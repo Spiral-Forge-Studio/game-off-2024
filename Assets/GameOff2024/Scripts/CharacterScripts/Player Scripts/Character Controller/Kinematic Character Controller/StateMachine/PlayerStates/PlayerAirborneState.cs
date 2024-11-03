@@ -90,6 +90,7 @@ public class PlayerAirborneState : PlayerBaseState
         else
         {
             _ctx._isMaintainingMomentum = false;
+            currentVelocity = new Vector3(currentVelocity.x/1.5f, currentVelocity.y, currentVelocity.z/1.5f);
         }
 
         //Debug.Log("final fall: " + _ctx._finalFallVelocityY);
