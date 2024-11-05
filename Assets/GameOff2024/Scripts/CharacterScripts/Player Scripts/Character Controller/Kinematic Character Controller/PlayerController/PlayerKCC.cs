@@ -28,6 +28,7 @@ namespace KinematicCharacterController
     {
         TowardsCamera,
         TowardsMovement,
+        TowardsMouse
     }
 
     public struct PlayerCharacterInputs
@@ -40,6 +41,8 @@ namespace KinematicCharacterController
         public bool RightShoot;
         public bool LeftSwap;
         public bool RightSwap;
+
+        public Vector3 mousePos;
     }
 
     public struct AICharacterInputs
@@ -95,7 +98,10 @@ namespace KinematicCharacterController
         [HideInInspector] public bool _isUsingMovementAbility;
         [HideInInspector] public bool _canUseMovementAbility;
         [HideInInspector] public float _timeSinceMovementAbilityLastUsed = Mathf.Infinity;
-        
+
+        [Header("Targeting")]
+        public Vector3 _mousePos;
+
         [Header("Parkour Variables")]
         public LayerMask _wallLayers;
 
@@ -117,7 +123,6 @@ namespace KinematicCharacterController
 
         public float _moveInputForward;
         public float _moveInputRight;
-        public bool _interact;
 
         // State Management
         public EPlayerLocomotion newPlayerAction;
@@ -198,6 +203,9 @@ namespace KinematicCharacterController
             // Move and look inputs
             _moveInputVector = cameraPlanarRotation * moveInputVector;
 
+            //Vector3 mouseAimDirection = new Vector3(inputs.mousePos.x - transform.position.x, transform.position.y, inputs.mousePos.z - transform.position.z);
+            Vector3 mouseAimDirection = Vector3.ProjectOnPlane(inputs.mousePos - transform.position, Motor.CharacterUp);
+
             switch (_orientationMethod)
             {
                 case OrientationMethod.TowardsCamera:
@@ -205,6 +213,9 @@ namespace KinematicCharacterController
                     break;
                 case OrientationMethod.TowardsMovement:
                     _lookInputVector = _moveInputVector.normalized;
+                    break;
+                case OrientationMethod.TowardsMouse:
+                    _lookInputVector = mouseAimDirection.normalized;
                     break;
             }
 

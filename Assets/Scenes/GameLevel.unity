@@ -210,19 +210,20 @@ MonoBehaviour:
   _walkingSpeed: 5
   _runningSpeed: 15
   _stableMovementSharpness: 15
-  _orientationSharpness: 100
-  _orientationMethod: 1
+  _orientationSharpness: 20
+  _orientationMethod: 2
   _isMaintainingMomentum: 0
   _runningCapsuleRadius: 0
   _runningCapsuleHeight: 0
   _runToStop: 0
-  _dashSpeed: 15
-  _dashDuration: 0.3
+  _dashSpeed: 25
+  _dashDuration: 0.2
   _dashInternalCooldown: 0.3
   _movementAbilityRequested: 0
   _isUsingMovementAbility: 0
   _canUseMovementAbility: 0
   _timeSinceMovementAbilityLastUsed: Infinity
+  _mousePos: {x: 0, y: 0, z: 0}
   _wallLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -239,7 +240,6 @@ MonoBehaviour:
   _internalVelocityAdd: {x: 0, y: 0, z: 0}
   _moveInputForward: 0
   _moveInputRight: 0
-  _interact: 0
   newPlayerAction: 0
 --- !u!114 &68620419
 MonoBehaviour:
@@ -917,7 +917,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -2.23, y: 0.29, z: 2.19}
-  m_LocalScale: {x: 3.59, y: 1.81, z: 3.34}
+  m_LocalScale: {x: 3.59, y: 42.84, z: 3.34}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 22529107}
@@ -1232,7 +1232,7 @@ Transform:
   m_GameObject: {fileID: 1496410940}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalPosition: {x: 0, y: 11.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1404,10 +1404,10 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: -500
+  near clip plane: 0.01
   far clip plane: 1000
   field of view: 60
-  orthographic: 1
+  orthographic: 0
   orthographic size: 7
   m_Depth: -1
   m_CullingMask:
@@ -1432,13 +1432,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921039113}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
-  m_LocalPosition: {x: -11.22, y: 11.37, z: -10.22}
+  m_LocalRotation: {x: 0.53729963, y: 0, z: 0, w: 0.8433915}
+  m_LocalPosition: {x: 0, y: 13.82, z: -6.6}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
+  m_LocalEulerAnglesHint: {x: 65, y: 0, z: 0}
 --- !u!114 &1921039118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1495,8 +1495,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fddb89b049a581741a58502f3e140f03, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerFollowPoint: {fileID: 1496410941}
-  followSpeed: 5
+  cameraFollowPoint: {fileID: 1496410941}
+  mouseFollowPoint: {x: 0, y: 0, z: 0}
+  followSpeed: 10
+  cameraDistance: 6
   maxTargetDistance: 11.7
   minCameraSplitMoveDistance: 0
   targetableMasks:
