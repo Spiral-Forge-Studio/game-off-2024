@@ -14,18 +14,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void EnterState()
     {
-        //Debug.Log("Grounded, " + _ctx._finalFallVelocityY + ", " + _ctx._isMaintainingMomentum);
-
-        if (_ctx._isMaintainingMomentum)
-        {
-            SetSubState(_factory.Run());
-        }
-        else
-        {
-            SetSubState(_factory.Idle());
-        }
-
-        _ctx.CurrentCharacterState = ECharacterState.Default;
+        SetSubState(_factory.Idle());
     }
 
     public override void ExitState()

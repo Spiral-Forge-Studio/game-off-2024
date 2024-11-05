@@ -15,7 +15,7 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "Dash",
                     "type": "Button",
                     "id": "f673fbb6-1845-477f-a012-584d05e2bbb6",
                     "expectedControlType": "",
@@ -24,9 +24,36 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Run",
+                    "name": "Left Shoot",
                     "type": "Button",
-                    "id": "342cf214-7454-46ba-ad63-35956b75a934",
+                    "id": "29b0a438-e88c-4668-aede-f14fa8178001",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right Shoot",
+                    "type": "Button",
+                    "id": "4fe1b32a-3e27-4943-b790-cc7ed0527515",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Left Swap",
+                    "type": "Button",
+                    "id": "4d90caf1-600d-4b5a-81f8-9632e8a15da2",
+                    "expectedControlType": "",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Right Swap",
+                    "type": "Button",
+                    "id": "cb854fc5-76dd-4ab8-b4c2-a819cb994e8b",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -96,18 +123,51 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
+                    "action": "Dash",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
                 {
                     "name": "",
-                    "id": "7ac9ce2c-f38d-4c08-b000-b4e4f086f620",
-                    "path": "<Keyboard>/leftShift",
+                    "id": "402abf00-1b96-4243-b4a5-faf6457059e3",
+                    "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Run",
+                    "action": "Left Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "2d4e0e11-2f42-44ab-91f2-ffcd7cd80c7c",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Shoot",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "cdabd361-809a-474e-add1-905d340b43bb",
+                    "path": "<Keyboard>/q",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Left Swap",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "e3571095-7f99-4220-829c-e287db02cd9e",
+                    "path": "<Keyboard>/e",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Right Swap",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
