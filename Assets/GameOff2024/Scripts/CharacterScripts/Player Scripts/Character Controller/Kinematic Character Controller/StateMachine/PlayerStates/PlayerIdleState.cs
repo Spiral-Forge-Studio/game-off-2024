@@ -48,23 +48,14 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (!_ctx.IsGrounded)
+        if (_ctx._movementAbilityRequested && _ctx._canUseMovementAbility)
         {
-            SwitchState(_factory.Airborne());
+            SwitchState(_factory.Dash());
         }
-
-        else if (_ctx._jumpRequested && !_ctx._jumpConsumed &&
-                ((_ctx._allowJumpingWhenSliding ? _ctx.Motor.GroundingStatus.FoundAnyGround : _ctx.Motor.GroundingStatus.IsStableOnGround) ||
-                _ctx._timeSinceLastAbleToJump <= _ctx._jumpPostGroundingGraceTime))
-        {
-            SwitchState(_factory.Airborne());
-        }
-
         else if (_ctx._moveInputVector.sqrMagnitude != 0)
         {
             SwitchState(_factory.Walk());
         }
-
     }
 
     public override void InitializeSubStates()
