@@ -539,7 +539,7 @@ GameObject:
   - component: {fileID: 458007635}
   - component: {fileID: 458007636}
   m_Layer: 0
-  m_Name: Weapon Manager
+  m_Name: Combat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -574,6 +574,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc078090383f104b8f13d70fef5f6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerStatsSO: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  additionalDamage: 0
+  additionalDamageMultiplier: 0
+  additionalCritRate: 0
+  additionalCritDamage: 0
+  additionalFireRate: 0
+  additionalReloadTime: 0
+  additionalMagazineSize: 0
+  additionalProjectileLifetime: 0
+  additionalProjectileSpeed: 0
 --- !u!1 &505548547
 GameObject:
   m_ObjectHideFlags: 0
@@ -721,13 +731,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 0
-  baseDamagePercent: 0
+  baseDamageMultiplier: 0
   baseCritRate: 0
   baseCritDamage: 0
   baseFireRate: 0
   baseReloadTime: 0
   baseMagazineSize: 0
   baseProjectileLifetime: 0
+  baseProjectileSpeed: 0
 --- !u!1 &720346855
 GameObject:
   m_ObjectHideFlags: 0
@@ -983,13 +994,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 0
-  baseDamagePercent: 0
+  baseDamageMultiplier: 0
   baseCritRate: 0
   baseCritDamage: 0
   baseFireRate: 0
   baseReloadTime: 0
   baseMagazineSize: 0
   baseProjectileLifetime: 0
+  baseProjectileSpeed: 0
+  minigunBulletDeviationAngle: 0
 --- !u!1 &894734312
 GameObject:
   m_ObjectHideFlags: 0
@@ -1500,13 +1513,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 0
-  baseDamagePercent: 0
+  baseDamageMultiplier: 0
   baseCritRate: 0
   baseCritDamage: 0
   baseFireRate: 0
   baseReloadTime: 0
   baseMagazineSize: 0
   baseProjectileLifetime: 0
+  baseProjectileSpeed: 0
 --- !u!1 &1749387205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1818,13 +1832,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   baseDamage: 0
-  baseDamagePercent: 0
+  baseDamageMultiplier: 0
   baseCritRate: 0
   baseCritDamage: 0
   baseFireRate: 0
   baseReloadTime: 0
   baseMagazineSize: 0
   baseProjectileLifetime: 0
+  baseProjectileSpeed: 0
+  baseRocketExplosionRadius: 0
 --- !u!1 &1995938534
 GameObject:
   m_ObjectHideFlags: 0

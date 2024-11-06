@@ -12,15 +12,16 @@ public enum EWeapon
 
 public class WeaponBase : MonoBehaviour
 {
-    [Header("Stats")]
+    [Header("Weapon Base Stats")]
     public float baseDamage;
-    public float baseDamagePercent;
+    public float baseDamageMultiplier;
     public float baseCritRate;
     public float baseCritDamage;
     public float baseFireRate;
     public float baseReloadTime;
     public float baseMagazineSize;
     public float baseProjectileLifetime;
+    public float baseProjectileSpeed;
 
     // Start is called before the first frame update
     void Start()

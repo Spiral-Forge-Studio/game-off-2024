@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class WeaponManager : MonoBehaviour
 {
-    public WeaponStatsSO weaponStatsSO;
+    public PlayerStatusSO playerStatsSO;
 
     private Minigun minigun;
     private Shotgun shotgun;
@@ -22,17 +22,18 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        playerStatsSO.ResetMultipliersAndFlatBonuses();
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void InitializeBaseWeaponStats()
     {
 
+        
     }
 }

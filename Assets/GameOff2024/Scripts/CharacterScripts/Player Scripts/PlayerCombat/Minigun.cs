@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class Minigun : WeaponBase
 {
+    [Header("Minigun Special Base Stats")]
+    public float minigunBulletDeviationAngle;
 
     // Start is called before the first frame update
     void Start()
