@@ -190,6 +190,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1006645429}
+  - {fileID: 1496410941}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &68620418
@@ -206,30 +207,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Motor: {fileID: 68620419}
   _animator: {fileID: 68620421}
-  _walkingSpeed: 7
+  _walkingSpeed: 5
   _runningSpeed: 15
   _stableMovementSharpness: 15
-  _orientationSharpness: 20
+  _orientationSharpness: 100
   _orientationMethod: 1
   _isMaintainingMomentum: 0
   _runningCapsuleRadius: 0
   _runningCapsuleHeight: 0
   _runToStop: 0
-  _maxAirMovespeed: 7
-  _airAccelerationSpeed: 100
-  _drag: 0
-  _dashSpeed: 0
+  _dashSpeed: 15
+  _dashDuration: 0.3
+  _dashInternalCooldown: 0.3
   _movementAbilityRequested: 0
   _isUsingMovementAbility: 0
-  _timeSinceMovementAbilityRequested: Infinity
-  _dashInternalCoolDown: 0
-  _dashingCapsuleRadius: 0
-  _dashingCapsuleHeight: 0
-  _allowJumpingWhenSliding: 0
-  _jumpUpSpeed: 10
-  _jumpScalableForwardSpeed: 0
-  _jumpPreGroundingGraceTime: 0
-  _jumpPostGroundingGraceTime: 0
+  _canUseMovementAbility: 0
+  _timeSinceMovementAbilityLastUsed: Infinity
   _wallLayers:
     serializedVersion: 2
     m_Bits: 64
@@ -243,19 +236,11 @@ MonoBehaviour:
   _originalCapsuleRadius: 0
   _moveInputVector: {x: 0, y: 0, z: 0}
   _lookInputVector: {x: 0, y: 0, z: 0}
-  _jumpRequested: 0
-  _jumpConsumed: 0
-  _jumpedThisFrame: 0
-  _timeSinceJumpRequested: Infinity
-  _timeSinceLastAbleToJump: 0
   _internalVelocityAdd: {x: 0, y: 0, z: 0}
   _moveInputForward: 0
   _moveInputRight: 0
   _interact: 0
   newPlayerAction: 0
-  CurrentCharacterState: 0
-  _fallToRollVelocityY: 0
-  _finalFallVelocityY: 0
 --- !u!114 &68620419
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -506,7 +491,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Character: {fileID: 68620418}
-  CharacterCamera: {fileID: 1921039117}
+  CharacterCamera: {fileID: 1921039119}
   _endCutscene: 0
   _disableMovement: 0
   _disableRotation: 0
@@ -672,7 +657,7 @@ Transform:
   m_GameObject: {fileID: 720346855}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.84, y: 0.97, z: 1.35}
+  m_LocalPosition: {x: 1.84, y: -0.09, z: 1.35}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -931,7 +916,7 @@ Transform:
   m_GameObject: {fileID: 975533873}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.23, y: 1.79, z: 2.19}
+  m_LocalPosition: {x: -2.23, y: 0.29, z: 2.19}
   m_LocalScale: {x: 3.59, y: 1.81, z: 3.34}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1222,6 +1207,37 @@ Transform:
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1496410940
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1496410941}
+  m_Layer: 0
+  m_Name: CameraFollow
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1496410941
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1496410940}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -1, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 68620417}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1749387205
 GameObject:
   m_ObjectHideFlags: 0
@@ -1341,7 +1357,7 @@ GameObject:
   - component: {fileID: 1921039115}
   - component: {fileID: 1921039114}
   - component: {fileID: 1921039118}
-  - component: {fileID: 1921039117}
+  - component: {fileID: 1921039119}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -1370,7 +1386,7 @@ Camera:
   m_BackGroundColor: {r: 0, g: 0, b: 0, a: 1}
   m_projectionMatrixMode: 1
   m_GateFitMode: 2
-  m_FOVAxisMode: 0
+  m_FOVAxisMode: 1
   m_Iso: 200
   m_ShutterSpeed: 0.005
   m_Aperture: 16
@@ -1388,11 +1404,11 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: -500
   far clip plane: 1000
   field of view: 60
-  orthographic: 0
-  orthographic size: 5
+  orthographic: 1
+  orthographic size: 7
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -1416,47 +1432,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1921039113}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 1, z: -10}
+  m_LocalRotation: {x: 0.23911765, y: 0.3696438, z: -0.09904577, w: 0.89239913}
+  m_LocalPosition: {x: -11.22, y: 11.37, z: -10.22}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1921039117
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1921039113}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 1ee0ba60052ba0048bd539fbfeda56d3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Camera: {fileID: 1921039115}
-  FollowPointFraming: {x: 0, y: 0}
-  FollowingSharpness: 10000
-  DefaultDistance: 6
-  MinDistance: 0
-  MaxDistance: 10
-  DistanceMovementSpeed: 5
-  DistanceMovementSharpness: 10
-  InvertX: 0
-  InvertY: 0
-  DefaultVerticalAngle: 20
-  MinVerticalAngle: -90
-  MaxVerticalAngle: 90
-  RotationSpeed: 1
-  RotationSharpness: 10000
-  RotateWithPhysicsMover: 0
-  ObstructionCheckRadius: 0.2
-  ObstructionLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  ObstructionSharpness: 10000
-  IgnoredColliders: []
+  m_LocalEulerAnglesHint: {x: 30, y: 45, z: 0}
 --- !u!114 &1921039118
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1501,6 +1483,25 @@ MonoBehaviour:
     m_MipBias: 0
     m_VarianceClampScale: 0.9
     m_ContrastAdaptiveSharpening: 0
+--- !u!114 &1921039119
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1921039113}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fddb89b049a581741a58502f3e140f03, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerFollowPoint: {fileID: 1496410941}
+  followSpeed: 5
+  maxTargetDistance: 11.7
+  minCameraSplitMoveDistance: 0
+  targetableMasks:
+    serializedVersion: 2
+    m_Bits: 64
 --- !u!1 &1995938534
 GameObject:
   m_ObjectHideFlags: 0
