@@ -102,6 +102,8 @@ namespace KinematicCharacterController
             characterInputs.LeftSwap = _leftSwap.ReadValue<float>() == 1;
             characterInputs.RightSwap= _rightSwap.ReadValue<float>() == 1;
 
+            characterInputs.mousePos = CharacterCamera.mouseFollowPoint;
+
             // Apply inputs to character
             Character.SetInputs(ref characterInputs);
         }
