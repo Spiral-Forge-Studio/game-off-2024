@@ -8,6 +8,8 @@ public enum EProjectileType
     Minigun,
     Rocket,
     Enemy
+
+    // add your projectile types
 }
 
 public abstract class ProjectileParams {}

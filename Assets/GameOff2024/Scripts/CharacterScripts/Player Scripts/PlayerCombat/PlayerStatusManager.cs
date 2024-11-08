@@ -35,6 +35,8 @@ public class PlayerStatusManager : MonoBehaviour
         return minigunProjectileParams;
     }
 
+
+
     public float GetComputedDamage(EWeaponType weaponType)
     {
         float roll = Random.Range(0, 100f);

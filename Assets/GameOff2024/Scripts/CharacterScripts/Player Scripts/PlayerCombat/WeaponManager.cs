@@ -18,28 +18,24 @@ public class WeaponManager : MonoBehaviour
 
     [SerializeField] private PlayerStatusSO playerStats;
 
-    private Minigun minigun;
-    private Rocket rocket;
-
     private Vector3 aimPosition;
     private Quaternion aimRotation;
 
-    // Minigun Params
-    private float shotInterval;
+    // Firerate Timing Variables
     private float minigun_lastShotTime;
+    private float rocket_lastShotTime;
 
 
     private void Awake()
     {
-        minigun = GetComponentInChildren<Minigun>();
-        rocket = GetComponentInChildren<Rocket>();
+        FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
+        FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(rocketProjectileShooter);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
-        FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(rocketProjectileShooter);
+
     }
 
     // Update is called once per frame
@@ -62,14 +58,68 @@ public class WeaponManager : MonoBehaviour
         {
             if (Time.time - minigun_lastShotTime > 1f / playerStats.MinigunFireRate)
             {
-
-                minigunProjectileShooter.FireProjectile(
-                    Quaternion.LookRotation(Vector3.ProjectOnPlane(aimPosition - minigunProjectileShooter.firePoint.position, minigunProjectileShooter.gameObject.transform.up)));
+                FireMinigunProjectile(aimPosition);
 
                 minigun_lastShotTime = Time.time;
             }
         }
+        if (inputs.RightShoot)
+        {
+            if (Time.time - minigun_lastShotTime > 1f / playerStats.RocketFireRate)
+            {
+                FireRocketProjectile(aimPosition);
+
+                rocket_lastShotTime = Time.time;
+            }
+        }
     }
+
+
+    #region -- Minigun Related ---
+    private void FireMinigunProjectile(Vector3 aimPosition)
+    {
+        float deviationAngle = playerStats.MinigunBulletDeviationAngle; // The max angle to deviate
+
+        // Calculate the direction to the target
+        Vector3 aimDirection = aimPosition - minigunProjectileShooter.firePoint.position;
+
+        // Calculate a random deviation within the specified range
+        float randomAngle = Random.Range(-deviationAngle, deviationAngle);
+
+        // Create a rotation around the up axis (or another suitable axis based on your setup)
+        Quaternion deviationRotation = Quaternion.AngleAxis(randomAngle, minigunProjectileShooter.gameObject.transform.up);
+
+        // Apply the deviation to the aim direction
+        Vector3 deviatedDirection = deviationRotation * aimDirection;
+
+        // Fire the projectile with the deviated direction
+        minigunProjectileShooter.FireProjectile(Quaternion.LookRotation(Vector3.ProjectOnPlane(deviatedDirection, minigunProjectileShooter.gameObject.transform.up)));
+    }
+
+    #endregion
+
+    #region -- Rocket Related ---
+    private void FireRocketProjectile(Vector3 aimPosition)
+    {
+        float deviationAngle = playerStats.MinigunBulletDeviationAngle; // The max angle to deviate
+
+        // Calculate the direction to the target
+        Vector3 aimDirection = aimPosition - minigunProjectileShooter.firePoint.position;
+
+        // Calculate a random deviation within the specified range
+        float randomAngle = Random.Range(-deviationAngle, deviationAngle);
+
+        // Create a rotation around the up axis (or another suitable axis based on your setup)
+        Quaternion deviationRotation = Quaternion.AngleAxis(randomAngle, minigunProjectileShooter.firePoint.up);
+
+        // Apply the deviation to the aim direction
+        Vector3 deviatedDirection = deviationRotation * aimDirection;
+
+        // Fire the projectile with the deviated direction
+        rocketProjectileShooter.FireProjectile(Quaternion.LookRotation(Vector3.ProjectOnPlane(deviatedDirection, minigunProjectileShooter.firePoint.up)));
+    }
+
+    #endregion
 
     private void OnDrawGizmos()
     {

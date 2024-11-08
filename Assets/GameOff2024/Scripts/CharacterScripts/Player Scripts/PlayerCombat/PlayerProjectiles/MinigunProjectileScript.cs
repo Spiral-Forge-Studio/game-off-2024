@@ -18,11 +18,12 @@ public class MinigunProjectileParams : ProjectileParams
 
 public class MinigunProjectileScript : Projectile
 {
-    public LayerMask targetLayers;
+    // Minigun Params
     private float speed;
     private float damage;
     private float lifetime;
 
+    // lifetime logic variables
     private float startTime;
     private bool returningToPool;
 

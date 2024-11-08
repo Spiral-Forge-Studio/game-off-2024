@@ -6,7 +6,7 @@ public class ProjectileManager : MonoBehaviour
 {
     [Header("Projectile Parameter Handling")]
     public PlayerStatusSO playerStats;
-    [SerializeField] private PlayerStatusManager playerStatusManager;
+    private PlayerStatusManager playerStatusManager;
 
     // projectile params
     private MinigunProjectileParams minigunParams;
@@ -14,7 +14,7 @@ public class ProjectileManager : MonoBehaviour
     private Dictionary<EProjectileType, ProjectileParams> projectileParamsDict = new Dictionary<EProjectileType, ProjectileParams>();
 
     [Header("Projectile Object Pooling")]
-    public List<ProjectilePoolScript> projectilePoolSOList;
+    public List<ProjectilePoolScript> projectilePoolList;
     private Dictionary<EProjectileType, ProjectilePoolScript> projectilePoolDict = new Dictionary<EProjectileType, ProjectilePoolScript>();
 
     // List to manage all active projectiles
@@ -32,7 +32,7 @@ public class ProjectileManager : MonoBehaviour
     {
         playerStatusManager = FindObjectOfType<PlayerStatusManager>();
 
-        foreach (ProjectilePoolScript pool in projectilePoolSOList)
+        foreach (ProjectilePoolScript pool in projectilePoolList)
         {
             pool.Initialize();
             projectilePoolDict[pool.projectileType] = pool;
@@ -121,6 +121,12 @@ public class ProjectileManager : MonoBehaviour
 
     #region --- Projectile Parameter Setup ---
 
+
+    /// <summary>
+    /// The parameters you want to pass to your projectile based on the enum projectile type, edit as needed
+    /// </summary>
+    /// <param name="projectileType"></param>
+    /// <returns></returns>
     private ProjectileParams GetProjectileParams(EProjectileType projectileType)
     {
         if (projectileType == EProjectileType.Minigun)
@@ -131,6 +137,8 @@ public class ProjectileManager : MonoBehaviour
         {
             return null;
         }
+
+        // TODO: Add your own conditions and return values, you can reference other scripts.
 
         return null;
     }
