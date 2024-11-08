@@ -8,7 +8,7 @@ public class PlayerGroundedState : PlayerBaseState
         _isRootState = true;
     }
 
-    public override void SetInput(ref PlayerCharacterInputs inputs)
+    public override void SetInput(ref PlayerControllerInputs inputs)
     {
     }
 
@@ -19,6 +19,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void ExitState()
     {
+
     }
 
     public override void AfterCharacterUpdate(float deltaTime)

@@ -20,14 +20,13 @@ MonoBehaviour:
   baseMoveSpeed: 5
   baseDashCooldown: 1
   baseMinigunDamage: 1
-  baseMinigunDamageMultiplier: 1
   baseMinigunCritRate: 0
   baseMinigunCritDamage: 0
-  baseMinigunFireRate: 10
+  baseMinigunFireRate: 25
   baseMinigunReloadTime: 0.3
   baseMinigunMagazineSize: 20
-  baseMinigunProjectileLifetime: 2
-  baseMinigunProjectileSpeed: 20
+  baseMinigunProjectileLifetime: 0.7
+  baseMinigunProjectileSpeed: 25
   baseminigunBulletDeviationAngle: 20
   baseRocketDamage: 10
   baseRocketCritRate: 0

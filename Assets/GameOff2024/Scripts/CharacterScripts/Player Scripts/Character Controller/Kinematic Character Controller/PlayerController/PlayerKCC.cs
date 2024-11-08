@@ -31,16 +31,12 @@ namespace KinematicCharacterController
         TowardsMouse
     }
 
-    public struct PlayerCharacterInputs
+    public struct PlayerControllerInputs
     {
         public float MoveAxisForward;
         public float MoveAxisRight;
         public Quaternion CameraRotation;
         public bool Dash;
-        public bool LeftShoot;
-        public bool RightShoot;
-        public bool LeftSwap;
-        public bool RightSwap;
 
         public Vector3 mousePos;
     }
@@ -173,7 +169,7 @@ namespace KinematicCharacterController
         /// <summary>
         /// This is called every frame by the player in order to tell the character what its inputs are
         /// </summary>
-        public void SetInputs(ref PlayerCharacterInputs inputs)
+        public void SetInputs(ref PlayerControllerInputs inputs)
         {
             _moveInputForward = inputs.MoveAxisForward;
             _moveInputRight = inputs.MoveAxisRight;

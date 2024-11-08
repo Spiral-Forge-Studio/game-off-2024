@@ -2,26 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EWeapon
+public enum EWeaponType
 {
     Minigun,
-    Shotgun,
-    Railgun,
     Rocket
 }
 
 public class WeaponBase : MonoBehaviour
 {
-    [Header("Weapon Base Stats")]
-    public float baseDamage;
-    public float baseDamageMultiplier;
-    public float baseCritRate;
-    public float baseCritDamage;
-    public float baseFireRate;
-    public float baseReloadTime;
-    public float baseMagazineSize;
-    public float baseProjectileLifetime;
-    public float baseProjectileSpeed;
+    private ProjectileShooter projectileShooter;
 
     // Start is called before the first frame update
     void Start()
@@ -33,5 +22,10 @@ public class WeaponBase : MonoBehaviour
     void Update()
     {
         
+    }
+
+    public void SetProjectileShooter(ProjectileShooter projectileShooter)
+    {
+        this.projectileShooter = projectileShooter;
     }
 }
