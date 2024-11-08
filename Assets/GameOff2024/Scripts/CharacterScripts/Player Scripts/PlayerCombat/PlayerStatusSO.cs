@@ -79,30 +79,30 @@ public class PlayerStatusSO : ScriptableObject
     [SerializeField] private float baseDashCooldown;
 
     [Header("Minigun Base Stats")]
-    [SerializeField] private float baseMinigunDamage;
-    [SerializeField] private float baseMinigunCritRate;
-    [SerializeField] private float baseMinigunCritDamage;
-    [SerializeField] private float baseMinigunFireRate;
-    [SerializeField] private float baseMinigunReloadTime;
-    [SerializeField] private float baseMinigunMagazineSize;
-    [SerializeField] private float baseMinigunProjectileLifetime;
-    [SerializeField] private float baseMinigunProjectileSpeed;
+    [SerializeField] private float b_MinigunDamage;
+    [SerializeField] private float b_MinigunCritRate;
+    [SerializeField] private float b_MinigunCritDamage;
+    [SerializeField] private float b_MinigunFireRate;
+    [SerializeField] private float b_MinigunReloadTime;
+    [SerializeField] private float b_MinigunMagazineSize;
+    [SerializeField] private float b_MinigunProjectileLifetime;
+    [SerializeField] private float b_MinigunProjectileSpeed;
 
     [Header("Minigun Special Base Stats")]
-    [SerializeField] private float baseminigunBulletDeviationAngle;
+    [SerializeField] private float b_minigunDeviationAngle;
 
     [Header("Rocket Base Stats")]
-    [SerializeField] private float baseRocketDamage;
-    [SerializeField] private float baseRocketCritRate;
-    [SerializeField] private float baseRocketCritDamage;
-    [SerializeField] private float baseRocketFireRate;
-    [SerializeField] private float baseRocketReloadTime;
-    [SerializeField] private float baseRocketMagazineSize;
-    [SerializeField] private float baseRocketProjectileLifetime;
-    [SerializeField] private float baseRocketProjectileSpeed;
+    [SerializeField] private float b_RocketDamage;
+    [SerializeField] private float b_RocketCritRate;
+    [SerializeField] private float b_RocketCritDamage;
+    [SerializeField] private float b_RocketFireRate;
+    [SerializeField] private float b_RocketReloadTime;
+    [SerializeField] private float b_RocketMagazineSize;
+    [SerializeField] private float b_RocketProjectileLifetime;
+    [SerializeField] private float b_RocketProjectileSpeed;
 
     [Header("Rocket Special Base Stats")]
-    [SerializeField] private float baseRocketExplosionRadius;
+    [SerializeField] private float b_RocketExplosionRadius;
 
 
     // Modifier Dictionaries
@@ -174,26 +174,26 @@ public class PlayerStatusSO : ScriptableObject
     public float DashCooldown => (baseDashCooldown * multipliers[EStatTypeMultiplier.DashCooldownMultiplier]) + flatBonuses[EStatTypeFlatBonus.DashCooldownFlatBonus];
 
     // Minigun Computed Stats
-    public float MinigunDamage => (baseMinigunDamage * multipliers[EStatTypeMultiplier.MinigunDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunDamageFlatBonus];
-    public float MinigunCritRate => (baseMinigunCritRate * multipliers[EStatTypeMultiplier.MinigunCritRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunCritRateFlatBonus];
-    public float MinigunCritDamage => (baseMinigunCritDamage * multipliers[EStatTypeMultiplier.MinigunCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunCritDamageFlatBonus];
-    public float MinigunFireRate => (baseMinigunFireRate * multipliers[EStatTypeMultiplier.MinigunFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunFireRateFlatBonus];
-    public float MinigunReloadTime => (baseMinigunReloadTime * multipliers[EStatTypeMultiplier.MinigunReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunReloadTimeFlatBonus];
-    public float MinigunMagazineSize => (baseMinigunMagazineSize * multipliers[EStatTypeMultiplier.MinigunMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus];
-    public float MinigunProjectileLifetime => (baseMinigunProjectileLifetime * multipliers[EStatTypeMultiplier.MinigunProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileLifetimeFlatBonus];
-    public float MinigunProjectileSpeed => (baseMinigunProjectileSpeed * multipliers[EStatTypeMultiplier.MinigunProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileSpeedFlatBonus];
-    public float MinigunBulletDeviationAngle => (baseminigunBulletDeviationAngle * multipliers[EStatTypeMultiplier.MinigunBulletDeviationAngleMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunBulletDeviationAngleBonus];
+    public float MinigunDamage => (b_MinigunDamage * multipliers[EStatTypeMultiplier.MinigunDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunDamageFlatBonus];
+    public float MinigunCritRate => (b_MinigunCritRate * multipliers[EStatTypeMultiplier.MinigunCritRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunCritRateFlatBonus];
+    public float MinigunCritDamage => (b_MinigunCritDamage * multipliers[EStatTypeMultiplier.MinigunCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunCritDamageFlatBonus];
+    public float MinigunFireRate => (b_MinigunFireRate * multipliers[EStatTypeMultiplier.MinigunFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunFireRateFlatBonus];
+    public float MinigunReloadTime => (b_MinigunReloadTime * multipliers[EStatTypeMultiplier.MinigunReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunReloadTimeFlatBonus];
+    public float MinigunMagazineSize => (b_MinigunMagazineSize * multipliers[EStatTypeMultiplier.MinigunMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus];
+    public float MinigunProjectileLifetime => (b_MinigunProjectileLifetime * multipliers[EStatTypeMultiplier.MinigunProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileLifetimeFlatBonus];
+    public float MinigunProjectileSpeed => (b_MinigunProjectileSpeed * multipliers[EStatTypeMultiplier.MinigunProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileSpeedFlatBonus];
+    public float MinigunBulletDeviationAngle => (b_minigunDeviationAngle * multipliers[EStatTypeMultiplier.MinigunBulletDeviationAngleMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunBulletDeviationAngleBonus];
 
     // Rocket Computed Stats
-    public float RocketDamage => (baseRocketDamage * multipliers[EStatTypeMultiplier.RocketDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketDamageFlatBonus];
-    public float RocketCritRate => (baseRocketCritRate * multipliers[EStatTypeMultiplier.RocketCritRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketCritRateFlatBonus];
-    public float RocketCritDamage => (baseRocketCritDamage * multipliers[EStatTypeMultiplier.RocketCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketCritDamageFlatBonus];
-    public float RocketFireRate => (baseRocketFireRate * multipliers[EStatTypeMultiplier.RocketFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketFireRateFlatBonus];
-    public float RocketReloadTime => (baseRocketReloadTime * multipliers[EStatTypeMultiplier.RocketReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketReloadTimeFlatBonus];
-    public float RocketMagazineSize => (baseRocketMagazineSize * multipliers[EStatTypeMultiplier.RocketMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketMagazineSizeFlatBonus];
-    public float RocketProjectileLifetime => (baseRocketProjectileLifetime * multipliers[EStatTypeMultiplier.RocketProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileLifetimeFlatBonus];
-    public float RocketProjectileSpeed => (baseRocketProjectileSpeed * multipliers[EStatTypeMultiplier.RocketProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileSpeedFlatBonus];
-    public float RocketExplosionRadius => (baseRocketExplosionRadius * multipliers[EStatTypeMultiplier.RocketExplosionRadiusMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketExplosionRadiusFlatBonus];
+    public float RocketDamage => (b_RocketDamage * multipliers[EStatTypeMultiplier.RocketDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketDamageFlatBonus];
+    public float RocketCritRate => (b_RocketCritRate * multipliers[EStatTypeMultiplier.RocketCritRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketCritRateFlatBonus];
+    public float RocketCritDamage => (b_RocketCritDamage * multipliers[EStatTypeMultiplier.RocketCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketCritDamageFlatBonus];
+    public float RocketFireRate => (b_RocketFireRate * multipliers[EStatTypeMultiplier.RocketFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketFireRateFlatBonus];
+    public float RocketReloadTime => (b_RocketReloadTime * multipliers[EStatTypeMultiplier.RocketReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketReloadTimeFlatBonus];
+    public float RocketMagazineSize => (b_RocketMagazineSize * multipliers[EStatTypeMultiplier.RocketMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketMagazineSizeFlatBonus];
+    public float RocketProjectileLifetime => (b_RocketProjectileLifetime * multipliers[EStatTypeMultiplier.RocketProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileLifetimeFlatBonus];
+    public float RocketProjectileSpeed => (b_RocketProjectileSpeed * multipliers[EStatTypeMultiplier.RocketProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileSpeedFlatBonus];
+    public float RocketExplosionRadius => (b_RocketExplosionRadius * multipliers[EStatTypeMultiplier.RocketExplosionRadiusMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketExplosionRadiusFlatBonus];
 
 
     #region --- Initialization Functions ---

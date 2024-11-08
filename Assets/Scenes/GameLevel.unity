@@ -1538,9 +1538,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 41d73488627ac4143a9d20f532b59a58, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStats: {fileID: 0}
-  playerStatusManager: {fileID: 0}
-  projectilePoolSOList:
+  playerStats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  projectilePoolList:
   - {fileID: 989192641}
 --- !u!1 &1749387205
 GameObject:
