@@ -12,7 +12,7 @@ public class PlayerIdleState : PlayerBaseState
     {
     }
 
-    public override void SetInput(ref PlayerCharacterInputs inputs)
+    public override void SetInput(ref PlayerControllerInputs inputs)
     {
 
     }
@@ -20,9 +20,9 @@ public class PlayerIdleState : PlayerBaseState
     public override void EnterState()
     {
 
-        _ctx._animator.CrossFadeInFixedTime(_ctx.STANDING_IDLE, 0.1f);
+        //_ctx._animator.CrossFadeInFixedTime(_ctx.STANDING_IDLE, 0.1f);
 
-        //Debug.Log("Enter Idle State");
+        // Debug.Log("Enter Idle State");
     }
 
     public override void ExitState()
