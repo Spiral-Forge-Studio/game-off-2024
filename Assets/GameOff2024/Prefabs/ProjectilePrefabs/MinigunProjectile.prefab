@@ -99,7 +99,7 @@ SphereCollider:
     m_Bits: 247
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 136
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0
@@ -121,9 +121,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   projectileType: 0
   isActive: 0
-  targetLayers:
-    serializedVersion: 2
-    m_Bits: 0
 --- !u!54 &-175773353590947757
 Rigidbody:
   m_ObjectHideFlags: 0

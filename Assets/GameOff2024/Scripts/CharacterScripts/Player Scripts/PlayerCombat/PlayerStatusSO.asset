@@ -28,12 +28,12 @@ MonoBehaviour:
   b_MinigunProjectileLifetime: 0.4
   b_MinigunProjectileSpeed: 35
   b_minigunDeviationAngle: 10
-  b_RocketDamage: 0
+  b_RocketDamage: 20
   b_RocketCritRate: 0
-  b_RocketCritDamage: 0
-  b_RocketFireRate: 0
-  b_RocketReloadTime: 0
-  b_RocketMagazineSize: 0
-  b_RocketProjectileLifetime: 0
-  b_RocketProjectileSpeed: 0
-  b_RocketExplosionRadius: 0
+  b_RocketCritDamage: 1.5
+  b_RocketFireRate: 3
+  b_RocketReloadTime: 1
+  b_RocketMagazineSize: 5
+  b_RocketProjectileLifetime: 1
+  b_RocketProjectileSpeed: 20
+  b_RocketExplosionRadius: 20

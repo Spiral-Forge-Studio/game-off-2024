@@ -157,6 +157,8 @@ namespace KinematicCharacterController
 
             _originalCapsuleHeight = Motor.Capsule.height;
             _originalCapsuleRadius = Motor.Capsule.radius;
+
+            AudioManager.instance.SetMusicAndUIAudioSourcesToPlayerPosition(transform);
         }
 
         private void Update()

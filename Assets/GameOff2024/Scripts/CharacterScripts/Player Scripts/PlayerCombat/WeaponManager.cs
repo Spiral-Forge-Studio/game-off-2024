@@ -65,7 +65,7 @@ public class WeaponManager : MonoBehaviour
         }
         if (inputs.RightShoot)
         {
-            if (Time.time - minigun_lastShotTime > 1f / playerStats.RocketFireRate)
+            if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate)
             {
                 FireRocketProjectile(aimPosition);
 
@@ -101,22 +101,11 @@ public class WeaponManager : MonoBehaviour
     #region -- Rocket Related ---
     private void FireRocketProjectile(Vector3 aimPosition)
     {
-        float deviationAngle = playerStats.MinigunBulletDeviationAngle; // The max angle to deviate
-
         // Calculate the direction to the target
-        Vector3 aimDirection = aimPosition - minigunProjectileShooter.firePoint.position;
-
-        // Calculate a random deviation within the specified range
-        float randomAngle = Random.Range(-deviationAngle, deviationAngle);
-
-        // Create a rotation around the up axis (or another suitable axis based on your setup)
-        Quaternion deviationRotation = Quaternion.AngleAxis(randomAngle, minigunProjectileShooter.firePoint.up);
-
-        // Apply the deviation to the aim direction
-        Vector3 deviatedDirection = deviationRotation * aimDirection;
+        Vector3 aimDirection = aimPosition - rocketProjectileShooter.firePoint.position;
 
         // Fire the projectile with the deviated direction
-        rocketProjectileShooter.FireProjectile(Quaternion.LookRotation(Vector3.ProjectOnPlane(deviatedDirection, minigunProjectileShooter.firePoint.up)));
+        rocketProjectileShooter.FireProjectile(Quaternion.LookRotation(Vector3.ProjectOnPlane(aimDirection, rocketProjectileShooter.firePoint.up)));
     }
 
     #endregion
@@ -124,6 +113,8 @@ public class WeaponManager : MonoBehaviour
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.red;
+
         Gizmos.DrawLine(minigunProjectileShooter.firePoint.position, aimPosition);
+        Gizmos.DrawLine(rocketProjectileShooter.firePoint.position, aimPosition);
     }
 }

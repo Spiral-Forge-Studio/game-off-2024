@@ -11,6 +11,7 @@ public class PlayerStatusManager : MonoBehaviour
     private PlayerKCC playerKCC;
 
     private MinigunProjectileParams minigunProjectileParams;
+    private RocketProjectileParams rocketProjectileParams;
 
     // Start is called before the first frame update
     void Start()
@@ -21,12 +22,28 @@ public class PlayerStatusManager : MonoBehaviour
             playerStatus.MinigunProjectileSpeed,
             GetComputedDamage(EWeaponType.Minigun),
             playerStatus.MinigunProjectileLifetime);
+
+        rocketProjectileParams = new RocketProjectileParams(
+            playerStatus.RocketProjectileSpeed,
+            GetComputedDamage(EWeaponType.Rocket),
+            playerStatus.RocketProjectileLifetime,
+            playerStatus.RocketExplosionRadius);
     }
 
     // Update is called once per frame
     void Update()
     {
         UpdatePlayerKCCStats();
+    }
+
+    public RocketProjectileParams GetRocketProjectileParams()
+    {
+        rocketProjectileParams.damage = GetComputedDamage(EWeaponType.Rocket);
+        rocketProjectileParams.speed = playerStatus.RocketProjectileSpeed;
+        rocketProjectileParams.lifetime = playerStatus.RocketProjectileLifetime;
+        rocketProjectileParams.explosionRadius = playerStatus.RocketExplosionRadius;
+
+        return rocketProjectileParams;
     }
 
     public MinigunProjectileParams GetMinigunProjectileParams()
