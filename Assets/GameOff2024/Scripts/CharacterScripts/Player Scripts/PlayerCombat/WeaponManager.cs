@@ -6,8 +6,6 @@ public struct PlayerCombatInputs
 {
     public bool LeftShoot;
     public bool RightShoot;
-    public bool LeftSwap;
-    public bool RightSwap;
     public Vector3 mousePos;
 }
 
@@ -25,6 +23,13 @@ public class WeaponManager : MonoBehaviour
     private float minigun_lastShotTime;
     private float rocket_lastShotTime;
 
+    // Ammo
+    private int minigun_currentAmmo;
+    private int rocket_currentAmmo;
+
+    private bool isMinigunReloading;
+    private bool isRocketReloading;
+
 
     private void Awake()
     {
@@ -35,7 +40,8 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
+        minigun_currentAmmo = playerStats.MinigunMagazineSize;
+        rocket_currentAmmo = playerStats.RocketMagazineSize;
     }
 
     // Update is called once per frame
@@ -44,36 +50,71 @@ public class WeaponManager : MonoBehaviour
         // some logic
     }
 
-    public void InitializeBaseWeaponStats()
-    {
-
-        
-    }
-
     public void SetInputs(ref PlayerCombatInputs inputs)
     {
         aimPosition = inputs.mousePos;
 
+        // Handle Minigun Shooting and Reloading
         if (inputs.LeftShoot)
         {
-            if (Time.time - minigun_lastShotTime > 1f / playerStats.MinigunFireRate)
+            if (minigun_currentAmmo > 0)
             {
-                FireMinigunProjectile(aimPosition);
-
-                minigun_lastShotTime = Time.time;
+                if (Time.time - minigun_lastShotTime > 1f / playerStats.MinigunFireRate)
+                {
+                    FireMinigunProjectile(aimPosition);
+                    minigun_currentAmmo--;
+                    minigun_lastShotTime = Time.time;
+                }
+            }
+            else if (!isMinigunReloading)
+            {
+                StartCoroutine(reload(playerStats.MinigunReloadTime, EWeaponType.Minigun));
             }
         }
+
+        // Handle Rocket Shooting and Reloading
         if (inputs.RightShoot)
         {
-            if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate)
+            if (rocket_currentAmmo > 0)
             {
-                FireRocketProjectile(aimPosition);
-
-                rocket_lastShotTime = Time.time;
+                if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate)
+                {
+                    FireRocketProjectile(aimPosition);
+                    rocket_currentAmmo--;
+                    rocket_lastShotTime = Time.time;
+                }
+            }
+            else if (!isRocketReloading)
+            {
+                StartCoroutine(reload(playerStats.RocketReloadTime, EWeaponType.Rocket));
             }
         }
     }
 
+    private IEnumerator reload(float reloadTime, EWeaponType weaponType)
+    {
+        // Set the appropriate reload flag
+        if (weaponType == EWeaponType.Minigun) isMinigunReloading = true;
+        if (weaponType == EWeaponType.Rocket) isRocketReloading = true;
+
+        Debug.Log($"Reloading {weaponType}...");
+        yield return new WaitForSeconds(reloadTime); // Wait for the reload duration
+
+        // Refill ammo and reset reload flag
+        if (weaponType == EWeaponType.Minigun)
+        {
+            minigun_currentAmmo = playerStats.MinigunMagazineSize; // Refill minigun ammo
+            isMinigunReloading = false;
+            Debug.Log("Minigun reloaded!");
+        }
+
+        if (weaponType == EWeaponType.Rocket)
+        {
+            rocket_currentAmmo = playerStats.RocketMagazineSize; // Refill rocket ammo
+            isRocketReloading = false;
+            Debug.Log("Rocket launcher reloaded!");
+        }
+    }
 
     #region -- Minigun Related ---
     private void FireMinigunProjectile(Vector3 aimPosition)
@@ -96,6 +137,11 @@ public class WeaponManager : MonoBehaviour
         minigunProjectileShooter.FireProjectile(Quaternion.LookRotation(Vector3.ProjectOnPlane(deviatedDirection, minigunProjectileShooter.gameObject.transform.up)));
     }
 
+    public int GetMinigunAmmo()
+    {
+        return minigun_currentAmmo;
+    }
+
     #endregion
 
     #region -- Rocket Related ---
@@ -106,6 +152,11 @@ public class WeaponManager : MonoBehaviour
 
         // Fire the projectile with the deviated direction
         rocketProjectileShooter.FireProjectile(Quaternion.LookRotation(Vector3.ProjectOnPlane(aimDirection, rocketProjectileShooter.firePoint.up)));
+    }
+
+    public int GetRocketAmmo()
+    {
+        return rocket_currentAmmo;
     }
 
     #endregion

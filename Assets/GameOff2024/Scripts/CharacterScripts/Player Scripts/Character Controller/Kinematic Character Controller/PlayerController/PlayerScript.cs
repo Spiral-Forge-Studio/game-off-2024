@@ -104,8 +104,6 @@ namespace KinematicCharacterController
 
             combatInputs.LeftShoot = _leftShoot.ReadValue<float>() == 1;
             combatInputs.RightShoot = _rightShoot.ReadValue<float>() == 1;
-            combatInputs.LeftSwap = _leftSwap.ReadValue<float>() == 1;
-            combatInputs.RightSwap= _rightSwap.ReadValue<float>() == 1;
 
             controllerInputs.mousePos = CharacterCamera.mouseFollowPoint;
             combatInputs.mousePos = CharacterCamera.mouseFollowPoint;

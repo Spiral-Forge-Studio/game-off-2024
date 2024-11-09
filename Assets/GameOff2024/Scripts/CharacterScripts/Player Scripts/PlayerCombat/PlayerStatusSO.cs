@@ -84,7 +84,7 @@ public class PlayerStatusSO : ScriptableObject
     [SerializeField] private float b_MinigunCritDamage;
     [SerializeField] private float b_MinigunFireRate;
     [SerializeField] private float b_MinigunReloadTime;
-    [SerializeField] private float b_MinigunMagazineSize;
+    [SerializeField] private int b_MinigunMagazineSize;
     [SerializeField] private float b_MinigunProjectileLifetime;
     [SerializeField] private float b_MinigunProjectileSpeed;
 
@@ -97,7 +97,7 @@ public class PlayerStatusSO : ScriptableObject
     [SerializeField] private float b_RocketCritDamage;
     [SerializeField] private float b_RocketFireRate;
     [SerializeField] private float b_RocketReloadTime;
-    [SerializeField] private float b_RocketMagazineSize;
+    [SerializeField] private int b_RocketMagazineSize;
     [SerializeField] private float b_RocketProjectileLifetime;
     [SerializeField] private float b_RocketProjectileSpeed;
 
@@ -179,7 +179,7 @@ public class PlayerStatusSO : ScriptableObject
     public float MinigunCritDamage => (b_MinigunCritDamage * multipliers[EStatTypeMultiplier.MinigunCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunCritDamageFlatBonus];
     public float MinigunFireRate => (b_MinigunFireRate * multipliers[EStatTypeMultiplier.MinigunFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunFireRateFlatBonus];
     public float MinigunReloadTime => (b_MinigunReloadTime * multipliers[EStatTypeMultiplier.MinigunReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunReloadTimeFlatBonus];
-    public float MinigunMagazineSize => (b_MinigunMagazineSize * multipliers[EStatTypeMultiplier.MinigunMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus];
+    public int MinigunMagazineSize => (int)((b_MinigunMagazineSize * multipliers[EStatTypeMultiplier.MinigunMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus]);
     public float MinigunProjectileLifetime => (b_MinigunProjectileLifetime * multipliers[EStatTypeMultiplier.MinigunProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileLifetimeFlatBonus];
     public float MinigunProjectileSpeed => (b_MinigunProjectileSpeed * multipliers[EStatTypeMultiplier.MinigunProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileSpeedFlatBonus];
     public float MinigunBulletDeviationAngle => (b_minigunDeviationAngle * multipliers[EStatTypeMultiplier.MinigunBulletDeviationAngleMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunBulletDeviationAngleBonus];
@@ -190,13 +190,14 @@ public class PlayerStatusSO : ScriptableObject
     public float RocketCritDamage => (b_RocketCritDamage * multipliers[EStatTypeMultiplier.RocketCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketCritDamageFlatBonus];
     public float RocketFireRate => (b_RocketFireRate * multipliers[EStatTypeMultiplier.RocketFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketFireRateFlatBonus];
     public float RocketReloadTime => (b_RocketReloadTime * multipliers[EStatTypeMultiplier.RocketReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketReloadTimeFlatBonus];
-    public float RocketMagazineSize => (b_RocketMagazineSize * multipliers[EStatTypeMultiplier.RocketMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketMagazineSizeFlatBonus];
+    public int RocketMagazineSize => (int)((b_RocketMagazineSize * multipliers[EStatTypeMultiplier.RocketMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketMagazineSizeFlatBonus]);
     public float RocketProjectileLifetime => (b_RocketProjectileLifetime * multipliers[EStatTypeMultiplier.RocketProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileLifetimeFlatBonus];
     public float RocketProjectileSpeed => (b_RocketProjectileSpeed * multipliers[EStatTypeMultiplier.RocketProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileSpeedFlatBonus];
     public float RocketExplosionRadius => (b_RocketExplosionRadius * multipliers[EStatTypeMultiplier.RocketExplosionRadiusMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketExplosionRadiusFlatBonus];
 
 
     #region --- Initialization Functions ---
+
     /// <summary>
     /// Call to reset the player's status. Essentially removes all modifiers to the base stats.
     /// </summary>
@@ -212,6 +213,7 @@ public class PlayerStatusSO : ScriptableObject
             flatBonuses[key] = 0f;
         }
     }
+
     #endregion
 
     #region --- Roguelike functions ---
@@ -243,6 +245,7 @@ public class PlayerStatusSO : ScriptableObject
     {
         flatBonuses[statType] += flatBonusValue;
     }
+
     #endregion
 
 }
