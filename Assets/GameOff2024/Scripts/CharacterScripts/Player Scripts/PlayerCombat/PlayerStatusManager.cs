@@ -1,3 +1,4 @@
+using KinematicCharacterController;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -7,12 +8,15 @@ using UnityEngine;
 public class PlayerStatusManager : MonoBehaviour
 {
     [SerializeField] private PlayerStatusSO playerStatus;
+    private PlayerKCC playerKCC;
 
     private MinigunProjectileParams minigunProjectileParams;
 
     // Start is called before the first frame update
     void Start()
     {
+        playerKCC = FindAnyObjectByType<PlayerKCC>();
+
         minigunProjectileParams = new MinigunProjectileParams(
             playerStatus.MinigunProjectileSpeed,
             GetComputedDamage(EWeaponType.Minigun),
@@ -22,7 +26,7 @@ public class PlayerStatusManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        UpdatePlayerKCCStats();
     }
 
     public MinigunProjectileParams GetMinigunProjectileParams()
@@ -35,7 +39,10 @@ public class PlayerStatusManager : MonoBehaviour
         return minigunProjectileParams;
     }
 
-
+    private void UpdatePlayerKCCStats()
+    {
+        playerKCC._walkingSpeed = playerStatus.MoveSpeed;
+    }
 
     public float GetComputedDamage(EWeaponType weaponType)
     {
