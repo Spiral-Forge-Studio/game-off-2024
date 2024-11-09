@@ -135,7 +135,7 @@ public class ProjectileManager : MonoBehaviour
         }
         else if (projectileType == EProjectileType.Rocket)
         {
-            return null;
+            return playerStatusManager.GetRocketProjectileParams();
         }
 
         // TODO: Add your own conditions and return values, you can reference other scripts.
