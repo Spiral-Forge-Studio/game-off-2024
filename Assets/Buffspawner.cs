@@ -11,7 +11,7 @@ public class BuffSpawner : MonoBehaviour
     public PlayerStatusSO playerStats;
     void Start()
     {
-        playerStats.flatBonuses[EStatTypeFlatBonus.MinigunProjectileSpeedFlatBonus] = 0;
+        
         StartCoroutine(SpawnBuffAtIntervals());
     }
 

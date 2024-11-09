@@ -23,6 +23,7 @@ public enum BuffRarity
 public class BuffManager : MonoBehaviour
 {
     public PlayerStatusSO playerStats;
+    
 
     // Buff Rarity Appearance Rate
     public Dictionary<BuffRarity, float> RarityProb = new Dictionary<BuffRarity, float>
@@ -35,7 +36,7 @@ public class BuffManager : MonoBehaviour
     };
 
     // Initial Multiplier Bonus
-    public Dictionary<EStatTypeMultiplier, float> Initmultipliers = new Dictionary<EStatTypeMultiplier, float>
+    public Dictionary<EStatTypeMultiplier, float> InitMultiplierBonuses = new Dictionary<EStatTypeMultiplier, float>
     {
         { EStatTypeMultiplier.HealthMultiplier, 1.1f },
         { EStatTypeMultiplier.ShieldMultiplier, 1.15f },
@@ -273,6 +274,9 @@ public class BuffManager : MonoBehaviour
         { EStatTypeMultiplier.ShieldRegenRateMultiplier, BuffRarity.Rare }
     };
 
+    //Get player stats from flatbuff
+    //public Dictionary<EStatTypeFlatBonus, > TO DO: MAPPING 
+
     // Buffrarity prob
     public Dictionary<BuffRarity, float> RarityProbabilityMapping = new Dictionary<BuffRarity, float>
     {
@@ -296,7 +300,6 @@ public class BuffManager : MonoBehaviour
 
 
     //Debugging
-    EStatTypeFlatBonus bufftoapply = EStatTypeFlatBonus.MinigunProjectileSpeedFlatBonus;
     public PlayerKCC playerKCC;
     float bufftimer = 0f;
     public GameObject buffPrefab; 
@@ -308,31 +311,124 @@ public class BuffManager : MonoBehaviour
     BuffRarity temprarity;
     void ApplyBuff()
     {
-        if (InitflatBonuses.ContainsKey(bufftoapply))
-        {
-            cumulativeProbability = 0f;
-            randomvalue = UnityEngine.Random.value;
-            foreach (var rarity in RarityProbabilityMapping)
-            {
-                cumulativeProbability += rarity.Value;
-                if (randomvalue <= cumulativeProbability)
-                {
-                    temprarity = rarity.Key;
-                    buffamount = InitflatBonuses[bufftoapply] * RarityMultiplier[rarity.Key];
-                    break;
-                }
-            }
+        cumulativeProbability = 0f;
+        randomvalue = UnityEngine.Random.value;
 
-            playerStats.ModifyFlatBonus(bufftoapply, buffamount);
-            Debug.Log("Buff applied: " + bufftoapply + "+" + buffamount + " Buff rarity: " + temprarity + randomvalue +  " Current projectile speed: " + playerStats.MinigunProjectileSpeed + " Current fire rate: " + playerStats.MinigunFireRate);
-            bufftimer = Time.time; 
-            Destroy(gameObject); 
+        // Step 1: Select a rarity based on probability
+        foreach (var rarity in RarityProbabilityMapping)
+        {
+            cumulativeProbability += rarity.Value;
+            if (randomvalue <= cumulativeProbability)
+            {
+                temprarity = rarity.Key;
+                break;
+            }
+        }
+
+        // Step 2: Select a random buff from the chosen rarity
+        
+        List<EStatTypeFlatBonus> availableBuffsFlat = new List<EStatTypeFlatBonus>();
+        List<EStatTypeMultiplier> availableBuffsMultiplier = new List<EStatTypeMultiplier>();
+        bool Buffisflat;
+        randomvalue = UnityEngine.Random.value;
+        if (randomvalue >= 0.5)
+        {
+            Buffisflat = true;
         }
         else
         {
-            Debug.LogWarning("Buff type " + bufftoapply + " not found in InitflatBonuses.");
+            Buffisflat = false;
         }
+        
+        if (Buffisflat)
+        {
+            foreach (var buff in FlatBonusRarityMapping)
+            {
+                if (buff.Value == temprarity)
+                {
+                    availableBuffsFlat.Add(buff.Key);
+                }
+            }
+            EStatTypeFlatBonus bufftoapply;
+            if (availableBuffsFlat.Count > 0)
+            {
+                bufftoapply = availableBuffsFlat[UnityEngine.Random.Range(0, availableBuffsFlat.Count)];
+            }
+            else
+            {
+                Debug.LogWarning("No buffs available for rarity: " + temprarity);
+                return;
+            }
+
+            // Step 3: Calculate buff amount with rarity multiplier
+            if (InitflatBonuses.ContainsKey(bufftoapply))
+            {
+                float rarityMultiplier = RarityMultiplier.ContainsKey(temprarity) ? RarityMultiplier[temprarity] : 1f;
+                buffamount = InitflatBonuses[bufftoapply] * rarityMultiplier;
+
+                // Apply the buff to player stats
+                playerStats.ModifyFlatBonus(bufftoapply, buffamount);
+                // Debugging output
+                Debug.Log("Buff applied: " + bufftoapply + " + " + buffamount + " Buff rarity: " + temprarity + " Random value: " + randomvalue);
+
+                // Set buff timer and destroy buff object
+                bufftimer = Time.time;
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("Buff type " + bufftoapply + " not found in InitflatBonuses.");
+            }
+        }
+        else
+        {
+            foreach (var buff in MultiplierRarityMapping)
+            {
+                if (buff.Value == temprarity)
+                {
+                    availableBuffsMultiplier.Add(buff.Key);
+                }
+            }
+            EStatTypeMultiplier bufftoapply;
+            if (availableBuffsMultiplier.Count > 0)
+            {
+                bufftoapply = availableBuffsMultiplier[UnityEngine.Random.Range(0, availableBuffsMultiplier.Count)];
+            }
+            else
+            {
+                Debug.LogWarning("No buffs available for rarity: " + temprarity);
+                return;
+            }
+
+            // Step 3: Calculate buff amount with rarity multiplier
+            if (InitMultiplierBonuses.ContainsKey(bufftoapply))
+            {
+                float rarityMultiplier = RarityMultiplier.ContainsKey(temprarity) ? RarityMultiplier[temprarity] : 1f;
+                buffamount = InitMultiplierBonuses[bufftoapply] * rarityMultiplier;
+
+                // Apply the buff to player stat
+               
+                playerStats.ModifyMultiplier(bufftoapply, buffamount, true);
+
+                // Debugging output
+                Debug.Log("Buff applied: " + bufftoapply + " + " + buffamount + " Buff rarity: " + temprarity + " Random value: " + randomvalue);
+
+                // Set buff timer and destroy buff object
+                bufftimer = Time.time;
+                Destroy(gameObject);
+            }
+            else
+            {
+                Debug.LogWarning("Buff type " + bufftoapply + " not found in InitMultiplierBonuses.");
+            }
+        }
+        
+
+ 
     }
+
+
+
 
     void PerformSphereCast()
     {

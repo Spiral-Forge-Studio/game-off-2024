@@ -150,13 +150,14 @@ namespace KinematicCharacterController
             // Assign the characterController to the motor
             Motor.CharacterController = this;
         }
-
+        public PlayerStatusSO playerStats;
         private void Start()
         {
             Motor.SetCapsuleCollisionsActivation(true);
 
             _originalCapsuleHeight = Motor.Capsule.height;
             _originalCapsuleRadius = Motor.Capsule.radius;
+            playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
         }
 
         private void Update()
