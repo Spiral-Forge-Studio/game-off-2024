@@ -9,7 +9,7 @@ public class PlayerWalkState : PlayerBaseState
     {
     }
 
-    public override void SetInput(ref PlayerCharacterInputs inputs)
+    public override void SetInput(ref PlayerControllerInputs inputs)
     {
     }
 
@@ -17,7 +17,7 @@ public class PlayerWalkState : PlayerBaseState
     {
         //Debug.Log("Enter Walk State");
 
-        _ctx._animator.CrossFadeInFixedTime(_ctx.JOGGING, 0.1f);
+        //_ctx._animator.CrossFadeInFixedTime(_ctx.JOGGING, 0.1f);
     }
 
     public override void ExitState()

@@ -9,7 +9,7 @@ public class DB_EndlessFlurryState : PlayerBaseState
     {
     }
 
-    public override void SetInput(ref PlayerCharacterInputs inputs)
+    public override void SetInput(ref PlayerControllerInputs inputs)
     {
     }
 

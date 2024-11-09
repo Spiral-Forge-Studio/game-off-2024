@@ -8,7 +8,7 @@ public class PlayerGroundedState : PlayerBaseState
         _isRootState = true;
     }
 
-    public override void SetInput(ref PlayerCharacterInputs inputs)
+    public override void SetInput(ref PlayerControllerInputs inputs)
     {
     }
 
@@ -19,6 +19,7 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void ExitState()
     {
+
     }
 
     public override void AfterCharacterUpdate(float deltaTime)
@@ -45,7 +46,10 @@ public class PlayerGroundedState : PlayerBaseState
         // Reorient velocity on slope
         currentVelocity = _ctx.Motor.GetDirectionTangentToSurface(currentVelocity, effectiveGroundNormal) * currentVelocityMagnitude;
 
-        currentVelocity += _ctx._gravity * deltaTime;
+        if (_ctx.Motor.GroundingStatus.IsStableOnGround)
+        {
+            currentVelocity += _ctx._gravity * deltaTime;
+        }
     }
 
     public override void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
