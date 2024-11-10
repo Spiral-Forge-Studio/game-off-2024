@@ -9,7 +9,7 @@ public class GeneralState : PlayerBaseState
     {
     }
 
-    public override void SetInput(ref PlayerCharacterInputs inputs)
+    public override void SetInput(ref PlayerControllerInputs inputs)
     {
     }
 

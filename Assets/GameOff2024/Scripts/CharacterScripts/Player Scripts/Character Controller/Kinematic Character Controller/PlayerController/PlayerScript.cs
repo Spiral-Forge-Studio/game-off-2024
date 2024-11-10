@@ -11,6 +11,7 @@ namespace KinematicCharacterController
         [Header("References")]
         public PlayerKCC Character;
         public CameraFollow CharacterCamera;
+        private WeaponManager WeaponManager;
 
         [Header("Input Actions")]
         PlayerInput playerInput;
@@ -38,10 +39,12 @@ namespace KinematicCharacterController
         [HideInInspector] private GameStateManager gameState;
         [HideInInspector] public float _mouseSensitivity;
 
+
         private void Awake()
         {
             _disableRotation = false;
             gameState = FindObjectOfType<GameStateManager>();
+            WeaponManager = FindObjectOfType<WeaponManager>();
             _disableMovement = false;
             _endCutscene = false;
             _mouseSensitivity = 1f;
@@ -89,23 +92,25 @@ namespace KinematicCharacterController
 
         private void HandleCharacterInput()
         {
-            PlayerCharacterInputs characterInputs = new PlayerCharacterInputs();
+            PlayerControllerInputs controllerInputs = new PlayerControllerInputs();
+            PlayerCombatInputs combatInputs = new PlayerCombatInputs();
 
             // Build the CharacterInputs struct
 
-            characterInputs.MoveAxisForward = _moveAction.ReadValue<Vector2>().y;
-            characterInputs.MoveAxisRight = _moveAction.ReadValue<Vector2>().x;
-            characterInputs.CameraRotation = CharacterCamera.transform.rotation;
-            characterInputs.Dash = _dash.ReadValue<float>() == 1;
-            characterInputs.LeftShoot = _leftShoot.ReadValue<float>() == 1;
-            characterInputs.RightShoot = _rightShoot.ReadValue<float>() == 1;
-            characterInputs.LeftSwap = _leftSwap.ReadValue<float>() == 1;
-            characterInputs.RightSwap= _rightSwap.ReadValue<float>() == 1;
+            controllerInputs.MoveAxisForward = _moveAction.ReadValue<Vector2>().y;
+            controllerInputs.MoveAxisRight = _moveAction.ReadValue<Vector2>().x;
+            controllerInputs.CameraRotation = CharacterCamera.transform.rotation;
+            controllerInputs.Dash = _dash.ReadValue<float>() == 1;
 
-            characterInputs.mousePos = CharacterCamera.mouseFollowPoint;
+            combatInputs.LeftShoot = _leftShoot.ReadValue<float>() == 1;
+            combatInputs.RightShoot = _rightShoot.ReadValue<float>() == 1;
+
+            controllerInputs.mousePos = CharacterCamera.mouseFollowPoint;
+            combatInputs.mousePos = CharacterCamera.mouseFollowPoint;
 
             // Apply inputs to character
-            Character.SetInputs(ref characterInputs);
+            Character.SetInputs(ref controllerInputs);
+            WeaponManager.SetInputs(ref combatInputs);
         }
     }
 }

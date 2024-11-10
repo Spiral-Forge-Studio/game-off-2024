@@ -18,9 +18,9 @@ public abstract class PlayerBaseState
         _factory = playerStateFactory;
     }
 
-    public abstract void SetInput(ref PlayerCharacterInputs inputs);
+    public abstract void SetInput(ref PlayerControllerInputs inputs);
 
-    public void SetInputs(ref PlayerCharacterInputs inputs)
+    public void SetInputs(ref PlayerControllerInputs inputs)
     {
         SetInput(ref inputs);
 
