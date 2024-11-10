@@ -6,6 +6,8 @@ public struct PlayerCombatInputs
 {
     public bool LeftShoot;
     public bool RightShoot;
+    public bool RightHold;
+    public bool RightRelease;
     public Vector3 mousePos;
 }
 
@@ -15,6 +17,8 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private ProjectileShooter rocketProjectileShooter;
 
     [SerializeField] private PlayerStatusSO playerStats;
+
+
 
     private Vector3 aimPosition;
     private Quaternion aimRotation;
@@ -29,6 +33,12 @@ public class WeaponManager : MonoBehaviour
 
     private bool isMinigunReloading;
     private bool isRocketReloading;
+
+    private float rocket_setHoldTime = 0.3f;
+    private float rocket_startHoldTime;
+
+    private bool rocket_holdTimerStarted;
+    private bool rocket_holdReleased;
 
 
     private void Awake()
@@ -52,6 +62,11 @@ public class WeaponManager : MonoBehaviour
 
     public void SetInputs(ref PlayerCombatInputs inputs)
     {
+        if (inputs.RightRelease)
+        {
+            Debug.Log("release: " + inputs.RightRelease);
+        }
+
         aimPosition = inputs.mousePos;
 
         // Handle Minigun Shooting and Reloading
@@ -68,52 +83,47 @@ public class WeaponManager : MonoBehaviour
             }
             else if (!isMinigunReloading)
             {
-                StartCoroutine(reload(playerStats.MinigunReloadTime, EWeaponType.Minigun));
+                StartCoroutine(ReloadMinigun(playerStats.MinigunReloadTime));
             }
         }
 
         // Handle Rocket Shooting and Reloading
-        if (inputs.RightShoot)
+        if (inputs.RightShoot && !rocket_holdTimerStarted)
         {
-            if (rocket_currentAmmo > 0)
+            rocket_holdTimerStarted = true;
+            rocket_startHoldTime = Time.time;
+        }
+
+        if (!inputs.RightShoot && rocket_holdTimerStarted)
+        {
+            if (Time.time - rocket_startHoldTime < rocket_setHoldTime)
             {
-                if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate)
+                if (rocket_currentAmmo > 0)
                 {
-                    FireRocketProjectile(aimPosition);
-                    rocket_currentAmmo--;
-                    rocket_lastShotTime = Time.time;
+                    if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate && !inputs.RightHold)
+                    {
+                        FireRocketProjectile(aimPosition);
+                        rocket_currentAmmo--;
+                        rocket_lastShotTime = Time.time;
+                    }
                 }
             }
-            else if (!isRocketReloading)
-            {
-                StartCoroutine(reload(playerStats.RocketReloadTime, EWeaponType.Rocket));
-            }
+
+            rocket_holdTimerStarted = false;
         }
+
     }
 
-    private IEnumerator reload(float reloadTime, EWeaponType weaponType)
+    private IEnumerator ReloadMinigun(float reloadTime)
     {
-        // Set the appropriate reload flag
-        if (weaponType == EWeaponType.Minigun) isMinigunReloading = true;
-        if (weaponType == EWeaponType.Rocket) isRocketReloading = true;
+        isMinigunReloading = true;
 
-        Debug.Log($"Reloading {weaponType}...");
+        //Debug.Log($"Reloading {weaponType}...");
         yield return new WaitForSeconds(reloadTime); // Wait for the reload duration
 
-        // Refill ammo and reset reload flag
-        if (weaponType == EWeaponType.Minigun)
-        {
-            minigun_currentAmmo = playerStats.MinigunMagazineSize; // Refill minigun ammo
-            isMinigunReloading = false;
-            Debug.Log("Minigun reloaded!");
-        }
+        minigun_currentAmmo = playerStats.MinigunMagazineSize; // Refill minigun ammo
+        isMinigunReloading = false;
 
-        if (weaponType == EWeaponType.Rocket)
-        {
-            rocket_currentAmmo = playerStats.RocketMagazineSize; // Refill rocket ammo
-            isRocketReloading = false;
-            Debug.Log("Rocket launcher reloaded!");
-        }
     }
 
     #region -- Minigun Related ---

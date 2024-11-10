@@ -31,7 +31,9 @@ public enum EStatTypeMultiplier
     RocketMagazineSizeMultiplier,
     RocketProjectileLifetimeMultiplier,
     RocketProjectileSpeedMultiplier,
-    RocketExplosionRadiusMultiplier
+    RocketExplosionRadiusMultiplier,
+    RocketHoldDurationMultiplier,
+    RocketReleaseFireRateMultiplier
 }
 public enum EStatTypeFlatBonus
 {
@@ -61,10 +63,10 @@ public enum EStatTypeFlatBonus
     RocketMagazineSizeFlatBonus,
     RocketProjectileLifetimeFlatBonus,
     RocketProjectileSpeedFlatBonus,
-    RocketExplosionRadiusFlatBonus
+    RocketExplosionRadiusFlatBonus,
+    RocketHoldDurationFlatBonus,
+    RocketReleaseFireRateFlatBonus
 }
-
-
 
 [CreateAssetMenu(fileName = "PlayerStatusSO", menuName = "Scriptable Objects/PlayerStatus Scriptable Object")]
 public class PlayerStatusSO : ScriptableObject
@@ -103,6 +105,8 @@ public class PlayerStatusSO : ScriptableObject
 
     [Header("Rocket Special Base Stats")]
     [SerializeField] private float b_RocketExplosionRadius;
+    [SerializeField] private float b_RocketHoldDuration;
+    [SerializeField] private float b_RocketReleaseFirerate;
 
 
     // Modifier Dictionaries
@@ -132,7 +136,9 @@ public class PlayerStatusSO : ScriptableObject
         { EStatTypeMultiplier.RocketMagazineSizeMultiplier, 1f },
         { EStatTypeMultiplier.RocketProjectileLifetimeMultiplier, 1f },
         { EStatTypeMultiplier.RocketProjectileSpeedMultiplier, 1f },
-        { EStatTypeMultiplier.RocketExplosionRadiusMultiplier, 1f }
+        { EStatTypeMultiplier.RocketExplosionRadiusMultiplier, 1f },
+        { EStatTypeMultiplier.RocketHoldDurationMultiplier, 1f },
+        { EStatTypeMultiplier.RocketReleaseFireRateMultiplier, 1f }
     };
 
     private Dictionary<EStatTypeFlatBonus, float> flatBonuses = new Dictionary<EStatTypeFlatBonus, float>
@@ -161,7 +167,9 @@ public class PlayerStatusSO : ScriptableObject
         { EStatTypeFlatBonus.RocketMagazineSizeFlatBonus, 0f },
         { EStatTypeFlatBonus.RocketProjectileLifetimeFlatBonus, 0f },
         { EStatTypeFlatBonus.RocketProjectileSpeedFlatBonus, 0f },
-        { EStatTypeFlatBonus.RocketExplosionRadiusFlatBonus, 0f }
+        { EStatTypeFlatBonus.RocketExplosionRadiusFlatBonus, 0f },
+        { EStatTypeFlatBonus.RocketHoldDurationFlatBonus, 0f },
+        { EStatTypeFlatBonus.RocketReleaseFireRateFlatBonus, 0f }
     };
 
     // General Computed Stats
@@ -194,6 +202,8 @@ public class PlayerStatusSO : ScriptableObject
     public float RocketProjectileLifetime => (b_RocketProjectileLifetime * multipliers[EStatTypeMultiplier.RocketProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileLifetimeFlatBonus];
     public float RocketProjectileSpeed => (b_RocketProjectileSpeed * multipliers[EStatTypeMultiplier.RocketProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileSpeedFlatBonus];
     public float RocketExplosionRadius => (b_RocketExplosionRadius * multipliers[EStatTypeMultiplier.RocketExplosionRadiusMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketExplosionRadiusFlatBonus];
+    public float RocketHoldDuration => (b_RocketHoldDuration * multipliers[EStatTypeMultiplier.RocketHoldDurationMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketHoldDurationFlatBonus];
+    public float RocketReleaseFireRate => (b_RocketReleaseFirerate * multipliers[EStatTypeMultiplier.RocketReleaseFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketReleaseFireRateFlatBonus];
 
 
     #region --- Initialization Functions ---
