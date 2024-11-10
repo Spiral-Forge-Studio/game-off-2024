@@ -20,8 +20,7 @@ namespace KinematicCharacterController
         InputAction _dash;
         InputAction _leftShoot;
         InputAction _rightShoot;
-        InputAction _leftSwap;
-        InputAction _rightSwap;
+        InputAction _rightHold;
 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
@@ -63,8 +62,7 @@ namespace KinematicCharacterController
             _leftShoot = playerInput.actions.FindAction("Left Shoot");
             _rightShoot = playerInput.actions.FindAction("Right Shoot");
 
-            _leftSwap = playerInput.actions.FindAction("Left Swap");
-            _rightSwap = playerInput.actions.FindAction("Right Swap");
+            _rightHold = playerInput.actions.FindAction("Right Hold");
 
             _openMenu = false;
         }
@@ -96,14 +94,20 @@ namespace KinematicCharacterController
             PlayerCombatInputs combatInputs = new PlayerCombatInputs();
 
             // Build the CharacterInputs struct
-
             controllerInputs.MoveAxisForward = _moveAction.ReadValue<Vector2>().y;
             controllerInputs.MoveAxisRight = _moveAction.ReadValue<Vector2>().x;
             controllerInputs.CameraRotation = CharacterCamera.transform.rotation;
             controllerInputs.Dash = _dash.ReadValue<float>() == 1;
 
             combatInputs.LeftShoot = _leftShoot.ReadValue<float>() == 1;
-            combatInputs.RightShoot = _rightShoot.ReadValue<float>() == 1;
+
+            combatInputs.RightShoot = _rightShoot.phase == InputActionPhase.Started;
+
+            Debug.Log("Right shoot phase: " +  _rightShoot.phase);
+
+            // Check if the right shoot action was released
+            combatInputs.RightHold = _rightShoot.phase == InputActionPhase.Performed;
+            combatInputs.RightRelease = _rightShoot.phase == InputActionPhase.Waiting;
 
             controllerInputs.mousePos = CharacterCamera.mouseFollowPoint;
             combatInputs.mousePos = CharacterCamera.mouseFollowPoint;
