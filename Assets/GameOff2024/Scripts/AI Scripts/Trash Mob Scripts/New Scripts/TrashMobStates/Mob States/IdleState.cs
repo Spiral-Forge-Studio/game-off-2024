@@ -5,27 +5,29 @@ using UnityEngine.AI;
 
 public class IdleState : IState
 {
-    private TrashMob TrashMob;
+    private readonly TrashMob TrashMob;
     private NavMeshAgent _navmeshagent;
+    //private readonly TrashMobParameters _parameters;
     //private Animator _animator;
 
-
-    public float roamspeed = 1f;
+    [HideInInspector] public float roamspeed;
     public float roamradius = 7f;
 
     private List<Vector3> roamPoints = new List<Vector3>();
     private int currentPointIndex = 0;
-    public IdleState(TrashMob trashMob, NavMeshAgent agent)
+    public IdleState(TrashMob trashMob, NavMeshAgent agent, TrashMobParameters parameters)
     {
         TrashMob = trashMob;
         _navmeshagent = agent;
+        //_parameters = parameters;
+        roamspeed = parameters.roamspeed;
     }
 
     public void OnEnter() 
     { 
-        Debug.Log("Entered idle"); 
         _navmeshagent.enabled = true; 
         _navmeshagent.speed = roamspeed; 
+        _navmeshagent.autoBraking = true;
     }
     public void Tick()
     {
@@ -76,5 +78,5 @@ public class IdleState : IState
     }
     #endregion
 
-    public void OnExit() { Debug.Log("Exited"); }
+    public void OnExit() { }
 }

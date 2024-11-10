@@ -7,13 +7,15 @@ public class TrashMobParameters : MonoBehaviour
     #region ---TrashMobCoreParameters---
     [Header ("TrashMob Parameters")]
     public float health = 100f;
-    public float speed = 3f;
+    public float roamspeed = 1.5f;
+    public float combatspeed = 5f;
     public float dodgeSpeed = 5f;
     public float dodgecooldown = 0.3f;
     public float detectCover = 10f;
     public float dodgeprobability = 0.3f;
     public float shootprobability = 0.7f;
     public float PlayerDetectionRadius = 15f;
+    public float PlayerExitCombatRange = 7f;
     #endregion
 
     #region ---ScalingFactor---
@@ -27,7 +29,7 @@ public class TrashMobParameters : MonoBehaviour
     public void ScaleParams(int levelscleared)
     {
         health += levelscleared * healthfactor;
-        speed += levelscleared * speedfactor;
+        combatspeed += levelscleared * speedfactor;
         dodgeSpeed += levelscleared * dodgespeedfactor;
     }
 }
