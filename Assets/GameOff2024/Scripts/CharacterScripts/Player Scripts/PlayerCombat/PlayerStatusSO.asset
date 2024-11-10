@@ -31,7 +31,7 @@ MonoBehaviour:
   b_RocketDamage: 20
   b_RocketCritRate: 0
   b_RocketCritDamage: 1.5
-  b_RocketFireRate: 10
+  b_RocketFireRate: 5
   b_RocketReloadTime: 3
   b_RocketMagazineSize: 100
   b_RocketProjectileLifetime: 1

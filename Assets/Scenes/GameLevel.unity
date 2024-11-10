@@ -626,7 +626,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc078090383f104b8f13d70fef5f6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playerStatsSO: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
   minigunProjectileShooter: {fileID: 1848058518}
   rocketProjectileShooter: {fileID: 617873296}
   playerStats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
@@ -2611,7 +2610,7 @@ Transform:
   m_GameObject: {fileID: 1492865676}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.4822404, y: 2.2184238, z: -0.007262006}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
