@@ -42,18 +42,9 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Left Swap",
+                    "name": "Right Hold",
                     "type": "Button",
-                    "id": "4d90caf1-600d-4b5a-81f8-9632e8a15da2",
-                    "expectedControlType": "",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Right Swap",
-                    "type": "Button",
-                    "id": "cb854fc5-76dd-4ab8-b4c2-a819cb994e8b",
+                    "id": "74e9e3db-1674-4762-a6e2-1a27e2f2b61c",
                     "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
@@ -142,7 +133,7 @@
                     "name": "",
                     "id": "2d4e0e11-2f42-44ab-91f2-ffcd7cd80c7c",
                     "path": "<Mouse>/rightButton",
-                    "interactions": "",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "",
                     "action": "Right Shoot",
@@ -151,23 +142,12 @@
                 },
                 {
                     "name": "",
-                    "id": "cdabd361-809a-474e-add1-905d340b43bb",
-                    "path": "<Keyboard>/q",
-                    "interactions": "",
+                    "id": "801d470c-318e-418f-af61-69288cf65857",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "Hold",
                     "processors": "",
                     "groups": "",
-                    "action": "Left Swap",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e3571095-7f99-4220-829c-e287db02cd9e",
-                    "path": "<Keyboard>/e",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Right Swap",
+                    "action": "Right Hold",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
