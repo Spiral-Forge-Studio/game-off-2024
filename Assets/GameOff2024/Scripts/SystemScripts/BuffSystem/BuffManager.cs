@@ -1,9 +1,97 @@
-using System.Collections;
 using System.Collections.Generic;
-using System.Threading;
 using KinematicCharacterController;
 using UnityEngine;
 
+public class BuffManager : MonoBehaviour
+{
+    private List<Buff> activeBuffs = new List<Buff>();
+    public PlayerKCC playerKCC;
+    public PlayerStatusSO playerStats;
+    public float sphereCastInterval = 0.0001f;
+
+    private float sphereCastTimer = 0f;
+    private GameObject toBeBuffed;
+    private BuffSpawner buffSpawner;
+
+    private void Awake()
+    {
+        playerKCC = FindObjectOfType<PlayerKCC>();
+        buffSpawner = FindAnyObjectByType<BuffSpawner>();
+        sphereCastTimer = sphereCastInterval;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log(other.tag);
+    }
+    /*
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            toBeBuffed = other.gameObject;
+            Debug.Log("Buff collided with an object with the tag: " + other.gameObject.tag);
+
+            HpBuff hpBuff = toBeBuffed.AddComponent<HpBuff>();
+            hpBuff.Initialize(playerStats, 1f, HpBuff.BuffType.Flat, HpBuff.Rarity.Common, 10f, 5f, 0.2f);
+
+            AddBuff(hpBuff);
+            Destroy(this.gameObject);
+        }
+    }
+    */
+    private void Update()
+    {
+        //PerformSphereCast();
+    }
+
+    public void AddBuff(Buff newBuff)
+    {
+        Buff existingBuff = activeBuffs.Find(b => b.GetType() == newBuff.GetType());
+
+        if (existingBuff == null)
+        {
+            activeBuffs.Add(newBuff);
+            newBuff.StartBuff(toBeBuffed);
+        }
+        else
+        {
+            // Optionally update the existing buff
+        }
+    }
+
+    public void RemoveBuff(Buff buff)
+    {
+        activeBuffs.Remove(buff);
+    }
+
+    void PerformSphereCast()
+    {
+        float radius = 0.5f;
+
+        RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, Vector3.forward, radius);
+        foreach (RaycastHit hit in hits)
+        {
+            if (hit.collider.CompareTag("Player"))
+            {
+                toBeBuffed = hit.collider.gameObject;
+                Debug.Log("Buff collided with an object with the tag: " + hit.collider.gameObject.tag);
+
+                HpBuff hpBuff = toBeBuffed.AddComponent<HpBuff>();
+                hpBuff.Initialize(playerStats, 1f, HpBuff.BuffType.Flat, HpBuff.Rarity.Common, 10f, 5f, 0.2f);
+
+                AddBuff(hpBuff);
+                Destroy(this.gameObject);
+            }
+        }
+    }
+}
+
+
+
+
+// Old Buff Structure
+/*
 public enum BuffScaling
 {
     Flat,
@@ -463,3 +551,4 @@ public class BuffManager : MonoBehaviour
 
 
 }
+*/
