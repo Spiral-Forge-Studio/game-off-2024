@@ -7,16 +7,18 @@ public class ProjectileShooter : MonoBehaviour
     public Transform firePoint;
     public EProjectileType projectileType;
     [HideInInspector] public bool fireProjectile;
-    [HideInInspector] public Quaternion fireRotation;
+    [HideInInspector] public List<Quaternion> fireRotations = new List<Quaternion>();
+    [HideInInspector] public int projectileAmount;
 
     protected ProjectileShooter(bool fireProjectile = false)
     {
         this.fireProjectile = fireProjectile;
     }
 
-    public void FireProjectile(Quaternion fireRotation)
+    public void FireProjectile(List<Quaternion> fireRotations)
     {
         fireProjectile = true;
-        this.fireRotation = fireRotation;
+        this.fireRotations = fireRotations;
+        projectileAmount = fireRotations.Count;
     }
 }

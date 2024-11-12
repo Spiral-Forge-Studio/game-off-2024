@@ -7,8 +7,9 @@ public enum EStatTypeMultiplier
 {
     HealthMultiplier,
     ShieldMultiplier,
-    ShieldRegenRateMultiplier,
-    ShieldRegenDelayMultiplier,
+    ShieldRegenAmountMultiplier,
+    ShieldBreakRecoveryDelayMultiplier,
+    ShieldRegenTickIntervalMultipier,
     DamageReductionMultiplier,
     MoveSpeedMultiplier,
     DashCooldownMultiplier,
@@ -39,8 +40,9 @@ public enum EStatTypeFlatBonus
 {
     HealthFlatBonus,
     ShieldFlatBonus,
-    ShieldRegenRateFlatBonus,
-    ShieldRegenDelayFlatBonus,
+    ShieldRegenAmountFlatBonus,
+    ShieldBreakRecoveryDelayFlatBonus,
+    ShieldRegenTickIntervalFlatBonus,
     DamageReductionFlatBonus,
     MoveSpeedFlatBonus,
     DashCooldownFlatBonus,
@@ -74,8 +76,9 @@ public class PlayerStatusSO : ScriptableObject
     [Header("General")]
     [SerializeField] private float baseHealth;
     [SerializeField] private float baseShield;
-    [SerializeField] private float baseShieldRegenRate;
-    [SerializeField] private float baseShieldRegenDelay;
+    [SerializeField] private float baseShieldRegenAmount;
+    [SerializeField] private float baseShieldBreakRecoveryDelay;
+    [SerializeField] private float baseShieldRegenTickInterval;
     [SerializeField] private float baseDamageReduction;
     [SerializeField] private float baseMoveSpeed;
     [SerializeField] private float baseDashCooldown;
@@ -114,8 +117,9 @@ public class PlayerStatusSO : ScriptableObject
     {
         { EStatTypeMultiplier.HealthMultiplier, 1f },
         { EStatTypeMultiplier.ShieldMultiplier, 1f },
-        { EStatTypeMultiplier.ShieldRegenRateMultiplier, 1f },
-        { EStatTypeMultiplier.ShieldRegenDelayMultiplier, 1f },
+        { EStatTypeMultiplier.ShieldRegenAmountMultiplier, 1f },
+        { EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier, 1f },
+        { EStatTypeMultiplier.ShieldRegenTickIntervalMultipier, 1f },
         { EStatTypeMultiplier.DamageReductionMultiplier, 1f },
         { EStatTypeMultiplier.MoveSpeedMultiplier, 1f },
         { EStatTypeMultiplier.DashCooldownMultiplier, 1f },
@@ -145,8 +149,9 @@ public class PlayerStatusSO : ScriptableObject
     {
         { EStatTypeFlatBonus.HealthFlatBonus, 0f },
         { EStatTypeFlatBonus.ShieldFlatBonus, 0f },
-        { EStatTypeFlatBonus.ShieldRegenRateFlatBonus, 0f },
-        { EStatTypeFlatBonus.ShieldRegenDelayFlatBonus, 0f },
+        { EStatTypeFlatBonus.ShieldRegenAmountFlatBonus, 0f },
+        { EStatTypeFlatBonus.ShieldBreakRecoveryDelayFlatBonus, 0f },
+        { EStatTypeFlatBonus.ShieldRegenTickIntervalFlatBonus, 0f },
         { EStatTypeFlatBonus.DamageReductionFlatBonus, 0f },
         { EStatTypeFlatBonus.MoveSpeedFlatBonus, 0f },
         { EStatTypeFlatBonus.DashCooldownFlatBonus, 0f },
@@ -175,8 +180,9 @@ public class PlayerStatusSO : ScriptableObject
     // General Computed Stats
     public float Health => (baseHealth * multipliers[EStatTypeMultiplier.HealthMultiplier]) + flatBonuses[EStatTypeFlatBonus.HealthFlatBonus];
     public float Shield => (baseShield * multipliers[EStatTypeMultiplier.ShieldMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldFlatBonus];
-    public float ShieldRegenRate => (baseShieldRegenRate * multipliers[EStatTypeMultiplier.ShieldRegenRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldRegenRateFlatBonus];
-    public float ShieldRegenDelay => (baseShieldRegenDelay * multipliers[EStatTypeMultiplier.ShieldRegenDelayMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldRegenDelayFlatBonus];
+    public float ShieldRegenAmount => (baseShieldRegenAmount * multipliers[EStatTypeMultiplier.ShieldRegenAmountMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldRegenAmountFlatBonus];
+    public float ShieldBreakRecoveryDelay => (baseShieldBreakRecoveryDelay * multipliers[EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldBreakRecoveryDelayFlatBonus];
+    public float ShieldRegenTickInterval => (baseShieldRegenTickInterval * multipliers[EStatTypeMultiplier.ShieldRegenTickIntervalMultipier]) + flatBonuses[EStatTypeFlatBonus.ShieldRegenTickIntervalFlatBonus];    
     public float DamageReduction => (baseDamageReduction * multipliers[EStatTypeMultiplier.DamageReductionMultiplier]) + flatBonuses[EStatTypeFlatBonus.DamageReductionFlatBonus];
     public float MoveSpeed => (baseMoveSpeed * multipliers[EStatTypeMultiplier.MoveSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.MoveSpeedFlatBonus];
     public float DashCooldown => (baseDashCooldown * multipliers[EStatTypeMultiplier.DashCooldownMultiplier]) + flatBonuses[EStatTypeFlatBonus.DashCooldownFlatBonus];

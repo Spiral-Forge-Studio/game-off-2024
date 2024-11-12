@@ -8,8 +8,11 @@ public enum EGameplaySFX
 {
     MinigunFire,
     MinigunBulletHit,
+    MinigunReload,
     RocketFire,
     RocketExplode,
+    RocketRearm,
+    RocketAccumulate,
     PlayerWalk,
     PlayerDash,
     PlayerGetHit,
@@ -43,7 +46,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioSource musicNonLoopSource;
     [SerializeField] private AudioSource UIAudioSource;
 
-
     private Dictionary<EGameplaySFX, AudioClip[]> GameplaySFXDict = new Dictionary<EGameplaySFX, AudioClip[]>();
 
     [Header("Music")]
@@ -55,8 +57,11 @@ public class AudioManager : MonoBehaviour
     [Header("Gameplay SFX")]
     [SerializeField] private AudioClip[] MinigunFireSFX;
     [SerializeField] private AudioClip[] MinigunBulletHitSFX;
+    [SerializeField] private AudioClip[] MinigunReloadSFX;
     [SerializeField] private AudioClip[] RocketFireSFX;
     [SerializeField] private AudioClip[] RocketExplodeSFX;
+    [SerializeField] private AudioClip[] RocketRearmSFX;
+    [SerializeField] private AudioClip[] RocketAccumulateSFX;
     [SerializeField] private AudioClip[] PlayerWalkSFX;
     [SerializeField] private AudioClip[] PlayerDashSFX;
     [SerializeField] private AudioClip[] PlayerGetHitSFX;
@@ -97,8 +102,11 @@ public class AudioManager : MonoBehaviour
     {
         GameplaySFXDict.Add(EGameplaySFX.MinigunFire, MinigunFireSFX);
         GameplaySFXDict.Add(EGameplaySFX.MinigunBulletHit, MinigunBulletHitSFX);
+        GameplaySFXDict.Add(EGameplaySFX.MinigunReload, MinigunReloadSFX);
         GameplaySFXDict.Add(EGameplaySFX.RocketFire, RocketFireSFX);
         GameplaySFXDict.Add(EGameplaySFX.RocketExplode, RocketExplodeSFX);
+        GameplaySFXDict.Add(EGameplaySFX.RocketRearm, RocketRearmSFX);
+        GameplaySFXDict.Add(EGameplaySFX.RocketAccumulate, RocketAccumulateSFX);
         GameplaySFXDict.Add(EGameplaySFX.PlayerWalk, PlayerWalkSFX);
         GameplaySFXDict.Add(EGameplaySFX.PlayerDash, PlayerDashSFX);
         GameplaySFXDict.Add(EGameplaySFX.PlayerGetHit, PlayerGetHitSFX);
@@ -142,7 +150,7 @@ public class AudioManager : MonoBehaviour
         UIAudioSource.Play();
     }
 
-    public void PlaySFX(AudioSource audioSource, EGameplaySFX sfxEnum, bool randomSound = false)
+    public void PlaySFX(AudioSource audioSource, EGameplaySFX sfxEnum, int index = 0, bool randomSound = false)
     {
         AudioClip[] clips = null;
 
@@ -154,7 +162,8 @@ public class AudioManager : MonoBehaviour
             return;
         }
 
-        audioSource.clip = randomSound ? clips[UnityEngine.Random.Range(0, clips.Length)] : clips[0];
+        audioSource.clip = randomSound ? clips[UnityEngine.Random.Range(0, clips.Length)] : clips[index];
+
         audioSource.Play();
     }
 
