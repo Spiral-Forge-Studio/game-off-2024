@@ -26,6 +26,9 @@ public class PlayerStatusManager : MonoBehaviour
     private bool regeneratingShield;
     private float carryOverDamage = 0f;
 
+    private float currentMaxHealth;
+    private Coroutine shieldRecoverRoutine;
+
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +50,10 @@ public class PlayerStatusManager : MonoBehaviour
             Vector3.zero);
 
         currentHealth = playerStatus.Health;
+        currentMaxHealth = playerStatus.Health;
         currentShield = playerStatus.Shield;
+
+        shieldRecoverRoutine = null;
     }
 
     // Update is called once per frame
@@ -60,6 +66,20 @@ public class PlayerStatusManager : MonoBehaviour
             regeneratingShield = true;
             StartCoroutine(ShieldRegeneration());
         }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            TakeDamage(5f);
+        }
+
+        if (currentMaxHealth != playerStatus.Health)
+        {
+            float currentHealthMultiplier = 1 + (currentMaxHealth / playerStatus.Health);
+
+            currentHealth *= currentHealthMultiplier;
+
+            currentMaxHealth = playerStatus.Health;
+        }
     }
 
 
@@ -71,6 +91,10 @@ public class PlayerStatusManager : MonoBehaviour
         playerKCC._dashInternalCooldown = playerStatus.DashCooldown;
     }
 
+    /// <summary>
+    /// Called when you want the player to take damage
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
         if (damage < 0)
@@ -84,28 +108,35 @@ public class PlayerStatusManager : MonoBehaviour
         {
             currentShield -= damage;
 
-            if (currentShield < 0)
+            if (currentShield <= 0)
             {
                 carryOverDamage = currentShield;
+
                 shieldBroken = true;
                 currentShield = 0f;
 
-                StartCoroutine(ShieldRecovery());
+                shieldRecoverRoutine = StartCoroutine(ShieldRecovery());
             }
         }
 
         if (shieldBroken)
         {
-            if (carryOverDamage != 0)
+            if (carryOverDamage <= 0)
             {
-                currentHealth = Mathf.Clamp(currentHealth - carryOverDamage, 0, playerStatus.Health);
+                currentHealth = Mathf.Clamp(currentHealth + carryOverDamage, 0, playerStatus.Health);
             }
             else
             {
                 currentHealth = Mathf.Clamp(currentHealth - damage, 0, playerStatus.Health);
+
+                if (shieldRecoverRoutine != null)
+                {
+                    StopCoroutine(shieldRecoverRoutine);
+                    shieldRecoverRoutine = StartCoroutine(ShieldRecovery());
+                }
             }
 
-            carryOverDamage = 0f;
+            carryOverDamage = 1f;
         }
     }
 
@@ -134,8 +165,9 @@ public class PlayerStatusManager : MonoBehaviour
     private IEnumerator ShieldRecovery()
     {
         yield return new WaitForSeconds(playerStatus.ShieldBreakRecoveryDelay);
-
+        currentShield += playerStatus.ShieldRegenAmount;
         shieldBroken = false;
+
     }
 
     #endregion
