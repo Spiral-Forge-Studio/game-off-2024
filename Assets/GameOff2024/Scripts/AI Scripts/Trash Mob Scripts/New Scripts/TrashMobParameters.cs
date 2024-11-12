@@ -15,7 +15,7 @@ public class TrashMobParameters : MonoBehaviour
     public float dodgeprobability = 0.3f;
     public float shootprobability = 0.7f;
     public float PlayerDetectionRadius = 15f;
-    public float PlayerExitCombatRange = 7f;
+    public float PlayerExitCombatRange = 4f;
     #endregion
 
     #region ---ScalingFactor---
