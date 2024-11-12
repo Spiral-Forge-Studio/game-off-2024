@@ -27,6 +27,7 @@ public class BuffSpawner : MonoBehaviour
     void Start()
     {
         StartCoroutine(SpawnBuffAtIntervals());
+        playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
     }
 
     private IEnumerator SpawnBuffAtIntervals()

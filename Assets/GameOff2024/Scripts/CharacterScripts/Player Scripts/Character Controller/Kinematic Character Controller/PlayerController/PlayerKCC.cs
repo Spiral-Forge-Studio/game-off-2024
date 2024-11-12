@@ -158,7 +158,6 @@ namespace KinematicCharacterController
             _originalCapsuleHeight = Motor.Capsule.height;
             _originalCapsuleRadius = Motor.Capsule.radius;
             AudioManager.instance.SetMusicAndUIAudioSourcesToPlayerPosition(transform);
-            playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
         }
 
         private void Update()

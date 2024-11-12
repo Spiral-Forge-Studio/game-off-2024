@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class HpBuff : Buff
+public class ShieldBuff : Buff
 {
     public enum BuffType { Flat, Percentage }
     public enum Rarity { Common, Rare, Epic, Legendary }
@@ -17,7 +17,7 @@ public class HpBuff : Buff
 
     private PlayerStatusSO playerStatus;
 
-    public HpBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
+    public ShieldBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
         : base(duration)
     {
         this.playerStatus = status;
@@ -28,7 +28,7 @@ public class HpBuff : Buff
         this.scalingFactor = scalingFactor;
     }
 
-    public void Initialize(PlayerStatusSO playerStats, float amount, HpBuff.BuffType type, HpBuff.Rarity rarity, float initialAmount, float consecutiveAmount, float scaling)
+    public void Initialize(PlayerStatusSO playerStats, float amount, ShieldBuff.BuffType type, ShieldBuff.Rarity rarity, float initialAmount, float consecutiveAmount, float scaling)
     {
         this.playerStatus = playerStats; // Ensure playerStatus is set here
         this.buffType = type;
@@ -42,22 +42,16 @@ public class HpBuff : Buff
     {
         if (buffType == BuffType.Flat)
         {
-            // Apply a flat bonus to health
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.HealthFlatBonus, initialAmount);
+            // Apply a flat bonus to shield
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldFlatBonus, initialAmount);
             totalFlatBonus += initialAmount;
         }
         else
         {
-            // Apply a multiplier to health
-            float multiplierValue = initialAmount;  // Assuming this is in percentage terms
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, multiplierValue, true);
+            // Apply a multiplier to shield
+            float multiplierValue = initialAmount;
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, multiplierValue, true);
             totalMultiplier += multiplierValue / 100f;
-        }
-
-        // Set up consecutive bonus application if applicable
-        if (duration > 0)
-        {
-            InvokeRepeating(nameof(ApplyConsecutiveBuff), 1f, duration);
         }
     }
 
@@ -67,26 +61,25 @@ public class HpBuff : Buff
 
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.HealthFlatBonus, bonusAmount);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldFlatBonus, bonusAmount);
             totalFlatBonus += bonusAmount;
         }
         else
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, bonusAmount, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, bonusAmount, true);
             totalMultiplier += bonusAmount / 100f;
         }
     }
 
     public override void RemoveBuff(GameObject target)
     {
-        // Remove the accumulated bonuses
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.HealthFlatBonus, -totalFlatBonus);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldFlatBonus, -totalFlatBonus);
         }
         else
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, -totalMultiplier * 100f, false);
         }
 
         CancelInvoke(nameof(ApplyConsecutiveBuff));
@@ -96,5 +89,4 @@ public class HpBuff : Buff
     {
 
     }
-
 }

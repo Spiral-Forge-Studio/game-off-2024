@@ -14,8 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 100
   baseShield: 20
-  baseShieldRegenRate: 1
-  baseShieldRegenDelay: 3
+  baseShieldRegenAmount: 1
+  baseShieldBreakRecoveryDelay: 5
+  baseShieldRegenTickInterval: 1
   baseDamageReduction: 0.1
   baseMoveSpeed: 5
   baseDashCooldown: 1

@@ -26,8 +26,8 @@ public class PlayerStatsDisplay : MonoBehaviour
         // General Stats
         stats.AppendLine($"Health: {playerStats.Health}");
         stats.AppendLine($"Shield: {playerStats.Shield}");
-        stats.AppendLine($"Shield Regen Rate: {playerStats.ShieldRegenRate}");
-        stats.AppendLine($"Shield Regen Delay: {playerStats.ShieldRegenDelay}");
+        stats.AppendLine($"Shield Regen Rate: {playerStats.ShieldRegenAmount}");
+        stats.AppendLine($"Shield Regen Delay: {playerStats.ShieldRegenTickInterval}");
         stats.AppendLine($"Damage Reduction: {playerStats.DamageReduction}");
         stats.AppendLine($"Move Speed: {playerStats.MoveSpeed}");
         stats.AppendLine($"Dash Cooldown: {playerStats.DashCooldown}");

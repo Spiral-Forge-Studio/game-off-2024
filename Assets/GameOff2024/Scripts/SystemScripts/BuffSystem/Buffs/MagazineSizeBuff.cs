@@ -1,10 +1,7 @@
 using UnityEngine;
 
-public class HpBuff : Buff
+public class MinigunMagazineBuff : Buff
 {
-    public enum BuffType { Flat, Percentage }
-    public enum Rarity { Common, Rare, Epic, Legendary }
-
     public BuffType buffType;
     public Rarity rarity;
 
@@ -17,7 +14,7 @@ public class HpBuff : Buff
 
     private PlayerStatusSO playerStatus;
 
-    public HpBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
+    public MinigunMagazineBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
         : base(duration)
     {
         this.playerStatus = status;
@@ -28,7 +25,7 @@ public class HpBuff : Buff
         this.scalingFactor = scalingFactor;
     }
 
-    public void Initialize(PlayerStatusSO playerStats, float amount, HpBuff.BuffType type, HpBuff.Rarity rarity, float initialAmount, float consecutiveAmount, float scaling)
+    public void Initialize(PlayerStatusSO playerStats, float amount, MinigunMagazineBuff.BuffType type, MinigunMagazineBuff.Rarity rarity, float initialAmount, float consecutiveAmount, float scaling)
     {
         this.playerStatus = playerStats; // Ensure playerStatus is set here
         this.buffType = type;
@@ -42,15 +39,15 @@ public class HpBuff : Buff
     {
         if (buffType == BuffType.Flat)
         {
-            // Apply a flat bonus to health
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.HealthFlatBonus, initialAmount);
+            // Apply a flat bonus to MinigunMagazineSize
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, initialAmount);
             totalFlatBonus += initialAmount;
         }
         else
         {
-            // Apply a multiplier to health
+            // Apply a multiplier to MinigunMagazineSize
             float multiplierValue = initialAmount;  // Assuming this is in percentage terms
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, multiplierValue, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, multiplierValue, true);
             totalMultiplier += multiplierValue / 100f;
         }
 
@@ -67,12 +64,12 @@ public class HpBuff : Buff
 
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.HealthFlatBonus, bonusAmount);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, bonusAmount);
             totalFlatBonus += bonusAmount;
         }
         else
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, bonusAmount, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, bonusAmount, true);
             totalMultiplier += bonusAmount / 100f;
         }
     }
@@ -82,11 +79,11 @@ public class HpBuff : Buff
         // Remove the accumulated bonuses
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.HealthFlatBonus, -totalFlatBonus);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, -totalFlatBonus);
         }
         else
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, -totalMultiplier * 100f, false);
         }
 
         CancelInvoke(nameof(ApplyConsecutiveBuff));
@@ -94,7 +91,11 @@ public class HpBuff : Buff
 
     public override void UpdateBuffValues(Buff.BuffType bufftype, Buff.Rarity buffrarity, float InitAmount = 0, float ConsecAmount = 0, float ScaleAmount = 0)
     {
+        this.buffType = bufftype;
+        this.rarity = buffrarity;
+        this.initialAmount = InitAmount;
+        this.consecutiveAmount = ConsecAmount;
+        this.scalingFactor = ScaleAmount;
 
     }
-
 }

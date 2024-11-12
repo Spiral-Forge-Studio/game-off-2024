@@ -86,7 +86,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (inputs.RightRelease)
         {
-            Debug.Log("release: " + inputs.RightRelease);
+            //Debug.Log("release: " + inputs.RightRelease);
         }
 
         aimPosition = inputs.mousePos;
