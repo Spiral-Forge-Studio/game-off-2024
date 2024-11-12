@@ -33,7 +33,7 @@ public class PlayerDetector : MonoBehaviour
 
     }
 
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
         if (other.CompareTag("Player"))
         {
@@ -64,3 +64,23 @@ public class PlayerDetector : MonoBehaviour
         Gizmos.DrawWireSphere(transform.position, _colliderradius);
     }
 }
+
+
+
+
+/*
+ private Player _player;
+
+private void Update()
+
+{
+
+_player = GetComponent<Player>;
+
+pos = _player.transform;
+
+
+//
+}
+
+*/

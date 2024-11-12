@@ -15,7 +15,7 @@ MonoBehaviour:
   baseHealth: 100
   baseShield: 20
   baseShieldRegenAmount: 1
-  baseShieldBreakRecoveryDelay: 5
+  baseShieldBreakRecoveryDelay: 2
   baseShieldRegenTickInterval: 1
   baseDamageReduction: 0.1
   baseMoveSpeed: 5

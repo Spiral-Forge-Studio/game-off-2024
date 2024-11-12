@@ -57,8 +57,6 @@ public class WeaponManager : MonoBehaviour
     private bool rocket_holdTimerStarted;
     private bool rocket_holdReleased;
 
-
-
     private void Awake()
     {
         FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
