@@ -134,7 +134,7 @@ public class WeaponManager : MonoBehaviour
             rocket_startHoldTime = Time.time;
         }
 
-        if (rocket_currentAmmo > 0)
+        if (rocket_currentAmmo > 0 || rocket_accumulatedShots > 0)
         {
             if (!inputs.RightShoot && rocket_holdTimerStarted)
             {
@@ -163,6 +163,8 @@ public class WeaponManager : MonoBehaviour
                     && rocket_currentAmmoAtTimeOfAccumulation > 0)
                 {
                     rocket_accumulatedShots++;
+                    rocket_currentAmmo --;
+
                     Debug.Log("Accumulating rockets");
 
                     if (rocket_accumulatedShots == rocket_currentAmmoAtTimeOfAccumulation)
@@ -187,8 +189,6 @@ public class WeaponManager : MonoBehaviour
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);
 
                 AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
-
-                rocket_currentAmmo -= rocket_accumulatedShots;
                 rocket_accumulatedShots = 0;
 
                 rocket_holdTimerStarted = false;
