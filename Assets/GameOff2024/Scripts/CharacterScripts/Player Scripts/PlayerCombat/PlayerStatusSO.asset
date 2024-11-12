@@ -19,7 +19,7 @@ MonoBehaviour:
   baseShieldRegenTickInterval: 1
   baseDamageReduction: 0.1
   baseMoveSpeed: 5
-  baseDashCooldown: 1
+  baseDashCooldown: 0.1
   b_MinigunDamage: 5
   b_MinigunCritRate: 0.5
   b_MinigunCritDamage: 1.5

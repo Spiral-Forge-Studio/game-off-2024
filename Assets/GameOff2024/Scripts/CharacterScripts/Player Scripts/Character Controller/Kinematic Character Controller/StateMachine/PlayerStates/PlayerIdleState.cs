@@ -48,7 +48,11 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (_ctx._movementAbilityRequested && _ctx._canUseMovementAbility)
+        if (!_ctx.IsGrounded)
+        {
+            SwitchState(_factory.Falling());
+        }
+        else if (_ctx._movementAbilityRequested && _ctx._canUseMovementAbility)
         {
             SwitchState(_factory.Dash());
         }

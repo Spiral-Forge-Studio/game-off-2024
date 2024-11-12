@@ -6,6 +6,7 @@ namespace KinematicCharacterController
 {
     public enum EPlayerActionState
     {
+        Falling,
         Grounded,
         Walk,
         Idle,
@@ -25,6 +26,7 @@ namespace KinematicCharacterController
             _states.Add(EPlayerActionState.Idle, new PlayerIdleState(_context, this));
             _states.Add(EPlayerActionState.Grounded, new PlayerGroundedState(_context, this));
             _states.Add(EPlayerActionState.Dash, new PlayerMovementAbilityState(_context, this));
+            _states.Add(EPlayerActionState.Falling, new PlayerFallingState(_context, this));
         }
 
         public PlayerBaseState Walk() { return _states[EPlayerActionState.Walk]; }
@@ -32,6 +34,7 @@ namespace KinematicCharacterController
 
         public PlayerBaseState Grounded() { return _states[EPlayerActionState.Grounded]; }
         public PlayerBaseState Dash() { return _states[EPlayerActionState.Dash]; }
+        public PlayerBaseState Falling() { return _states[EPlayerActionState.Falling]; }
     }
 }
 

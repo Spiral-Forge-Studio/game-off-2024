@@ -175,7 +175,6 @@ public class WeaponManager : MonoBehaviour
                     {
                         AudioManager.instance.PlaySFX(audioSource_RocketRearm, EGameplaySFX.RocketRearm);
                     }
-                    
 
                     rocket_startAccumulateTime = Time.time;
                 }
@@ -189,6 +188,7 @@ public class WeaponManager : MonoBehaviour
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);
 
                 AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
+
                 rocket_accumulatedShots = 0;
 
                 rocket_holdTimerStarted = false;
@@ -221,7 +221,6 @@ public class WeaponManager : MonoBehaviour
 
         minigun_currentAmmo = playerStats.MinigunMagazineSize; // Refill minigun ammo
         isMinigunReloading = false;
-
     }
 
     private IEnumerator RearmRocket(float rearmTime)
