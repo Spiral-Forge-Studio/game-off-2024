@@ -20,5 +20,5 @@ public class CombatState : IState
     }
     public void OnEnter() { _agent.enabled = false;  Debug.Log("Entered CombatState"); }
     public void Tick() { }
-    public void OnExit() { }
+    public void OnExit() { Debug.Log("Exited CombatPrep"); }
 }
