@@ -267,7 +267,7 @@ public class WeaponManager : MonoBehaviour
 
         // Draw line to visualize the deviated aim direction
         Vector3 lineEndPoint = minigunProjectileShooter.firePoint.position + horizontalDeviatedDirection * 20f; // 10 units for visualization
-        Debug.DrawLine(minigunProjectileShooter.firePoint.position, lineEndPoint, Color.yellow, 1f);
+        Debug.DrawLine(minigunProjectileShooter.firePoint.position, lineEndPoint, new Color(1, 0.92f,0, 0.5f), 0.5f);
 
         // Fire the projectile with the deviated direction
         minigunProjectileShooter.FireProjectile(minigunProjectileRotationsList);
@@ -313,7 +313,7 @@ public class WeaponManager : MonoBehaviour
 
                 // Draw line to visualize the horizontal deviated aim direction
                 Vector3 lineEndPoint = rocketProjectileShooter.firePoint.position + horizontalDeviatedAimDirection * 20f; // 10 units for visualization
-                Debug.DrawLine(rocketProjectileShooter.firePoint.position, lineEndPoint, Color.blue, 3f);
+                Debug.DrawLine(rocketProjectileShooter.firePoint.position, lineEndPoint, new Color(0, 0, 1, 0.5f), 1f);
             }
 
         }

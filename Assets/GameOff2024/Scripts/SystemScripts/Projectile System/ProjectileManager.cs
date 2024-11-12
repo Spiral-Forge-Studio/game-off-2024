@@ -30,9 +30,11 @@ public class ProjectileManager : MonoBehaviour
 
     private void Awake()
     {
-
         playerStatusManager = FindObjectOfType<PlayerStatusManager>();
+    }
 
+    private void Start()
+    {
         foreach (ProjectilePoolScript pool in projectilePoolList)
         {
             pool.Initialize();
