@@ -30,6 +30,7 @@ public class ProjectileManager : MonoBehaviour
 
     private void Awake()
     {
+
         playerStatusManager = FindObjectOfType<PlayerStatusManager>();
 
         foreach (ProjectilePoolScript pool in projectilePoolList)
@@ -61,26 +62,29 @@ public class ProjectileManager : MonoBehaviour
         {
             if (shooter.fireProjectile)
             {
-                if (currentProjectilePool == null || currentProjectilePool.projectileType != shooter.projectileType)
+                for (int i = 0; i < shooter.projectileAmount; i++)
                 {
-                    currentProjectilePool = projectilePoolDict[shooter.projectileType];
-                }
+                    if (currentProjectilePool == null || currentProjectilePool.projectileType != shooter.projectileType)
+                    {
+                        currentProjectilePool = projectilePoolDict[shooter.projectileType];
+                    }
 
-                GameObject projectileObject = currentProjectilePool.GetProjectile();
+                    GameObject projectileObject = currentProjectilePool.GetProjectile();
 
-                projectileObject.transform.position = shooter.firePoint.position;
-                projectileObject.transform.rotation = shooter.fireRotation;
+                    projectileObject.transform.position = shooter.firePoint.position;
+                    projectileObject.transform.rotation = shooter.fireRotations[i];
 
-                Projectile projectile = projectileObject.GetComponent<Projectile>();
+                    Projectile projectile = projectileObject.GetComponent<Projectile>();
 
-                if (projectile != null)
-                {
-                    // Initialize the projectile and add to active projectiles list
-                    projectile.SetProjectilePool(projectilePoolDict[shooter.projectileType]);
-                    activeProjectiles.Add(projectile);
+                    if (projectile != null)
+                    {
+                        // Initialize the projectile and add to active projectiles list
+                        projectile.SetProjectilePool(projectilePoolDict[shooter.projectileType]);
+                        activeProjectiles.Add(projectile);
 
-                    // Set Parameters
-                    projectile.SetProjectileParams(GetProjectileParams(shooter.projectileType));
+                        // Set Parameters
+                        projectile.SetProjectileParams(GetProjectileParams(shooter.projectileType));
+                    }
                 }
 
                 shooter.fireProjectile = false;
@@ -127,6 +131,7 @@ public class ProjectileManager : MonoBehaviour
     /// </summary>
     /// <param name="projectileType"></param>
     /// <returns></returns>
+
     private ProjectileParams GetProjectileParams(EProjectileType projectileType)
     {
         if (projectileType == EProjectileType.Minigun)

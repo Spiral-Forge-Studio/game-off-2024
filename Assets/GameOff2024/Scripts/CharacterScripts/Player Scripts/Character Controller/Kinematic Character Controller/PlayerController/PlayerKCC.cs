@@ -88,7 +88,7 @@ namespace KinematicCharacterController
         [Header("Movement Ability")]
         public float _dashSpeed;
         public float _dashDuration;
-        public float _dashInternalCooldown;
+        [HideInInspector] public float _dashInternalCooldown;
 
         [HideInInspector] public bool _movementAbilityRequested;
         [HideInInspector] public bool _isUsingMovementAbility;

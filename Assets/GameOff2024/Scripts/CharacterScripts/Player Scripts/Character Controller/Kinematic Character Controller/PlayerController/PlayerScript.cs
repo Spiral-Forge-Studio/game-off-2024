@@ -21,6 +21,7 @@ namespace KinematicCharacterController
         InputAction _leftShoot;
         InputAction _rightShoot;
         InputAction _rightHold;
+        InputAction _reload;
 
         private const string MouseXInput = "Mouse X";
         private const string MouseYInput = "Mouse Y";
@@ -64,6 +65,8 @@ namespace KinematicCharacterController
 
             _rightHold = playerInput.actions.FindAction("Right Hold");
 
+            _reload = playerInput.actions.FindAction("Reload");
+
             _openMenu = false;
         }
 
@@ -103,14 +106,15 @@ namespace KinematicCharacterController
 
             combatInputs.RightShoot = _rightShoot.phase == InputActionPhase.Started;
 
-            Debug.Log("Right shoot phase: " +  _rightShoot.phase);
-
             // Check if the right shoot action was released
             combatInputs.RightHold = _rightShoot.phase == InputActionPhase.Performed;
             combatInputs.RightRelease = _rightShoot.phase == InputActionPhase.Waiting;
 
             controllerInputs.mousePos = CharacterCamera.mouseFollowPoint;
             combatInputs.mousePos = CharacterCamera.mouseFollowPoint;
+            combatInputs.Reload = _reload.phase == InputActionPhase.Performed;
+
+            Debug.Log(_reload.phase);
 
             // Apply inputs to character
             Character.SetInputs(ref controllerInputs);

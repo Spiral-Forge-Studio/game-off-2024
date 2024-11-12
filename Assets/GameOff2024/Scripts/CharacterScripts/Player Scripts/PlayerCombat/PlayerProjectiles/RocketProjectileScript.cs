@@ -8,13 +8,15 @@ public class RocketProjectileParams : ProjectileParams
     public float speed;
     public float lifetime;
     public float explosionRadius;
+    public Vector3 targetPos;
 
-    public RocketProjectileParams(float damage, float speed, float lifetime, float explosionRadius)
+    public RocketProjectileParams(float damage, float speed, float lifetime, float explosionRadius, Vector3 targetPos)
     {
         this.damage = damage;
         this.speed = speed;
         this.lifetime = lifetime;
         this.explosionRadius = explosionRadius;
+        this.targetPos = targetPos;
     }
 }
 
@@ -25,13 +27,17 @@ public class RocketProjectileScript : Projectile
     private float damage;
     private float lifetime;
     private float explosionRadius;
+    private Vector3 targetPos;
 
     // lifetime logic variables
     private float startTime;
     private bool returningToPool;
 
+    [SerializeField] private AudioSource audioSource;
+
     protected override void OnEnable()
     {
+        AudioManager.instance.PlaySFX(audioSource, EGameplaySFX.RocketFire, 1);
         base.OnEnable();
 
         returningToPool = false;
@@ -57,6 +63,7 @@ public class RocketProjectileScript : Projectile
             damage = rocketProjectileParams.damage;
             lifetime = rocketProjectileParams.lifetime;
             explosionRadius = rocketProjectileParams.explosionRadius;
+            targetPos = rocketProjectileParams.targetPos;
         }
         else
         {

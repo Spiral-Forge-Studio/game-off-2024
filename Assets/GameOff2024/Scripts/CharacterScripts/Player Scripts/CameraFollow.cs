@@ -55,10 +55,7 @@ public class CameraFollow : MonoBehaviour
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(mouseFollowPoint, 0.1f);
-
         Gizmos.color = Color.green;
-        Gizmos.DrawWireSphere(cameraFollowPoint.position, maxTargetDistance);
+        Gizmos.DrawSphere(mouseFollowPoint, 0.1f);
     }
 }
