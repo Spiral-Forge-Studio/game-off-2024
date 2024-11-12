@@ -60,6 +60,11 @@ public class PlayerStatusManager : MonoBehaviour
             regeneratingShield = true;
             StartCoroutine(ShieldRegeneration());
         }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            TakeDamage(5f);
+        }
     }
 
 
@@ -71,6 +76,11 @@ public class PlayerStatusManager : MonoBehaviour
         playerKCC._dashInternalCooldown = playerStatus.DashCooldown;
     }
 
+
+    /// <summary>
+    /// Called when you want the player to take damage
+    /// </summary>
+    /// <param name="damage"></param>
     public void TakeDamage(float damage)
     {
         if (damage < 0)

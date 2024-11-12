@@ -46,5 +46,6 @@ public class UIScript : MonoBehaviour
         currentShield.text = playerStatusManager.GetCurrentShield().ToString();
 
         healthFill.fillAmount = playerStatusManager.GetCurrentHealth()/playerStatusSO.Health;
+        shieldFill.fillAmount = playerStatusManager.GetCurrentShield()/playerStatusSO.Shield;
     }
 }

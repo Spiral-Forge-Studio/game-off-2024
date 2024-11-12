@@ -114,8 +114,6 @@ namespace KinematicCharacterController
             combatInputs.mousePos = CharacterCamera.mouseFollowPoint;
             combatInputs.Reload = _reload.phase == InputActionPhase.Performed;
 
-            Debug.Log(_reload.phase);
-
             // Apply inputs to character
             Character.SetInputs(ref controllerInputs);
             WeaponManager.SetInputs(ref combatInputs);
