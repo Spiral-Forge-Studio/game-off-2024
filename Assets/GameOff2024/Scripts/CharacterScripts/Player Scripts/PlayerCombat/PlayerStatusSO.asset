@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   baseHealth: 100
   baseShield: 20
-  baseShieldRegenAmount: 5
+  baseShieldRegenAmount: 1
   baseShieldBreakRecoveryDelay: 2
   baseShieldRegenTickInterval: 1
   baseDamageReduction: 0.1
