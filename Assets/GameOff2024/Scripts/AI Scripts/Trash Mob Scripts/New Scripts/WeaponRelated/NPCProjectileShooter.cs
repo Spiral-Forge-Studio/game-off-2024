@@ -6,7 +6,7 @@ public class NPCProjectileShooter : MonoBehaviour
     public NPCPoolingScript poolingScript;
     public WeaponParameters weaponParameters;
     public NPCWeaponType weaponType;
-
+    public AudioSource _soundsource;
 
     [HideInInspector] public int currentammo;
     [HideInInspector] public bool isreloading = false;
@@ -24,6 +24,8 @@ public class NPCProjectileShooter : MonoBehaviour
     private void Awake()
     {
         weaponParameters = GetComponentInParent<WeaponParameters>();
+        _soundsource = GetComponent<AudioSource>();
+        
         SetUpWeapon();
     }
 
@@ -36,7 +38,7 @@ public class NPCProjectileShooter : MonoBehaviour
             Shoot(targetPosition);
             lastShootTime = Time.time;
             currentammo--;
-            Debug.Log($"Shooting Projectile # " + currentammo);
+            //Debug.Log($"Shooting Projectile # " + currentammo);
             if(currentammo <= 0)
             {
                 StartCoroutine(Reload());
@@ -48,7 +50,7 @@ public class NPCProjectileShooter : MonoBehaviour
     {
         if (isreloading == false)
         {
-
+            AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobRifleFire, 0, true);
             GameObject projectile = poolingScript.GetProjectile();
             projectile.transform.position = transform.position;
             projectile.transform.LookAt(targetPosition);
