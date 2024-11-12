@@ -1,20 +1,36 @@
 using KinematicCharacterController;
+using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerGroundedState : PlayerBaseState
+public class PlayerFallingState : PlayerBaseState
 {
-    public PlayerGroundedState(PlayerKCC currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory)
+    public PlayerFallingState(PlayerKCC currentContext, PlayerStateFactory playerStateFactory) : base(currentContext, playerStateFactory)
     {
         _isRootState = true;
     }
 
-    public override void SetInput(ref PlayerControllerInputs inputs)
+    public override void AfterCharacterUpdate(float deltaTime)
     {
+
+    }
+
+    public override void BeforeCharacterUpdate(float deltaTime)
+    {
+
+    }
+
+    public override void CheckSwitchState()
+    {
+        if (_ctx.IsGrounded)
+        {
+            SwitchState(_factory.Grounded());
+        }
     }
 
     public override void EnterState()
     {
-        SetSubState(_factory.Idle());
+
     }
 
     public override void ExitState()
@@ -22,29 +38,14 @@ public class PlayerGroundedState : PlayerBaseState
 
     }
 
-    public override void AfterCharacterUpdate(float deltaTime)
+    public override void InitializeSubStates()
     {
-        //_ctx.WallCheckLogic();
+
     }
 
-    public override void BeforeCharacterUpdate(float deltaTime)
+    public override void SetInput(ref PlayerControllerInputs inputs)
     {
-        
-    }
 
-    public override void UpdateState()
-    {
-        
-    }
-
-    public override void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
-    {
-        float currentVelocityMagnitude = currentVelocity.magnitude;
-
-        Vector3 effectiveGroundNormal = _ctx.Motor.GroundingStatus.GroundNormal;
-
-        // Reorient velocity on slope
-        currentVelocity = _ctx.Motor.GetDirectionTangentToSurface(currentVelocity, effectiveGroundNormal) * currentVelocityMagnitude;
     }
 
     public override void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
@@ -64,13 +65,13 @@ public class PlayerGroundedState : PlayerBaseState
         currentRotation = Quaternion.FromToRotation(currentUp, smoothedGravityDir) * currentRotation;
     }
 
-    public override void CheckSwitchState()
+    public override void UpdateState()
     {
 
     }
 
-    public override void InitializeSubStates()
+    public override void UpdateVelocity(ref Vector3 currentVelocity, float deltaTime)
     {
-
+        currentVelocity += _ctx._gravity * deltaTime;
     }
 }
