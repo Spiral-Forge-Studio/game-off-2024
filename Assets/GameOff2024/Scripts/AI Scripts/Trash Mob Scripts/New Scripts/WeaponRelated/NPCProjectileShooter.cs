@@ -66,6 +66,7 @@ public class NPCProjectileShooter : MonoBehaviour
     {
         isreloading = true;
         Debug.Log("Reloading....");
+        AudioManager.instance.PlaySFX(_soundsource,EGameplaySFX.MobWindup, 0, true);
         yield return new WaitForSeconds(reloadtime);
         SetUpWeapon();
         isreloading = false;

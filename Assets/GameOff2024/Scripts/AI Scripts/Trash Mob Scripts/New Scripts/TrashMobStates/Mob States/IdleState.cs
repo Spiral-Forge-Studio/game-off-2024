@@ -28,6 +28,7 @@ public class IdleState : IState
         _navmeshagent.enabled = true; 
         _navmeshagent.speed = roamspeed; 
         _navmeshagent.autoBraking = true;
+        _navmeshagent.stoppingDistance = 0f;
     }
     public void Tick()
     {

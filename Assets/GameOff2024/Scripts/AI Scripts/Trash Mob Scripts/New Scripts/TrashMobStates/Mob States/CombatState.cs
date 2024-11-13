@@ -18,7 +18,7 @@ public class CombatState : IState
         _combatspeed = parameters.combatspeed;
 
     }
-    public void OnEnter() { _agent.enabled = false;  Debug.Log("Entered CombatState"); }
+    public void OnEnter() { _agent.enabled = false; _agent.speed = _combatspeed; Debug.Log("Entered CombatState"); }
     public void Tick() { }
     public void OnExit() { Debug.Log("Exited CombatPrep"); }
 }
