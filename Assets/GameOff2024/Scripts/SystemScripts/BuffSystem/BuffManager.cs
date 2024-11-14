@@ -15,6 +15,20 @@ public class BuffManager : MonoBehaviour
     public PlayerStatusManager playerStatusManager;
 
 
+    Buff GetRandomBuff()
+    {
+        List<Buff> allBuffs = BuffRegistry.GetAllBuffs();
+
+        if (allBuffs.Count == 0)
+        {
+            Debug.LogWarning("No buffs available in the registry.");
+            return null;
+        }
+
+        int randomIndex = Random.Range(0, allBuffs.Count);
+        return allBuffs[randomIndex];
+    }
+
 
     void PerformSphereCast()
     {
@@ -22,39 +36,17 @@ public class BuffManager : MonoBehaviour
 
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, Vector3.forward, radius);
         foreach (RaycastHit hit in hits)
-        {
+        {   
             if (hit.collider.CompareTag("Player"))
             {
                 toBeBuffed = hit.collider.gameObject;
-                string Buffname = "MinigunMagazineBuff";
-                Debug.Log("Buff named " + Buffname+ " collided with an object with the tag: " + hit.collider.gameObject.tag);
-                Buff chosenBuff = BuffRegistry.GetBuff("MinigunMagazineBuff");
-                chosenBuff.UpdateBuffValues(Buff.BuffType.Flat, Buff.Rarity.Common, 10, 10, 0);
-                chosenBuff.ApplyBuff(toBeBuffed);
-                //MinigunMagazineBuff MinigunmagazineSizeBuff = toBeBuffed.AddComponent<MinigunMagazineBuff>();
-                //MinigunmagazineSizeBuff.Initialize(playerStats, 0f, MinigunMagazineBuff.BuffType.Flat, MinigunMagazineBuff.Rarity.Common, 10f, 5f, 0.2f);
-                //HpBuff hpBuff = toBeBuffed.AddComponent<HpBuff>();
-                //ShieldBuff ShieldBuff = toBeBuffed.AddComponent<ShieldBuff>();
-                //hpBuff.Initialize(playerStats, 0f, HpBuff.BuffType.Flat, HpBuff.Rarity.Common, 10f, 5f, 0.2f);
-                //ShieldBuff.Initialize(playerStats, 0f, ShieldBuff.BuffType.Flat, ShieldBuff.Rarity.Common, 100f, 5f, 0.2f);
+                Buff chosenBuff = GetRandomBuff();
+                chosenBuff = BuffRegistry.GetBuff("ShieldRegenAmountBuff");
                 AddBuff(chosenBuff);
+                Debug.Log("You got: " + chosenBuff.getBuffName() + " Rarity: " + chosenBuff.getBuffType() + " Amount: " + chosenBuff.getBuffBonus());
                 Destroy(this.gameObject);
             }
         }
-    }
-
-    private void Awake()
-    {
-        BuffRegistry.InitializeBuffs(playerStats);
-        playerKCC = FindObjectOfType<PlayerKCC>();
-        buffSpawner = FindAnyObjectByType<BuffSpawner>();
-        playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
-        sphereCastTimer = sphereCastInterval;
-    }
-    
-    private void Update()
-    {
-        PerformSphereCast();
     }
 
     public void AddBuff(Buff newBuff)
@@ -70,6 +62,20 @@ public class BuffManager : MonoBehaviour
         {
             // Optionally update the existing buff
         }
+    }
+
+    private void Awake()
+    {
+        BuffRegistry.InitializeBuffs(playerStats);
+        playerKCC = FindObjectOfType<PlayerKCC>();
+        buffSpawner = FindAnyObjectByType<BuffSpawner>();
+        playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
+        sphereCastTimer = sphereCastInterval;
+    }
+    
+    private void Update()
+    {
+        PerformSphereCast();
     }
 
     public void RemoveBuff(Buff buff)

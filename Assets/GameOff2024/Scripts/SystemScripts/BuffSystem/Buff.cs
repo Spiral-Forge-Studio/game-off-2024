@@ -1,11 +1,12 @@
 using UnityEngine;
+using static Buff;
 
 public abstract class Buff : MonoBehaviour
 {
-
+    
     public enum BuffType { Flat, Percentage, Unique }
-    public enum Rarity { Common, Rare, Epic, Legendary }
-
+    public enum Rarity { Common, Uncommon, Rare, Epic, Legendary }
+    
 
     public float duration;
     protected bool isActive = false;
@@ -17,13 +18,24 @@ public abstract class Buff : MonoBehaviour
 
     public abstract void ApplyBuff(GameObject target);   // Define how the buff affects the target
     public abstract void RemoveBuff(GameObject target);  // Define how to remove the buff's effect
-
+    public abstract void ApplyConsecutiveBuff();
     public abstract void UpdateBuffValues(Buff.BuffType bufftype, Buff.Rarity buffrarity, float InitAmount = 0, float ConsecAmount = 0, float ScaleAmount = 0);
+    public abstract string getBuffName();
+    public abstract BuffType getBuffType();
+
+    public abstract float getBuffBonus();
 
     public void StartBuff(GameObject target)
     {
-        ApplyBuff(target);
-        isActive = true;
+        if (isActive) {
+            ApplyConsecutiveBuff();
+        }
+        else
+        {
+            ApplyBuff(target);
+            isActive = true;
+        }
+        
         // Do not invoke EndBuff here, as we don't want to destroy the buff GameObject
     }
 
