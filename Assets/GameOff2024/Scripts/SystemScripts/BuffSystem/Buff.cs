@@ -22,7 +22,9 @@ public abstract class Buff : MonoBehaviour
     public abstract void UpdateBuffValues(Buff.BuffType bufftype, Buff.Rarity buffrarity, float InitAmount = 0, float ConsecAmount = 0, float ScaleAmount = 0);
     public abstract string getBuffName();
     public abstract BuffType getBuffType();
-
+    public abstract Rarity getBuffRarity();
+    public abstract Rarity getRandomRarity();
+    public abstract BuffType getRandomType();
     public abstract float getBuffBonus();
 
     public void StartBuff(GameObject target)

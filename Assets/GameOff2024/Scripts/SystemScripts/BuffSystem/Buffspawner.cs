@@ -26,8 +26,58 @@ public class BuffSpawner : MonoBehaviour
 
     void Start()
     {
-        StartCoroutine(SpawnBuffAtIntervals());
+        //StartCoroutine(SpawnBuffAtIntervals());
         playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
+        SpawnBuffs();
+    }
+
+    private void Update()
+    {
+        
+    }
+
+    private void SpawnBuffs()
+    {
+
+        float timestart = Time.time;
+        while (activeBuffs.Count < buffCount && buffPrefab != null)
+        {
+            Vector3 spawnPosition = spawnPoint.position + new Vector3(
+                Random.Range(-spawnRadius, spawnRadius),
+                1f,
+                Random.Range(-spawnRadius, spawnRadius)
+            );
+
+            Collider[] colliders = Physics.OverlapSphere(spawnPosition, 5);
+            bool ValidPos = true;
+            if (colliders.Length != 0)
+            {
+                //continue;
+                foreach (Collider collided in colliders)
+                {
+                    Debug.Log(collided.name);
+                    if (collided.gameObject.tag == "Player")//HARD CODING NAMES TO AVOID LMAO
+                    {
+                        ValidPos = false;
+                    }
+                    if (collided.name == "BuffPrefabFinal(Clone)")
+                    {
+                        ValidPos = false;
+                    }
+                }
+
+            }
+            if (ValidPos)
+            {
+                GameObject newBuff = Instantiate(buffPrefab, spawnPosition, Quaternion.identity);
+                activeBuffs.Add(newBuff);
+            }
+
+            if (Time.time - timestart > 3)
+            {
+                break;
+            }
+        }
     }
 
     private IEnumerator SpawnBuffAtIntervals()
@@ -35,7 +85,7 @@ public class BuffSpawner : MonoBehaviour
         while (true)
         {
             // Spawn buffs only if the count is less than the defined number
-            while (activeBuffs.Count < buffCount && buffPrefab != null)
+            if (activeBuffs.Count < buffCount && buffPrefab != null)
             {
                 Vector3 spawnPosition = spawnPoint.position + new Vector3(
                     Random.Range(-spawnRadius, spawnRadius),
@@ -50,7 +100,7 @@ public class BuffSpawner : MonoBehaviour
                     //continue;
                     foreach (Collider collided in colliders)
                     {
-                        //Debug.Log(collided.name);
+                        Debug.Log(collided.name);
                         if(collided.name == "Player")
                         {
                             ValidPos = false;

@@ -1,20 +1,20 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MinigunMagazineBuff : Buff
+public class MoveSpeedBuff : Buff
 {
     public BuffType buffType;
     public Rarity rarity;
-    public string buffname = "Extra Magazine Clip";
+    public string buffname = "Swift Stride";
 
     public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 10f;
+    public float initialAmountMultiplier = 5f;
     public float consecutiveAmountFlat = 2f;
-    public float consecutiveAmountMultiplier = 5f;
+    public float consecutiveAmountMultiplier = 2f;
     public float scalingFactor;
 
-    private float totalFlatBonus;    // Tracks total flat bonus to remove
-    private float totalMultiplier;   // Tracks total multiplier bonus to remove
+    private float totalFlatBonus;
+    private float totalMultiplier;
 
     private PlayerStatusSO playerStatus;
 
@@ -42,12 +42,13 @@ public class MinigunMagazineBuff : Buff
         { Rarity.Legendary, 5.0f }
     };
 
-    public MinigunMagazineBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
+    public MoveSpeedBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
         : base(duration)
     {
         this.playerStatus = status;
         this.buffType = buffType;
         this.rarity = rarity;
+
         if (buffType == BuffType.Flat)
         {
             this.initialAmountFlat *= rarityMultiplier[rarity];
@@ -82,7 +83,6 @@ public class MinigunMagazineBuff : Buff
         float cumulative = 0;
         foreach (var entry in rarityProbabilities)
         {
-            Debug.Log(entry.Value);
             cumulative += entry.Value;
             if (randomValue <= cumulative)
             {
@@ -90,7 +90,6 @@ public class MinigunMagazineBuff : Buff
             }
         }
         return Rarity.Common;
-
     }
 
     public override BuffType getRandomType()
@@ -106,7 +105,6 @@ public class MinigunMagazineBuff : Buff
             }
         }
         return BuffType.Flat;
-
     }
 
     public override float getBuffBonus()
@@ -117,7 +115,7 @@ public class MinigunMagazineBuff : Buff
         }
         else
         {
-            return totalMultiplier;
+            return totalMultiplier * 100f;
         }
     }
 
@@ -125,13 +123,13 @@ public class MinigunMagazineBuff : Buff
     {
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, initialAmountFlat);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MoveSpeedFlatBonus, initialAmountFlat);
             totalFlatBonus += initialAmountFlat;
         }
         if (buffType == BuffType.Percentage)
         {
             float multiplierValue = initialAmountMultiplier;
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, multiplierValue, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MoveSpeedMultiplier, multiplierValue, true);
             totalMultiplier += multiplierValue / 100f;
         }
 
@@ -146,13 +144,13 @@ public class MinigunMagazineBuff : Buff
         if (buffType == BuffType.Flat)
         {
             float bonusAmount = consecutiveAmountFlat * (1 + scalingFactor);
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, bonusAmount);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MoveSpeedFlatBonus, bonusAmount);
             totalFlatBonus += bonusAmount;
         }
         if (buffType == BuffType.Percentage)
         {
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, bonusAmount, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MoveSpeedMultiplier, bonusAmount, true);
             totalMultiplier += bonusAmount / 100f;
         }
     }
@@ -161,11 +159,11 @@ public class MinigunMagazineBuff : Buff
     {
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, -totalFlatBonus);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MoveSpeedFlatBonus, -totalFlatBonus);
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MoveSpeedMultiplier, -totalMultiplier * 100f, false);
         }
 
         CancelInvoke(nameof(ApplyConsecutiveBuff));
@@ -175,18 +173,15 @@ public class MinigunMagazineBuff : Buff
     {
         this.buffType = bufftype;
         this.rarity = buffrarity;
+
         if (buffType == BuffType.Flat)
         {
-            //this.initialAmountFlat = initialAmount * rarityMultiplier[rarity];
             this.initialAmountFlat *= rarityMultiplier[rarity];
-            //this.consecutiveAmountFlat = consecutiveAmount * rarityMultiplier[rarity];
             this.consecutiveAmountFlat *= rarityMultiplier[rarity];
         }
         if (buffType == BuffType.Percentage)
         {
-            //this.initialAmountMultiplier = initialAmount * rarityMultiplier[rarity];
             this.initialAmountMultiplier *= rarityMultiplier[rarity];
-            //this.consecutiveAmountMultiplier = consecutiveAmount * rarityMultiplier[rarity];
             this.consecutiveAmountMultiplier *= rarityMultiplier[rarity];
         }
         this.scalingFactor = ScaleAmount;

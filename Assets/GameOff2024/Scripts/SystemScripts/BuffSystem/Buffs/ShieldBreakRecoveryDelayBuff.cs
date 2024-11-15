@@ -1,15 +1,16 @@
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.MessageBox;
 
-public class MinigunMagazineBuff : Buff
+public class ShieldBreakRecoveryDelay : Buff
 {
     public BuffType buffType;
     public Rarity rarity;
-    public string buffname = "Extra Magazine Clip";
+    public string buffname = "Nano Repair Kit";
 
-    public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 10f;
-    public float consecutiveAmountFlat = 2f;
+    public float initialAmountFlat = 0.5f;
+    public float initialAmountMultiplier = 30f;
+    public float consecutiveAmountFlat = 25f;
     public float consecutiveAmountMultiplier = 5f;
     public float scalingFactor;
 
@@ -33,6 +34,7 @@ public class MinigunMagazineBuff : Buff
         { Rarity.Common, 0.45f }
     };
 
+
     private Dictionary<Rarity, float> rarityMultiplier = new Dictionary<Rarity, float>
     {
         { Rarity.Common, 1.0f },
@@ -42,7 +44,9 @@ public class MinigunMagazineBuff : Buff
         { Rarity.Legendary, 5.0f }
     };
 
-    public MinigunMagazineBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
+
+
+    public ShieldBreakRecoveryDelay(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
         : base(duration)
     {
         this.playerStatus = status;
@@ -65,7 +69,6 @@ public class MinigunMagazineBuff : Buff
     {
         return buffname;
     }
-
     public override BuffType getBuffType()
     {
         return buffType;
@@ -111,13 +114,13 @@ public class MinigunMagazineBuff : Buff
 
     public override float getBuffBonus()
     {
-        if (buffType == BuffType.Flat)
+        if(buffType == BuffType.Flat)
         {
             return totalFlatBonus;
         }
         else
         {
-            return totalMultiplier;
+            return totalMultiplier*100f;
         }
     }
 
@@ -125,16 +128,19 @@ public class MinigunMagazineBuff : Buff
     {
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, initialAmountFlat);
+            // Apply a flat bonus to health
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldBreakRecoveryDelayFlatBonus, initialAmountFlat);
             totalFlatBonus += initialAmountFlat;
         }
         if (buffType == BuffType.Percentage)
         {
-            float multiplierValue = initialAmountMultiplier;
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, multiplierValue, true);
+            // Apply a multiplier to health
+            float multiplierValue = initialAmountMultiplier;  // Assuming this is in percentage terms
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier, multiplierValue, true);
             totalMultiplier += multiplierValue / 100f;
         }
 
+        // Set up consecutive bonus application if applicable
         if (duration > 0)
         {
             InvokeRepeating(nameof(ApplyConsecutiveBuff), 1f, duration);
@@ -143,29 +149,32 @@ public class MinigunMagazineBuff : Buff
 
     public override void ApplyConsecutiveBuff()
     {
+        
+
         if (buffType == BuffType.Flat)
         {
             float bonusAmount = consecutiveAmountFlat * (1 + scalingFactor);
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, bonusAmount);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldBreakRecoveryDelayFlatBonus, bonusAmount);
             totalFlatBonus += bonusAmount;
         }
         if (buffType == BuffType.Percentage)
         {
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, bonusAmount, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier, bonusAmount, true);
             totalMultiplier += bonusAmount / 100f;
         }
     }
 
     public override void RemoveBuff(GameObject target)
     {
+        // Remove the accumulated bonuses
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus, -totalFlatBonus);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldBreakRecoveryDelayFlatBonus, -totalFlatBonus);
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier, -totalMultiplier * 100f, false);
         }
 
         CancelInvoke(nameof(ApplyConsecutiveBuff));
@@ -178,17 +187,18 @@ public class MinigunMagazineBuff : Buff
         if (buffType == BuffType.Flat)
         {
             //this.initialAmountFlat = initialAmount * rarityMultiplier[rarity];
-            this.initialAmountFlat *= rarityMultiplier[rarity];
+            this.initialAmountFlat*=rarityMultiplier[rarity];
             //this.consecutiveAmountFlat = consecutiveAmount * rarityMultiplier[rarity];
-            this.consecutiveAmountFlat *= rarityMultiplier[rarity];
+            this.consecutiveAmountFlat*=rarityMultiplier[rarity];
         }
         if (buffType == BuffType.Percentage)
         {
             //this.initialAmountMultiplier = initialAmount * rarityMultiplier[rarity];
-            this.initialAmountMultiplier *= rarityMultiplier[rarity];
+            this.initialAmountMultiplier*=rarityMultiplier[rarity];
             //this.consecutiveAmountMultiplier = consecutiveAmount * rarityMultiplier[rarity];
-            this.consecutiveAmountMultiplier *= rarityMultiplier[rarity];
+            this.consecutiveAmountMultiplier*=rarityMultiplier[rarity];
         }
         this.scalingFactor = ScaleAmount;
     }
+
 }

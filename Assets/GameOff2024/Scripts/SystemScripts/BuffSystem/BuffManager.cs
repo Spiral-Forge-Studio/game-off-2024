@@ -41,9 +41,12 @@ public class BuffManager : MonoBehaviour
             {
                 toBeBuffed = hit.collider.gameObject;
                 Buff chosenBuff = GetRandomBuff();
-                chosenBuff = BuffRegistry.GetBuff("ShieldRegenAmountBuff");
+                chosenBuff = chosenBuff = BuffRegistry.GetBuff("MinigunReloadTimeBuff");
+                //chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(),chosenBuff.getRandomRarity());
+                chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), Buff.Rarity.Legendary);
+                //chosenBuff = BuffRegistry.GetBuff("ShieldRegenAmountBuff");
                 AddBuff(chosenBuff);
-                Debug.Log("You got: " + chosenBuff.getBuffName() + " Rarity: " + chosenBuff.getBuffType() + " Amount: " + chosenBuff.getBuffBonus());
+                Debug.Log("You got: " + BuffRegistry.NametoBuffs[chosenBuff.getBuffName()] + " Rarity: " + chosenBuff.getBuffRarity() + " Amount: " + chosenBuff.getBuffBonus() + " Type: " + chosenBuff.getBuffType());
                 Destroy(this.gameObject);
             }
         }

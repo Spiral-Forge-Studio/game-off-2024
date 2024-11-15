@@ -18,6 +18,21 @@ public class ShieldRegenAmountBuff : Buff
 
     private PlayerStatusSO playerStatus;
 
+    public Dictionary<BuffType, float> bufftypeProbabilities = new Dictionary<BuffType, float>
+    {
+        { BuffType.Percentage, 0.4f },
+        { BuffType.Flat, 0.6f }
+    };
+
+    public Dictionary<Rarity, float> rarityProbabilities = new Dictionary<Rarity, float>
+    {
+        { Rarity.Legendary, 0.05f },
+        { Rarity.Epic, 0.1f },
+        { Rarity.Rare, 0.15f },
+        { Rarity.Uncommon, 0.25f },
+        { Rarity.Common, 0.45f }
+    };
+
     private Dictionary<Rarity, float> rarityMultiplier = new Dictionary<Rarity, float>
     {
         { Rarity.Common, 1.0f },
@@ -58,6 +73,46 @@ public class ShieldRegenAmountBuff : Buff
     {
         return buffType;
     }
+
+    public override Rarity getBuffRarity()
+    {
+        return rarity;
+    }
+
+    public override Rarity getRandomRarity()
+    {
+        float randomValue = UnityEngine.Random.value;
+        float cumulative = 0;
+        foreach (var entry in rarityProbabilities)
+        {
+            Debug.Log(entry.Value);
+            cumulative += entry.Value;
+            if (randomValue <= cumulative)
+            {
+                return entry.Key;
+            }
+        }
+        return Rarity.Common;
+
+    }
+
+    public override BuffType getRandomType()
+    {
+        float randomValue = UnityEngine.Random.value;
+        float cumulative = 0;
+        foreach (var entry in bufftypeProbabilities)
+        {
+            cumulative += entry.Value;
+            if (randomValue <= cumulative)
+            {
+                return entry.Key;
+            }
+        }
+        return BuffType.Flat;
+
+    }
+
+
     public override float getBuffBonus()
     {
         if (buffType == BuffType.Flat)
@@ -131,18 +186,20 @@ public class ShieldRegenAmountBuff : Buff
     {
         this.buffType = bufftype;
         this.rarity = buffrarity;
-
         if (buffType == BuffType.Flat)
         {
-            this.initialAmountFlat = initialAmount * rarityMultiplier[rarity];
-            this.consecutiveAmountFlat = consecutiveAmount * rarityMultiplier[rarity];
+            //this.initialAmountFlat = initialAmount * rarityMultiplier[rarity];
+            this.initialAmountFlat *= rarityMultiplier[rarity];
+            //this.consecutiveAmountFlat = consecutiveAmount * rarityMultiplier[rarity];
+            this.consecutiveAmountFlat *= rarityMultiplier[rarity];
         }
-        else if (buffType == BuffType.Percentage)
+        if (buffType == BuffType.Percentage)
         {
-            this.initialAmountMultiplier = initialAmount * rarityMultiplier[rarity];
-            this.consecutiveAmountMultiplier = consecutiveAmount * rarityMultiplier[rarity];
+            //this.initialAmountMultiplier = initialAmount * rarityMultiplier[rarity];
+            this.initialAmountMultiplier *= rarityMultiplier[rarity];
+            //this.consecutiveAmountMultiplier = consecutiveAmount * rarityMultiplier[rarity];
+            this.consecutiveAmountMultiplier *= rarityMultiplier[rarity];
         }
-
         this.scalingFactor = ScaleAmount;
     }
 }

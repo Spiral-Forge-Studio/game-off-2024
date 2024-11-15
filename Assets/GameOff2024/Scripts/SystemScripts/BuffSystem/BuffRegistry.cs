@@ -6,63 +6,20 @@ public static class BuffRegistry
 {
     private static Dictionary<string, Buff> availableBuffs = new Dictionary<string, Buff>();
 
-    // Initialize and register available buffs (e.g., at the start of the game)
-
-
     public static Dictionary<string, string> NametoBuffs = new Dictionary<string, string>()
     {
         {"Steel-Plated Armor", "HpBuff"},
         {"Reinforced Shields", "ShieldBuff"},
-        {"Nano Repair Kit", "ShieldRegenBuff"},
-        {"Reactive Armor", "DamageReductionBuff"},
-        {"Boosted Thrusters", "MoveSpeedBuff"},
-        {"Overclocked Engines", "DashCooldownBuff"},
-        {"Precision Firing", "MinigunDamageBuff"},
-        {"Hardened Core", "DamageReductionBuff"},
-        {"High-Capacity Battery", "ShieldRegenDelayBuff"},
-        {"Experimental Projectiles", "MinigunProjectileSpeedBuff"},
-        {"Piercing Rounds", "MinigunCritRateBuff"},
-        {"Accelerated Fire Control", "MinigunFireRateBuff"},
+        {"Nano Repair Kit", "ShieldBreakRecoveryDelay"},
+        {"Rapid Shield Regeneration", "ShieldRegenTickInterval"},
+        {"Shield Regen Boost", "ShieldRegenAmountBuff"},
         {"Extra Magazine Clip", "MinigunMagazineBuff"},
-        {"Rifled Barrel", "MinigunBulletDeviationBuff"},
-        {"Thermal Rounds", "RocketDamageBuff"},
-        {"Shockwave Rockets", "RocketExplosionRadiusBuff"},
-        {"Rapid Detonation", "RocketFireRateBuff"},
-        {"Efficient Reload", "RocketReloadTimeBuff"},
-        {"Targeted Payloads", "RocketCritRateBuff"},
-        {"Tungsten Alloy Rounds", "RocketProjectileSpeedBuff"},
-        {"High-Impact Payload", "RocketCritDamageBuff"},
-        {"Explosive Ammunition", "MinigunDamageBuff"},
-        {"Lightweight Construction", "MoveSpeedBuff"},
-        {"Improved Cooling", "ShieldRegenRateBuff"},
-        {"Laser Sights", "MinigunCritRateBuff"},
-        {"Ion-Plated Armor", "ShieldBuff"},
-        {"High-Pressure Rounds", "RocketCritRateBuff"},
-        {"Tactical Scanners", "CritRateBuff"},
-        {"Quick Reflexes", "DashCooldownBuff"},
-        {"Auto-Repair Modules", "HealthRegenBuff"},
-        {"Energy Siphon", "MinigunShieldRestoreBuff"},
-        {"Adaptive Plating", "DamageReductionBuff"},
-        {"Nano-Regen Pulse", "ShieldRegenBuff"},
-        {"Critical Strike Overload", "MinigunCritDamageBuff"},
-        {"Focused Payload", "RocketDamageBuff"},
-        {"Overdrive Mode", "MinigunFireRateBuff"},
-        {"Magnetized Payloads", "RocketExplosionAttractionBuff"},
-        {"Twin Rockets", "RocketMultiShotBuff"},
-        {"Shield Overcharge", "MinigunFireRateBuff"},
-        {"Drone Companion", "DroneBuff"},
-        {"Swarm Rockets", "RocketMultiShotBuff"},
-        {"Hologram Decoy", "HologramBuff"},
-        {"Reflective Armor", "ProjectileReflectionBuff"},
-        {"Shockwave Stomp", "ShockwaveBuff"},
-        {"Dimensional Rift", "RiftBuff"},
-        {"Energy Vortex Rockets", "RocketVortexBuff"},
-        {"Berserker Mode", "BerserkBuff"},
-        {"Ammo Recycler", "MinigunAmmoBuff"},
-        {"Phase Shift", "IntangibilityBuff"},
-        {"Gigantic Rockets", "RocketSizeBuff"},
-        {"Phasewalk Rocket", "IntangibleRocketBuff"},
-        {"Reflective Dash", "DashReflectionBuff"}
+        {"Hardened Plating","DamageReductionBuff" },
+        {"Swift Stride", "MoveSpeedBuff"},
+        {"Minigun Damage Boost", "MinigunDamageBuff"},
+        {"Minigun Bullet Deviation Angle Reduction", "MinigunBulletDeviationAngleBuff"},
+        {"Quick Loader", "MinigunReloadTimeBuff"},
+        {"Rapid Barrel Upgrade", "MinigunFireRateBuff"}
     };
 
 
@@ -71,7 +28,15 @@ public static class BuffRegistry
         availableBuffs["HpBuff"] = new HpBuff(playerStatus, 0f, HpBuff.BuffType.Flat, HpBuff.Rarity.Common, 0f, 0f, 0f);
         availableBuffs["MinigunMagazineBuff"] = new MinigunMagazineBuff(playerStatus, 0f, MinigunMagazineBuff.BuffType.Flat, MinigunMagazineBuff.Rarity.Common, 0f, 0f, 0f);
         availableBuffs["ShieldBuff"] = new ShieldBuff(playerStatus, 0f, ShieldBuff.BuffType.Flat, ShieldBuff.Rarity.Common, 0f, 0f, 0f);
-        availableBuffs["ShieldRegenAmountBuff"] = new ShieldRegenAmountBuff(playerStatus, 0f, ShieldBuff.BuffType.Flat, ShieldBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["ShieldRegenAmountBuff"] = new ShieldRegenAmountBuff(playerStatus, 0f, ShieldRegenAmountBuff.BuffType.Flat, ShieldRegenAmountBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["ShieldBreakRecoveryDelay"] = new ShieldBreakRecoveryDelay(playerStatus, 0f, ShieldBreakRecoveryDelay.BuffType.Flat, ShieldBreakRecoveryDelay.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["ShieldRegenTickInterval"] = new ShieldRegenTickIntervalBuff(playerStatus, 0f, ShieldRegenTickIntervalBuff.BuffType.Flat, ShieldRegenTickIntervalBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["DamageReductionBuff"] = new DamageReductionBuff(playerStatus, 0f, DamageReductionBuff.BuffType.Flat, DamageReductionBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["MoveSpeedBuff"] = new MoveSpeedBuff(playerStatus, 0f, MoveSpeedBuff.BuffType.Flat, MoveSpeedBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["MinigunDamageBuff"] = new MinigunDamageBuff(playerStatus, 0f, MinigunDamageBuff.BuffType.Flat, MinigunDamageBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["MinigunBulletDeviationAngleBuff"] = new MinigunBulletDeviationAngleBuff(playerStatus, 0f, MinigunBulletDeviationAngleBuff.BuffType.Flat, MinigunBulletDeviationAngleBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["MinigunFireRateBuff"] = new MinigunFireRateBuff(playerStatus, 0f, MinigunFireRateBuff.BuffType.Flat, MinigunFireRateBuff.Rarity.Common, 0f, 0f, 0f);
+        availableBuffs["MinigunReloadTimeBuff"] = new MinigunReloadTimeBuff(playerStatus, 0f, MinigunReloadTimeBuff.BuffType.Flat, MinigunReloadTimeBuff.Rarity.Common, 0f, 0f, 0f);
         // Add more buffs as needed
     }
 
