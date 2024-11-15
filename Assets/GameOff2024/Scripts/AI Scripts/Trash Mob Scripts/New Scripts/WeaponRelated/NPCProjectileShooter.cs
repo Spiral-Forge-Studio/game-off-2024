@@ -1,4 +1,5 @@
 using System.Collections;
+using System.Threading;
 using UnityEngine;
 
 public class NPCProjectileShooter : MonoBehaviour
@@ -50,27 +51,57 @@ public class NPCProjectileShooter : MonoBehaviour
     {
         if (isreloading == false)
         {
-            AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobRifleFire, 0, true);
-            GameObject projectile = poolingScript.GetProjectile();
-            projectile.transform.position = transform.position;
-            projectile.transform.LookAt(targetPosition);
 
-            // Initialize projectile based on weapon type and parameters
-            NPCProjectile projectileScript = projectile.GetComponentInParent<NPCProjectile>();
-            if(projectileScript == null) { Debug.LogError("Projectile not found"); }
-            projectileScript.Initialize(weaponType, weaponParameters, poolingScript);
+            if (weaponType == NPCWeaponType.Shotgun)
+            {
+                AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobShotgunFire, 0, true);
+                // Spread angle for the shotgun (adjust in WeaponParameters for fine-tuning)
+                float spreadAngle = weaponParameters.shotgunspreadangle; // e.g., 10 degrees
+
+                // Create 3 projectiles with spread
+                for (int i = -1; i <= 1; i++)
+                {
+                    GameObject projectile = poolingScript.GetProjectile();
+                    projectile.transform.position = transform.position;
+
+                    // Calculate the spread rotation
+                    Quaternion spreadRotation = Quaternion.Euler(0, i * spreadAngle, 0);
+                    Vector3 spreadDirection = spreadRotation * (targetPosition - transform.position).normalized;
+                    projectile.transform.rotation = Quaternion.LookRotation(spreadDirection);
+
+                    // Initialize projectile based on weapon type and parameters
+                    NPCProjectile projectileScript = projectile.GetComponentInParent<NPCProjectile>();
+                    if (projectileScript == null) { Debug.LogError("Projectile not found"); }
+                    projectileScript.Initialize(weaponType, weaponParameters, poolingScript);
+                }
+            }
+
+            else 
+            {
+                AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobRifleFire, 0, true);
+                GameObject projectile = poolingScript.GetProjectile();
+                projectile.transform.position = transform.position;
+                projectile.transform.LookAt(targetPosition);
+
+                // Initialize projectile based on weapon type and parameters
+                NPCProjectile projectileScript = projectile.GetComponentInParent<NPCProjectile>();
+                if (projectileScript == null) { Debug.LogError("Projectile not found"); }
+                projectileScript.Initialize(weaponType, weaponParameters, poolingScript);
+            }
+            
+            
         }
     }
 
     private IEnumerator Reload()
     {
         isreloading = true;
-        Debug.Log("Reloading....");
-        AudioManager.instance.PlaySFX(_soundsource,EGameplaySFX.MobWindup, 0, true);
+        //Debug.Log("Reloading....");
+        AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobWindup, 0, true);
         yield return new WaitForSeconds(reloadtime);
         SetUpWeapon();
         isreloading = false;
-        Debug.Log("Reload Complete");
+        //Debug.Log("Reload Complete");
     }
 
     private void SetUpWeapon()

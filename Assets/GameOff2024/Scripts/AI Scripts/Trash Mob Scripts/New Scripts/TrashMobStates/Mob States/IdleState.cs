@@ -58,9 +58,11 @@ public class IdleState : IState
         for (int i = 0; i < 5; i++)
         {
             // Calculate angle for evenly spaced points around a circle
-            float angle = i * (2 * Mathf.PI / 5);
-            float xOffset = Mathf.Cos(angle) * roamradius;
-            float zOffset = Mathf.Sin(angle) * roamradius;
+            //float angle = i * (2 * Mathf.PI / 5);
+            //float xOffset = Mathf.Cos(angle) * roamradius;
+            //float zOffset = Mathf.Sin(angle) * roamradius;
+            float xOffset = Random.Range(_navmeshagent.transform.position.x, roamradius);
+            float zOffset = Random.Range(_navmeshagent.transform.position.z, roamradius);
 
             Vector3 roamPoint = new Vector3(center.x + xOffset, center.y, center.z + zOffset);
 

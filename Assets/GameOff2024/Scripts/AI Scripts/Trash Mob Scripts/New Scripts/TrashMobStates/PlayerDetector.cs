@@ -37,7 +37,7 @@ public class PlayerDetector : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player In Range");
+            //Debug.Log("Player In Range");
             _detectedPlayer = other.transform;
         }
     }

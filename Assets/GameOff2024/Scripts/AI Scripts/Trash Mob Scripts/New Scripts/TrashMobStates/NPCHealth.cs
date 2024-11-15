@@ -61,6 +61,7 @@ public class NPCHealth : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log($"Mob hit by: " + other);
         if(other.CompareTag("PlayerMinigun"))
         {
             Debug.Log("Taking minigun damage");
@@ -78,7 +79,7 @@ public class NPCHealth : MonoBehaviour
     {
         if (mobcurrenthealth <= 0)
         {
-            Debug.Log("Mob Destroyed");
+            //Debug.Log("Mob Destroyed");
             mob.SetActive(false);
         }
     }

@@ -32,15 +32,13 @@ public class ShootState : IState
         LookAtPlayer(_playerpos);
 
         _projectileShooter.TryShoot(_playerpos);
+        _agent.SetDestination(_playerpos);
 
     }
     public void OnEnter() 
     {
         //NavMeshdata
         _agent.enabled = true;
-
-        
-        Debug.Log("Entered ShootState");
 
         //Get Player data
         GameObject player = GameObject.Find("Player Controller");
