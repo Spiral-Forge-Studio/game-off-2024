@@ -18,6 +18,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private TMP_Text minigunMagazineSize;
     [SerializeField] private TMP_Text rocketCurrentAmmo;
     [SerializeField] private TMP_Text rocketMagazineSize;
+    [SerializeField] private TMP_Text rocketAccumulatedShots;
 
     [Header("Data References")]
     public PlayerStatusSO playerStatusSO;
@@ -41,6 +42,7 @@ public class UIScript : MonoBehaviour
 
         rocketCurrentAmmo.text = weaponManager.GetRocketAmmo().ToString();
         rocketMagazineSize.text = playerStatusSO.RocketMagazineSize.ToString();
+        rocketAccumulatedShots.text = weaponManager.GetRocketAccumulatedShots().ToString();
 
         currentHealth.text = playerStatusManager.GetCurrentHealth().ToString();
         currentShield.text = playerStatusManager.GetCurrentShield().ToString();

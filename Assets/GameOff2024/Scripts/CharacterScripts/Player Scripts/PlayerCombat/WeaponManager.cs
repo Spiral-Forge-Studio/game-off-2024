@@ -134,7 +134,7 @@ public class WeaponManager : MonoBehaviour
             rocket_startHoldTime = Time.time;
         }
 
-        if (rocket_currentAmmo > 0)
+        if (rocket_currentAmmo > 0 || rocket_accumulatedShots > 0)
         {
             if (!inputs.RightShoot && rocket_holdTimerStarted)
             {
@@ -163,6 +163,8 @@ public class WeaponManager : MonoBehaviour
                     && rocket_currentAmmoAtTimeOfAccumulation > 0)
                 {
                     rocket_accumulatedShots++;
+                    rocket_currentAmmo --;
+
                     Debug.Log("Accumulating rockets");
 
                     if (rocket_accumulatedShots == rocket_currentAmmoAtTimeOfAccumulation)
@@ -187,8 +189,6 @@ public class WeaponManager : MonoBehaviour
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);
 
                 AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
-
-                rocket_currentAmmo -= rocket_accumulatedShots;
                 rocket_accumulatedShots = 0;
 
                 rocket_holdTimerStarted = false;
@@ -267,7 +267,7 @@ public class WeaponManager : MonoBehaviour
 
         // Draw line to visualize the deviated aim direction
         Vector3 lineEndPoint = minigunProjectileShooter.firePoint.position + horizontalDeviatedDirection * 20f; // 10 units for visualization
-        Debug.DrawLine(minigunProjectileShooter.firePoint.position, lineEndPoint, Color.yellow, 1f);
+        Debug.DrawLine(minigunProjectileShooter.firePoint.position, lineEndPoint, new Color(1, 0.92f,0, 0.5f), 0.5f);
 
         // Fire the projectile with the deviated direction
         minigunProjectileShooter.FireProjectile(minigunProjectileRotationsList);
@@ -313,7 +313,7 @@ public class WeaponManager : MonoBehaviour
 
                 // Draw line to visualize the horizontal deviated aim direction
                 Vector3 lineEndPoint = rocketProjectileShooter.firePoint.position + horizontalDeviatedAimDirection * 20f; // 10 units for visualization
-                Debug.DrawLine(rocketProjectileShooter.firePoint.position, lineEndPoint, Color.blue, 3f);
+                Debug.DrawLine(rocketProjectileShooter.firePoint.position, lineEndPoint, new Color(0, 0, 1, 0.5f), 1f);
             }
 
         }
