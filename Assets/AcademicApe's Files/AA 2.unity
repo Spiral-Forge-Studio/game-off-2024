@@ -144,8 +144,8 @@ MonoBehaviour:
     type: 3}
   spawnPoint: {fileID: 715392768}
   spawnInterval: 5
-  spawnRadius: 5
-  buffCount: 1
+  spawnRadius: 10
+  buffCount: 10
   playerStats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
 --- !u!114 &68620418 stripped
 MonoBehaviour:

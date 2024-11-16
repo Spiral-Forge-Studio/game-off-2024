@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BuffSpawner : MonoBehaviour
@@ -70,6 +71,10 @@ public class BuffSpawner : MonoBehaviour
             if (ValidPos)
             {
                 GameObject newBuff = Instantiate(buffPrefab, spawnPosition, Quaternion.identity);
+                //newBuff.AddComponent<BuffManager>();
+                //newBuff.AddComponent(spawnPosition);
+
+                //
                 activeBuffs.Add(newBuff);
             }
 

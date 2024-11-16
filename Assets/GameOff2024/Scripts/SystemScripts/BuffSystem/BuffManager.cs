@@ -6,7 +6,8 @@ public class BuffManager : MonoBehaviour
 {
     private List<Buff> activeBuffs = new List<Buff>();
     public PlayerKCC playerKCC;
-    public PlayerStatusSO playerStats;
+    [SerializeField] private PlayerStatusSO playerStats;
+    //public PlayerStatusSO playerStats;
     public float sphereCastInterval = 0.0001f;
 
     private float sphereCastTimer = 0f;
@@ -41,9 +42,9 @@ public class BuffManager : MonoBehaviour
             {
                 toBeBuffed = hit.collider.gameObject;
                 Buff chosenBuff = GetRandomBuff();
-                chosenBuff = chosenBuff = BuffRegistry.GetBuff("MinigunReloadTimeBuff");
-                //chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(),chosenBuff.getRandomRarity());
-                chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), Buff.Rarity.Legendary);
+                chosenBuff = chosenBuff = BuffRegistry.GetBuff("RocketExplosionRadiusBuff");
+                chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(),chosenBuff.getRandomRarity());
+                //chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), Buff.Rarity.Legendary);
                 //chosenBuff = BuffRegistry.GetBuff("ShieldRegenAmountBuff");
                 AddBuff(chosenBuff);
                 Debug.Log("You got: " + BuffRegistry.NametoBuffs[chosenBuff.getBuffName()] + " Rarity: " + chosenBuff.getBuffRarity() + " Amount: " + chosenBuff.getBuffBonus() + " Type: " + chosenBuff.getBuffType());
@@ -74,6 +75,7 @@ public class BuffManager : MonoBehaviour
         buffSpawner = FindAnyObjectByType<BuffSpawner>();
         playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
         sphereCastTimer = sphereCastInterval;
+        //playerStats = FindAnyObjectByType<PlayerStatusSO>();
     }
     
     private void Update()
