@@ -3,7 +3,11 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - PlayerMinigun
+  - PlayerRocket
+  - Player Projectile
+  - Buff
   layers:
   - Default
   - TransparentFX
@@ -13,6 +17,7 @@ TagManager:
   - UI
   - Ground
   - Projectile
+  - Enemy
   - AimPlatformLayer
   - 
   - 

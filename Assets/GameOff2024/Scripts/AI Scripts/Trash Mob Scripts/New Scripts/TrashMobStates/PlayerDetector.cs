@@ -37,7 +37,7 @@ public class PlayerDetector : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player In Range");
+            //Debug.Log("Player In Range");
             _detectedPlayer = other.transform;
         }
     }
@@ -56,6 +56,7 @@ public class PlayerDetector : MonoBehaviour
         _detectedPlayer = null;
     }
 
+   /*
     private void OnDrawGizmos()
     {
         Color color = Color.red;
@@ -63,24 +64,5 @@ public class PlayerDetector : MonoBehaviour
 
         Gizmos.DrawWireSphere(transform.position, _colliderradius);
     }
+   */
 }
-
-
-
-
-/*
- private Player _player;
-
-private void Update()
-
-{
-
-_player = GetComponent<Player>;
-
-pos = _player.transform;
-
-
-//
-}
-
-*/

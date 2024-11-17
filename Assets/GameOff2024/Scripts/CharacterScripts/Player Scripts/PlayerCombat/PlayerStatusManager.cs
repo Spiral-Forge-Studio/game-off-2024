@@ -74,10 +74,8 @@ public class PlayerStatusManager : MonoBehaviour
 
         if (currentMaxHealth != playerStatus.Health)
         {
-            float currentHealthMultiplier = 1 + (currentMaxHealth / playerStatus.Health);
-
+            float currentHealthMultiplier = playerStatus.Health/ currentMaxHealth;
             currentHealth *= currentHealthMultiplier;
-
             currentMaxHealth = playerStatus.Health;
         }
     }
