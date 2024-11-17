@@ -4,18 +4,25 @@ using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
+
+    private void Awake()
+    {
+        // Initialize other components
+        BuffRegistry.InitializeBuffs(playerStats);
+        playerKCC = FindObjectOfType<PlayerKCC>();
+        buffSpawner = FindAnyObjectByType<BuffSpawner>();
+        playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
+    }
     private List<Buff> activeBuffs = new List<Buff>();
     public PlayerKCC playerKCC;
     [SerializeField] private PlayerStatusSO playerStats;
-    //public PlayerStatusSO playerStats;
-    public float sphereCastInterval = 0.0001f;
+    public float sphereCastInterval = 0.1f;
 
-    private float sphereCastTimer = 0f;
     private GameObject toBeBuffed;
     private BuffSpawner buffSpawner;
     public PlayerStatusManager playerStatusManager;
 
-
+    // Get a random buff from the registry
     Buff GetRandomBuff()
     {
         List<Buff> allBuffs = BuffRegistry.GetAllBuffs();
@@ -30,63 +37,60 @@ public class BuffManager : MonoBehaviour
         return allBuffs[randomIndex];
     }
 
-
     void PerformSphereCast()
     {
         float radius = 0.5f;
 
         RaycastHit[] hits = Physics.SphereCastAll(transform.position, radius, Vector3.forward, radius);
         foreach (RaycastHit hit in hits)
-        {   
+        {
             if (hit.collider.CompareTag("Player"))
             {
                 toBeBuffed = hit.collider.gameObject;
+
                 Buff chosenBuff = GetRandomBuff();
-                chosenBuff = chosenBuff = BuffRegistry.GetBuff("RocketExplosionRadiusBuff");
-                chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(),chosenBuff.getRandomRarity());
-                //chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), Buff.Rarity.Legendary);
-                //chosenBuff = BuffRegistry.GetBuff("ShieldRegenAmountBuff");
+                if (chosenBuff == null) return;
+
+                // Set buff properties
+                chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
                 AddBuff(chosenBuff);
-                Debug.Log("You got: " + BuffRegistry.NametoBuffs[chosenBuff.getBuffName()] + " Rarity: " + chosenBuff.getBuffRarity() + " Amount: " + chosenBuff.getBuffBonus() + " Type: " + chosenBuff.getBuffType());
-                Destroy(this.gameObject);
+
+                Debug.Log($"You got: {chosenBuff.getBuffName()} " +
+                          $"Rarity: {chosenBuff.getBuffRarity()} " +
+                          $"Amount: {chosenBuff.getBuffBonus()} " +
+                          $"Type: {chosenBuff.getBuffType()}");
+
+                Destroy(gameObject); // Destroy the buff GameObject
             }
         }
     }
 
     public void AddBuff(Buff newBuff)
     {
+        // Check if a similar buff is already active
         Buff existingBuff = activeBuffs.Find(b => b.GetType() == newBuff.GetType());
 
         if (existingBuff == null)
         {
+            // Add and apply the new buff
             activeBuffs.Add(newBuff);
             newBuff.StartBuff(toBeBuffed);
         }
         else
         {
-            // Optionally update the existing buff
+            // Apply stacking or consecutive logic if needed
+            existingBuff.ApplyConsecutiveBuff();
         }
-    }
-
-    private void Awake()
-    {
-        BuffRegistry.InitializeBuffs(playerStats);
-        playerKCC = FindObjectOfType<PlayerKCC>();
-        buffSpawner = FindAnyObjectByType<BuffSpawner>();
-        playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
-        sphereCastTimer = sphereCastInterval;
-        //playerStats = FindAnyObjectByType<PlayerStatusSO>();
-    }
-    
-    private void Update()
-    {
-        PerformSphereCast();
     }
 
     public void RemoveBuff(Buff buff)
     {
-        activeBuffs.Remove(buff);
+        buff.EndBuff(toBeBuffed); // Remove effects
+        activeBuffs.Remove(buff); // Remove from list
     }
 
-    
+    private void Update()
+    {
+        PerformSphereCast();
+    }
 }

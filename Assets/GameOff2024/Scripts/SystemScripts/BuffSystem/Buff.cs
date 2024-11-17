@@ -1,25 +1,21 @@
 using UnityEngine;
 using static Buff;
 
-public abstract class Buff : MonoBehaviour
+[CreateAssetMenu(fileName = "NewBuff", menuName = "Buffs/BaseBuff")]
+public abstract class Buff : ScriptableObject
 {
-    
     public enum BuffType { Flat, Percentage, Unique }
     public enum Rarity { Common, Uncommon, Rare, Epic, Legendary }
-    
 
-    public float duration;
-    protected bool isActive = false;
+    public float duration; // Duration of the buff
+    protected bool isActive = false; // Tracks if the buff is active
 
-    public Buff(float duration)
-    {
-        this.duration = duration;
-    }
-
-    public abstract void ApplyBuff(GameObject target);   // Define how the buff affects the target
-    public abstract void RemoveBuff(GameObject target);  // Define how to remove the buff's effect
+    // Abstract methods that child classes must implement
+    public abstract void Initialize(PlayerStatusSO playerStatus, float initAmount, BuffType type, Rarity rarity, float consecAmount, float scaleAmount, float duration);
+    public abstract void ApplyBuff(GameObject target);
+    public abstract void RemoveBuff(GameObject target);
     public abstract void ApplyConsecutiveBuff();
-    public abstract void UpdateBuffValues(Buff.BuffType bufftype, Buff.Rarity buffrarity, float InitAmount = 0, float ConsecAmount = 0, float ScaleAmount = 0);
+    public abstract void UpdateBuffValues(BuffType bufftype, Rarity buffrarity, float InitAmount = 0, float ConsecAmount = 0, float ScaleAmount = 0);
     public abstract string getBuffName();
     public abstract BuffType getBuffType();
     public abstract Rarity getBuffRarity();
@@ -29,25 +25,24 @@ public abstract class Buff : MonoBehaviour
 
     public void StartBuff(GameObject target)
     {
-        if (isActive) {
+        if (isActive)
+        {
             ApplyConsecutiveBuff();
         }
         else
         {
             ApplyBuff(target);
             isActive = true;
+
         }
-        
-        // Do not invoke EndBuff here, as we don't want to destroy the buff GameObject
     }
 
-    private void EndBuff()
+    public void EndBuff(GameObject target)
     {
         if (isActive)
         {
-            RemoveBuff(gameObject);
+            RemoveBuff(target);
             isActive = false;
-            Destroy(this); // Clean up
         }
     }
 }
