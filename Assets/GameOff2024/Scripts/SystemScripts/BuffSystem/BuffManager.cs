@@ -37,6 +37,8 @@ public class BuffManager : MonoBehaviour
         return allBuffs[randomIndex];
     }
 
+    public GameObject floatingTextPrefab; // Assign your FloatingText prefab in the Inspector
+
     void PerformSphereCast()
     {
         float radius = 0.5f;
@@ -55,15 +57,39 @@ public class BuffManager : MonoBehaviour
                 chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
                 AddBuff(chosenBuff);
 
-                Debug.Log($"You got: {chosenBuff.getBuffName()} " +
-                          $"Rarity: {chosenBuff.getBuffRarity()} " +
-                          $"Amount: {chosenBuff.getBuffBonus()} " +
-                          $"Type: {chosenBuff.getBuffType()}");
+                string message = $"You got: {chosenBuff.getBuffName()} " +
+                                 $"Rarity: {chosenBuff.getBuffRarity()} " +
+                                 $"Amount: {chosenBuff.getBuffBonus()} " +
+                                 $"Type: {chosenBuff.getBuffType()}";
 
+                ShowFloatingText(message, toBeBuffed.transform);
+
+                Debug.Log(message);
                 Destroy(gameObject); // Destroy the buff GameObject
             }
         }
     }
+
+
+    private void ShowFloatingText(string message, Transform playerTransform)
+    {
+        if (floatingTextPrefab != null)
+        {
+            GameObject floatingText = Instantiate(floatingTextPrefab, playerTransform.position + Vector3.up * 2f, Quaternion.identity);
+            floatingText.GetComponent<FloatingText>().Initialize(message, playerTransform);
+        }
+    }
+
+
+    private void ShowFloatingText(string message, Vector3 position)
+    {
+        if (floatingTextPrefab != null)
+        {
+            GameObject floatingText = Instantiate(floatingTextPrefab, position + Vector3.up * 2f, Quaternion.identity);
+            floatingText.GetComponent<FloatingText>().SetText(message);
+        }
+    }
+
 
     public void AddBuff(Buff newBuff)
     {

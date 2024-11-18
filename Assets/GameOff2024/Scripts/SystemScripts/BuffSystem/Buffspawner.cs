@@ -56,7 +56,7 @@ public class BuffSpawner : MonoBehaviour
                 //continue;
                 foreach (Collider collided in colliders)
                 {
-                    Debug.Log(collided.name);
+                    //Debug.Log(collided.name);
                     if (collided.gameObject.tag == "Player")//HARD CODING NAMES TO AVOID LMAO
                     {
                         ValidPos = false;
