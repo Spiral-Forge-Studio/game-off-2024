@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5510509848925237294}
   m_Layer: 7
   m_Name: PlayerRocketProjectile
-  m_TagString: Untagged
+  m_TagString: PlayerRocket
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

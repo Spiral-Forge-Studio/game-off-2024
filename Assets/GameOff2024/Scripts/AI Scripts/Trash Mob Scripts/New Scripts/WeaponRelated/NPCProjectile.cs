@@ -60,11 +60,11 @@ public class NPCProjectile : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Hit Object" + other);
+        //Debug.Log($"Hit Object" + other);
 
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Hit Player");
+            //Debug.Log("Hit Player");
             _playerstatusmanager.TakeDamage(damage);
         }
         // Implement damage or other effects here, if needed
