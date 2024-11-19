@@ -9,14 +9,28 @@ public class RocketProjectileParams : ProjectileParams
     public float lifetime;
     public float explosionRadius;
     public Vector3 targetPos;
+    public UniqueBuffHandler uniqueBuffHandler;
+    public bool isCriticalHit;
+    public GameObject rocketExplosionPrefab;
 
-    public RocketProjectileParams(float damage, float speed, float lifetime, float explosionRadius, Vector3 targetPos)
+    public RocketProjectileParams(
+        float damage, 
+        float speed, 
+        float lifetime, 
+        float explosionRadius, 
+        Vector3 targetPos , 
+        UniqueBuffHandler uniqueBuffHandler, 
+        bool isCriticalHit, 
+        GameObject rocketExplosionPrefab)
     {
         this.damage = damage;
         this.speed = speed;
         this.lifetime = lifetime;
         this.explosionRadius = explosionRadius;
         this.targetPos = targetPos;
+        this.uniqueBuffHandler = uniqueBuffHandler;
+        this.isCriticalHit = isCriticalHit;
+        this.rocketExplosionPrefab = rocketExplosionPrefab;
     }
 }
 
@@ -28,10 +42,14 @@ public class RocketProjectileScript : Projectile
     private float lifetime;
     private float explosionRadius;
     private Vector3 targetPos;
+    private bool isCriticalHit;
 
     // lifetime logic variables
     private float startTime;
     private bool returningToPool;
+
+    private UniqueBuffHandler uniqueBuffHandler;
+    private GameObject rocketExplosionPrefab;
 
     [SerializeField] private AudioSource audioSource;
 
@@ -64,6 +82,10 @@ public class RocketProjectileScript : Projectile
             lifetime = rocketProjectileParams.lifetime;
             explosionRadius = rocketProjectileParams.explosionRadius;
             targetPos = rocketProjectileParams.targetPos;
+            uniqueBuffHandler = rocketProjectileParams.uniqueBuffHandler;
+            isCriticalHit = rocketProjectileParams.isCriticalHit;
+            rocketExplosionPrefab = rocketProjectileParams.rocketExplosionPrefab;
+
         }
         else
         {
@@ -74,8 +96,15 @@ public class RocketProjectileScript : Projectile
 
     private void OnTriggerEnter(Collider other)
     {
+        GameObject explosion = Instantiate(rocketExplosionPrefab, transform.position, Quaternion.identity);
+        RocketExplosionScript explosionScript = explosion.GetComponent<RocketExplosionScript>();
+        explosionScript.damage = damage;
+        explosionScript.radius = explosionRadius;
+        explosionScript.Explode();
+
+        Destroy(explosion);
+
         returningToPool = true;
         ReturnToPool();
-
     }
 }

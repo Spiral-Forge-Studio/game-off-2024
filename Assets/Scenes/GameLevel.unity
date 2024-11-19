@@ -197,6 +197,16 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7256930548906093671, guid: c552efd66870f6d418e08d070c14f5cb,
+        type: 3}
+      propertyPath: m_AnchorMax.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7256930548906093671, guid: c552efd66870f6d418e08d070c14f5cb,
+        type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 7699694257959907689, guid: c552efd66870f6d418e08d070c14f5cb,
         type: 3}
       propertyPath: riflespeed
@@ -1005,16 +1015,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level
-      objectReference: {fileID: 0}
-    - target: {fileID: 2231929007583054814, guid: 62972a2bd8b6bdd40b8cd4584d67482e,
-        type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4201305545369095054, guid: 62972a2bd8b6bdd40b8cd4584d67482e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 8
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

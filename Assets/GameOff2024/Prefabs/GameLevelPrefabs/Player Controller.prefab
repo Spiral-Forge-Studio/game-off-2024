@@ -384,6 +384,7 @@ MonoBehaviour:
   _moveInputForward: 0
   _moveInputRight: 0
   newPlayerAction: 0
+  playerStats: {fileID: 0}
 --- !u!136 &656453646442218326
 CapsuleCollider:
   m_ObjectHideFlags: 8
@@ -1030,6 +1031,8 @@ MonoBehaviour:
   minigunProjectileShooter: {fileID: 3458498399717429045}
   rocketProjectileShooter: {fileID: 6145216674599205822}
   playerStats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  rocketExplosionPrefab: {fileID: 3066081042312337224, guid: b105fb0f60d06c944b5faa4a37f8372c,
+    type: 3}
   aimPosition: {x: 0, y: 0, z: 0}
   rocket_accumulationTimePerRocket: 0.3
 --- !u!82 &5743112714889601978

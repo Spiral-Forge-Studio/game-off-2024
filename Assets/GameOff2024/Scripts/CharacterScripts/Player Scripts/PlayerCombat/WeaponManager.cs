@@ -14,6 +14,7 @@ public struct PlayerCombatInputs
 
 public class WeaponManager : MonoBehaviour
 {
+    [Header("Weapon Audio Sources")]
     [SerializeField] private AudioSource audioSource_MinigunFireSource1;
     [SerializeField] private AudioSource audioSource_MinigunFireSource2;
     [SerializeField] private AudioSource audioSource_MinigunReload;
@@ -21,13 +22,19 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource_RocketRearm;
     [SerializeField] private AudioSource audioSource_RocketAccumulate;
 
+    [Header("Projectile Shooters")]
     [SerializeField] private ProjectileShooter minigunProjectileShooter;
     [SerializeField] private ProjectileShooter rocketProjectileShooter;
 
     private List<Quaternion> minigunProjectileRotationsList = new List<Quaternion>();
     private List<Quaternion> rocketProjectileRotationsList = new List<Quaternion>();
 
+    [Header("PlayerStatus SO")]
     [SerializeField] private PlayerStatusSO playerStats;
+
+    [Header("Prefab Objects")]
+    public GameObject rocketExplosionPrefab;
+
     [HideInInspector] public Vector3 aimPosition;
 
     // Firerate Timing Variables
