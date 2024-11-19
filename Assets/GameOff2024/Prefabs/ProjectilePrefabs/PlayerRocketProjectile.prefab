@@ -98,7 +98,7 @@ GameObject:
   - component: {fileID: 5510509848925237294}
   m_Layer: 7
   m_Name: PlayerRocketProjectile
-  m_TagString: PlayerRocket
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -154,7 +154,7 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.25, y: 0.25, z: 0.87}
+  m_Size: {x: 0.75, y: 0.61, z: 0.87}
   m_Center: {x: 0, y: 0, z: 0.08}
 --- !u!54 &6711942783392934474
 Rigidbody:

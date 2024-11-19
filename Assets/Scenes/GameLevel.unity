@@ -147,6 +147,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: TestTrashMob
       objectReference: {fileID: 0}
+    - target: {fileID: 1204066799560372558, guid: c552efd66870f6d418e08d070c14f5cb,
+        type: 3}
+      propertyPath: m_Layer
+      value: 8
+      objectReference: {fileID: 0}
     - target: {fileID: 2883429376775109252, guid: c552efd66870f6d418e08d070c14f5cb,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -946,7 +951,7 @@ PrefabInstance:
     - target: {fileID: 1375170015152377213, guid: 0d1181a09b9f07944a395277e02c6046,
         type: 3}
       propertyPath: targetableMasks.m_Bits
-      value: 256
+      value: 512
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1015,6 +1020,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Level
+      objectReference: {fileID: 0}
+    - target: {fileID: 4201305545369095054, guid: 62972a2bd8b6bdd40b8cd4584d67482e,
+        type: 3}
+      propertyPath: m_Layer
+      value: 9
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
