@@ -91,7 +91,7 @@ GameObject:
   - component: {fileID: 1873272110631518664}
   - component: {fileID: 7167967295996525820}
   - component: {fileID: 5471113202861883791}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: TestTrashMob
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -228,6 +228,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 911663f4653a80f4692a598eacd7d3fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _weaponType: 0
+  _weaponparam: {fileID: 0}
 --- !u!195 &7167967295996525820
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -263,7 +265,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   mob: {fileID: 1204066799560372558}
-  player: {fileID: 0}
   _slider: {fileID: 4268195514215165608}
   _playerdamage: {fileID: 0}
   _mobparameters: {fileID: 5480265079099415624}
