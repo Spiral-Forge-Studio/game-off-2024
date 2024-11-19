@@ -7,12 +7,16 @@ public class MinigunProjectileParams : ProjectileParams
     public float speed;
     public float damage;
     public float lifetime;
+    public UniqueBuffHandler uniqueBuffHandler;
+    public bool isCriticalHit;
 
-    public MinigunProjectileParams(float speed, float damage, float lifetime)
+    public MinigunProjectileParams(float speed, float damage, float lifetime, UniqueBuffHandler uniqueBuffHandler, bool isCriticalHit)
     {
         this.speed = speed;
         this.damage = damage;
         this.lifetime = lifetime;
+        this.uniqueBuffHandler = uniqueBuffHandler;
+        this.isCriticalHit = isCriticalHit;
     }
 }
 
@@ -22,10 +26,13 @@ public class MinigunProjectileScript : Projectile
     private float speed;
     private float damage;
     private float lifetime;
+    private bool isCritical;
 
     // lifetime logic variables
     private float startTime;
     private bool returningToPool;
+
+    private UniqueBuffHandler uniqueBuffHandler;
 
     protected override void OnEnable()
     {
@@ -53,12 +60,19 @@ public class MinigunProjectileScript : Projectile
             speed = minigunProjectileParams.speed;
             damage = minigunProjectileParams.damage;
             lifetime = minigunProjectileParams.lifetime;
+            uniqueBuffHandler = minigunProjectileParams.uniqueBuffHandler;
+            isCritical = minigunProjectileParams.isCriticalHit;
         }
         else
         {
             Debug.LogError("Must pass a MinigunProjectileParams class only as projectileParams");
             Debug.Break();
         }
+    }
+
+    public float GetDamage()
+    {
+        return damage;
     }
 
     private void OnTriggerEnter(Collider other)
