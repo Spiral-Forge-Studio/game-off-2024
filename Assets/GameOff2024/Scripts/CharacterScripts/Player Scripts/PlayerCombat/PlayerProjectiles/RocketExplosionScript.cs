@@ -16,7 +16,17 @@ public class RocketExplosionScript : MonoBehaviour
     public void Explode()
     {
         gameObject.transform.localScale = Vector3.one*radius;
-        GetComponent<MeshRenderer>().enabled = true;
         GetComponent<SphereCollider>().enabled = true;
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        StartCoroutine(DestroyAfterDelay(0.05f));
+    }
+
+    private IEnumerator DestroyAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        Destroy(gameObject);
     }
 }

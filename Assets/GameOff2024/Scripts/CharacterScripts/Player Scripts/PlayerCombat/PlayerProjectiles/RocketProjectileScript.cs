@@ -102,8 +102,6 @@ public class RocketProjectileScript : Projectile
         explosionScript.radius = explosionRadius;
         explosionScript.Explode();
 
-        Destroy(explosion);
-
         returningToPool = true;
         ReturnToPool();
     }

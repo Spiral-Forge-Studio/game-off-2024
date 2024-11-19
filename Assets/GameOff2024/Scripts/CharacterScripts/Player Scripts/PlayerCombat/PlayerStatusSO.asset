@@ -37,6 +37,6 @@ MonoBehaviour:
   b_RocketMagazineSize: 5
   b_RocketProjectileLifetime: 1
   b_RocketProjectileSpeed: 20
-  b_RocketExplosionRadius: 20
+  b_RocketExplosionRadius: 5
   b_RocketHoldDuration: 0
   b_RocketReleaseFirerate: 0
