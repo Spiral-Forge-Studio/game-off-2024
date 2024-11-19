@@ -14,6 +14,7 @@ public struct PlayerCombatInputs
 
 public class WeaponManager : MonoBehaviour
 {
+    [Header("Weapon Audio Sources")]
     [SerializeField] private AudioSource audioSource_MinigunFireSource1;
     [SerializeField] private AudioSource audioSource_MinigunFireSource2;
     [SerializeField] private AudioSource audioSource_MinigunReload;
@@ -21,13 +22,19 @@ public class WeaponManager : MonoBehaviour
     [SerializeField] private AudioSource audioSource_RocketRearm;
     [SerializeField] private AudioSource audioSource_RocketAccumulate;
 
+    [Header("Projectile Shooters")]
     [SerializeField] private ProjectileShooter minigunProjectileShooter;
     [SerializeField] private ProjectileShooter rocketProjectileShooter;
 
     private List<Quaternion> minigunProjectileRotationsList = new List<Quaternion>();
     private List<Quaternion> rocketProjectileRotationsList = new List<Quaternion>();
 
+    [Header("PlayerStatus SO")]
     [SerializeField] private PlayerStatusSO playerStats;
+
+    [Header("Prefab Objects")]
+    public GameObject rocketExplosionPrefab;
+
     [HideInInspector] public Vector3 aimPosition;
 
     // Firerate Timing Variables
@@ -84,7 +91,7 @@ public class WeaponManager : MonoBehaviour
     {
         if (inputs.RightRelease)
         {
-            Debug.Log("release: " + inputs.RightRelease);
+            //Debug.Log("release: " + inputs.RightRelease);
         }
 
         aimPosition = inputs.mousePos;
@@ -175,7 +182,6 @@ public class WeaponManager : MonoBehaviour
                     {
                         AudioManager.instance.PlaySFX(audioSource_RocketRearm, EGameplaySFX.RocketRearm);
                     }
-                    
 
                     rocket_startAccumulateTime = Time.time;
                 }
@@ -189,6 +195,7 @@ public class WeaponManager : MonoBehaviour
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);
 
                 AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
+
                 rocket_accumulatedShots = 0;
 
                 rocket_holdTimerStarted = false;
@@ -221,7 +228,6 @@ public class WeaponManager : MonoBehaviour
 
         minigun_currentAmmo = playerStats.MinigunMagazineSize; // Refill minigun ammo
         isMinigunReloading = false;
-
     }
 
     private IEnumerator RearmRocket(float rearmTime)
@@ -267,7 +273,7 @@ public class WeaponManager : MonoBehaviour
 
         // Draw line to visualize the deviated aim direction
         Vector3 lineEndPoint = minigunProjectileShooter.firePoint.position + horizontalDeviatedDirection * 20f; // 10 units for visualization
-        Debug.DrawLine(minigunProjectileShooter.firePoint.position, lineEndPoint, new Color(1, 0.92f,0, 0.5f), 0.5f);
+        //Debug.DrawLine(minigunProjectileShooter.firePoint.position, lineEndPoint, new Color(1, 0.92f,0, 0.5f), 0.5f);
 
         // Fire the projectile with the deviated direction
         minigunProjectileShooter.FireProjectile(minigunProjectileRotationsList);

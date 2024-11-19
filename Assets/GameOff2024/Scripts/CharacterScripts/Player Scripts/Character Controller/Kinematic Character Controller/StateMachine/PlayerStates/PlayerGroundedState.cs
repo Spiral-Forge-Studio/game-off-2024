@@ -45,11 +45,6 @@ public class PlayerGroundedState : PlayerBaseState
 
         // Reorient velocity on slope
         currentVelocity = _ctx.Motor.GetDirectionTangentToSurface(currentVelocity, effectiveGroundNormal) * currentVelocityMagnitude;
-
-        if (_ctx.Motor.GroundingStatus.IsStableOnGround)
-        {
-            currentVelocity += _ctx._gravity * deltaTime;
-        }
     }
 
     public override void UpdateRotation(ref Quaternion currentRotation, float deltaTime)

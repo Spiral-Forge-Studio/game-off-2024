@@ -7,6 +7,7 @@ TagManager:
   - PlayerMinigun
   - PlayerRocket
   - Player Projectile
+  - Buff
   layers:
   - Default
   - TransparentFX
@@ -17,6 +18,7 @@ TagManager:
   - Ground
   - Projectile
   - Enemy
+  - AimPlatformLayer
   - 
   - 
   - 

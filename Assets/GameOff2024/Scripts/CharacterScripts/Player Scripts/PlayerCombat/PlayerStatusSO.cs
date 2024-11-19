@@ -145,7 +145,7 @@ public class PlayerStatusSO : ScriptableObject
         { EStatTypeMultiplier.RocketReleaseFireRateMultiplier, 1f }
     };
 
-    private Dictionary<EStatTypeFlatBonus, float> flatBonuses = new Dictionary<EStatTypeFlatBonus, float>
+    public  Dictionary<EStatTypeFlatBonus, float> flatBonuses = new Dictionary<EStatTypeFlatBonus, float>
     {
         { EStatTypeFlatBonus.HealthFlatBonus, 0f },
         { EStatTypeFlatBonus.ShieldFlatBonus, 0f },

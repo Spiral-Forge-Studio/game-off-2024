@@ -86,8 +86,6 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] BossLevelRoomClearedSFX;
     [SerializeField] private AudioClip[] BossKilledSFX;
 
-
-
     private void Awake()
     {
         if (instance == null)

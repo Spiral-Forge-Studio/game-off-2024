@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using static TrashMobAI;
 
 
 public class PlayerStatusManager : MonoBehaviour
@@ -16,12 +17,17 @@ public class PlayerStatusManager : MonoBehaviour
 
     private PlayerKCC playerKCC;
     private WeaponManager weaponManager;
+    private UniqueBuffHandler uniqueBuffHandler;
 
     private MinigunProjectileParams minigunProjectileParams;
     private RocketProjectileParams rocketProjectileParams;
 
 
     //[Header("[DEBUG] Local Helper Variabes")]
+
+    [HideInInspector] public bool minigun_landedCriticalHit;
+    [HideInInspector] public bool rocket_landedCriticalHit;
+
     private bool shieldBroken;
     private bool regeneratingShield;
     private float carryOverDamage = 0f;
@@ -29,6 +35,11 @@ public class PlayerStatusManager : MonoBehaviour
     private float currentMaxHealth;
     private Coroutine shieldRecoverRoutine;
 
+
+    private void Awake()
+    {
+        uniqueBuffHandler = GetComponent<UniqueBuffHandler>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -39,15 +50,20 @@ public class PlayerStatusManager : MonoBehaviour
 
         minigunProjectileParams = new MinigunProjectileParams(
             playerStatus.MinigunProjectileSpeed,
-            GetComputedDamage(EWeaponType.Minigun),
-            playerStatus.MinigunProjectileLifetime);
+            GetComputedDamage(EWeaponType.Minigun, false),
+            playerStatus.MinigunProjectileLifetime,
+            uniqueBuffHandler,
+            false);
 
         rocketProjectileParams = new RocketProjectileParams(
             playerStatus.RocketProjectileSpeed,
-            GetComputedDamage(EWeaponType.Rocket),
+            GetComputedDamage(EWeaponType.Rocket, false),
             playerStatus.RocketProjectileLifetime,
             playerStatus.RocketExplosionRadius,
-            Vector3.zero);
+            Vector3.zero,
+            uniqueBuffHandler,
+            false,
+            weaponManager.rocketExplosionPrefab);
 
         currentHealth = playerStatus.Health;
         currentMaxHealth = playerStatus.Health;
@@ -74,10 +90,8 @@ public class PlayerStatusManager : MonoBehaviour
 
         if (currentMaxHealth != playerStatus.Health)
         {
-            float currentHealthMultiplier = 1 + (currentMaxHealth / playerStatus.Health);
-
+            float currentHealthMultiplier = playerStatus.Health/ currentMaxHealth;
             currentHealth *= currentHealthMultiplier;
-
             currentMaxHealth = playerStatus.Health;
         }
     }
@@ -175,31 +189,69 @@ public class PlayerStatusManager : MonoBehaviour
     #region --- Weapon Stuff ---
     public RocketProjectileParams GetRocketProjectileParams()
     {
-        rocketProjectileParams.damage = GetComputedDamage(EWeaponType.Rocket);
+        bool isCriticalHit = IsCriticalHit(EWeaponType.Rocket);
+
+        rocketProjectileParams.damage = GetComputedDamage(EWeaponType.Rocket, isCriticalHit);
         rocketProjectileParams.speed = playerStatus.RocketProjectileSpeed;
         rocketProjectileParams.lifetime = playerStatus.RocketProjectileLifetime;
         rocketProjectileParams.explosionRadius = playerStatus.RocketExplosionRadius;
         rocketProjectileParams.targetPos = weaponManager.aimPosition; 
+        rocketProjectileParams.isCriticalHit = isCriticalHit;
 
         return rocketProjectileParams;
     }
 
     public MinigunProjectileParams GetMinigunProjectileParams()
     {
-        minigunProjectileParams.damage = GetComputedDamage(EWeaponType.Minigun);
+        bool isCriticalHit = IsCriticalHit(EWeaponType.Minigun);
+
+        minigunProjectileParams.damage = GetComputedDamage(EWeaponType.Minigun, isCriticalHit);
         minigunProjectileParams.speed = playerStatus.MinigunProjectileSpeed;
         minigunProjectileParams.lifetime = playerStatus.MinigunProjectileLifetime;
+        minigunProjectileParams.isCriticalHit = isCriticalHit;
 
         return minigunProjectileParams;
     }
 
-    public float GetComputedDamage(EWeaponType weaponType)
+    public bool IsCriticalHit(EWeaponType weaponType)
     {
         float roll = Random.Range(0, 100f);
 
         if (weaponType == EWeaponType.Minigun)
         {
             if (roll < playerStatus.MinigunCritRate * 100f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else if (weaponType == EWeaponType.Rocket)
+        {
+            if (roll < playerStatus.RocketCritRate * 100f)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public float GetComputedDamage(EWeaponType weaponType, bool isCriticalHit)
+    {
+        float roll = Random.Range(0, 100f);
+
+        if (weaponType == EWeaponType.Minigun)
+        {
+            if (isCriticalHit)
             {
                 return playerStatus.MinigunDamage * playerStatus.MinigunCritDamage;
             }
@@ -210,7 +262,7 @@ public class PlayerStatusManager : MonoBehaviour
         }
         else if (weaponType == EWeaponType.Rocket)
         {
-            if (roll < playerStatus.RocketCritRate * 100f)
+            if (isCriticalHit)
             {
                 return playerStatus.RocketDamage * playerStatus.RocketCritDamage;
             }

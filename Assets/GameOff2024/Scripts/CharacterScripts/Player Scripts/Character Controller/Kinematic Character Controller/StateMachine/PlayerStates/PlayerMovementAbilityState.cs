@@ -17,7 +17,7 @@ public class PlayerMovementAbilityState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Movement Ability State");
+        //Debug.Log("Enter Movement Ability State");
 
         _dashStartTime = Time.time;
         _ctx._isUsingMovementAbility = true;
@@ -43,6 +43,7 @@ public class PlayerMovementAbilityState : PlayerBaseState
         if (_ctx._moveInputVector.magnitude == 0)
         {
             Vector3 dashDirection = _ctx.Motor.GetDirectionTangentToSurface(_ctx.Motor.CharacterForward, _ctx.Motor.GroundingStatus.GroundNormal);
+            dashDirection.y = 0;
             currentVelocity = dashDirection * _ctx._dashSpeed;
         }
         else
@@ -50,6 +51,8 @@ public class PlayerMovementAbilityState : PlayerBaseState
             Vector3 inputRight = Vector3.Cross(_ctx._moveInputVector, _ctx.Motor.CharacterUp);
             Vector3 reorientedInput = Vector3.Cross(_ctx.Motor.GroundingStatus.GroundNormal, inputRight).normalized * _ctx._moveInputVector.magnitude;
             Vector3 targetMovementVelocity = reorientedInput * _ctx._dashSpeed;
+
+            targetMovementVelocity.y = 0;
 
             currentVelocity = targetMovementVelocity;
         }
@@ -61,6 +64,10 @@ public class PlayerMovementAbilityState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
+        //if (!_ctx.IsGrounded)
+        //{
+        //    SwitchState(_factory.Falling());
+        //}
         if (!_ctx._isUsingMovementAbility)
         {
             if (_ctx._moveInputVector.sqrMagnitude != 0)

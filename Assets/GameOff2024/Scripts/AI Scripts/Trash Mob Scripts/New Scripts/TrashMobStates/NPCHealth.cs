@@ -17,8 +17,7 @@ public class NPCHealth : MonoBehaviour
 
     private float _mobcurrenthealth;
     private float _mobhealthmax;
-    private float _minigundamage;
-    private float _rocketdamage;
+
     // Start is called before the first frame update
     void Awake()
     {
@@ -34,10 +33,6 @@ public class NPCHealth : MonoBehaviour
         {
             Debug.LogWarning("player parameters not referenced");
         }
-
-        //Acquire relevant data
-        _minigundamage = _playerdamage.GetComputedDamage(EWeaponType.Minigun);
-        _rocketdamage =  _playerdamage.GetComputedDamage(EWeaponType.Rocket);
 
         //Setup
         _mobhealthmax = _mobparameters.health;
@@ -65,13 +60,15 @@ public class NPCHealth : MonoBehaviour
         if(other.CompareTag("PlayerMinigun"))
         {
             Debug.Log("Taking minigun damage");
-            MobDamaged(_minigundamage);
+            float minigunDamage = other.gameObject.GetComponent<MinigunProjectileScript>().GetDamage();
+            MobDamaged(minigunDamage);
         }
 
         else if (other.CompareTag("PlayerRocket"))
         {
             Debug.Log("Taking rocket damage");
-            MobDamaged(_rocketdamage);
+            float rocketDamage = other.gameObject.GetComponent<RocketExplosionScript>().GetDamage();
+            MobDamaged(rocketDamage);
         }
     }
 
