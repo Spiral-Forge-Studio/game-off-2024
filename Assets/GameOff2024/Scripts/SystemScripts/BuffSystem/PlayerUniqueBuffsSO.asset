@@ -1,0 +1,32 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e93c1f99d7e70844ebc7e7f95ccc98c9, type: 3}
+  m_Name: PlayerUniqueBuffsSO
+  m_EditorClassIdentifier: 
+  EnergySiphon_ShieldRestoredPercent: 1
+  EnergySiphon_InternalCooldown: 0.1
+  AdaptivePlating_TimeToTrigger: 5
+  AdaptivePlating_DamageReduction: 10
+  AdaptivePlating_Duration: 5
+  NanoRegenPulse_PercentPerStack: 5
+  NanoRegenPulse_maxNumStacks: 3
+  NanoRegenPulse_stackDuration: 5
+  CriticalStrikeOverload_CritDmgPercentPerStack: 5
+  CriticalStrikeOverload_maxNumStacks: 10
+  CriticalStrikeOverload_stackDuration: 5
+  FocusedPayload_damageIncreasePercent: 30
+  FocusedPayload_AoEDecreasePercent: 50
+  OverdriveMode_minigunFireRateIncreasePercent: 50
+  OverdriveMode_damageReductionPercent: 50
+  MagnetizedPayloads_PullStrength: 10
+  MagnetizedPayloads_PullRadius: 2
+  ShieldOvercharge_minigunFireRateIncreasePercent: 20

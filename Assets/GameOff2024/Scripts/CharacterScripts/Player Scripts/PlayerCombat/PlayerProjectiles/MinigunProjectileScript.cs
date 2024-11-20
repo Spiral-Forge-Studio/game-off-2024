@@ -79,6 +79,5 @@ public class MinigunProjectileScript : Projectile
     {
         returningToPool = true;
         ReturnToPool();
-
     }
 }
