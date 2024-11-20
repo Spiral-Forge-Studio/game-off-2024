@@ -33,6 +33,7 @@ public class PlayerStatusManager : MonoBehaviour
     private float carryOverDamage = 0f;
 
     private float currentMaxHealth;
+    private float currentMaxShield;
     private Coroutine shieldRecoverRoutine;
 
 
@@ -94,6 +95,13 @@ public class PlayerStatusManager : MonoBehaviour
             currentHealth *= currentHealthMultiplier;
             currentMaxHealth = playerStatus.Health;
         }
+
+        if (currentMaxShield != playerStatus.Shield)
+        {
+            float currentShieldMultiplier = playerStatus.Shield / currentMaxShield;
+            currentShield *= currentShieldMultiplier;
+            currentMaxShield = playerStatus.Shield;
+        }
     }
 
 
@@ -108,19 +116,21 @@ public class PlayerStatusManager : MonoBehaviour
     /// <summary>
     /// Called when you want the player to take damage
     /// </summary>
-    /// <param name="damage"></param>
-    public void TakeDamage(float damage)
+    /// <param name="rawDamage"></param>
+    public void TakeDamage(float rawDamage)
     {
-        if (damage < 0)
+        if (rawDamage < 0)
         {
             Debug.LogError("can't take negative damage, did you want to heal?");
             Debug.Break();
             return;
         }
 
+        float modifiedDamage = Mathf.Clamp(rawDamage * (1 - playerStatus.DamageReduction), 0, rawDamage*2f);
+
         if (!shieldBroken)
         {
-            currentShield -= damage;
+            currentShield -= modifiedDamage;
 
             if (currentShield <= 0)
             {
@@ -141,7 +151,7 @@ public class PlayerStatusManager : MonoBehaviour
             }
             else
             {
-                currentHealth = Mathf.Clamp(currentHealth - damage, 0, playerStatus.Health);
+                currentHealth = Mathf.Clamp(currentHealth - modifiedDamage, 0, playerStatus.Health);
 
                 if (shieldRecoverRoutine != null)
                 {
@@ -152,6 +162,24 @@ public class PlayerStatusManager : MonoBehaviour
 
             carryOverDamage = 1f;
         }
+    }
+
+    /// <summary>
+    /// Call to add to the current health (heals, lifesteal, etc.)
+    /// </summary>
+    /// <param name="health"></param>
+    public void GainHealth(float health)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + health, 0, currentMaxHealth);
+    }
+
+    /// <summary>
+    /// Call to add to the current shield (shield buffs, energy siphon ability, etc.)
+    /// </summary>
+    /// <param name="shield"></param>
+    public void GainShield(float shield)
+    {
+        currentShield = Mathf.Clamp(currentShield + shield, 0, currentMaxShield);
     }
 
     public float GetCurrentHealth()
@@ -213,7 +241,7 @@ public class PlayerStatusManager : MonoBehaviour
         return minigunProjectileParams;
     }
 
-    public bool IsCriticalHit(EWeaponType weaponType)
+    private bool IsCriticalHit(EWeaponType weaponType)
     {
         float roll = Random.Range(0, 100f);
 
@@ -245,10 +273,8 @@ public class PlayerStatusManager : MonoBehaviour
         }
     }
 
-    public float GetComputedDamage(EWeaponType weaponType, bool isCriticalHit)
+    private float GetComputedDamage(EWeaponType weaponType, bool isCriticalHit)
     {
-        float roll = Random.Range(0, 100f);
-
         if (weaponType == EWeaponType.Minigun)
         {
             if (isCriticalHit)

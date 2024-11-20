@@ -28,6 +28,7 @@ public class UniqueBuffHandler : MonoBehaviour
 {
     [Header("Player References")]
     [SerializeField] private PlayerStatusSO playerStatsSO;
+    [SerializeField] private UniqueBuffsSO playerUniqueBuffsSO;
     private PlayerStatusManager playerStatusManager;
 
     private void Awake()
