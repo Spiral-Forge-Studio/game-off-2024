@@ -36,7 +36,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private float aimOffset;
 
 
-    [SerializeField] List<GameObject> _waypoints = new List<GameObject>();
     private void Awake()
     {
         _player = GameObject.Find("Player Controller").GetComponent<PlayerKCC>();
@@ -64,9 +63,6 @@ public class BossController : MonoBehaviour
         At(idle, rocketperi, () => _doRocketperi && idle.IsIdle); //Only go to this transition if miniperi has concluded before
         At(miniperi, idle, () => miniperi.IsComplete);  //Third Entry Condition to go to return to idle. After an attack pattern, go to idle
         At(rocketperi, idle, () => rocketperi.IsComplete);//Third Entry Condition to go to return to idle. After an attack pattern, go to idle
-        var miniperi = new MiniGunPerimeterSpray();
-        var rocketperi = new RocketPerimeterSpray();
-
         timer = 0;
         _statemachine.SetState(idle);
 
