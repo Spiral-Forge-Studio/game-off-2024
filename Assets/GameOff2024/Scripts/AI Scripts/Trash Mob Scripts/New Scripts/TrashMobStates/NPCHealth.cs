@@ -1,7 +1,9 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.Events; 
 
 public class NPCHealth : MonoBehaviour
 {
@@ -18,7 +20,9 @@ public class NPCHealth : MonoBehaviour
     private float _mobcurrenthealth;
     private float _mobhealthmax;
 
-    // Start is called before the first frame update
+
+    [Header("Events")]
+    public UnityEvent OnMobDestroyed;
     void Awake()
     {
         player = GameObject.Find("Player");
@@ -77,6 +81,7 @@ public class NPCHealth : MonoBehaviour
         if (mobcurrenthealth <= 0)
         {
             //Debug.Log("Mob Destroyed");
+            OnMobDestroyed?.Invoke();
             mob.SetActive(false);
         }
     }

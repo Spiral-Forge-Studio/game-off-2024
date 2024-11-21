@@ -23,7 +23,7 @@ public class BossController : MonoBehaviour
         _statemachine = new StateMachine();
 
         //Boss Phase
-        var idle = new BossIdle();
+        var idle = new BossIdle(this);
         var rambo = new BossRambo();
         var spine = new BossSpine();
         var minisweep = new MiniGunSweep();
@@ -39,5 +39,15 @@ public class BossController : MonoBehaviour
     private void Update()
     {
         _statemachine.Tick();
+    }
+
+    public void MoveToCenter()
+    {
+        _agent.SetDestination(_waypoints[0].transform.position);
+    }
+
+    public void AttackPattern_PerimeterSpray()
+    {
+
     }
 }

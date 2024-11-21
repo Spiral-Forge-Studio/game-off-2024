@@ -5,10 +5,10 @@ using UnityEngine;
 
 public class BossIdle : IState
 {
-
-    public BossIdle() { }
+    private BossController _bossfunc;
+    public BossIdle(BossController boss) { _bossfunc = boss; }
     public void Tick() { }
-    public void OnEnter() { Debug.Log("Entered Idle"); }
+    public void OnEnter() { Debug.Log("Entered Idle"); _bossfunc.MoveToCenter(); }
 
     public void OnExit() { }
 }
