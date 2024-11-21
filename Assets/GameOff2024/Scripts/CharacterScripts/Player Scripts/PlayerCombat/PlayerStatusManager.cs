@@ -15,8 +15,8 @@ public class PlayerStatusManager : MonoBehaviour
     [SerializeField] private float currentHealth;
     [SerializeField] private float currentShield;
 
-    private PlayerKCC playerKCC;
-    private WeaponManager weaponManager;
+    public PlayerKCC playerKCC;
+    public WeaponManager weaponManager;
     private UniqueBuffHandler uniqueBuffHandler;
 
     private MinigunProjectileParams minigunProjectileParams;
@@ -45,10 +45,6 @@ public class PlayerStatusManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        weaponManager = FindObjectOfType<WeaponManager>();
-        playerKCC = FindObjectOfType<PlayerKCC>();
-
         minigunProjectileParams = new MinigunProjectileParams(
             playerStatus.MinigunProjectileSpeed,
             GetComputedDamage(EWeaponType.Minigun, false),
