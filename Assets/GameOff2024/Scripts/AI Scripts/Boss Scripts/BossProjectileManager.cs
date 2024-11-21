@@ -2,11 +2,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
-public class ProjectileManager : MonoBehaviour
+public class BossProjectileManager : MonoBehaviour
 {
     [Header("Projectile Parameter Handling")]
-    public PlayerStatusSO playerStats;
-    private PlayerStatusManager playerStatusManager;
+    public BossStatusSO BossStats;
+    private BossStatusManager BossStatusManager;
 
     // projectile params
     private MinigunProjectileParams minigunParams;
@@ -30,7 +30,7 @@ public class ProjectileManager : MonoBehaviour
 
     private void Awake()
     {
-        playerStatusManager = FindObjectOfType<PlayerStatusManager>();
+        BossStatusManager = FindObjectOfType<BossStatusManager>();
     }
 
     private void Start()
@@ -136,17 +136,13 @@ public class ProjectileManager : MonoBehaviour
 
     private ProjectileParams GetProjectileParams(EProjectileType projectileType)
     {
-        if (projectileType == EProjectileType.PlayerMinigun)
+        if (projectileType == EProjectileType.BossMinigun)
         {
-            return playerStatusManager.GetMinigunProjectileParams();
+            return BossStatusManager.GetMinigunProjectileParams();
         }
-        else if (projectileType == EProjectileType.PlayerRocket)
+        else if (projectileType == EProjectileType.BossRocket)
         {
-            return playerStatusManager.GetRocketProjectileParams();
-        }
-        else if (projectileType == EProjectileType.EnemyRifle)
-        {
-            return playerStatusManager.GetRocketProjectileParams();
+            return BossStatusManager.GetRocketProjectileParams();
         }
 
         // TODO: Add your own conditions and return values, you can reference other scripts.

@@ -8,6 +8,9 @@ TagManager:
   - PlayerRocket
   - Player Projectile
   - Buff
+  - Boss
+  - BossMinigun
+  - BossRocket
   layers:
   - Default
   - TransparentFX
