@@ -17,7 +17,6 @@ public class ShootState : IState
     private float rotationSpeed = 3f;
     public ShootState(TrashMob trashmob, UnityEngine.AI.NavMeshAgent agent, NPCProjectileShooter _shooter)
     {
-
         mob = trashmob;
         _agent = agent;
         _projectileShooter = _shooter;
@@ -32,13 +31,18 @@ public class ShootState : IState
         LookAtPlayer(_playerpos);
 
         _projectileShooter.TryShoot(_playerpos);
-        _agent.SetDestination(_playerpos);
+        if((_playerpos - _agent.transform.position).magnitude > 15f)
+        {
+            _agent.SetDestination(_playerpos);
+        }
+        
 
     }
     public void OnEnter() 
     {
         //NavMeshdata
         _agent.enabled = true;
+        _agent.SetDestination(_playerpos);
 
         //Get Player data
         GameObject player = GameObject.Find("Player Controller");

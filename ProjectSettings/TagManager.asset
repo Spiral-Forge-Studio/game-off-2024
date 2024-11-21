@@ -19,8 +19,7 @@ TagManager:
   - Projectile
   - Enemy
   - AimPlatformLayer
-  - 
-  - 
+  - EnemyProjectile
   - 
   - 
   - 
