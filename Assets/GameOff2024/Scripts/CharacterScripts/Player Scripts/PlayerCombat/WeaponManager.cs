@@ -172,7 +172,7 @@ public class WeaponManager : MonoBehaviour
                     rocket_accumulatedShots++;
                     rocket_currentAmmo --;
 
-                    Debug.Log("Accumulating rockets");
+                    //Debug.Log("Accumulating rockets");
 
                     if (rocket_accumulatedShots == rocket_currentAmmoAtTimeOfAccumulation)
                     {
@@ -189,7 +189,7 @@ public class WeaponManager : MonoBehaviour
 
             if (!inputs.RightHold && !rocket_holdReleased)
             {
-                Debug.Log("Releasing " + rocket_accumulatedShots + " rockets at once");
+                //Debug.Log("Releasing " + rocket_accumulatedShots + " rockets at once");
 
 
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);

@@ -1667,6 +1667,7 @@ MonoBehaviour:
     type: 3}
   aimPosition: {x: 0, y: 0, z: 0}
   rocket_accumulationTimePerRocket: 0
+  rocket_setHoldTime: 0.3
 --- !u!4 &1496410941 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6648992991014048106, guid: 0f0bc997e6443f8428effb089bd37559,
@@ -2577,6 +2578,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponManager: {fileID: 1348048501}
+  BossStatusSO: {fileID: 11400000, guid: 9dff3d644b223274f96bdbef02336c5a, type: 2}
   shootingRange: 100
   aimOffset: 0
   _waypoints:
