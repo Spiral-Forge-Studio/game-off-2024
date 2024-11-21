@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class UniqueBuff : MonoBehaviour
+public abstract class UniqueBuff
 {
     protected UniqueBuffsSO uniqueBuffsSO;
     protected PlayerStatusSO playerStatusSO;

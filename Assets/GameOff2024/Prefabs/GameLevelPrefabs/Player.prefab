@@ -45,6 +45,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatsSO: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  playerUniqueBuffsSO: {fileID: 11400000, guid: 973bf79b4ed73a1439aff934c45fad19,
+    type: 2}
 --- !u!1 &5063264151163085427
 GameObject:
   m_ObjectHideFlags: 0

@@ -77,6 +77,7 @@ public class MinigunProjectileScript : Projectile
 
     private void OnTriggerEnter(Collider other)
     {
+        uniqueBuffHandler.ApplyMinigunOnHitUniqueBuffs(isCritical);
         returningToPool = true;
         ReturnToPool();
     }
