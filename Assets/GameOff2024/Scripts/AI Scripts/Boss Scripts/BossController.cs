@@ -13,6 +13,8 @@ public class BossController : MonoBehaviour
     private StateMachine _statemachine;
 
     private PlayerDetector _playerDetector;
+
+    [SerializeField] List<GameObject> _waypoints = new List<GameObject>();
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
@@ -20,7 +22,16 @@ public class BossController : MonoBehaviour
 
         _statemachine = new StateMachine();
 
+        //Boss Phase
         var idle = new BossIdle();
+        var rambo = new BossRambo();
+        var spine = new BossSpine();
+        var minisweep = new MiniGunSweep();
+        var rocketsweep = new RocketSweep();
+        var backshot = new RocketBackShot();
+        var miniperi = new MiniGunPerimeterSpray();
+        var rocketperi = new RocketPerimeterSpray();
+
 
         _statemachine.SetState(idle);
     }
