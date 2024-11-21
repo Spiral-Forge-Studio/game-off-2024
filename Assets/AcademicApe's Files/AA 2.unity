@@ -873,6 +873,18 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 2272359671433289074}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1598188559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 8463786501802719736, guid: 0f0bc997e6443f8428effb089bd37559,
+    type: 3}
+  m_PrefabInstance: {fileID: 2272359671433289074}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fcc078090383f104b8f13d70fef5f6ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1738483538
 GameObject:
   m_ObjectHideFlags: 0
@@ -1390,6 +1402,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa944771a8205d4a86237926fd3dd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _player: {fileID: 0}
+  _bossparam: {fileID: 11400000, guid: ec6f5e7d5dd684446a5e7c966532c436, type: 2}
   _waypoints:
   - {fileID: 2443634}
   - {fileID: 832728579}
@@ -2442,6 +2456,16 @@ PrefabInstance:
       propertyPath: m_Camera
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 6279829101597319737, guid: b98368f4588b5e34981533ceed68e2c6,
+        type: 3}
+      propertyPath: playerKCC
+      value: 
+      objectReference: {fileID: 68620418}
+    - target: {fileID: 6279829101597319737, guid: b98368f4588b5e34981533ceed68e2c6,
+        type: 3}
+      propertyPath: weaponManager
+      value: 
+      objectReference: {fileID: 1598188559}
     - target: {fileID: 8229666842000398956, guid: b98368f4588b5e34981533ceed68e2c6,
         type: 3}
       propertyPath: Character
