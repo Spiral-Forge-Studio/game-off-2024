@@ -33,6 +33,12 @@ public class PlayerMinigunProjectileScript : Projectile
     private bool returningToPool;
 
     private UniqueBuffHandler uniqueBuffHandler;
+    private TrailRenderer trailRenderer;
+
+    private void Awake()
+    {
+        trailRenderer = GetComponent<TrailRenderer>();
+    }
 
     protected override void OnEnable()
     {
@@ -41,6 +47,14 @@ public class PlayerMinigunProjectileScript : Projectile
         returningToPool = false;
         startTime = Time.time;
     }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        trailRenderer.Clear();
+    }
+
 
     public override void ProjectileMovementUpdate()
     {
