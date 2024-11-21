@@ -13,7 +13,6 @@ MonoBehaviour:
   m_Name: PlayerUniqueBuffsSO
   m_EditorClassIdentifier: 
   EnergySiphon_ShieldRestoredPercent: 1
-  EnergySiphon_InternalCooldown: 0.1
   AdaptivePlating_TimeToTrigger: 5
   AdaptivePlating_DamageReduction: 10
   AdaptivePlating_Duration: 5
