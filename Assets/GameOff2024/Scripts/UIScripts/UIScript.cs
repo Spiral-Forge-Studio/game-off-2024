@@ -44,8 +44,8 @@ public class UIScript : MonoBehaviour
         rocketMagazineSize.text = playerStatusSO.RocketMagazineSize.ToString();
         rocketAccumulatedShots.text = weaponManager.GetRocketAccumulatedShots().ToString();
 
-        currentHealth.text = playerStatusManager.GetCurrentHealth().ToString();
-        currentShield.text = playerStatusManager.GetCurrentShield().ToString();
+        currentHealth.text = Mathf.RoundToInt(playerStatusManager.GetCurrentHealth()).ToString();
+        currentShield.text = Mathf.RoundToInt(playerStatusManager.GetCurrentShield()).ToString();
 
         healthFill.fillAmount = playerStatusManager.GetCurrentHealth()/playerStatusSO.Health;
         shieldFill.fillAmount = playerStatusManager.GetCurrentShield()/playerStatusSO.Shield;
