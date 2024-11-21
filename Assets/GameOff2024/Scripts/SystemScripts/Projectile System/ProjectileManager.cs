@@ -136,11 +136,11 @@ public class ProjectileManager : MonoBehaviour
 
     private ProjectileParams GetProjectileParams(EProjectileType projectileType)
     {
-        if (projectileType == EProjectileType.Minigun)
+        if (projectileType == EProjectileType.PlayerMinigun)
         {
             return playerStatusManager.GetMinigunProjectileParams();
         }
-        else if (projectileType == EProjectileType.Rocket)
+        else if (projectileType == EProjectileType.PlayerRocket)
         {
             return playerStatusManager.GetRocketProjectileParams();
         }
