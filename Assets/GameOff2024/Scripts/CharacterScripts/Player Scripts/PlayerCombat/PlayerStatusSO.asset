@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: PlayerStatusSO
   m_EditorClassIdentifier: 
   baseHealth: 100
-  baseShield: 20
+  baseShield: 100
   baseShieldRegenAmount: 1
   baseShieldBreakRecoveryDelay: 2
   baseShieldRegenTickInterval: 1
@@ -26,9 +26,9 @@ MonoBehaviour:
   b_MinigunFireRate: 10
   b_MinigunReloadTime: 1
   b_MinigunMagazineSize: 100
-  b_MinigunProjectileLifetime: 0.4
+  b_MinigunProjectileLifetime: 0.5
   b_MinigunProjectileSpeed: 35
-  b_minigunDeviationAngle: 10
+  b_minigunDeviationAngle: 4
   b_RocketDamage: 20
   b_RocketCritRate: 0
   b_RocketCritDamage: 1.5
