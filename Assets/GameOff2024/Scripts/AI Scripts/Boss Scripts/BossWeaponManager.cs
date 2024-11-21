@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public struct PlayerCombatInputs
+public struct BossCombatInputs
 {
     public bool LeftShoot;
     public bool RightShoot;
@@ -10,9 +10,15 @@ public struct PlayerCombatInputs
     public bool RightRelease;
     public Vector3 mousePos;
     public bool Reload;
+
+    public override string ToString()
+    {
+        return $"LeftShoot: {LeftShoot}, RightShoot: {RightShoot}, RightHold: {RightHold}, RightRelease: {RightRelease}, " +
+               $"MousePos: {mousePos}, Reload: {Reload}";
+    }
 }
 
-public class WeaponManager : MonoBehaviour
+public class BossWeaponManager : MonoBehaviour
 {
     [Header("Weapon Audio Sources")]
     [SerializeField] private AudioSource audioSource_MinigunFireSource1;
@@ -29,8 +35,8 @@ public class WeaponManager : MonoBehaviour
     private List<Quaternion> minigunProjectileRotationsList = new List<Quaternion>();
     private List<Quaternion> rocketProjectileRotationsList = new List<Quaternion>();
 
-    [Header("PlayerStatus SO")]
-    [SerializeField] private PlayerStatusSO playerStats;
+    [Header("BossStatus SO")]
+    [SerializeField] private BossStatusSO BossStats;
 
     [Header("Prefab Objects")]
     public GameObject rocketExplosionPrefab;
@@ -53,9 +59,9 @@ public class WeaponManager : MonoBehaviour
     private bool useOtherSource;
 
     [Header("Rocket Rearm Mechanics")]
-    [SerializeField] private float rocket_accumulationTimePerRocket;
+    [SerializeField] public float rocket_accumulationTimePerRocket;
 
-    private float rocket_setHoldTime = 0.3f;
+    public float rocket_setHoldTime = 0.3f;
     private float rocket_startHoldTime;
     private float rocket_startAccumulateTime;
     private int rocket_accumulatedShots;
@@ -66,15 +72,15 @@ public class WeaponManager : MonoBehaviour
 
     private void Awake()
     {
-        FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
-        FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(rocketProjectileShooter);
+        FindAnyObjectByType<BossProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
+        FindAnyObjectByType<BossProjectileManager>().AddProjectileShooter(rocketProjectileShooter);
     }
 
     // Start is called before the first frame update
     void Start()
     {
-        minigun_currentAmmo = playerStats.MinigunMagazineSize;
-        rocket_currentAmmo = playerStats.RocketMagazineSize;
+        minigun_currentAmmo = BossStats.MinigunMagazineSize;
+        rocket_currentAmmo = BossStats.RocketMagazineSize;
         rocket_accumulatedShots = 0;
         rocket_holdReleased = true;
         isRocketRearming = false;
@@ -87,7 +93,7 @@ public class WeaponManager : MonoBehaviour
 
     }
 
-    public void SetInputs(ref PlayerCombatInputs inputs)
+    public void SetInputs(ref BossCombatInputs inputs)
     {
         if (inputs.RightRelease)
         {
@@ -96,10 +102,10 @@ public class WeaponManager : MonoBehaviour
 
         aimPosition = inputs.mousePos;
 
-        if (inputs.Reload && !isMinigunReloading && minigun_currentAmmo < playerStats.MinigunMagazineSize)
+        if (inputs.Reload && !isMinigunReloading && minigun_currentAmmo < BossStats.MinigunMagazineSize)
         {
             isMinigunReloading = true;
-            StartCoroutine(ReloadMinigun(playerStats.MinigunReloadTime));
+            StartCoroutine(ReloadMinigun(BossStats.MinigunReloadTime));
         }
 
         // Handle Minigun Shooting and Reloading
@@ -107,11 +113,11 @@ public class WeaponManager : MonoBehaviour
         {
             if (minigun_currentAmmo > 0)
             {
-                if (Time.time - minigun_lastShotTime > 1f / playerStats.MinigunFireRate)
+                if (Time.time - minigun_lastShotTime > 1f / BossStats.MinigunFireRate)
                 {
 
                     FireMinigunProjectile(aimPosition);
-                    minigun_currentAmmo--;
+                    //minigun_currentAmmo--;
                     minigun_lastShotTime = Time.time;
 
                     if (useOtherSource)
@@ -130,28 +136,31 @@ public class WeaponManager : MonoBehaviour
             else
             {
                 isMinigunReloading = true;
-                StartCoroutine(ReloadMinigun(playerStats.MinigunReloadTime));
+                StartCoroutine(ReloadMinigun(BossStats.MinigunReloadTime));
             }
         }
 
         // Handle Rocket Shooting and Rearming
         if (inputs.RightShoot && !rocket_holdTimerStarted)
         {
+            //Debug.Log("Here");
             rocket_holdTimerStarted = true;
             rocket_startHoldTime = Time.time;
         }
 
         if (rocket_currentAmmo > 0 || rocket_accumulatedShots > 0)
         {
+            
             if (!inputs.RightShoot && rocket_holdTimerStarted)
             {
+                
                 if (Time.time - rocket_startHoldTime < rocket_setHoldTime)
                 {
-                    if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate && !inputs.RightHold)
+                    if (Time.time - rocket_lastShotTime > 1f / BossStats.RocketFireRate && !inputs.RightHold)
                     {
                         FireRocketProjectiles(aimPosition, 1);
                         AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
-                        rocket_currentAmmo--;
+                        //rocket_currentAmmo--;
                         rocket_lastShotTime = Time.time;
                     }
                 }
@@ -172,7 +181,7 @@ public class WeaponManager : MonoBehaviour
                     rocket_accumulatedShots++;
                     rocket_currentAmmo --;
 
-                    //Debug.Log("Accumulating rockets");
+                    Debug.Log("Accumulating rockets");
 
                     if (rocket_accumulatedShots == rocket_currentAmmoAtTimeOfAccumulation)
                     {
@@ -191,7 +200,6 @@ public class WeaponManager : MonoBehaviour
             {
                 //Debug.Log("Releasing " + rocket_accumulatedShots + " rockets at once");
 
-
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);
 
                 AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
@@ -207,12 +215,12 @@ public class WeaponManager : MonoBehaviour
 
         if (!isRocketRearming && !inputs.RightHold)
         {
-            if (rocket_currentAmmo < playerStats.RocketMagazineSize)
+            if (rocket_currentAmmo < BossStats.RocketMagazineSize)
             {
-                StartCoroutine(RearmRocket(playerStats.RocketReloadTime));
+                StartCoroutine(RearmRocket(BossStats.RocketReloadTime));
             }
         }
-
+        //Debug.Log("accumulated rockets = " + rocket_accumulatedShots);
     }
 
     private IEnumerator ReloadMinigun(float reloadTime)
@@ -226,7 +234,7 @@ public class WeaponManager : MonoBehaviour
 
         AudioManager.instance.PlaySFX(audioSource_MinigunReload, EGameplaySFX.MinigunReload, 1);
 
-        minigun_currentAmmo = playerStats.MinigunMagazineSize; // Refill minigun ammo
+        minigun_currentAmmo = BossStats.MinigunMagazineSize; // Refill minigun ammo
         isMinigunReloading = false;
     }
 
@@ -247,7 +255,7 @@ public class WeaponManager : MonoBehaviour
     #region -- Minigun Related ---
     private void FireMinigunProjectile(Vector3 aimPosition)
     {
-        float deviationAngle = playerStats.MinigunBulletDeviationAngle; // The max angle to deviate
+        float deviationAngle = BossStats.MinigunBulletDeviationAngle; // The max angle to deviate
 
         // Calculate the direction to the target
         Vector3 aimDirection = aimPosition - minigunProjectileShooter.firePoint.position;
@@ -288,13 +296,13 @@ public class WeaponManager : MonoBehaviour
     #endregion
 
     #region -- Rocket Related ---
-    private void FireRocketProjectiles(Vector3 aimPosition, int amount)
+    public void FireRocketProjectiles(Vector3 aimPosition, int amount)
     {
         rocketProjectileRotationsList.Clear();
 
         // Calculate the direction to the target
         Vector3 aimDirection;
-
+        AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
         if (amount > 1)
         {
             float coneAngle = 30f; // Total spread angle for all rockets in degrees
@@ -352,7 +360,7 @@ public class WeaponManager : MonoBehaviour
     {
         Gizmos.color = Color.red;
 
-        Gizmos.DrawLine(minigunProjectileShooter.firePoint.position, aimPosition);
-        Gizmos.DrawLine(rocketProjectileShooter.firePoint.position, aimPosition);
+        //Gizmos.DrawLine(minigunProjectileShooter.firePoint.position, aimPosition);
+        //Gizmos.DrawLine(rocketProjectileShooter.firePoint.position, aimPosition);
     }
 }
