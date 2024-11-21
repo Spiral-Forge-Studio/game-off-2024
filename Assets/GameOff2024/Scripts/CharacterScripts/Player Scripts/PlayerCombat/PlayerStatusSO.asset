@@ -19,7 +19,7 @@ MonoBehaviour:
   baseShieldRegenTickInterval: 1
   baseDamageReduction: 0.1
   baseMoveSpeed: 5
-  baseDashCooldown: 1
+  baseDashCooldown: 0.3
   b_MinigunDamage: 5
   b_MinigunCritRate: 0.5
   b_MinigunCritDamage: 1.5
@@ -37,6 +37,6 @@ MonoBehaviour:
   b_RocketMagazineSize: 5
   b_RocketProjectileLifetime: 1
   b_RocketProjectileSpeed: 20
-  b_RocketExplosionRadius: 5
+  b_RocketExplosionRadius: 10
   b_RocketHoldDuration: 0
   b_RocketReleaseFirerate: 0
