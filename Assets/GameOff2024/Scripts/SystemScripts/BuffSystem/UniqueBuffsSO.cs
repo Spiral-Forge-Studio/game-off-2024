@@ -9,9 +9,8 @@ public class UniqueBuffsSO : ScriptableObject
     public float EnergySiphon_ShieldRestoredPercent;
 
     [Header("Adaptive Plating")]
-    public float AdaptivePlating_TimeToTrigger;
+    public float AdaptivePlating_ShieldThresholdPercent;
     public float AdaptivePlating_DamageReduction;
-    public float AdaptivePlating_Duration;
 
     [Header("Nano Regen Pulse")]
     public float NanoRegenPulse_PercentPerStack;

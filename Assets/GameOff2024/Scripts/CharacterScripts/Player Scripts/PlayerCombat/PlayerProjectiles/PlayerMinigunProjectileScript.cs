@@ -20,7 +20,7 @@ public class MinigunProjectileParams : ProjectileParams
     }
 }
 
-public class MinigunProjectileScript : Projectile
+public class PlayerMinigunProjectileScript : Projectile
 {
     // Minigun Params
     private float speed;

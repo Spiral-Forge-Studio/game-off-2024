@@ -6,8 +6,8 @@ using UnityEngine;
 public enum EProjectileType
 {
     //Player Projectiles
-    Minigun,
-    Rocket,
+    PlayerMinigun,
+    PlayerRocket,
 
     #region ---NPC Projectiles---
     Enemy,
