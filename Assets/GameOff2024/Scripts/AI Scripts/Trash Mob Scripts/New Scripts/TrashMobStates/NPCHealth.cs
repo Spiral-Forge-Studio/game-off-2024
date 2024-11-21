@@ -26,7 +26,7 @@ public class NPCHealth : MonoBehaviour
     void Awake()
     {
         //Event Handling
-        OnMobDestroyed.AddListener(GameObject.Find("Player").GetComponent<UniqueBuffHandler>().ApplyOnKillUniqueBuffs);
+        OnMobDestroyed.AddListener(GameObject.Find("Player").GetComponentInChildren<UniqueBuffHandler>().ApplyOnKillUniqueBuffs);
         player = GameObject.Find("Player");
         _playerdamage = player.GetComponent<PlayerStatusManager>();
         _mobparameters = GetComponent<TrashMobParameters>();
