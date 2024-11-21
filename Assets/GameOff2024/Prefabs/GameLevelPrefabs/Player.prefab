@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 8229666842000398956}
   - component: {fileID: 5589551036365784729}
   - component: {fileID: 6279829101597319737}
+  - component: {fileID: 5661431426882450033}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -96,3 +97,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerStatus: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  currentHealth: 0
+  currentShield: 0
+  minigun_landedCriticalHit: 0
+  rocket_landedCriticalHit: 0
+--- !u!114 &5661431426882450033
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5063264151163085427}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 37c4a36860aff604fabb57dda307d359, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerStatsSO: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  playerUniqueBuffsSO: {fileID: 11400000, guid: 973bf79b4ed73a1439aff934c45fad19,
+    type: 2}
