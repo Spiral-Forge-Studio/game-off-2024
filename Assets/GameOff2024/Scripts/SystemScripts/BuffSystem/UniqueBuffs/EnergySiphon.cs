@@ -6,6 +6,7 @@ public class EnergySiphon : UniqueBuff
 {
     public EnergySiphon(UniqueBuffsSO uniqueBuffsSO, PlayerStatusSO playerStatusSO, PlayerStatusManager playerStatusManager) : base(uniqueBuffsSO, playerStatusSO, playerStatusManager)
     {
+
     }
 
     public override void ApplyBuffEffect()
