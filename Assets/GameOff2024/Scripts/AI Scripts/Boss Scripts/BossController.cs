@@ -17,18 +17,20 @@ public class BossController : MonoBehaviour
     private PlayerDetector _playerDetector;
 
     public BossWeaponManager weaponManager;
-
+    public BossStatusSO BossStatusSO;
     private Transform playerTransform;
+
+    private float timer;
 
     [SerializeField] private float shootingRange;
     [SerializeField] private float aimOffset;
+
 
     [SerializeField] List<GameObject> _waypoints = new List<GameObject>();
     private void Awake()
     {
         _agent = GetComponent<NavMeshAgent>();
         _playerDetector = GetComponent<PlayerDetector>();
-
         _statemachine = new StateMachine();
 
         //Boss Phase
@@ -41,7 +43,7 @@ public class BossController : MonoBehaviour
         var miniperi = new MiniGunPerimeterSpray();
         var rocketperi = new RocketPerimeterSpray();
 
-
+        timer = 0;
         _statemachine.SetState(idle);
     }
 
@@ -67,7 +69,10 @@ public class BossController : MonoBehaviour
         }
         Vector3 aimPosition = playerTransform.position;
         ShootMinigunAt(aimPosition);
-        ShootRocketAt(aimPosition);
+        //ShootRocketAt(aimPosition);
+        BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
+
+
 
 
     }
@@ -97,50 +102,22 @@ public class BossController : MonoBehaviour
             RightShoot = true,  // Start the rocket shooting
             mousePos = Tobeshot // Aim at the target position
         };
-        float timer = Time.time;
         // Simulate pressing the button
         weaponManager.SetInputs(ref aiInputsForShooting);
-        while (Time.time - timer > 0.2f)
-        {
-            //do nothing
-        }
         aiInputsForShooting = new BossCombatInputs
         {
             RightShoot = false,  // Start the rocket shooting
             mousePos = Tobeshot // Aim at the target position
         };
-        // Wait for a time shorter than the rocket_setHoldTime (e.g., 0.2f)
         weaponManager.SetInputs(ref aiInputsForShooting);
     }
 
-
-    // Coroutine to simulate a quick rocket fire (shorter than the hold time)
-    IEnumerator SimulateQuickRocketFire(Vector3 targetPosition)
+    public void BackShotAt(Vector3 Tobeshot, int Amount)
     {
-        // Create inputs for shooting
-        BossCombatInputs aiInputsForShooting = new BossCombatInputs
+        if (Time.time - timer > 1/BossStatusSO.RocketReleaseFireRate)
         {
-            RightShoot = true,  // Start the rocket shooting
-            mousePos = targetPosition // Aim at the target position
-        };
-
-        // Simulate pressing the button
-        weaponManager.SetInputs(ref aiInputsForShooting);
-
-        // Wait for a time shorter than the rocket_setHoldTime (e.g., 0.2f)
-        yield return new WaitForSeconds(0.2f);
-
-        // Simulate releasing the button
-        aiInputsForShooting.RightShoot = false;
-        weaponManager.SetInputs(ref aiInputsForShooting);
-    }
-
-    void TriggerQuickRocketFire()
-    {
-        if (Vector3.Distance(transform.position, playerTransform.position) < shootingRange)
-        {
-            Vector3 aimPosition = playerTransform.position; // Target player's position
-            StartCoroutine(SimulateQuickRocketFire(aimPosition)); // Simulate quick press
+            timer = Time.time;
+            weaponManager.FireRocketProjectiles(Tobeshot, Amount);
         }
     }
 
