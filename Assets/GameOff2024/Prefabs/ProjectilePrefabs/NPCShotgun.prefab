@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3014781150815546971}
   - component: {fileID: -175773353590947757}
   - component: {fileID: -2449413639472781199}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: NPCShotgun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -99,7 +99,7 @@ SphereCollider:
     m_Bits: 247
   m_ExcludeLayers:
     serializedVersion: 2
-    m_Bits: 384
+    m_Bits: 1408
   m_LayerOverridePriority: 0
   m_IsTrigger: 1
   m_ProvidesContacts: 0

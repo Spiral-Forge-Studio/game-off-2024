@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 3014781150815546971}
   - component: {fileID: -175773353590947757}
   - component: {fileID: -2449413639472781199}
-  m_Layer: 7
+  m_Layer: 10
   m_Name: NPCProjectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
