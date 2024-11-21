@@ -83,6 +83,11 @@ public class UniqueBuffHandler : MonoBehaviour
 
     #endregion 
 
+    public void ApplyOnKillUniqueBuffs()
+    {
+        Debug.Log("Applying On Kill Unique Buffs");
+    }
+
     #region --- Minigun Related ---
 
     public void ApplyMinigunOnHitUniqueBuffs(bool isCriticalHit)
