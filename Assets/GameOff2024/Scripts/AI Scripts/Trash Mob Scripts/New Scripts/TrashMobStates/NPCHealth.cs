@@ -64,7 +64,7 @@ public class NPCHealth : MonoBehaviour
         if(other.CompareTag("PlayerMinigun"))
         {
             Debug.Log("Taking minigun damage");
-            float minigunDamage = other.gameObject.GetComponent<MinigunProjectileScript>().GetDamage();
+            float minigunDamage = other.gameObject.GetComponent<PlayerMinigunProjectileScript>().GetDamage();
             MobDamaged(minigunDamage);
         }
 

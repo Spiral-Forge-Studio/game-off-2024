@@ -192,6 +192,16 @@ public class PlayerStatusManager : MonoBehaviour
         return currentShield;
     }
 
+    public float GetCurrentMaxHealth()
+    {
+        return currentMaxHealth;
+    }
+    public float GetCurrentMaxShield()
+    {
+        return currentMaxShield;
+    }
+
+
     private IEnumerator ShieldRegeneration()
     {
         yield return new WaitForSeconds(playerStatus.ShieldRegenTickInterval);

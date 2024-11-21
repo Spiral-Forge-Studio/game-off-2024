@@ -46,7 +46,7 @@ public class UniqueBuffHandler : MonoBehaviour
     private void Start()
     {
         uniqueBuffsLogicDict.Add(EUniqueBuffs.EnergySiphon, new EnergySiphon(playerUniqueBuffsSO, playerStatsSO, playerStatusManager));
-        uniqueBuffsActiveCheckDict.Add(EUniqueBuffs.EnergySiphon, false);
+        uniqueBuffsActiveCheckDict.Add(EUniqueBuffs.EnergySiphon, true);
     }
 
     private void Update()
@@ -82,6 +82,11 @@ public class UniqueBuffHandler : MonoBehaviour
     }
 
     #endregion 
+
+    public void ApplyOnKillUniqueBuffs()
+    {
+        Debug.Log("Applying On Kill Unique Buffs");
+    }
 
     #region --- Minigun Related ---
 

@@ -20,7 +20,7 @@ public class MinigunProjectileParams : ProjectileParams
     }
 }
 
-public class MinigunProjectileScript : Projectile
+public class PlayerMinigunProjectileScript : Projectile
 {
     // Minigun Params
     private float speed;
@@ -28,7 +28,7 @@ public class MinigunProjectileScript : Projectile
     private float lifetime;
     private bool isCritical;
 
-    // lifetime logic variables
+    // Lifetime logic variables
     private float startTime;
     private bool returningToPool;
 
@@ -78,6 +78,7 @@ public class MinigunProjectileScript : Projectile
     private void OnTriggerEnter(Collider other)
     {
         uniqueBuffHandler.ApplyMinigunOnHitUniqueBuffs(isCritical);
+
         returningToPool = true;
         ReturnToPool();
     }
