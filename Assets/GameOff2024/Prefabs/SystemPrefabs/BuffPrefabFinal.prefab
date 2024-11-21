@@ -122,3 +122,5 @@ MonoBehaviour:
   playerStats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
   sphereCastInterval: 0.0001
   playerStatusManager: {fileID: 0}
+  floatingTextPrefab: {fileID: 716603592101926067, guid: 7475946a9d1d27e4d809dab3806e23e5,
+    type: 3}
