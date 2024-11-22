@@ -42,26 +42,24 @@ public class ShieldRegenAmountBuff : Buff
         { Rarity.Legendary, 5.0f }
     };
 
-    public ShieldRegenAmountBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
-        : base(duration)
+    public override void Initialize(PlayerStatusSO playerStatus, float initAmount, BuffType type, Rarity rarity, float consecAmount, float scaleAmount, float duration)
     {
-        this.playerStatus = status;
-        this.buffType = buffType;
-        this.rarity = rarity;
-
+        // Set properties here
+        this.playerStatus = playerStatus;
+        this.buffType = type;
         if (buffType == BuffType.Flat)
         {
             this.initialAmountFlat *= rarityMultiplier[rarity];
             this.consecutiveAmountFlat *= rarityMultiplier[rarity];
         }
-
         if (buffType == BuffType.Percentage)
         {
             this.initialAmountMultiplier *= rarityMultiplier[rarity];
             this.consecutiveAmountMultiplier *= rarityMultiplier[rarity];
         }
-
-        this.scalingFactor = scalingFactor;
+        this.rarity = rarity;
+        this.scalingFactor = scaleAmount;
+        this.duration = duration;
     }
 
     public override string getBuffName()
@@ -140,12 +138,6 @@ public class ShieldRegenAmountBuff : Buff
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenAmountMultiplier, multiplierValue, true);
             totalMultiplier += multiplierValue / 100f;
         }
-
-        // Apply consecutive bonuses at intervals
-        if (duration > 0)
-        {
-            InvokeRepeating(nameof(ApplyConsecutiveBuff), 1f, duration);
-        }
     }
 
     public override void ApplyConsecutiveBuff()
@@ -177,9 +169,6 @@ public class ShieldRegenAmountBuff : Buff
         {
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenAmountMultiplier, -totalMultiplier * 100f, false);
         }
-
-        // Cancel consecutive buff application
-        CancelInvoke(nameof(ApplyConsecutiveBuff));
     }
 
     public override void UpdateBuffValues(Buff.BuffType bufftype, Buff.Rarity buffrarity, float initialAmount = 0, float consecutiveAmount = 0, float ScaleAmount = 0)

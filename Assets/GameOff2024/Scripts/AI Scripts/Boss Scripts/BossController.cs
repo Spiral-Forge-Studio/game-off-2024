@@ -2,6 +2,7 @@ using KinematicCharacterController;
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using TMPro.Examples;
 using UnityEngine;
 using UnityEngine.AI;
@@ -25,6 +26,16 @@ public class BossController : MonoBehaviour
     [SerializeField] private bool _doRocketperi;
 
     [SerializeField] public List<GameObject> _waypoints = new List<GameObject>();
+    public BossWeaponManager weaponManager;
+    public BossStatusSO BossStatusSO;
+    private Transform playerTransform;
+
+    private float timer;
+
+    [SerializeField] private float shootingRange;
+    [SerializeField] private float aimOffset;
+
+
     private void Awake()
     {
         _player = GameObject.Find("Player Controller").GetComponent<PlayerKCC>();
@@ -52,6 +63,7 @@ public class BossController : MonoBehaviour
         At(idle, rocketperi, () => _doRocketperi && idle.IsIdle); //Only go to this transition if miniperi has concluded before
         At(miniperi, idle, () => miniperi.IsComplete);  //Third Entry Condition to go to return to idle. After an attack pattern, go to idle
         At(rocketperi, idle, () => rocketperi.IsComplete);//Third Entry Condition to go to return to idle. After an attack pattern, go to idle
+        timer = 0;
         _statemachine.SetState(idle);
 
         void At(IState from, IState to, Func<bool> condition) => _statemachine.AddTransition(from, to, condition);
@@ -64,6 +76,31 @@ public class BossController : MonoBehaviour
     {
         DoMiniSweep();
         _statemachine.Tick();
+
+
+        //Weapon pew pew you gotta put in states
+        // Get player transform if not already assigned
+        if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+            else
+            {
+                Debug.LogWarning("Player not found!");
+                return;
+            }
+        }
+        Vector3 aimPosition = playerTransform.position;
+        ShootMinigunAt(aimPosition);
+        //ShootRocketAt(aimPosition);
+        BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
+
+
+
+
     }
 
     public void MoveToCenter()
@@ -77,49 +114,40 @@ public class BossController : MonoBehaviour
         _doMiniperi = false;
         _doRocketperi = true;
     }
-    /*
-    public void Attack_MiniPerimeter()
+    public void ShootMinigunAt(Vector3 Tobeshot)
     {
-        StartCoroutine(MiniGunPerimeterSpray());
-    }
-
-    public void Attack_RocketPerimeter()
-    {
-        StartCoroutine(RocketPerimeterSpray());
-    }
-    private IEnumerator MiniGunPerimeterSpray()
-    {
-        int[] waypoint = {3, 6, 5, 2 };
-
-        foreach (int index in waypoint)
+        BossCombatInputs aiInputsForShooting = new BossCombatInputs
         {
-            _agent.SetDestination(_waypoints[index].transform.position);
+            LeftShoot = true, // Simulate minigun shooting
+            mousePos = Tobeshot // Aim at the player
+        };
+        weaponManager.SetInputs(ref aiInputsForShooting);
+    }
+    public void ShootRocketAt(Vector3 Tobeshot)
+    {
+        BossCombatInputs aiInputsForShooting = new BossCombatInputs
+        {
+            RightShoot = true,  // Start the rocket shooting
+            mousePos = Tobeshot // Aim at the target position
+        };
+        // Simulate pressing the button
+        weaponManager.SetInputs(ref aiInputsForShooting);
+        aiInputsForShooting = new BossCombatInputs
+        {
+            RightShoot = false,  // Start the rocket shooting
+            mousePos = Tobeshot // Aim at the target position
+        };
+        weaponManager.SetInputs(ref aiInputsForShooting);
+    }
 
-            while( _agent.remainingDistance > _agent.stoppingDistance)
-            {
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(0.5f);
+    public void BackShotAt(Vector3 Tobeshot, int Amount)
+    {
+        if (Time.time - timer > 1/BossStatusSO.RocketReleaseFireRate)
+        {
+            timer = Time.time;
+            weaponManager.FireRocketProjectiles(Tobeshot, Amount);
         }
     }
 
-    private IEnumerator RocketPerimeterSpray()
-    {
-        int[] waypoint = {2,5,6,3 };
-
-        foreach (int index in waypoint)
-        {
-            _agent.SetDestination(_waypoints[index].transform.position);
-
-            while (_agent.remainingDistance > _agent.stoppingDistance)
-            {
-                yield return null;
-            }
-
-            yield return new WaitForSeconds(0.5f);
-        }
-    }
-    */
 
 }

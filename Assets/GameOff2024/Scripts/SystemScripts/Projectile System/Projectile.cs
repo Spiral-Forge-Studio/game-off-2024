@@ -9,6 +9,10 @@ public enum EProjectileType
     PlayerMinigun,
     PlayerRocket,
 
+    //Boss Projectiles
+    BossMinigun,
+    BossRocket,
+
     #region ---NPC Projectiles---
     Enemy,
     EnemyRifle,

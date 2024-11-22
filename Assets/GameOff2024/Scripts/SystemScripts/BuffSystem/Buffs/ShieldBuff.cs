@@ -42,9 +42,28 @@ public class ShieldBuff : Buff
         { Rarity.Epic, 3.0f },
         { Rarity.Legendary, 5.0f }
     };
+    public override void Initialize(PlayerStatusSO playerStatus, float initAmount, BuffType type, Rarity rarity, float consecAmount, float scaleAmount, float duration)
+    {
+        // Set properties here
+        this.playerStatus = playerStatus;
+        this.buffType = type;
+        if (buffType == BuffType.Flat)
+        {
+            this.initialAmountFlat *= rarityMultiplier[rarity];
+            this.consecutiveAmountFlat *= rarityMultiplier[rarity];
+        }
+        if (buffType == BuffType.Percentage)
+        {
+            this.initialAmountMultiplier *= rarityMultiplier[rarity];
+            this.consecutiveAmountMultiplier *= rarityMultiplier[rarity];
+        }
+        this.rarity = rarity;
+        this.scalingFactor = scaleAmount;
+        this.duration = duration;
+    }
 
+    /*
     public ShieldBuff(PlayerStatusSO status, float duration, BuffType buffType, Rarity rarity, float initialAmount, float consecutiveAmount, float scalingFactor)
-        : base(duration)
     {
         this.playerStatus = status;
         this.buffType = buffType;
@@ -61,7 +80,7 @@ public class ShieldBuff : Buff
         }
         this.scalingFactor = scalingFactor;
     }
-
+    */
     public override string getBuffName()
     {
         return buffname;
@@ -134,11 +153,6 @@ public class ShieldBuff : Buff
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, multiplierValue, true);
             totalMultiplier += multiplierValue / 100f;
         }
-
-        if (duration > 0)
-        {
-            InvokeRepeating(nameof(ApplyConsecutiveBuff), 1f, duration);
-        }
     }
 
     public override void ApplyConsecutiveBuff()
@@ -167,8 +181,6 @@ public class ShieldBuff : Buff
         {
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, -totalMultiplier * 100f, false);
         }
-
-        CancelInvoke(nameof(ApplyConsecutiveBuff));
     }
 
     public override void UpdateBuffValues(Buff.BuffType bufftype, Buff.Rarity buffrarity, float initialAmount = 0, float consecutiveAmount = 0, float ScaleAmount = 0)
