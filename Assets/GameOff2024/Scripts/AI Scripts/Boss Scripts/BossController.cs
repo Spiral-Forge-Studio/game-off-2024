@@ -74,7 +74,7 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        DoMiniSweep();
+        //DoMiniSweep();
         _statemachine.Tick();
 
 

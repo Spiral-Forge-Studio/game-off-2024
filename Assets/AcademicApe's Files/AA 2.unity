@@ -585,6 +585,28 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 832728579}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1086048888 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5689274060540543715, guid: 3132b719c2a93024eb9e1565ae32c016,
+    type: 3}
+  m_PrefabInstance: {fileID: 1657610905}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1086048896
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1086048888}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edc812aad348d84594e258382d73939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Recenter: 5
+  _WhilePattern: 3
+  _BackShot: 7
+  _BackShot_StoppingDistance: 1
 --- !u!1 &1203665443
 GameObject:
   m_ObjectHideFlags: 0
@@ -902,47 +924,47 @@ PrefabInstance:
         type: 3}
       propertyPath: _waypoints.Array.data[0]
       value: 
-      objectReference: {fileID: 1297162586}
+      objectReference: {fileID: 2443634}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[1]
       value: 
-      objectReference: {fileID: 1963497410}
+      objectReference: {fileID: 832728579}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[2]
       value: 
-      objectReference: {fileID: 271701027}
+      objectReference: {fileID: 1966983695}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[3]
       value: 
-      objectReference: {fileID: 2443634}
+      objectReference: {fileID: 1798540166}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[4]
       value: 
-      objectReference: {fileID: 1738483538}
+      objectReference: {fileID: 1963497410}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[5]
       value: 
-      objectReference: {fileID: 227983084}
+      objectReference: {fileID: 1297162586}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[6]
       value: 
-      objectReference: {fileID: 1966983695}
+      objectReference: {fileID: 271701027}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[7]
       value: 
-      objectReference: {fileID: 832728579}
+      objectReference: {fileID: 1738483538}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: _waypoints.Array.data[8]
       value: 
-      objectReference: {fileID: 1798540166}
+      objectReference: {fileID: 227983084}
     - target: {fileID: 2473155472876638973, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: BossKCC
@@ -952,6 +974,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Boss
+      objectReference: {fileID: 0}
+    - target: {fileID: 5689274060540543715, guid: 3132b719c2a93024eb9e1565ae32c016,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8053245662887250320, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
@@ -1006,7 +1033,11 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5689274060540543715, guid: 3132b719c2a93024eb9e1565ae32c016,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1086048896}
   m_SourcePrefab: {fileID: 100100000, guid: 3132b719c2a93024eb9e1565ae32c016, type: 3}
 --- !u!1 &1738483538
 GameObject:
@@ -1491,7 +1522,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!195 &2114094528
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1540,6 +1571,10 @@ MonoBehaviour:
   - {fileID: 271701027}
   - {fileID: 1738483538}
   - {fileID: 227983084}
+  weaponManager: {fileID: 0}
+  BossStatusSO: {fileID: 0}
+  shootingRange: 0
+  aimOffset: 0
 --- !u!136 &2114094530
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -3023,3 +3058,4 @@ SceneRoots:
   - {fileID: 1203665445}
   - {fileID: 1268903680}
   - {fileID: 1657610905}
+  - {fileID: 2114094533}
