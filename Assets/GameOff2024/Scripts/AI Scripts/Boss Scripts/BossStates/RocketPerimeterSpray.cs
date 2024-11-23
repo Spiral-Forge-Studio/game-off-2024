@@ -25,11 +25,12 @@ public class RocketPerimeterSpray : IState
     {
         Debug.Log("Entered RPeri");
         _isComplete = false;
+        _boss._isLocked = true;
         _agent.speed = _parameters._WhilePattern;
         _boss.StartCoroutine(ExecuteRocketSweep());
     }
 
-    public void OnExit() { }
+    public void OnExit() { _agent.speed = _parameters._Recenter; _boss._isLocked = false; _boss.ResetAttackFlags(); }
 
     private IEnumerator ExecuteRocketSweep()
     {
