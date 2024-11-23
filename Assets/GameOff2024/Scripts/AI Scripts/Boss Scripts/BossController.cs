@@ -94,9 +94,9 @@ public class BossController : MonoBehaviour
             }
         }
         Vector3 aimPosition = playerTransform.position;
-        ShootMinigunAt(aimPosition);
+        //ShootMinigunAt(aimPosition);
         //ShootRocketAt(aimPosition);
-        BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
+        //BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
 
 
 
