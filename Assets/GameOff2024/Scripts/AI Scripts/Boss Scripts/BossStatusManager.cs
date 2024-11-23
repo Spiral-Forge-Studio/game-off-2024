@@ -80,10 +80,6 @@ public class BossStatusManager : MonoBehaviour
             StartCoroutine(ShieldRegeneration());
         }
 
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            TakeDamage(5f);
-        }
 
         if (currentMaxHealth != BossStatus.Health)
         {
