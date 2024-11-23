@@ -37,6 +37,7 @@ public class BossController : MonoBehaviour
     [SerializeField] public List<GameObject> _waypoints = new List<GameObject>();
     public BossWeaponManager weaponManager;
     public BossStatusSO BossStatusSO;
+    private BossStatusManager _statusManager;
     private Transform playerTransform;
 
     private float timer;
@@ -56,7 +57,7 @@ public class BossController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _playerDetector = GetComponent<PlayerDetector>();
         _bossparam = GetComponent<BossAgentParameters>();
-
+        _statusManager = FindAnyObjectByType<BossStatusManager>();
         _statemachine = new StateMachine();
 
         //Agent Movement
@@ -123,6 +124,10 @@ public class BossController : MonoBehaviour
                 Debug.LogWarning("Player not found!");
                 return;
             }
+        }
+        if (_statusManager.shieldBroken)
+        {
+            DoMiniSweep();
         }
         Vector3 aimPosition = playerTransform.position;
         //ShootMinigunAt(aimPosition);

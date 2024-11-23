@@ -39,6 +39,16 @@ public class BossSpine : IState
 
             while (_agent.remainingDistance > _agent.stoppingDistance)
             {
+                if (index == 1 || index == 4)
+                {
+                    _boss.ShootMinigunAt(new Vector3(1000, _boss.transform.position.y, _boss.transform.position.z));
+                    _boss.ShootRocketAt(new Vector3(-1000, _boss.transform.position.y, _boss.transform.position.z));
+                }
+                if (index == 7 || index == 8)
+                {
+                    _boss.ShootMinigunAt(new Vector3(_boss.transform.position.x, _boss.transform.position.y, 1000));
+                    _boss.ShootRocketAt(new Vector3(_boss.transform.position.x, _boss.transform.position.y, -1000));
+                }
                 yield return null;
             }
 

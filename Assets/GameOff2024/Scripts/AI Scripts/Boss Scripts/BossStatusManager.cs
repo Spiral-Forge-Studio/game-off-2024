@@ -28,7 +28,7 @@ public class BossStatusManager : MonoBehaviour
     [HideInInspector] public bool minigun_landedCriticalHit;
     [HideInInspector] public bool rocket_landedCriticalHit;
 
-    private bool shieldBroken;
+    public bool shieldBroken;
     private bool regeneratingShield;
     private float carryOverDamage = 0f;
 
@@ -73,7 +73,7 @@ public class BossStatusManager : MonoBehaviour
     void Update()
     {
         UpdateBossKCCStats();
-
+        
         if (!shieldBroken && !regeneratingShield && currentShield != BossStatus.Shield)
         { 
             regeneratingShield = true;
