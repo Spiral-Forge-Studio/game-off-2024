@@ -9,9 +9,10 @@ public class MinigunProjectileParams : ProjectileParams
     public float lifetime;
     public UniqueBuffHandler uniqueBuffHandler;
     public bool isCriticalHit;
+    
 
     public MinigunProjectileParams(float speed, float damage, float lifetime, UniqueBuffHandler uniqueBuffHandler, bool isCriticalHit)
-    {
+    { 
         this.speed = speed;
         this.damage = damage;
         this.lifetime = lifetime;
@@ -33,6 +34,14 @@ public class PlayerMinigunProjectileScript : Projectile
     private bool returningToPool;
 
     private UniqueBuffHandler uniqueBuffHandler;
+    private TrailRenderer trailRenderer;
+    private BossStatusManager StatusManager;
+
+    private void Awake()
+    {
+        trailRenderer = GetComponent<TrailRenderer>();
+        StatusManager = FindAnyObjectByType<BossStatusManager>();
+    }
 
     protected override void OnEnable()
     {
@@ -41,6 +50,14 @@ public class PlayerMinigunProjectileScript : Projectile
         returningToPool = false;
         startTime = Time.time;
     }
+
+    protected override void OnDisable()
+    {
+        base.OnDisable();
+
+        trailRenderer.Clear();
+    }
+
 
     public override void ProjectileMovementUpdate()
     {
@@ -78,7 +95,12 @@ public class PlayerMinigunProjectileScript : Projectile
     private void OnTriggerEnter(Collider other)
     {
         uniqueBuffHandler.ApplyMinigunOnHitUniqueBuffs(isCritical);
+        if (other.gameObject.tag == "BossHitBox")
+        {
+              
+            StatusManager.TakeDamage(damage);
 
+        }
         returningToPool = true;
         ReturnToPool();
     }

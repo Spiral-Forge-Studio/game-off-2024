@@ -49,10 +49,16 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
-        if (_ctx._lookInputVector.sqrMagnitude > 0f && _ctx._orientationSharpness > 0f)
+        Quaternion upperXRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+        _ctx._upperBodyTransform.rotation = 
+            Quaternion.LookRotation(Vector3.ProjectOnPlane(_ctx._lookInputVector, Vector3.up)) * upperXRotation;
+
+
+        // lower torso rotation
+        if (_ctx._moveInputVector.sqrMagnitude > 0f && _ctx._orientationSharpness > 0f)
         {
             // Smoothly interpolate from current to target look direction
-            Vector3 smoothedLookInputDirection = Vector3.Slerp(_ctx.Motor.CharacterForward, _ctx._lookInputVector, 1 - Mathf.Exp(-_ctx._orientationSharpness * deltaTime)).normalized;
+            Vector3 smoothedLookInputDirection = Vector3.Slerp(_ctx.Motor.CharacterForward, _ctx._moveInputVector, 1 - Mathf.Exp(-_ctx._orientationSharpness * deltaTime)).normalized;
 
             // Set the current rotation (which will be used by the KinematicCharacterMotor)
             currentRotation = Quaternion.LookRotation(smoothedLookInputDirection, _ctx.Motor.CharacterUp);
@@ -60,8 +66,8 @@ public class PlayerGroundedState : PlayerBaseState
 
         Vector3 currentUp = (currentRotation * Vector3.up);
 
-        Vector3 smoothedGravityDir = Vector3.Slerp(currentUp, -_ctx._gravity.normalized, 1 - Mathf.Exp(-_ctx._bonusOrientationSharpness * deltaTime));
-        currentRotation = Quaternion.FromToRotation(currentUp, smoothedGravityDir) * currentRotation;
+        Vector3 smoothedGravityDirLower = Vector3.Slerp(currentUp, -_ctx._gravity.normalized, 1 - Mathf.Exp(-_ctx._bonusOrientationSharpness * deltaTime));
+        currentRotation = Quaternion.FromToRotation(currentUp, smoothedGravityDirLower) * currentRotation;
     }
 
     public override void CheckSwitchState()

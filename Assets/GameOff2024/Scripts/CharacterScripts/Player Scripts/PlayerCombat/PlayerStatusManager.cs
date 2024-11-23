@@ -65,6 +65,7 @@ public class PlayerStatusManager : MonoBehaviour
         currentHealth = playerStatus.Health;
         currentMaxHealth = playerStatus.Health;
         currentShield = playerStatus.Shield;
+        currentMaxShield = playerStatus.Shield;
 
         shieldRecoverRoutine = null;
     }
