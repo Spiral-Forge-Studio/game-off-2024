@@ -22,14 +22,15 @@ public class MiniGunPerimeterSpray : IState
     public void OnEnter()
     {
         Debug.Log("Entered MPeri");
+        _boss._isLocked = true;
         _isComplete = false;
         _agent.speed = _parameters._WhilePattern;
-        _boss.StartCoroutine(ExecuteMiniSweep());
+        _boss.StartCoroutine(ExecuteMiniPeri());
     }
 
-    public void OnExit() { _agent.speed = _parameters._Recenter; }
+    public void OnExit() { _agent.speed = _parameters._Recenter; _boss._isLocked = false; _boss.ResetAttackFlags(); }
 
-    private IEnumerator ExecuteMiniSweep()
+    private IEnumerator ExecuteMiniPeri()
     {
         int[] waypoints = { 3, 6, 5, 2 };
         foreach (int index in waypoints)

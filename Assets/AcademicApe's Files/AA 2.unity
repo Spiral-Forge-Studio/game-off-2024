@@ -1056,7 +1056,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _Recenter: 5
-  _WhilePattern: 3
+  _WhilePattern: 7
   _BackShot: 7
   _BackShot_StoppingDistance: 1
 --- !u!4 &1086048903 stripped
