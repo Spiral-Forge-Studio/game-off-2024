@@ -17,11 +17,16 @@ public class BossController : MonoBehaviour
 
     private PlayerDetector _playerDetector;
 
+    [SerializeField] private GameObject BOSS;
+
     [SerializeField] private PlayerKCC _player;
 
     [Header ("Boss Agent Movement Parameters")]
     [SerializeField] private BossAgentParameters _bossparam;
+    [Header ("Boss Status Manager")]
+    [SerializeField] private BossStatusManager _statusManager;
 
+    #region ---Attack Flags---
     [Header("Attack Pattern Flags")]
     [SerializeField] private bool _doMiniperi;
     [SerializeField] private bool _doRocketperi;
@@ -31,13 +36,15 @@ public class BossController : MonoBehaviour
     [SerializeField] private bool _doSpine;
     [SerializeField] private bool _doBackshot;
 
+    #endregion
+
     [Header("Boss Attack State Locked")]
     [SerializeField] public bool _isLocked;
+    [SerializeField] public bool _attackselected = false;
 
     [SerializeField] public List<GameObject> _waypoints = new List<GameObject>();
     public BossWeaponManager weaponManager;
     public BossStatusSO BossStatusSO;
-    private BossStatusManager _statusManager;
     private Transform playerTransform;
 
     private float timer;
@@ -47,17 +54,20 @@ public class BossController : MonoBehaviour
 
 
     //Boss Health
-    private float BossMaxHealth;
-    private float BossCurrentHealth;
+    [SerializeField] private float BossMaxHealth;
+    [SerializeField] private float BossCurrentHealth;
 
 
     private void Awake()
     {
+        #region ---Reference Lines---
         _player = GameObject.Find("Player Controller").GetComponent<PlayerKCC>();
+        _statusManager = GetComponent<BossStatusManager>();
         _agent = GetComponent<NavMeshAgent>();
         _playerDetector = GetComponent<PlayerDetector>();
         _bossparam = GetComponent<BossAgentParameters>();
-        _statusManager = FindAnyObjectByType<BossStatusManager>();
+        #endregion
+
         _statemachine = new StateMachine();
 
         //Agent Movement
@@ -106,8 +116,15 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
-        //DoMiniSweep();
         _statemachine.Tick();
+        //Get Boss Health
+        BossMaxHealth = _statusManager.GetCurrentMaxHealth();
+        BossCurrentHealth = _statusManager.GetCurrentHealth();
+        OnBossDestroy();
+
+        //DoMiniSweep();
+        
+        
 
 
         //Weapon pew pew you gotta put in states
@@ -135,8 +152,7 @@ public class BossController : MonoBehaviour
         //BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
 
 
-
-
+        SelectAttack();
     }
 
     public void MoveToCenter()
@@ -144,13 +160,22 @@ public class BossController : MonoBehaviour
         _agent.SetDestination(_waypoints[0].transform.position);
     }
 
-
+    //Remove Later
     public void DoMiniSweep()
     {
         _doMiniperi = false;
         _doRocketperi = false;
         _doRambo = false;
         _doSpine = true;
+    }
+
+    private void OnBossDestroy()
+    {
+     if(BossCurrentHealth <= 0)
+        {
+            BOSS.SetActive(false);
+            Debug.Log("Boss Destroyed");
+        }   
     }
 
     #region ---Shooting Mechanism Related---
@@ -191,26 +216,15 @@ public class BossController : MonoBehaviour
 
     #endregion
 
-    #region ---Boss Parameters SO Related---
-    public void SetHealth()
-    {
-
-    }
-    public float BossHealth()
-    {
-
-        return BossStatusSO.Health;
-    }
-    #endregion
-
     #region ---Attack Phases Related---
     private void SelectAttack()
     {
-        if (!_isLocked)
+        if (!_isLocked && !_attackselected)
         {
             if (BossCurrentHealth > BossMaxHealth * 0.70f)
             {
-                int attackcase = UnityEngine.Random.Range(0,1);
+                int attackcase = UnityEngine.Random.Range(0,2);
+                Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
@@ -224,7 +238,8 @@ public class BossController : MonoBehaviour
 
             else if (BossCurrentHealth > BossMaxHealth * 0.50f && BossCurrentHealth <= BossMaxHealth * 0.70f)
             {
-                int attackcase = UnityEngine.Random.Range(0,3);
+                int attackcase = UnityEngine.Random.Range(0,4);
+                Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
@@ -244,7 +259,8 @@ public class BossController : MonoBehaviour
 
             else if (BossCurrentHealth > BossMaxHealth * 0.25f && BossCurrentHealth <= BossMaxHealth * 0.50f)
             {
-                int attackcase = UnityEngine.Random.Range(0,1);
+                int attackcase = UnityEngine.Random.Range(0,2);
+                Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
@@ -258,7 +274,8 @@ public class BossController : MonoBehaviour
 
             else if (BossCurrentHealth > 0f && BossCurrentHealth <= BossMaxHealth * 0.25f)
             {
-                int attackcase = UnityEngine.Random.Range(0,2);
+                int attackcase = UnityEngine.Random.Range(0,3);
+                Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
@@ -275,11 +292,11 @@ public class BossController : MonoBehaviour
 
             else if (BossCurrentHealth <= 0f)
             {
-                Debug.Log("Boss Destroyed. Unaable to Select Attack");
+                Debug.Log("Boss Destroyed. Unable to Select Attack");
             }
         }
 
-        else return;
+        _attackselected = true;
     }
 
     public void ResetAttackFlags()
@@ -291,6 +308,7 @@ public class BossController : MonoBehaviour
         _doRambo = false;
         _doSpine = false;
         _doBackshot = false;
+        _attackselected = false;
     }
     #endregion
 

@@ -244,6 +244,61 @@ MonoBehaviour:
   projectilePrefab: {fileID: 5974040554169218931, guid: f850212146bd5bb448ee8291d79bf9de,
     type: 3}
   initialSize: 10
+--- !u!1 &2297057499575487454
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5425289632923216451}
+  - component: {fileID: 2651223342378344489}
+  m_Layer: 8
+  m_Name: BossHitBox
+  m_TagString: BossHitBox
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5425289632923216451
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297057499575487454}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0, y: 1.2, z: 1.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8053245662887250320}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!136 &2651223342378344489
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2297057499575487454}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2
+  m_Direction: 1
+  m_Center: {x: 0, y: 0, z: 0}
 --- !u!1 &2435295351538402662
 GameObject:
   m_ObjectHideFlags: 0
@@ -921,6 +976,7 @@ GameObject:
   - component: {fileID: 949043510767115359}
   - component: {fileID: 1724280267186227818}
   - component: {fileID: 2473155472876638973}
+  - component: {fileID: 2439003061889665207}
   m_Layer: 8
   m_Name: Boss
   m_TagString: Boss
@@ -936,13 +992,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5689274060540543715}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.743488, y: 4, z: -7.415527}
   m_LocalScale: {x: 0.9667929, y: 1, z: 1.0025848}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8057501658784837612}
   - {fileID: 6614124399131995161}
+  - {fileID: 5425289632923216451}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &6711818729052139727
@@ -1030,10 +1087,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa944771a8205d4a86237926fd3dd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponManager: {fileID: 4715263503292837539}
-  BossStatusSO: {fileID: 11400000, guid: 9dff3d644b223274f96bdbef02336c5a, type: 2}
-  shootingRange: 100
-  aimOffset: 0
+  _player: {fileID: 0}
+  _bossparam: {fileID: 0}
+  _statusManager: {fileID: 0}
+  _doMiniperi: 0
+  _doRocketperi: 0
+  _doMinisweep: 0
+  _doRocketsweep: 0
+  _doRambo: 0
+  _doSpine: 0
+  _doBackshot: 0
+  _isLocked: 0
+  _attackselected: 0
   _waypoints:
   - {fileID: 0}
   - {fileID: 0}
@@ -1044,6 +1109,12 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  weaponManager: {fileID: 4715263503292837539}
+  BossStatusSO: {fileID: 11400000, guid: 9dff3d644b223274f96bdbef02336c5a, type: 2}
+  shootingRange: 100
+  aimOffset: 0
+  BossMaxHealth: 0
+  BossCurrentHealth: 0
 --- !u!195 &1724280267186227818
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -1085,6 +1156,22 @@ MonoBehaviour:
   weaponManager: {fileID: 4715263503292837539}
   minigun_landedCriticalHit: 0
   rocket_landedCriticalHit: 0
+--- !u!114 &2439003061889665207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5689274060540543715}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0edc812aad348d84594e258382d73939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _Recenter: 5
+  _WhilePattern: 7
+  _BackShot: 7
+  _BackShot_StoppingDistance: 1
 --- !u!1 &6470236472279061847
 GameObject:
   m_ObjectHideFlags: 0

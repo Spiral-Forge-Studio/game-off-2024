@@ -8,6 +8,7 @@ public class NPCProjectileShooter : MonoBehaviour
     public WeaponParameters weaponParameters;
     public NPCWeaponType weaponType;
     public AudioSource _soundsource;
+    public Animator _animator;
 
     [HideInInspector] public int currentammo;
     [HideInInspector] public bool isreloading = false;
@@ -16,6 +17,8 @@ public class NPCProjectileShooter : MonoBehaviour
     [HideInInspector] public float firerate;
     [HideInInspector] public float lifetime;
     [HideInInspector] public float bulletspeed;
+
+    
 
     private void Start()
     {
@@ -26,6 +29,17 @@ public class NPCProjectileShooter : MonoBehaviour
     {
         weaponParameters = GetComponentInParent<WeaponParameters>();
         _soundsource = GetComponent<AudioSource>();
+
+        switch (weaponType)
+        {
+            case NPCWeaponType.Shotgun:
+                _animator = GameObject.Find("Enemy_ShotgunV5").GetComponent<Animator>();
+                break;
+            case NPCWeaponType.Rifle:
+                _animator = GameObject.Find("Enemy_RifleV3").GetComponent<Animator>();
+                break;
+        }
+        
         
         SetUpWeapon();
     }
@@ -51,10 +65,11 @@ public class NPCProjectileShooter : MonoBehaviour
     {
         if (isreloading == false)
         {
+            _animator.SetTrigger("Shoot");
 
             if (weaponType == NPCWeaponType.Shotgun)
             {
-                AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobShotgunFire, 0, true);
+                //AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobShotgunFire, 0, true);
                 // Spread angle for the shotgun (adjust in WeaponParameters for fine-tuning)
                 float spreadAngle = weaponParameters.shotgunspreadangle; // e.g., 10 degrees
 
@@ -76,9 +91,21 @@ public class NPCProjectileShooter : MonoBehaviour
                 }
             }
 
-            else 
+            else  if (weaponType == NPCWeaponType.Rifle)
             {
-                AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobRifleFire, 0, true);
+                //AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobRifleFire, 0, true);
+                GameObject projectile = poolingScript.GetProjectile();
+                projectile.transform.position = transform.position;
+                projectile.transform.LookAt(targetPosition);
+
+                // Initialize projectile based on weapon type and parameters
+                NPCProjectile projectileScript = projectile.GetComponentInParent<NPCProjectile>();
+                if (projectileScript == null) { Debug.LogError("Projectile not found"); }
+                projectileScript.Initialize(weaponType, weaponParameters, poolingScript);
+            }
+
+            else if (weaponType == NPCWeaponType.Rocket)
+            {
                 GameObject projectile = poolingScript.GetProjectile();
                 projectile.transform.position = transform.position;
                 projectile.transform.LookAt(targetPosition);
@@ -101,7 +128,7 @@ public class NPCProjectileShooter : MonoBehaviour
         yield return new WaitForSeconds(reloadtime);
         SetUpWeapon();
         isreloading = false;
-        //Debug.Log("Reload Complete");
+        _animator.ResetTrigger("Shoot");
     }
 
     private void SetUpWeapon()
