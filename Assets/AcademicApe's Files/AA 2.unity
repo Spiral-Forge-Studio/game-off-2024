@@ -1182,7 +1182,7 @@ GameObject:
   - component: {fileID: 1268903677}
   m_Layer: 0
   m_Name: Sample Boss Platform
-  m_TagString: Untagged
+  m_TagString: BossPlatform
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1719,6 +1719,11 @@ PrefabInstance:
       objectReference: {fileID: 68620418}
     - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
+      propertyPath: _doMinisweep
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 949043510767115359, guid: 3132b719c2a93024eb9e1565ae32c016,
+        type: 3}
       propertyPath: _waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 2443634}
@@ -1762,6 +1767,11 @@ PrefabInstance:
       propertyPath: _waypoints.Array.data[8]
       value: 
       objectReference: {fileID: 227983084}
+    - target: {fileID: 2439003061889665207, guid: 3132b719c2a93024eb9e1565ae32c016,
+        type: 3}
+      propertyPath: _WhilePattern
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 2473155472876638973, guid: 3132b719c2a93024eb9e1565ae32c016,
         type: 3}
       propertyPath: BossKCC
@@ -2928,7 +2938,7 @@ PrefabInstance:
     - target: {fileID: 5954302786113817124, guid: fb3423213058efe44b974736d8bb97a1,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5954302786113817124, guid: fb3423213058efe44b974736d8bb97a1,
         type: 3}

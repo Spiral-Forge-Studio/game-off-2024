@@ -12,6 +12,7 @@ TagManager:
   - BossMinigun
   - BossRocket
   - BossHitBox
+  - BossPlatform
   layers:
   - Default
   - TransparentFX

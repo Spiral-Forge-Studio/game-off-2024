@@ -166,7 +166,8 @@ public class BossController : MonoBehaviour
         _doMiniperi = false;
         _doRocketperi = false;
         _doRambo = false;
-        _doSpine = true;
+        _doSpine = false;
+        _doMinisweep = true;
     }
 
     private void OnBossDestroy()
@@ -205,6 +206,14 @@ public class BossController : MonoBehaviour
         weaponManager.SetInputs(ref aiInputsForShooting);
     }
 
+    public void HoldShootMinigunAt(Vector3 Tobeshot, float firerate)
+    {
+        for (int i = 0; i < firerate; i++) {
+            ShootMinigunAt(Tobeshot);
+        }
+        
+    }
+
     public void BackShotAt(Vector3 Tobeshot, int Amount)
     {
         if (Time.time - timer > 1/BossStatusSO.RocketReleaseFireRate)
@@ -221,7 +230,7 @@ public class BossController : MonoBehaviour
     {
         if (!_isLocked && !_attackselected)
         {
-            if (BossCurrentHealth > BossMaxHealth * 0.70f)
+            if (BossCurrentHealth < BossMaxHealth * 0.70f)// return to >
             {
                 int attackcase = UnityEngine.Random.Range(0,2);
                 Debug.Log(attackcase);
@@ -236,9 +245,10 @@ public class BossController : MonoBehaviour
                 }
             }
 
-            else if (BossCurrentHealth > BossMaxHealth * 0.50f && BossCurrentHealth <= BossMaxHealth * 0.70f)
+            else if (BossCurrentHealth > BossMaxHealth * 0.50f || BossCurrentHealth <= BossMaxHealth * 0.70f)//return to &&
             {
                 int attackcase = UnityEngine.Random.Range(0,4);
+                attackcase = 0;
                 Debug.Log(attackcase);
                 switch (attackcase)
                 {
