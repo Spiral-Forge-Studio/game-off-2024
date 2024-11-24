@@ -38,6 +38,9 @@ public class NPCProjectileShooter : MonoBehaviour
             case NPCWeaponType.Rifle:
                 _animator = GameObject.Find("Enemy_RifleV3").GetComponent<Animator>();
                 break;
+            case NPCWeaponType.Rocket:
+                _animator = GameObject.Find("Enemy_CannonV3(NEW)").GetComponent<Animator>();
+                break;
         }
         
         
