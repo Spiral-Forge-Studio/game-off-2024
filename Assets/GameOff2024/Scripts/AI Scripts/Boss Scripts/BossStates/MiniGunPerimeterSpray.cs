@@ -8,7 +8,7 @@ public class MiniGunPerimeterSpray : IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
-
+    private Transform BossPlatform;
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
@@ -25,6 +25,16 @@ public class MiniGunPerimeterSpray : IState
         _boss._isLocked = true;
         _isComplete = false;
         _agent.speed = _parameters._WhilePattern;
+        
+        GameObject bossPlatformObject = GameObject.FindWithTag("BossPlatform");
+        if (bossPlatformObject != null)
+        {
+            BossPlatform = bossPlatformObject.transform;
+        }
+        else
+        {
+            Debug.LogWarning("No GameObject with tag 'BossPlatform' was found!");
+        }
         _boss.StartCoroutine(ExecuteMiniPeri());
     }
 
@@ -39,6 +49,7 @@ public class MiniGunPerimeterSpray : IState
 
             while (_agent.remainingDistance > _agent.stoppingDistance)
             {
+                _boss.ShootMinigunAt(BossPlatform.position);
                 yield return null;
             }
 
