@@ -17,6 +17,8 @@ public class BossController : MonoBehaviour
 
     private PlayerDetector _playerDetector;
 
+    [SerializeField] private GameObject BOSS;
+
     [SerializeField] private PlayerKCC _player;
 
     [Header ("Boss Agent Movement Parameters")]
@@ -118,6 +120,7 @@ public class BossController : MonoBehaviour
         //Get Boss Health
         BossMaxHealth = _statusManager.GetCurrentMaxHealth();
         BossCurrentHealth = _statusManager.GetCurrentHealth();
+        OnBossDestroy();
 
         //DoMiniSweep();
         
@@ -160,6 +163,15 @@ public class BossController : MonoBehaviour
         _doRocketperi = false;
         _doRambo = false;
         _doSpine = true;
+    }
+
+    private void OnBossDestroy()
+    {
+     if(BossCurrentHealth <= 0)
+        {
+            BOSS.SetActive(false);
+            Debug.Log("Boss Destroyed");
+        }   
     }
 
     #region ---Shooting Mechanism Related---
