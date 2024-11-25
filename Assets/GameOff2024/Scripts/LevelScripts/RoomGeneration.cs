@@ -27,8 +27,12 @@ public class DungeonGenerator : MonoBehaviour
             {
                 ConnectedRooms.Add(otherRoom.Id);
                 otherRoom.ConnectedRooms.Add(Id); // Ensure bidirectional connection
+
+                Debug.Log($"Room {Id} ({Type}) connected to Room {otherRoom.Id} ({otherRoom.Type})");
             }
         }
+
+
     }
 
     public int roomCount = 10;
@@ -106,30 +110,22 @@ public class DungeonGenerator : MonoBehaviour
 
     }
 
+
     private void RenderDungeon()
     {
-        float roomSpacing = 20f; // Minimum spacing between rooms
-        float floorHeight = 0f; // All rooms are at this height
-        Dictionary<int, Vector3> roomPositions = new Dictionary<int, Vector3>(); // Track room positions
-        HashSet<Vector3> occupiedPositions = new HashSet<Vector3>(); // Track used positions
+        float roomSpacing = 100f; // Distance between rooms in the grid
+        float floorHeight = 0f; // All rooms are at the same height
+        int gridColumns = 4; // Number of columns in the grid
+        Dictionary<int, Vector3> roomPositions = new Dictionary<int, Vector3>();
 
-        // First pass: Place all rooms and store their positions
+        // Place rooms in a grid layout
         for (int i = 0; i < dungeon.Count; i++)
         {
-            Vector3 position;
+            int row = i / gridColumns; // Determine row
+            int column = i % gridColumns; // Determine column
 
-            // Ensure no overlap by generating positions until one is free
-            do
-            {
-                position = new Vector3(
-                    UnityEngine.Random.Range(-5, 5) * roomSpacing,
-                    floorHeight,
-                    UnityEngine.Random.Range(-5, 5) * roomSpacing
-                );
-            } while (occupiedPositions.Contains(position));
-
-            occupiedPositions.Add(position); // Mark this position as occupied
-            roomPositions[i] = position; // Save position for this room
+            Vector3 position = new Vector3(column * roomSpacing, floorHeight, row * roomSpacing); // Calculate grid position
+            roomPositions[i] = position;
 
             // Instantiate the correct prefab
             GameObject roomPrefab = dungeon[i].Type switch
@@ -139,7 +135,7 @@ public class DungeonGenerator : MonoBehaviour
                 _ => uniqueRoomPrefabs.Count > 0 ? uniqueRoomPrefabs[0] : defaultRoomPrefab,
             };
 
-            if (dungeon[i].Type != "Start" && dungeon[i].Type != "Boss")
+            if (dungeon[i].Type != "Start" && dungeon[i].Type != "Boss" && uniqueRoomPrefabs.Count > 0)
             {
                 uniqueRoomPrefabs.RemoveAt(0); // Use and remove prefab
             }
@@ -155,7 +151,7 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        // Second pass: Draw connections using Debug.DrawLine
+        // Draw connections and log connections
         foreach (Room room in dungeon)
         {
             Vector3 roomPosition = roomPositions[room.Id];
@@ -164,15 +160,19 @@ public class DungeonGenerator : MonoBehaviour
                 if (roomPositions.ContainsKey(connectedRoomId))
                 {
                     Vector3 connectedRoomPosition = roomPositions[connectedRoomId];
-                    Debug.DrawLine(roomPosition, connectedRoomPosition, Color.red, 100f); // Red line visible for 10 seconds
-                }
-                else
-                {
-                    Debug.LogWarning($"Room {room.Id} references a non-existent room {connectedRoomId}");
+
+                    // Debug.DrawLine to visualize connections
+                    Debug.DrawLine(roomPosition, connectedRoomPosition, Color.green, 1000f);
+
+                    // Debug.Log for tracking connections
+                    Debug.Log($"Room {room.Id} connects to Room {connectedRoomId}");
                 }
             }
         }
     }
+
+
+
 
 
     private void ShuffleList<T>(List<T> list)
@@ -185,6 +185,7 @@ public class DungeonGenerator : MonoBehaviour
             list[randomIndex] = temp;
         }
     }
+
     private void OnRoomVisited(Room room)
     {
         if (room.IsVisited)

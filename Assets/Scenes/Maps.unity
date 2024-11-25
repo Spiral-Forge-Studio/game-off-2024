@@ -284,7 +284,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 469dc80b3ec3a954fa9d361f0de532df, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  roomCount: 12
+  roomCount: 10
   startRoomPrefab: {fileID: 5404491850618832485, guid: 53b69903c83d95843bc35e34224634d4,
     type: 3}
   bossRoomPrefab: {fileID: 5167195408827501112, guid: fd073c381031b6f4793d96a928476281,
