@@ -1,0 +1,42 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b820967904ae18949b49837f33348730, type: 3}
+  m_Name: BossStatusSO
+  m_EditorClassIdentifier: 
+  baseHealth: 100
+  baseShield: 20
+  baseShieldRegenAmount: 1
+  baseShieldBreakRecoveryDelay: 2
+  baseShieldRegenTickInterval: 1
+  baseDamageReduction: 0.1
+  baseMoveSpeed: 5
+  baseDashCooldown: 0.1
+  b_MinigunDamage: 5
+  b_MinigunCritRate: 0.5
+  b_MinigunCritDamage: 1.5
+  b_MinigunFireRate: 10
+  b_MinigunReloadTime: 1
+  b_MinigunMagazineSize: 100
+  b_MinigunProjectileLifetime: 2
+  b_MinigunProjectileSpeed: 10
+  b_minigunDeviationAngle: 10
+  b_RocketDamage: 20
+  b_RocketCritRate: 0
+  b_RocketCritDamage: 1.5
+  b_RocketFireRate: 3
+  b_RocketReloadTime: 1
+  b_RocketMagazineSize: 5
+  b_RocketProjectileLifetime: 10
+  b_RocketProjectileSpeed: 5
+  b_RocketExplosionRadius: 5
+  b_RocketHoldDuration: 0
+  b_RocketReleaseFirerate: 1

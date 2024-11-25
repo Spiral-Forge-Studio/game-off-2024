@@ -61,7 +61,8 @@ namespace KinematicCharacterController
 
         [Header("[DO NOT REMOVE]")]
         public KinematicCharacterMotor Motor;
-        public Animator _animator;
+        public Transform _upperBodyTransform;
+        public Animator _lowerBodyAnim;
 
 
         [Header("State Machine")]
@@ -125,9 +126,8 @@ namespace KinematicCharacterController
 
         [Header("Animation Logic Helper Variables")]
 
-        public readonly int STANDING_IDLE = Animator.StringToHash("Standing Idle");
-        public readonly int RUNNING = Animator.StringToHash("Running");
-        public readonly int JOGGING = Animator.StringToHash("Jogging");
+        public readonly int IDLE = Animator.StringToHash("Idle");
+        public readonly int WALKING = Animator.StringToHash("Walking");
 
 
         #endregion
@@ -139,25 +139,18 @@ namespace KinematicCharacterController
             _currentState = _states.Grounded();
             _currentState.EnterStates();
 
-            // ----------------------------------- //
-
-            _animator = GetComponent<Animator>();
-
-            // ----------------------------------- /
-
             newPlayerAction = EPlayerLocomotion.None;
 
             // Assign the characterController to the motor
             Motor.CharacterController = this;
         }
-
+        public PlayerStatusSO playerStats;
         private void Start()
         {
             Motor.SetCapsuleCollisionsActivation(true);
 
             _originalCapsuleHeight = Motor.Capsule.height;
             _originalCapsuleRadius = Motor.Capsule.radius;
-
             AudioManager.instance.SetMusicAndUIAudioSourcesToPlayerPosition(transform);
         }
 

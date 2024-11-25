@@ -17,7 +17,7 @@ public class PlayerMovementAbilityState : PlayerBaseState
 
     public override void EnterState()
     {
-        Debug.Log("Enter Movement Ability State");
+        //Debug.Log("Enter Movement Ability State");
 
         _dashStartTime = Time.time;
         _ctx._isUsingMovementAbility = true;

@@ -19,10 +19,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void EnterState()
     {
-
-        //_ctx._animator.CrossFadeInFixedTime(_ctx.STANDING_IDLE, 0.1f);
-
-        // Debug.Log("Enter Idle State");
+        _ctx._lowerBodyAnim.CrossFadeInFixedTime(_ctx.IDLE, 0.2f);
     }
 
     public override void ExitState()

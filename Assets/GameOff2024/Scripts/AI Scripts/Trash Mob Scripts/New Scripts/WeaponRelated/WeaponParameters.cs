@@ -23,6 +23,7 @@ public class WeaponParameters : MonoBehaviour
     public float riflereload = 5f; // Reload Time
     public float riflefirerate = 1f; //Time Between Shots
     public int riflemagazinesize = 10; // Pool Size, goes to reload after reaching 0
+    public float riflerange = 10f;
 
     [Header("Shotgun Parameters")]
     public float shotgundamage = 10f;
@@ -32,6 +33,7 @@ public class WeaponParameters : MonoBehaviour
     public float shotgunfirerate = 1.5f;
     public int shotgunmagazinesize = 3;
     public float shotgunspreadangle = 2f;
+    public float shotgunrange = 5f;
 
     [Header("Rocket Parameters")]
     public float rocketdamage = 20f;
@@ -41,6 +43,7 @@ public class WeaponParameters : MonoBehaviour
     public float rocketfirerate = 1f;
     public int rocketmagazinesize = 3;
     public float rocketAOE = 3f;
+    public float rocketrange = 15f;
 
 }
 

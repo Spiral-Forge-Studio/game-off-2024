@@ -18,21 +18,30 @@ public class TrashMob : MonoBehaviour
     //Shooting related
     private NPCProjectileShooter _poolshooter;
 
+    //Set NPC Weapon Type
+    [SerializeField] private NPCWeaponType _weaponType;
+    [SerializeField] private WeaponParameters _weaponparam;
+
+    [SerializeField] private Animator _animator;
 
     private void Awake()
     {
         _parameters = GetComponent<TrashMobParameters>();
+        _animator = GetComponentInChildren<Animator>();
         _agent = GetComponent<NavMeshAgent>();
         _poolshooter = GetComponentInChildren<NPCProjectileShooter>();
+        _weaponparam = GetComponentInChildren<WeaponParameters>();  
         if(_poolshooter == null) { Debug.LogWarning("Shooter not referenced"); }
+        if (_weaponparam == null) { Debug.LogWarning("Shooter not referenced"); }
 
         var playerdetector = GetComponentInChildren<PlayerDetector>();
 
         _statemachine = new StateMachine();
 
         var idle = new IdleState(this, _agent, _parameters);
-        var combat = new CombatState(this, _agent, _parameters);
-        var shoot = new ShootState(this, _agent, _poolshooter);
+        var combat = new CombatState(this, _agent, _parameters, _weaponType, _weaponparam);
+        var shoot = new ShootState(this, _agent, _poolshooter, _animator);
+
 
 
         //Idle -> Combat
@@ -51,10 +60,8 @@ public class TrashMob : MonoBehaviour
 
     private void Update() 
     {   
+        _animator.SetFloat("AI Speed", _agent.velocity.magnitude);
         _statemachine.Tick();
     }
-
-
-
 
 }
