@@ -23,7 +23,7 @@ MonoBehaviour:
   b_MinigunDamage: 5
   b_MinigunCritRate: 0.5
   b_MinigunCritDamage: 1.5
-  b_MinigunFireRate: 20.32
+  b_MinigunFireRate: 10
   b_MinigunReloadTime: 1
   b_MinigunMagazineSize: 100
   b_MinigunProjectileLifetime: 2

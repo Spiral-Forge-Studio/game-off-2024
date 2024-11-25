@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,7 +9,12 @@ public class MiniGunSweep : IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
-
+    Vector3 tobeshot;
+    Vector3 start;
+    Vector3 end;
+    int startindex;
+    int endindex;
+    bool shootingaboutxaxis;
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
@@ -32,40 +38,74 @@ public class MiniGunSweep : IState
 
     private IEnumerator ExecuteMiniSweep()
     {
-        // Waypoints represent the corners in order: top-left, top-right, bottom-right, bottom-left
-        int[] waypoints = { 2, 3, 6, 5 };
-        List<Vector3> shootingPoints = new List<Vector3>();
-
-        // Number of divisions for each edge
-        //int pointsPerEdge = Mathf.RoundToInt(_boss.BossStatusSO.MinigunFireRate); // Adjust for more or fewer points along the edges
-        int pointsPerEdge = Mathf.RoundToInt(10 * _boss.BossStatusSO.MinigunFireRate);
-
-        // Loop through each edge and calculate intermediate points
-        for (int i = 0; i < waypoints.Length; i++)
+        // Waypoints represent the corners in order: top-left, top-right, bottom-right, bottom-left, top-left
+        int[] waypoints = { 2, 3, 6, 5 , 2};
+        for (int i = 0; i < waypoints.Length-1; i++)
         {
-            Vector3 start = _boss._waypoints[waypoints[i]].transform.position;
-            Vector3 end = _boss._waypoints[waypoints[(i + 1) % waypoints.Length]].transform.position; // Wrap around to first waypoint
-
-            for (int j = 0; j <= pointsPerEdge; j++) // Include both start and end points
+            startindex = waypoints[i];
+            endindex = waypoints[i+1];
+            start = _boss._waypoints[startindex].transform.position;
+            end = _boss._waypoints[endindex].transform.position;
+            
+            tobeshot = start;
+            // if two points are on the same x axis
+            if (start.x == end.x)
             {
-                float t = (float)j / pointsPerEdge; // Interpolation factor
-                Vector3 point = Vector3.Lerp(start, end, t);
-                shootingPoints.Add(point);
+                shootingaboutxaxis = false;
+            }
+            // if two points are on the same z axis
+            if (start.z == end.z)
+            {
+                shootingaboutxaxis = true;
+            }
 
+            if (shootingaboutxaxis == true)
+            {
+                if (start.x > end.x)
+                {
+                    
+                    while (tobeshot.x > end.x)
+                    {
+                        tobeshot.x--;
+                        _boss.ShootMinigunAt(tobeshot);
+                        yield return new WaitForSeconds(1f / _boss.BossStatusSO.MinigunFireRate);
+                    }
+                }
+                else
+                {
+                    while (tobeshot.x < end.x)
+                    {
+                        tobeshot.x++;
+                        _boss.ShootMinigunAt(tobeshot);
+                        yield return new WaitForSeconds(1f / _boss.BossStatusSO.MinigunFireRate);
+                    }
+                }
+            }
+            else
+            {
+                if (start.z > end.z)
+                {
+                    while (tobeshot.z > end.z)
+                    {
+                        tobeshot.z--;
+                        _boss.ShootMinigunAt(tobeshot);
+
+                        yield return new WaitForSeconds(1f / _boss.BossStatusSO.MinigunFireRate);
+                    }
+                }
+                else
+                {
+                    while (tobeshot.z < end.z)
+                    {
+                        tobeshot.z++;
+                        _boss.ShootMinigunAt(tobeshot);
+                        yield return new WaitForSeconds(1f / _boss.BossStatusSO.MinigunFireRate);
+                    }
+                }
             }
             
         }
-        
-        // Shoot at all calculated points
-        foreach (Vector3 point in shootingPoints)
-        {
-            _boss.ShootMinigunAt(point);
-            yield return null;
-
-        }
-        //shootingPoints.Clear();
         yield return new WaitForSeconds(0.5f); // Simulate attack delay
-
         _isComplete = true; // Mark state as complete
     }
 

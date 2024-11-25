@@ -167,7 +167,8 @@ public class BossController : MonoBehaviour
         _doRocketperi = false;
         _doRambo = false;
         _doSpine = false;
-        _doMinisweep = true;
+        _doMinisweep = false;
+        _doRocketsweep = true;
     }
 
     private void OnBossDestroy()
@@ -182,6 +183,7 @@ public class BossController : MonoBehaviour
     #region ---Shooting Mechanism Related---
     public void ShootMinigunAt(Vector3 Tobeshot)
     {
+        //Debug.Log("shootingat" + Tobeshot);
         BossCombatInputs aiInputsForShooting = new BossCombatInputs
         {
             LeftShoot = true, // Simulate minigun shooting
@@ -230,7 +232,7 @@ public class BossController : MonoBehaviour
     {
         if (!_isLocked && !_attackselected)
         {
-            if (BossCurrentHealth < BossMaxHealth * 0.70f)// return to >
+            if (BossCurrentHealth > BossMaxHealth * 0.70f)
             {
                 int attackcase = UnityEngine.Random.Range(0,2);
                 Debug.Log(attackcase);
@@ -245,10 +247,9 @@ public class BossController : MonoBehaviour
                 }
             }
 
-            else if (BossCurrentHealth > BossMaxHealth * 0.50f || BossCurrentHealth <= BossMaxHealth * 0.70f)//return to &&
+            else if (BossCurrentHealth > BossMaxHealth * 0.50f && BossCurrentHealth <= BossMaxHealth * 0.70f)
             {
                 int attackcase = UnityEngine.Random.Range(0,4);
-                attackcase = 0;
                 Debug.Log(attackcase);
                 switch (attackcase)
                 {
