@@ -141,10 +141,6 @@ public class BossController : MonoBehaviour
                 return;
             }
         }
-        if (_statusManager.shieldBroken)
-        {
-            DoMiniSweep();
-        }
         Vector3 aimPosition = playerTransform.position;
         //ShootMinigunAt(aimPosition);
         //ShootRocketAt(aimPosition);
