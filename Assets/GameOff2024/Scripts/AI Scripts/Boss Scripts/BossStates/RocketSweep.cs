@@ -40,13 +40,13 @@ public class RocketSweep :IState
     {
         int skipcounter = 5;
         // Waypoints represent the corners in order: top-left, top-right, bottom-right, bottom-left, top-left
-        int[] waypoints = { 2, 3, 6, 5, 2 };
+        int[] waypoints = { 1, 2, 4, 3, 1 };
         for (int i = 0; i < waypoints.Length - 1; i++)
         {
             startindex = waypoints[i];
             endindex = waypoints[i + 1];
-            start = _boss._waypoints[startindex].transform.position;
-            end = _boss._waypoints[endindex].transform.position;
+            start = _boss._shootpoints[startindex].transform.position;
+            end = _boss._shootpoints[endindex].transform.position;
 
             tobeshot = start;
             // if two points are on the same x axis
