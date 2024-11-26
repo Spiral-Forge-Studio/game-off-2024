@@ -43,6 +43,7 @@ public class BossController : MonoBehaviour
     [SerializeField] public bool _attackselected = false;
 
     [SerializeField] public List<GameObject> _waypoints = new List<GameObject>();
+    [SerializeField] public List<GameObject> _shootpoints = new List<GameObject>();
     public BossWeaponManager weaponManager;
     public BossStatusSO BossStatusSO;
     private Transform playerTransform;
@@ -149,7 +150,7 @@ public class BossController : MonoBehaviour
 
 
 
-        SelectAttack();
+        //SelectAttack();
 
     }
 
