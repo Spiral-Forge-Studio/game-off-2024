@@ -152,7 +152,7 @@ public class BossController : MonoBehaviour
         //BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
 
 
-        SelectAttack();
+        //SelectAttack();
     }
 
     public void MoveToCenter()
