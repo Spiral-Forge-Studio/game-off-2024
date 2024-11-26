@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BossStatusSO
   m_EditorClassIdentifier: 
   baseHealth: 100
-  baseShield: 20
+  baseShield: 50
   baseShieldRegenAmount: 1
-  baseShieldBreakRecoveryDelay: 2
+  baseShieldBreakRecoveryDelay: 10
   baseShieldRegenTickInterval: 1
   baseDamageReduction: 0.1
   baseMoveSpeed: 5

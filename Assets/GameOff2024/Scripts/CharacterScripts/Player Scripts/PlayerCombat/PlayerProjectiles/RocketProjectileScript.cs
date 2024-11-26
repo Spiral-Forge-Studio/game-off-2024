@@ -43,7 +43,7 @@ public class RocketProjectileScript : Projectile
     private float explosionRadius;
     private Vector3 targetPos;
     private bool isCriticalHit;
-
+    private BossStatusManager StatusManager;
     // lifetime logic variables
     private float startTime;
     private bool returningToPool;
@@ -57,7 +57,7 @@ public class RocketProjectileScript : Projectile
     {
         AudioManager.instance.PlaySFX(audioSource, EGameplaySFX.RocketFire, 1);
         base.OnEnable();
-
+        StatusManager = FindAnyObjectByType<BossStatusManager>();
         returningToPool = false;
         startTime = Time.time;
     }
@@ -96,6 +96,13 @@ public class RocketProjectileScript : Projectile
 
     private void OnTriggerEnter(Collider other)
     {
+        Debug.Log("Collided with " + other.gameObject);
+        if (other.gameObject.tag == "BossHitBox")
+        {
+
+            StatusManager.TakeDamage(damage);
+
+        }
         GameObject explosion = Instantiate(rocketExplosionPrefab, transform.position, Quaternion.identity);
         RocketExplosionScript explosionScript = explosion.GetComponent<RocketExplosionScript>();
         explosionScript.damage = damage;

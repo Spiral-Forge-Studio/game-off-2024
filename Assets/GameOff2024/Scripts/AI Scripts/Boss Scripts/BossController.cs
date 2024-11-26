@@ -24,7 +24,7 @@ public class BossController : MonoBehaviour
     [Header ("Boss Agent Movement Parameters")]
     [SerializeField] private BossAgentParameters _bossparam;
     [Header ("Boss Status Manager")]
-    [SerializeField] private BossStatusManager _statusManager;
+    [SerializeField] public BossStatusManager _statusManager;
 
     #region ---Attack Flags---
     [Header("Attack Pattern Flags")]
@@ -123,52 +123,12 @@ public class BossController : MonoBehaviour
         OnBossDestroy();
 
         //DoMiniSweep();
-        
-        
-
-
-        //Weapon pew pew you gotta put in states
-        // Get player transform if not already assigned
-        if (playerTransform == null)
-        {
-            GameObject player = GameObject.FindGameObjectWithTag("Player");
-            if (player != null)
-            {
-                playerTransform = player.transform;
-            }
-            else
-            {
-                Debug.LogWarning("Player not found!");
-                return;
-            }
-        }
-        if (_statusManager.shieldBroken)
-        {
-            DoMiniSweep();
-        }
-        Vector3 aimPosition = playerTransform.position;
-        //ShootMinigunAt(aimPosition);
-        //ShootRocketAt(aimPosition);
-        //BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
-
-
         SelectAttack();
     }
 
     public void MoveToCenter()
     {
         _agent.SetDestination(_waypoints[0].transform.position);
-    }
-
-    //Remove Later
-    public void DoMiniSweep()
-    {
-        _doMiniperi = false;
-        _doRocketperi = false;
-        _doRambo = false;
-        _doSpine = false;
-        _doMinisweep = false;
-        _doRocketsweep = true;
     }
 
     private void OnBossDestroy()
@@ -234,8 +194,9 @@ public class BossController : MonoBehaviour
         {
             if (BossCurrentHealth > BossMaxHealth * 0.70f)
             {
+                Debug.Log("Boss in Phase 1");
                 int attackcase = UnityEngine.Random.Range(0,2);
-                Debug.Log(attackcase);
+                //Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
@@ -249,8 +210,9 @@ public class BossController : MonoBehaviour
 
             else if (BossCurrentHealth > BossMaxHealth * 0.50f && BossCurrentHealth <= BossMaxHealth * 0.70f)
             {
+                Debug.Log("Boss in Phase 2");
                 int attackcase = UnityEngine.Random.Range(0,4);
-                Debug.Log(attackcase);
+                //Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
@@ -270,8 +232,9 @@ public class BossController : MonoBehaviour
 
             else if (BossCurrentHealth > BossMaxHealth * 0.25f && BossCurrentHealth <= BossMaxHealth * 0.50f)
             {
+                Debug.Log("Boss in Phase 3");
                 int attackcase = UnityEngine.Random.Range(0,2);
-                Debug.Log(attackcase);
+                //Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
@@ -285,8 +248,10 @@ public class BossController : MonoBehaviour
 
             else if (BossCurrentHealth > 0f && BossCurrentHealth <= BossMaxHealth * 0.25f)
             {
+                Debug.Log("Boss in Phase 4");
                 int attackcase = UnityEngine.Random.Range(0,3);
-                Debug.Log(attackcase);
+                attackcase = 0;
+                //Debug.Log(attackcase);
                 switch (attackcase)
                 {
                     case 0:
