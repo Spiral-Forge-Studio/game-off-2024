@@ -2,7 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class MobSpawner : MonoBehaviour
+
+
+
+public class MobSpawnerOld : MonoBehaviour
+
 {
     [SerializeField] private List<Enemy> _enemyList = new List<Enemy>();
     [SerializeField] private List<GameObject> _enemywave = new List<GameObject>();

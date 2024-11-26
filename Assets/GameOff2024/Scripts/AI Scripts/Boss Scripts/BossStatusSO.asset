@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: BossStatusSO
   m_EditorClassIdentifier: 
   baseHealth: 100
-  baseShield: 20
+  baseShield: 50
   baseShieldRegenAmount: 1
-  baseShieldBreakRecoveryDelay: 2
+  baseShieldBreakRecoveryDelay: 10
   baseShieldRegenTickInterval: 1
   baseDamageReduction: 0.1
   baseMoveSpeed: 5
@@ -26,17 +26,17 @@ MonoBehaviour:
   b_MinigunFireRate: 10
   b_MinigunReloadTime: 1
   b_MinigunMagazineSize: 100
-  b_MinigunProjectileLifetime: 2
+  b_MinigunProjectileLifetime: 5
   b_MinigunProjectileSpeed: 10
   b_minigunDeviationAngle: 10
   b_RocketDamage: 20
   b_RocketCritRate: 0
   b_RocketCritDamage: 1.5
-  b_RocketFireRate: 10
+  b_RocketFireRate: 3
   b_RocketReloadTime: 1
   b_RocketMagazineSize: 5
-  b_RocketProjectileLifetime: 3
-  b_RocketProjectileSpeed: 5
+  b_RocketProjectileLifetime: 10
+  b_RocketProjectileSpeed: 10
   b_RocketExplosionRadius: 5
   b_RocketHoldDuration: 0
   b_RocketReleaseFirerate: 1

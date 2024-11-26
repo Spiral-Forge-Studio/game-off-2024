@@ -9,28 +9,36 @@ public class ShootState : IState
     private PlayerKCC _player;
     private Transform _firepoint;
     private NPCProjectileShooter _projectileShooter;
+    private Animator _animator;
     private readonly TrashMob mob;
     private UnityEngine.AI.NavMeshAgent _agent;
 
 
     [HideInInspector] public Vector3 _playerpos;
     private float rotationSpeed = 3f;
-    public ShootState(TrashMob trashmob, UnityEngine.AI.NavMeshAgent agent, NPCProjectileShooter _shooter)
+    public ShootState(TrashMob trashmob, UnityEngine.AI.NavMeshAgent agent, NPCProjectileShooter _shooter, Animator animator)
     {
         mob = trashmob;
         _agent = agent;
         _projectileShooter = _shooter;
+        _animator = animator;
         //Get WeaponParams
 
     }
 
 
     public void Tick() 
-    { 
+    {
+        //_animator.SetFloat("AI Speed", _agent.velocity.magnitude);
         _playerpos = _player.transform.position; 
         LookAtPlayer(_playerpos);
 
-        _projectileShooter.TryShoot(_playerpos);
+        if (_agent.remainingDistance <= _agent.stoppingDistance) 
+        { 
+            _projectileShooter.TryShoot(_playerpos); 
+        }
+        
+       
         if((_playerpos - _agent.transform.position).magnitude > 15f)
         {
             _agent.SetDestination(_playerpos);
@@ -42,7 +50,7 @@ public class ShootState : IState
     {
         //NavMeshdata
         _agent.enabled = true;
-        _agent.SetDestination(_playerpos);
+        //_agent.SetDestination(_playerpos);
 
         //Get Player data
         GameObject player = GameObject.Find("Player Controller");

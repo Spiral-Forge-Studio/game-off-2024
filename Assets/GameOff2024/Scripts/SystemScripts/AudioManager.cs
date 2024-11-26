@@ -21,6 +21,7 @@ public enum EGameplaySFX
     MobHit,
     MobDie,
     MobWalk,
+    MobRoll,
     MobWindup,
     SuicideMobPrime,
     SuicideMobExplode,
@@ -73,6 +74,7 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] MobDieSFX;
     [SerializeField] private AudioClip[] MobWindupSFX;
     [SerializeField] private AudioClip[] MobWalkSFX;
+    [SerializeField] private AudioClip[] MobRollSFX;
     [SerializeField] private AudioClip[] SuicideMobPrimeSFX;
     [SerializeField] private AudioClip[] SuicideMobExplodeSFX;
     [SerializeField] private AudioClip[] MobShotgunFireSFX;
@@ -118,6 +120,7 @@ public class AudioManager : MonoBehaviour
         GameplaySFXDict.Add(EGameplaySFX.MobDie, MobDieSFX);
         GameplaySFXDict.Add(EGameplaySFX.MobWindup, MobWindupSFX);
         GameplaySFXDict.Add(EGameplaySFX.MobWalk, MobWalkSFX);
+        GameplaySFXDict.Add(EGameplaySFX.MobRoll, MobRollSFX);
         GameplaySFXDict.Add(EGameplaySFX.SuicideMobPrime, SuicideMobPrimeSFX);
         GameplaySFXDict.Add(EGameplaySFX.SuicideMobExplode, SuicideMobExplodeSFX);
         GameplaySFXDict.Add(EGameplaySFX.MobShotgunFire, MobShotgunFireSFX);
