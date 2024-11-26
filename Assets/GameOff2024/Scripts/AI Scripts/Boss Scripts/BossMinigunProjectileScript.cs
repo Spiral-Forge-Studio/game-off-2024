@@ -35,11 +35,13 @@ public class BossMinigunProjectileScript : Projectile
     private UniqueBuffHandler uniqueBuffHandler;
 
     public PlayerStatusManager playerStatusManager;
+    public BossStatusManager bossStatusManager;
 
     protected override void OnEnable()
     {
         base.OnEnable();
         playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
+        bossStatusManager = FindAnyObjectByType<BossStatusManager>();
         returningToPool = false;
         startTime = Time.time;
     }
@@ -49,6 +51,11 @@ public class BossMinigunProjectileScript : Projectile
         transform.position = transform.position + transform.forward * speed * Time.deltaTime;
 
         if (Time.time - startTime > lifetime && returningToPool == false)
+        {
+            returningToPool = true;
+            ReturnToPool();
+        }
+        if (bossStatusManager.GetCurrentHealth() == 0)
         {
             returningToPool = true;
             ReturnToPool();
