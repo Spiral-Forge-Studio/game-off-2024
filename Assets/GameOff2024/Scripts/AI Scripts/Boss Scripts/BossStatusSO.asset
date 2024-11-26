@@ -26,7 +26,7 @@ MonoBehaviour:
   b_MinigunFireRate: 10
   b_MinigunReloadTime: 1
   b_MinigunMagazineSize: 100
-  b_MinigunProjectileLifetime: 2
+  b_MinigunProjectileLifetime: 5
   b_MinigunProjectileSpeed: 10
   b_minigunDeviationAngle: 10
   b_RocketDamage: 20
@@ -36,7 +36,7 @@ MonoBehaviour:
   b_RocketReloadTime: 1
   b_RocketMagazineSize: 5
   b_RocketProjectileLifetime: 10
-  b_RocketProjectileSpeed: 5
+  b_RocketProjectileSpeed: 10
   b_RocketExplosionRadius: 5
   b_RocketHoldDuration: 0
   b_RocketReleaseFirerate: 1

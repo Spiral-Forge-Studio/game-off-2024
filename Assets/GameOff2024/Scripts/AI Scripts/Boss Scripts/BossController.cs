@@ -123,7 +123,38 @@ public class BossController : MonoBehaviour
         OnBossDestroy();
 
         //DoMiniSweep();
+               
+
+
+        //Weapon pew pew you gotta put in states
+        // Get player transform if not already assigned
+        if (playerTransform == null)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag("Player");
+            if (player != null)
+            {
+                playerTransform = player.transform;
+            }
+            else
+            {
+                Debug.LogWarning("Player not found!");
+                return;
+            }
+        }
+        if (_statusManager.shieldBroken)
+        {
+            DoMiniSweep();
+        }
+        Vector3 aimPosition = playerTransform.position;
+        //ShootMinigunAt(aimPosition);
+        //ShootRocketAt(aimPosition);
+        //BackShotAt(aimPosition, BossStatusSO.RocketMagazineSize);
+
+
+
+
         SelectAttack();
+
     }
 
     public void MoveToCenter()

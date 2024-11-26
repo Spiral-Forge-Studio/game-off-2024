@@ -32,7 +32,7 @@ public class BossSpine : IState
 
     private IEnumerator ExecuteSpine()
     {
-        int[] waypoints = { 1,4,0,7,8 };
+        int[] waypoints = {1,4,0,7,10 };
         foreach (int index in waypoints)
         {
             _agent.SetDestination(_boss._waypoints[index].transform.position);
