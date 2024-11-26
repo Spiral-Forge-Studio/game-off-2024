@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class BossRocketProjectileParams : ProjectileParams
@@ -37,6 +38,7 @@ public class BossRocketProjectileParams : ProjectileParams
 public class BossRocketProjectileScript : Projectile
 {
     public PlayerStatusManager playerStatusManager;
+    public BossStatusManager bossStatusManager;
     // Minigun Params
     private float speed;
     private float damage;
@@ -59,6 +61,7 @@ public class BossRocketProjectileScript : Projectile
         AudioManager.instance.PlaySFX(audioSource, EGameplaySFX.RocketFire, 1);
         base.OnEnable();
         playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
+        bossStatusManager = FindAnyObjectByType<BossStatusManager>();  
         returningToPool = false;
         startTime = Time.time;
     }
@@ -68,6 +71,11 @@ public class BossRocketProjectileScript : Projectile
         transform.position = transform.position + transform.forward * speed * Time.deltaTime;
 
         if (Time.time - startTime > lifetime && returningToPool == false)
+        {
+            returningToPool = true;
+            ReturnToPool();
+        }
+        if (bossStatusManager.GetCurrentHealth() == 0)
         {
             returningToPool = true;
             ReturnToPool();

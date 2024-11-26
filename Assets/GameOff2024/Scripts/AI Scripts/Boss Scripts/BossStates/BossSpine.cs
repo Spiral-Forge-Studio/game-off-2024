@@ -54,7 +54,6 @@ public class BossSpine : IState
 
             yield return new WaitForSeconds(0.5f); // Simulate attack delay
         }
-
         _isComplete = true; // Mark state as complete
     }
 }
