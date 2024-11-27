@@ -59,6 +59,10 @@ namespace KinematicCharacterController
     {
         #region --- Variables ---
 
+        [Header("GOD MODE (make sure to turn off after using...)")]
+        public bool _noFalling;
+        [HideInInspector] public bool _preventFalling;
+
         [Header("[DO NOT REMOVE]")]
         public KinematicCharacterMotor Motor;
         public Transform _upperBodyTransform;
@@ -143,6 +147,8 @@ namespace KinematicCharacterController
 
             // Assign the characterController to the motor
             Motor.CharacterController = this;
+
+            _preventFalling = false;
         }
         public PlayerStatusSO playerStats;
         private void Start()

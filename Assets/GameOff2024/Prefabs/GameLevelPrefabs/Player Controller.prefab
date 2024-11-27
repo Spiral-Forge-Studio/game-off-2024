@@ -348,6 +348,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9b2c8a417d5948042b65cd956d687d56, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _noFalling: 0
+  _preventFalling: 0
   Motor: {fileID: 5537482666170751915}
   _upperBodyTransform: {fileID: 0}
   _lowerBodyAnim: {fileID: 4704544023782695206}
