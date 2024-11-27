@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using static TrashMobAI;
 
 
@@ -18,6 +19,10 @@ public class PlayerStatusManager : MonoBehaviour
     public PlayerKCC playerKCC;
     public WeaponManager weaponManager;
     private UniqueBuffHandler uniqueBuffHandler;
+
+    [Header ("Game Over Stuff")]
+    //[SerializeField] private GameObject _playerobject;
+    [SerializeField] private GameObject _gameOverPanel;
 
     private MinigunProjectileParams minigunProjectileParams;
     private RocketProjectileParams rocketProjectileParams;
@@ -99,6 +104,8 @@ public class PlayerStatusManager : MonoBehaviour
             currentShield *= currentShieldMultiplier;
             currentMaxShield = playerStatus.Shield;
         }
+
+        OnPlayerDestroy();
     }
 
 
@@ -314,4 +321,34 @@ public class PlayerStatusManager : MonoBehaviour
     }
 
     #endregion
+
+    private void OnPlayerDestroy()
+    {
+        if (currentHealth <= 0)
+        {
+            Debug.Log("Player Destroyed");
+            ShowGameOverscreen();
+        }
+    }
+
+    private void ShowGameOverscreen()
+    {
+        if (_gameOverPanel != null)
+        {
+            _gameOverPanel.SetActive(true); // Activate the Game Over UI
+
+            // Optionally, lock game time
+            Time.timeScale = 0f; // Pause the game
+        }
+        else
+        {
+            Debug.LogWarning("Game Over Panel is not assigned in the Inspector!");
+        }
+    }
+
+    public void RestartGame()
+    {
+        Time.timeScale = 1f; // Reset time scale
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene
+    }
 }
