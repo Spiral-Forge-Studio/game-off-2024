@@ -1529,7 +1529,7 @@ GameObject:
   - component: {fileID: 4267103618546195098}
   - component: {fileID: 2515518453655471758}
   - component: {fileID: 3873265497863845978}
-  m_Layer: 8
+  m_Layer: 9
   m_Name: Aiming Platform
   m_TagString: Untagged
   m_Icon: {fileID: 0}
