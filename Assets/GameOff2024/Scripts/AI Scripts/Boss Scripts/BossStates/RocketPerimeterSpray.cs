@@ -44,12 +44,14 @@ public class RocketPerimeterSpray : IState
 
     private IEnumerator ExecuteRocketSweep()
     {
-        int[] waypoints = { 2,5,6,3 };
+        int[] waypoints = {3,11,12,6,5,9,8,2}; 
         foreach (int index in waypoints)
         {
             _agent.SetDestination(_boss._waypoints[index].transform.position);
+            Debug.Log($"Going To Waypoint" + index);
 
-            while (_agent.remainingDistance > _agent.stoppingDistance)
+            while (_agent.pathPending) { yield return null; }
+            while (!_agent.pathPending &&  _agent.remainingDistance > _agent.stoppingDistance)
             {
                 _boss.ShootRocketAt(BossPlatform.position);
                 yield return null;

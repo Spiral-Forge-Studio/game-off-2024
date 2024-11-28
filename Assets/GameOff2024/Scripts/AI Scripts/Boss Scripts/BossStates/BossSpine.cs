@@ -32,19 +32,21 @@ public class BossSpine : IState
 
     private IEnumerator ExecuteSpine()
     {
-        int[] waypoints = { 1,4,0,7,8 };
+        int[] waypoints = {1,4,0,7,10}; // top middle, bottom middle, center, right middle, left middle
         foreach (int index in waypoints)
         {
             _agent.SetDestination(_boss._waypoints[index].transform.position);
 
+            while (_agent.pathPending) { yield return null; }
+
             while (_agent.remainingDistance > _agent.stoppingDistance)
             {
-                if (index == 1 || index == 4)
+                if (index == 1 || index == 4 || index == 0)
                 {
                     _boss.ShootMinigunAt(new Vector3(1000, _boss.transform.position.y, _boss.transform.position.z));
                     _boss.ShootRocketAt(new Vector3(-1000, _boss.transform.position.y, _boss.transform.position.z));
                 }
-                if (index == 7 || index == 8)
+                if (index == 7 || index == 10)
                 {
                     _boss.ShootMinigunAt(new Vector3(_boss.transform.position.x, _boss.transform.position.y, 1000));
                     _boss.ShootRocketAt(new Vector3(_boss.transform.position.x, _boss.transform.position.y, -1000));
@@ -54,7 +56,6 @@ public class BossSpine : IState
 
             yield return new WaitForSeconds(0.5f); // Simulate attack delay
         }
-
         _isComplete = true; // Mark state as complete
     }
 }

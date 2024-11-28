@@ -31,14 +31,17 @@ public class BossIdle : IState
     {
         _isComplete = false;
         _agent.enabled = true;
-        //_agent.speed = _parameters._Recenter;
+        _agent.speed = _parameters._Recenter;
         Debug.Log("Entered Idle");
+        
         _bossfunc.MoveToCenter();
-
+        
         //_bossfunc.Attack_RocketPerimeter();
     }
 
     public void OnExit() { }
+
+
 }
 
 

@@ -42,12 +42,15 @@ public class MiniGunPerimeterSpray : IState
 
     private IEnumerator ExecuteMiniPeri()
     {
-        int[] waypoints = { 3, 6, 5, 2 };
+        int[] waypoints = {2,8,9,5,6,12,11,3};
         foreach (int index in waypoints)
         {
             _agent.SetDestination(_boss._waypoints[index].transform.position);
+            Debug.Log($"Going To Waypoint " + index);
 
-            while (_agent.remainingDistance > _agent.stoppingDistance)
+            while (_agent.pathPending) { yield return null; }
+
+            while (_agent.remainingDistance >_agent.stoppingDistance)
             {
                 _boss.ShootMinigunAt(BossPlatform.position);
                 yield return null;
