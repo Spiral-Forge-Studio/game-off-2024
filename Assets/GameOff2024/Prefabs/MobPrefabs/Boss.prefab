@@ -1087,6 +1087,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fa944771a8205d4a86237926fd3dd2b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  BOSS: {fileID: 5689274060540543715}
   _player: {fileID: 0}
   _bossparam: {fileID: 0}
   _statusManager: {fileID: 0}
@@ -1104,6 +1105,16 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _shootpoints:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
@@ -1156,6 +1167,7 @@ MonoBehaviour:
   weaponManager: {fileID: 4715263503292837539}
   minigun_landedCriticalHit: 0
   rocket_landedCriticalHit: 0
+  shieldBroken: 0
 --- !u!114 &2439003061889665207
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1168,8 +1180,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0edc812aad348d84594e258382d73939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _Recenter: 5
-  _WhilePattern: 7
+  _Recenter: 10
+  _WhilePattern: 30
   _BackShot: 7
   _BackShot_StoppingDistance: 1
 --- !u!1 &6470236472279061847

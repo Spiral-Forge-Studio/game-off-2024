@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b820967904ae18949b49837f33348730, type: 3}
   m_Name: BossStatusSO
   m_EditorClassIdentifier: 
-  baseHealth: 100
-  baseShield: 50
+  baseHealth: 1000
+  baseShield: 100
   baseShieldRegenAmount: 1
   baseShieldBreakRecoveryDelay: 10
   baseShieldRegenTickInterval: 1

@@ -48,7 +48,6 @@ public class RocketPerimeterSpray : IState
         foreach (int index in waypoints)
         {
             _agent.SetDestination(_boss._waypoints[index].transform.position);
-            Debug.Log($"Going To Waypoint" + index);
 
             while (_agent.pathPending) { yield return null; }
             while (!_agent.pathPending &&  _agent.remainingDistance > _agent.stoppingDistance)

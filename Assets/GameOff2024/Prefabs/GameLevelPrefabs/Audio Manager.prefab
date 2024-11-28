@@ -327,10 +327,20 @@ MonoBehaviour:
   PlayerDieSFX: []
   MobHitSFX: []
   MobDieSFX: []
+  MobWindupSFX:
+  - {fileID: 8300000, guid: 04c84f89599d69e459a2a359fa03f151, type: 3}
+  MobWalkSFX:
+  - {fileID: 8300000, guid: fe43b44e9b07b614cb2b0488f05f4330, type: 3}
+  MobRollSFX:
+  - {fileID: 8300000, guid: ddb5a9ed37cb80142b58d6f000e55f04, type: 3}
+  - {fileID: 8300000, guid: a75321d14e8a76443bdbf7e75806d305, type: 3}
+  - {fileID: 8300000, guid: 7269d06e0be3d29499cf758b7858c18b, type: 3}
   SuicideMobPrimeSFX: []
   SuicideMobExplodeSFX: []
-  MobShotgunFireSFX: []
-  MobRifleFireSFX: []
+  MobShotgunFireSFX:
+  - {fileID: 8300000, guid: 40c1183e131365a41be5a4194ccb7bfd, type: 3}
+  MobRifleFireSFX:
+  - {fileID: 8300000, guid: a6734cc1fb6bb3f42a59ddfa7d83dd39, type: 3}
   MobRocketFireSFX: []
   MobRocketExplodeSFX: []
   NormalLevelRoomEnteredSFX: []
