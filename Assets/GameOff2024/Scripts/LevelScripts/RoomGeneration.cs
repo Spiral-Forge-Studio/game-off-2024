@@ -189,6 +189,8 @@ public class DungeonGenerator : MonoBehaviour
                         {
                             teleporterComponent.targetRoom = roomObjects[connectedRoomId].transform;
 
+                            teleporterObject.GetComponent<Collider>().enabled = false;
+
                             // Optional debugging information
                             if (teleporterComponent.GetType().GetField("targetRoomId") != null)
                             {

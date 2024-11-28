@@ -86,11 +86,6 @@ public class PlayerStatusManager : MonoBehaviour
             StartCoroutine(ShieldRegeneration());
         }
 
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            TakeDamage(5f);
-        }
-
         if (currentMaxHealth != playerStatus.Health)
         {
             float currentHealthMultiplier = playerStatus.Health/ currentMaxHealth;
