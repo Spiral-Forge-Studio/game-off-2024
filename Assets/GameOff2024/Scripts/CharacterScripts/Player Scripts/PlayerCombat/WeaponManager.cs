@@ -297,7 +297,7 @@ public class WeaponManager : MonoBehaviour
 
         if (amount > 1)
         {
-            float coneAngle = 30f; // Total spread angle for all rockets in degrees
+            float coneAngle = 20f; // Total spread angle for all rockets in degrees
             float angleStep = coneAngle / (amount - 1); // Divide spread evenly among rockets
 
             for (int i = 0; i < amount; i++)
