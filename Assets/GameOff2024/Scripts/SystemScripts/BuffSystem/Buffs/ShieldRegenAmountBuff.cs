@@ -83,7 +83,7 @@ public class ShieldRegenAmountBuff : Buff
         float cumulative = 0;
         foreach (var entry in rarityProbabilities)
         {
-            Debug.Log(entry.Value);
+            //Debug.Log(entry.Value);
             cumulative += entry.Value;
             if (randomValue <= cumulative)
             {
