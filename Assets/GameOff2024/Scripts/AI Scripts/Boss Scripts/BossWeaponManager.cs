@@ -36,7 +36,7 @@ public class BossWeaponManager : MonoBehaviour
     private List<Quaternion> rocketProjectileRotationsList = new List<Quaternion>();
 
     [Header("BossStatus SO")]
-    [SerializeField] private BossStatusSO BossStats;
+    [SerializeField] private PlayerStatusSO BossStats;
 
     [Header("Prefab Objects")]
     public GameObject rocketExplosionPrefab;

@@ -5,7 +5,7 @@ using System.Linq;
 public class BossProjectileManager : MonoBehaviour
 {
     [Header("Projectile Parameter Handling")]
-    public BossStatusSO BossStats;
+    public PlayerStatusSO BossStats;
     private BossStatusManager BossStatusManager;
 
     // projectile params

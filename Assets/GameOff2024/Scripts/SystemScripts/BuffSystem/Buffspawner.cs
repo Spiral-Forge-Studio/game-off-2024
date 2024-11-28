@@ -11,18 +11,19 @@ public class BuffSpawner : MonoBehaviour
     public float spawnRadius = 0.5f; // Define the radius for random spawning
     public int buffCount = 3;      // Number of buffs to spawn
     public PlayerStatusSO playerStats;
-
+    public PlayerStatusSO BossStatusSO;
     private List<GameObject> activeBuffs = new List<GameObject>();
 
     public void DestroyActiveBuff(GameObject buff)
     {
-        Debug.Log(buff.name);
+        //Debug.Log(buff.name);
         if (activeBuffs.Contains(buff))
         {
-            Debug.Log(buff.name);
+            Debug.Log("Removed " + buff.name);
             activeBuffs.Remove(buff);
             Destroy(buff);
         }
+        ApplyRandomBufftoBoss();
     }
 
     void Start()
@@ -34,12 +35,11 @@ public class BuffSpawner : MonoBehaviour
 
     private void Update()
     {
-        
+        //Debug.Log("There are " + activeBuffs.Count + " active buffs");
     }
 
     private void SpawnBuffs()
     {
-
         float timestart = Time.time;
         while (activeBuffs.Count < buffCount && buffPrefab != null)
         {
@@ -50,32 +50,26 @@ public class BuffSpawner : MonoBehaviour
             );
 
             Collider[] colliders = Physics.OverlapSphere(spawnPosition, 5);
-            bool ValidPos = true;
+            bool validPos = true;
+
             if (colliders.Length != 0)
             {
-                //continue;
                 foreach (Collider collided in colliders)
                 {
-                    //Debug.Log(collided.name);
-                    if (collided.gameObject.tag == "Player")//HARD CODING NAMES TO AVOID LMAO
+                    if (collided.gameObject.CompareTag("Player") || collided.gameObject.CompareTag("Buff"))
                     {
-                        ValidPos = false;
-                    }
-                    if (collided.name == "BuffPrefabFinal(Clone)")
-                    {
-                        ValidPos = false;
+                        validPos = false;
+                        break;
                     }
                 }
-
             }
-            if (ValidPos)
+
+            if (validPos)
             {
                 GameObject newBuff = Instantiate(buffPrefab, spawnPosition, Quaternion.identity);
-                //newBuff.AddComponent<BuffManager>();
-                //newBuff.AddComponent(spawnPosition);
-
-                //
                 activeBuffs.Add(newBuff);
+
+               
             }
 
             if (Time.time - timestart > 3)
@@ -83,51 +77,30 @@ public class BuffSpawner : MonoBehaviour
                 break;
             }
         }
+
+        
     }
 
-    private IEnumerator SpawnBuffAtIntervals()
+    private void ApplyRandomBufftoBoss()
     {
-        while (true)
+        int randomIndex = Random.Range(0, activeBuffs.Count);
+        BuffManager buffManager = activeBuffs[randomIndex].GetComponent<BuffManager>();
+        GameObject boss = GameObject.FindGameObjectWithTag("Boss");
+        if (boss == null)
         {
-            // Spawn buffs only if the count is less than the defined number
-            if (activeBuffs.Count < buffCount && buffPrefab != null)
-            {
-                Vector3 spawnPosition = spawnPoint.position + new Vector3(
-                    Random.Range(-spawnRadius, spawnRadius),
-                    0f,
-                    Random.Range(-spawnRadius, spawnRadius)
-                );
-
-                Collider[] colliders = Physics.OverlapSphere(spawnPosition, 5);
-                bool ValidPos = true;
-                if (colliders.Length != 0)
-                {
-                    //continue;
-                    foreach (Collider collided in colliders)
-                    {
-                        Debug.Log(collided.name);
-                        if(collided.name == "Player")
-                        {
-                            ValidPos = false;
-                        }
-                        if (collided.name == "BuffPrefabFinal(Clone)")
-                        {
-                            ValidPos = false;
-                        }
-                    }
-                    
-                }
-                if (ValidPos) 
-                {
-                    GameObject newBuff = Instantiate(buffPrefab, spawnPosition, Quaternion.identity);
-                    activeBuffs.Add(newBuff);
-                }
-                
-            }
-
-            yield return new WaitForSeconds(spawnInterval); // Wait for the next spawn
-
-
+            Debug.Log("Boss not found");
         }
+        else
+        {
+            Debug.Log("Boss found = " + boss.name);
+        }
+        
+        buffManager.toBeBuffed = boss;
+        buffManager.chosenBuff.Initialize(BossStatusSO, buffManager.chosenBuff.getBuffBonus(), buffManager.chosenBuff.getBuffType(), buffManager.chosenBuff.getBuffRarity(), 0f, 0f, 0f);
+        buffManager.AddBuff(buffManager.chosenBuff);
+        Debug.Log("Boss buffed with" +  buffManager.chosenBuff.getBuffName());  
     }
+
+
+
 }
