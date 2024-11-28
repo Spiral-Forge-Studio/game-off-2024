@@ -234,12 +234,12 @@ PrefabInstance:
     - target: {fileID: 7256930548906093671, guid: c552efd66870f6d418e08d070c14f5cb,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256930548906093671, guid: c552efd66870f6d418e08d070c14f5cb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -258,6 +258,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: TestTrashMob (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 1204066799560372558, guid: c552efd66870f6d418e08d070c14f5cb,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2883429376775109252, guid: c552efd66870f6d418e08d070c14f5cb,
         type: 3}
@@ -317,12 +322,12 @@ PrefabInstance:
     - target: {fileID: 7256930548906093671, guid: c552efd66870f6d418e08d070c14f5cb,
         type: 3}
       propertyPath: m_AnchorMax.x
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7256930548906093671, guid: c552efd66870f6d418e08d070c14f5cb,
         type: 3}
       propertyPath: m_AnchorMax.y
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -532,12 +537,12 @@ PrefabInstance:
     - target: {fileID: 7778897619339754986, guid: 0f0bc997e6443f8428effb089bd37559,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 4.52
+      value: 3.1
       objectReference: {fileID: 0}
     - target: {fileID: 7778897619339754986, guid: 0f0bc997e6443f8428effb089bd37559,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.23
+      value: 9.23
       objectReference: {fileID: 0}
     - target: {fileID: 7778897619339754986, guid: 0f0bc997e6443f8428effb089bd37559,
         type: 3}
@@ -928,6 +933,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 5063264151163085427, guid: b98368f4588b5e34981533ceed68e2c6,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6279829101597319737, guid: b98368f4588b5e34981533ceed68e2c6,
         type: 3}
