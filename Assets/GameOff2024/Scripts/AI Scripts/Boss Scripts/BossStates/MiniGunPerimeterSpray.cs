@@ -49,6 +49,7 @@ public class MiniGunPerimeterSpray : IState
         foreach (int index in waypoints)
         {
             _agent.SetDestination(_boss._waypoints[index].transform.position);
+            Debug.Log($"Going To Waypoint " + index);
 
             while (_agent.pathPending) { yield return null; }
 
