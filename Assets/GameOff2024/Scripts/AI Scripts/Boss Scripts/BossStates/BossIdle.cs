@@ -29,7 +29,7 @@ public class BossIdle : IState
         if (!_isComplete && !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
         {
             //_isComplete = true; // Set IsIdle to true when destination is reached
-            Debug.Log("Boss has finished moving to the center.");
+            //Debug.Log("Boss has finished moving to the center.");
             _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);
             
         }
@@ -38,7 +38,7 @@ public class BossIdle : IState
         if(Time.time > time + 3f)
         {
             _isComplete = true;
-            Debug.Log("Ready for New State");
+            //Debug.Log("Ready for New State");
         }
     }
     public void OnEnter() 
