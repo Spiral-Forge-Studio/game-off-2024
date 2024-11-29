@@ -12,34 +12,23 @@ public class BossIdle : IState
 
     private bool _isComplete;
     public bool IsIdle => _isComplete;
-
-    private float time;
     public BossIdle(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam) 
     { 
         _bossfunc = boss; 
         _parameters = bossparam;
         _agent = agent;
     }
-
     public void Tick() 
     {
         // Continuously check if the agent has reached the destination
         if (!_isComplete && !_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
         {
-            //_isComplete = true; // Set IsIdle to true when destination is reached
+            _isComplete = true; // Set IsIdle to true when destination is reached
             Debug.Log("Boss has finished moving to the center.");
-        }
-
-        
-        if(Time.time > time + 3f)
-        {
-            _isComplete = true;
-            Debug.Log("Ready for New State");
         }
     }
     public void OnEnter() 
     {
-        time = Time.time;
         _isComplete = false;
         _agent.enabled = true;
         _agent.speed = _parameters._Recenter;
