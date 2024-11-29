@@ -8,7 +8,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = System.Object;
-using UnityEngine.Events;
 
 public class BossController : MonoBehaviour
 {
@@ -26,8 +25,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private BossAgentParameters _bossparam;
     [Header ("Boss Status Manager")]
     [SerializeField] public BossStatusManager _statusManager;
-
-    [SerializeField] public Animator _bosslower;
 
     #region ---Attack Flags---
     [Header("Attack Pattern Flags")]
@@ -61,18 +58,11 @@ public class BossController : MonoBehaviour
     [SerializeField] private float BossMaxHealth;
     [SerializeField] private float BossCurrentHealth;
 
-    [Header("Events")]
-    public UnityEvent OnMobDestroyed;
-
 
     private void Awake()
     {
-
-        OnMobDestroyed.AddListener(() => GameObject.Find("Score").GetComponentInChildren<ScoreManager>().UpdateScore(1000));
-
         #region ---Reference Lines---
         _player = GameObject.Find("Player Controller").GetComponent<PlayerKCC>();
-        _bosslower = GameObject.Find("Boss").GetComponentsInChildren<Animator>()[0];
         _statusManager = GetComponent<BossStatusManager>();
         _agent = GetComponent<NavMeshAgent>();
         _playerDetector = GetComponent<PlayerDetector>();
@@ -86,14 +76,14 @@ public class BossController : MonoBehaviour
         _agent.stoppingDistance = 0f;
 
         #region ---Boss States---
-        var idle = new BossIdle(this, _agent, _bossparam, _bosslower);
-        var rambo = new BossRambo(this, _agent, _bossparam, _bosslower);
-        var spine = new BossSpine(this, _agent, _bossparam, _bosslower);
-        var minisweep = new MiniGunSweep(this, _agent, _bossparam, _bosslower);
-        var rocketsweep = new RocketSweep(this, _agent, _bossparam, _bosslower);
-        var backshot = new RocketBackShot(this, _agent, _bossparam, _bosslower);
-        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam, _bosslower);
-        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam, _bosslower);
+        var idle = new BossIdle(this, _agent, _bossparam);
+        var rambo = new BossRambo(this, _agent, _bossparam);
+        var spine = new BossSpine(this, _agent, _bossparam);
+        var minisweep = new MiniGunSweep(this, _agent, _bossparam);
+        var rocketsweep = new RocketSweep(this, _agent, _bossparam);
+        var backshot = new RocketBackShot(this, _agent, _bossparam);
+        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam);
+        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam);
         #endregion
 
         #region ---Boss Enter Phase Condition---
@@ -173,7 +163,6 @@ public class BossController : MonoBehaviour
     {
      if(BossCurrentHealth <= 0)
         {
-            OnMobDestroyed?.Invoke();
             BOSS.SetActive(false);
             Debug.Log("Boss Destroyed");
         }   
