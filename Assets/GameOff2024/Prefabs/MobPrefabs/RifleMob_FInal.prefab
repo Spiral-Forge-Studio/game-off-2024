@@ -65,6 +65,7 @@ GameObject:
   - component: {fileID: 8824737121061983152}
   - component: {fileID: 8679618817355924273}
   - component: {fileID: 3343165316674424459}
+  - component: {fileID: 1355253112493957078}
   m_Layer: 8
   m_Name: RifleMob_FInal
   m_TagString: Untagged
@@ -277,6 +278,18 @@ MonoBehaviour:
   OnMobDestroyed:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &1355253112493957078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1119717829361681369}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 120906b9ea527614e974f10ecc20699b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &3545507178163952269
 GameObject:
   m_ObjectHideFlags: 0
