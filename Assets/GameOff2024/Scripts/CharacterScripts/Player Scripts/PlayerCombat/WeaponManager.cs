@@ -64,10 +64,11 @@ public class WeaponManager : MonoBehaviour
     private bool rocket_holdTimerStarted;
     private bool rocket_holdReleased;
 
-    [Header("Minigun Stuff")]
+    [Header("Animation and Particles")]
     public Animator minigunAnimator;
     public ParticleSystem minigunMuzzleFlash;
     public ParticleSystem minigunMuzzleSmoke;
+    public ParticleSystem rocketMuzzleSmoke;
 
     private void Awake()
     {
@@ -165,6 +166,7 @@ public class WeaponManager : MonoBehaviour
                 {
                     if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate && !inputs.RightHold)
                     {
+                        rocketMuzzleSmoke.Play();
                         FireRocketProjectiles(aimPosition, 1);
                         AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
                         rocket_currentAmmo--;
@@ -211,6 +213,8 @@ public class WeaponManager : MonoBehaviour
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);
 
                 AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
+
+                rocketMuzzleSmoke.Play();
 
                 rocket_accumulatedShots = 0;
 

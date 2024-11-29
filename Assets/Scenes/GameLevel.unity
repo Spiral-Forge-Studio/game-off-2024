@@ -503,6 +503,12 @@ ParticleSystem:
     type: 3}
   m_PrefabInstance: {fileID: 5575299177246480500}
   m_PrefabAsset: {fileID: 0}
+--- !u!198 &1600362568 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6515337894550147015, guid: b98368f4588b5e34981533ceed68e2c6,
+    type: 3}
+  m_PrefabInstance: {fileID: 5575299177246480500}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1749387205 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1329576248256207840, guid: fb3423213058efe44b974736d8bb97a1,
@@ -684,6 +690,11 @@ PrefabInstance:
       propertyPath: minigunAnimator
       value: 
       objectReference: {fileID: 880666353}
+    - target: {fileID: 8463786501802719736, guid: 0f0bc997e6443f8428effb089bd37559,
+        type: 3}
+      propertyPath: rocketMuzzleSmoke
+      value: 
+      objectReference: {fileID: 1600362568}
     - target: {fileID: 8463786501802719736, guid: 0f0bc997e6443f8428effb089bd37559,
         type: 3}
       propertyPath: minigunMuzzleFlash
