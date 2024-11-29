@@ -12,22 +12,19 @@ public class RocketPerimeterSpray : IState
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
     private Transform BossPlatform;
-    private Animator _animator;
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public RocketPerimeterSpray(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator) 
+    public RocketPerimeterSpray(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam) 
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
-        _animator = animator;
     }
     public void Tick() { }
     public void OnEnter() 
     {
         Debug.Log("Entered RPeri");
-        _animator.CrossFade("Armature|SB_Boss_Lower_Slide", 0.2f);
         _isComplete = false;
         _boss._isLocked = true;
         _agent.speed = _parameters._WhilePattern;
