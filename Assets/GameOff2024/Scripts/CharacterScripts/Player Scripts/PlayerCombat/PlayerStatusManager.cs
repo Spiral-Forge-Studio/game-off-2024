@@ -24,6 +24,10 @@ public class PlayerStatusManager : MonoBehaviour
     //[SerializeField] private GameObject _playerobject;
     [SerializeField] private GameObject _gameOverPanel;
 
+    [SerializeField] private GameObject _UI1;
+    [SerializeField] private GameObject _UI2;
+    [SerializeField] private GameObject _UI3;
+
     private MinigunProjectileParams minigunProjectileParams;
     private RocketProjectileParams rocketProjectileParams;
 
@@ -332,6 +336,9 @@ public class PlayerStatusManager : MonoBehaviour
         {
             _gameOverPanel.SetActive(true); // Activate the Game Over UI
 
+            _UI1.SetActive(false);
+            _UI2.SetActive(false);
+            _UI3.SetActive(false);
             // Optionally, lock game time
             Time.timeScale = 0f; // Pause the game
         }
