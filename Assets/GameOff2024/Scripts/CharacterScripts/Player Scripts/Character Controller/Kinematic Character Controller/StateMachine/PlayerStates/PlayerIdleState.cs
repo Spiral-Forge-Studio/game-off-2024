@@ -45,7 +45,7 @@ public class PlayerIdleState : PlayerBaseState
 
     public override void CheckSwitchState()
     {
-        if (!_ctx.IsGrounded)
+        if (!_ctx.IsGrounded && !_ctx._noFalling)
         {
             SwitchState(_factory.Falling());
         }
