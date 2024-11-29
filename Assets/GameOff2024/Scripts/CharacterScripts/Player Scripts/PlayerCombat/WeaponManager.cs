@@ -64,6 +64,11 @@ public class WeaponManager : MonoBehaviour
     private bool rocket_holdTimerStarted;
     private bool rocket_holdReleased;
 
+    [Header("Minigun Stuff")]
+    public Animator minigunAnimator;
+    public ParticleSystem minigunMuzzleFlash;
+    public ParticleSystem minigunMuzzleSmoke;
+
     private void Awake()
     {
         FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
@@ -107,6 +112,10 @@ public class WeaponManager : MonoBehaviour
         {
             if (minigun_currentAmmo > 0)
             {
+                minigunAnimator.Play("Firing");
+                minigunMuzzleFlash.Play();
+                minigunMuzzleSmoke.Play();
+
                 if (Time.time - minigun_lastShotTime > 1f / playerStats.MinigunFireRate)
                 {
 
@@ -133,6 +142,13 @@ public class WeaponManager : MonoBehaviour
                 StartCoroutine(ReloadMinigun(playerStats.MinigunReloadTime));
             }
         }
+        else
+        {
+            minigunAnimator.Play("Idle");
+            minigunMuzzleFlash.Stop();
+            minigunMuzzleSmoke.Stop();
+        }
+        
 
         // Handle Rocket Shooting and Rearming
         if (inputs.RightShoot && !rocket_holdTimerStarted)
