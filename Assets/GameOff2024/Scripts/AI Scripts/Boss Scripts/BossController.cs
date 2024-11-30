@@ -26,6 +26,10 @@ public class BossController : MonoBehaviour
     [Header ("Boss Status Manager")]
     [SerializeField] public BossStatusManager _statusManager;
 
+    [Header("ParticleEffects")]
+
+    public ParticleSystem _booster1;
+    public ParticleSystem _booster2;
     #region ---Attack Flags---
     [Header("Attack Pattern Flags")]
     [SerializeField] private bool _doMiniperi;
@@ -124,6 +128,19 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
+
+        if (_agent.speed > 0.01f)
+        {
+            _booster1.Play();
+            _booster2.Play();
+        }
+
+        if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
+        {
+            
+            _booster1.Stop();
+            _booster2.Stop();
+        }
         _statemachine.Tick();
         //Get Boss Health
         BossMaxHealth = _statusManager.GetCurrentMaxHealth();
@@ -163,7 +180,6 @@ public class BossController : MonoBehaviour
 
     public void MoveToCenter()
     {
-        
         _bosslower.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f);
         
         _agent.SetDestination(_waypoints[0].transform.position);
