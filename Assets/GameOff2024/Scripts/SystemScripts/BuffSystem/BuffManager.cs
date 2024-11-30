@@ -4,9 +4,14 @@ using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
-
+    private BuffMenu buffMenu;
     private void Awake()
     {
+        buffMenu = Resources.Load<BuffMenu>("BuffMenu");
+        if (buffMenu == null)
+        {
+            Debug.LogError("BuffMenu could not be found in Resources!");
+        }
         // Initialize other components
         BuffRegistry.InitializeBuffs(playerStats);
         playerKCC = FindObjectOfType<PlayerKCC>();
@@ -54,10 +59,10 @@ public class BuffManager : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
+                buffMenu.DiscoverBuff(chosenBuff.getBuffName());
                 toBeBuffed = hit.collider.gameObject;
                 
                 AddBuff(chosenBuff);
-
                 string message = $"You got: {chosenBuff.getBuffName()} " +
                                  $"Rarity: {chosenBuff.getBuffRarity()} " +
                                  $"Amount: {chosenBuff.getBuffBonus()} " +

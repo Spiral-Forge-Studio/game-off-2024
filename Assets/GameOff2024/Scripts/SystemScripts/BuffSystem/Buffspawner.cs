@@ -22,8 +22,9 @@ public class BuffSpawner : MonoBehaviour
             Debug.Log("Removed " + buff.name);
             activeBuffs.Remove(buff);
             Destroy(buff);
+            ApplyRandomBufftoBoss();
         }
-        ApplyRandomBufftoBoss();
+        
     }
 
     void Start()
@@ -83,6 +84,7 @@ public class BuffSpawner : MonoBehaviour
 
     private void ApplyRandomBufftoBoss()
     {
+        if (activeBuffs.Count < 1) {  return; }
         int randomIndex = Random.Range(0, activeBuffs.Count);
         BuffManager buffManager = activeBuffs[randomIndex].GetComponent<BuffManager>();
         GameObject boss = GameObject.FindGameObjectWithTag("Boss");
@@ -93,12 +95,13 @@ public class BuffSpawner : MonoBehaviour
         else
         {
             Debug.Log("Boss found = " + boss.name);
+            buffManager.toBeBuffed = boss;
+            buffManager.chosenBuff.Initialize(BossStatusSO, buffManager.chosenBuff.getBuffBonus(), buffManager.chosenBuff.getBuffType(), buffManager.chosenBuff.getBuffRarity(), 0f, 0f, 0f);
+            buffManager.AddBuff(buffManager.chosenBuff);
+            Debug.Log("Boss buffed with" + buffManager.chosenBuff.getBuffName());
         }
         
-        buffManager.toBeBuffed = boss;
-        buffManager.chosenBuff.Initialize(BossStatusSO, buffManager.chosenBuff.getBuffBonus(), buffManager.chosenBuff.getBuffType(), buffManager.chosenBuff.getBuffRarity(), 0f, 0f, 0f);
-        buffManager.AddBuff(buffManager.chosenBuff);
-        Debug.Log("Boss buffed with" +  buffManager.chosenBuff.getBuffName());  
+        
     }
 
 

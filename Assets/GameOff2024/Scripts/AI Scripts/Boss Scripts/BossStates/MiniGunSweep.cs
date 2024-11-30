@@ -9,6 +9,7 @@ public class MiniGunSweep : IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
+
     private Animator _animator;
     private GameObject _torso;
     Vector3 tobeshot;
@@ -20,11 +21,13 @@ public class MiniGunSweep : IState
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
+
     public MiniGunSweep(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso)
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
+
         _animator = animator;
         _torso = torso;
     }
@@ -32,7 +35,6 @@ public class MiniGunSweep : IState
     public void OnEnter()
     {
         Debug.Log("Entered MiniSweep");
-        _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);
         _isComplete = false;
         _boss._isLocked = true;
         _agent.speed = _parameters._WhilePattern;

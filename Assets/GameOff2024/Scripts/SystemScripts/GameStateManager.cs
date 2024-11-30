@@ -19,6 +19,7 @@ public class GameStateManager : MonoBehaviour
     [Header("Game Over UI")]
     public GameObject gameOverPanel;
     public float restartDelay = 2f;
+    public BuffMenu BuffMenu;
 
 
     void Awake()
@@ -28,6 +29,17 @@ public class GameStateManager : MonoBehaviour
         playerKCC = FindAnyObjectByType<PlayerKCC>();
         gameOverPanel.SetActive(false);
         playerScript = FindObjectOfType<PlayerScript>();
+        if (BuffMenu != null)
+        {
+            if (BuffMenu.FirstTimeRun)
+            {
+                BuffMenu.InitializeMenu();//run this only once per game 
+                BuffMenu.FirstTimeRun = false;
+            }
+            
+
+        }
+        
     }
 
     // Start is called before the first frame update
