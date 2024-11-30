@@ -14,6 +14,7 @@ public class RocketPerimeterSpray : IState
     private Transform BossPlatform;
     private Animator _animator;
     private GameObject _torso;
+    private Quaternion _originalrotation;
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
@@ -33,6 +34,7 @@ public class RocketPerimeterSpray : IState
         _isComplete = false;
         _boss._isLocked = true;
         _agent.speed = _parameters._WhilePattern;
+        _torso.transform.localRotation = _originalrotation;
         GameObject bossPlatformObject = GameObject.FindWithTag("BossPlatform");
         if (bossPlatformObject != null)
         {
@@ -45,8 +47,15 @@ public class RocketPerimeterSpray : IState
         _boss.StartCoroutine(ExecuteRocketSweep());
     }
 
-    public void OnExit() { _agent.speed = _parameters._Recenter; _boss._isLocked = false; _boss.ResetAttackFlags(); _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f); }
-
+    public void OnExit()
+    {
+        _agent.speed = _parameters._Recenter;
+        _boss._isLocked = false;
+        _boss.ResetAttackFlags();
+        _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f);
+        _boss.MoveToCenter();
+        _torso.transform.localRotation = _originalrotation;
+    }
     private IEnumerator ExecuteRocketSweep()
     {
         int[] waypoints = {3,11,12,6,5,9,8,2}; 
@@ -58,6 +67,7 @@ public class RocketPerimeterSpray : IState
             while (_agent.pathPending) { yield return null; }
             while (!_agent.pathPending &&  _agent.remainingDistance > _agent.stoppingDistance)
             {
+                RotateTorsoTowards(BossPlatform.position);
                 _boss.ShootRocketAt(BossPlatform.position);
                 yield return null;
             }

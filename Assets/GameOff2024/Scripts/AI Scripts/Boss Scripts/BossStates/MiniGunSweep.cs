@@ -29,7 +29,7 @@ public class MiniGunSweep : IState
         _animator = animator;
         _torso = torso;
     }
-    public void Tick() { }
+    public void Tick() { RotateTorsoTowards(tobeshot); }
     public void OnEnter()
     {
         _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);
@@ -96,7 +96,6 @@ public class MiniGunSweep : IState
                     while (tobeshot.z > end.z)
                     {
                         tobeshot.z--;
-                        RotateTorsoTowards(tobeshot);
                         _boss.ShootMinigunAt(tobeshot);
 
                         yield return new WaitForSeconds(1f / _boss.BossStatusSO.MinigunFireRate);
@@ -123,7 +122,7 @@ public class MiniGunSweep : IState
         directionToTarget.y = 0; // Ignore Y-axis to only rotate in the XZ plane
 
         Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 2f);
+        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 1f);
     }
 
 }
