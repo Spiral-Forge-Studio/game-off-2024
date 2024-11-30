@@ -59,17 +59,15 @@ public class BuffManager : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
+                
                 buffMenu.DiscoverBuff(chosenBuff.getBuffName());
                 toBeBuffed = hit.collider.gameObject;
                 
                 AddBuff(chosenBuff);
-                string message = $"You got: {chosenBuff.getBuffName()} " +
-                                 $"Rarity: {chosenBuff.getBuffRarity()} " +
-                                 $"Amount: {chosenBuff.getBuffBonus()} " +
-                                 $"Type: {chosenBuff.getBuffType()}";
+                string message = $"You got: {chosenBuff.getBuffName()} ";
 
                 ShowFloatingText(message, toBeBuffed.transform);
-
+                //put teleport function here
                 Debug.Log(message);
                 if (buffSpawner != null)
                 {
