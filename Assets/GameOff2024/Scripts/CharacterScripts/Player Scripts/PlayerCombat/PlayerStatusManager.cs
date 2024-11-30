@@ -23,9 +23,6 @@ public class PlayerStatusManager : MonoBehaviour
     [Header ("Game Over Stuff")]
     //[SerializeField] private GameObject _playerobject;
     [SerializeField] private GameObject _gameOverPanel;
-    [SerializeField] private GameObject _UI1;
-    [SerializeField] private GameObject _UI2;
-    [SerializeField] private GameObject _UI3;
 
     private MinigunProjectileParams minigunProjectileParams;
     private RocketProjectileParams rocketProjectileParams;
@@ -87,11 +84,6 @@ public class PlayerStatusManager : MonoBehaviour
         { 
             regeneratingShield = true;
             StartCoroutine(ShieldRegeneration());
-        }
-
-        if (Input.GetKeyUp(KeyCode.E))
-        {
-            TakeDamage(5f);
         }
 
         if (currentMaxHealth != playerStatus.Health)
@@ -339,9 +331,6 @@ public class PlayerStatusManager : MonoBehaviour
         if (_gameOverPanel != null)
         {
             _gameOverPanel.SetActive(true); // Activate the Game Over UI
-            _UI1.SetActive(false);
-            _UI2.SetActive(false);
-            _UI3.SetActive(false);
 
             // Optionally, lock game time
             Time.timeScale = 0f; // Pause the game
@@ -355,6 +344,6 @@ public class PlayerStatusManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f; // Reset time scale
-        SceneManager.LoadScene(0); //Main Menu
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene
     }
 }

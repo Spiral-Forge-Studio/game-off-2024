@@ -9,8 +9,6 @@ public class RocketSweep :IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
-    private Animator _animator;
-    private GameObject _torso;
     Vector3 tobeshot;
     Vector3 start;
     Vector3 end;
@@ -20,13 +18,11 @@ public class RocketSweep :IState
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public RocketSweep(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso) 
+    public RocketSweep(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam) 
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
-        _animator = animator;
-        _torso = torso;
     }
     public void Tick() { }
     public void OnEnter() {

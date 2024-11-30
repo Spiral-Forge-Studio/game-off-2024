@@ -1,0 +1,58 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb3529d0b7b722419407c2735607804, type: 3}
+  m_Name: BuffMenu
+  m_EditorClassIdentifier: 
+  FirstTimeRun: 0
+  BuffStatuses:
+  - BuffName: Steel - Plated Armor
+    IsDiscovered: 1
+  - BuffName: Reinforced Shields
+    IsDiscovered: 1
+  - BuffName: Nano Repair Kit
+    IsDiscovered: 1
+  - BuffName: Rapid Shield Regeneration
+    IsDiscovered: 1
+  - BuffName: Shield Regen Boost
+    IsDiscovered: 1
+  - BuffName: Hardened Plating
+    IsDiscovered: 1
+  - BuffName: Swift Stride
+    IsDiscovered: 1
+  - BuffName: Minigun Damage Boost
+    IsDiscovered: 1
+  - BuffName: Minigun Bullet Deviation Angle Reduction
+    IsDiscovered: 1
+  - BuffName: Quick Loader
+    IsDiscovered: 1
+  - BuffName: Minigun Projectile Speed Buff
+    IsDiscovered: 1
+  - BuffName: Minigun Crit Rate Buff
+    IsDiscovered: 1
+  - BuffName: Minigun Crit Damage Buff
+    IsDiscovered: 1
+  - BuffName: Rapid Barrel Upgrade
+    IsDiscovered: 1
+  - BuffName: Extra Magazine Clip
+    IsDiscovered: 1
+  - BuffName: Rocket Damage Boost
+    IsDiscovered: 1
+  - BuffName: Rocket Explosion Radius Boost
+    IsDiscovered: 1
+  - BuffName: Quick Loader Rocket
+    IsDiscovered: 1
+  - BuffName: Rocket Crit Rate Buff
+    IsDiscovered: 1
+  - BuffName: Rocket Crit Damage Buff
+    IsDiscovered: 1
+  - BuffName: Extra Rocket Magazine Clip
+    IsDiscovered: 1

@@ -3,7 +3,10 @@ using UnityEngine;
 
 public static class BuffRegistry
 {
+
     private static readonly Dictionary<string, Buff> availableBuffs = new Dictionary<string, Buff>();
+
+
     public static readonly Dictionary<string, string> NameToBuffs = new Dictionary<string, string>()
     {
         {"Steel - Plated Armor", "HpBuff"},
@@ -31,12 +34,16 @@ public static class BuffRegistry
         {"Extra Rocket Magazine Clip", "RocketMagazineBuff"}
     };
 
+
+
     /// <summary>
     /// Initializes all buffs and stores them in the registry.
     /// </summary>
     /// <param name="playerStatus">Player's status for initializing buffs.</param>
     public static void InitializeBuffs(PlayerStatusSO playerStatus)
     {
+        
+        
         AddBuff<HpBuff>("HpBuff", playerStatus);
         AddBuff<ShieldBuff>("ShieldBuff", playerStatus);
         AddBuff<ShieldBreakRecoveryDelay>("ShieldBreakRecoveryDelay", playerStatus);

@@ -12,24 +12,19 @@ public class RocketPerimeterSpray : IState
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
     private Transform BossPlatform;
-    private Animator _animator;
-    private GameObject _torso;
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public RocketPerimeterSpray(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso) 
+    public RocketPerimeterSpray(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam) 
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
-        _animator = animator;
-        _torso = torso;
     }
     public void Tick() { }
     public void OnEnter() 
     {
         Debug.Log("Entered RPeri");
-        _animator.CrossFade("Armature|SB_Boss_Lower_Slide", 0.2f);
         _isComplete = false;
         _boss._isLocked = true;
         _agent.speed = _parameters._WhilePattern;
@@ -53,6 +48,7 @@ public class RocketPerimeterSpray : IState
         foreach (int index in waypoints)
         {
             _agent.SetDestination(_boss._waypoints[index].transform.position);
+            Debug.Log($"Going To Waypoint" + index);
 
             while (_agent.pathPending) { yield return null; }
             while (!_agent.pathPending &&  _agent.remainingDistance > _agent.stoppingDistance)

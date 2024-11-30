@@ -9,7 +9,7 @@ using static TrashMobAI;
 public class BossStatusManager : MonoBehaviour
 {
     [Header("Base Stats Scriptable Object")]
-    [SerializeField] private BossStatusSO BossStatus;
+    [SerializeField] private PlayerStatusSO BossStatus;
 
     [Header("Boss Status")]
     [SerializeField] private float currentHealth;
@@ -31,7 +31,7 @@ public class BossStatusManager : MonoBehaviour
     public bool shieldBroken;
     private bool regeneratingShield;
     private float carryOverDamage = 0f;
-
+    private float TimeSinceLastDamage;
     private float currentMaxHealth;
     private float currentMaxShield;
     private Coroutine shieldRecoverRoutine;
@@ -45,6 +45,7 @@ public class BossStatusManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        TimeSinceLastDamage = Time.time;
         minigunProjectileParams = new MinigunProjectileParams(
             BossStatus.MinigunProjectileSpeed,
             GetComputedDamage(EWeaponType.Minigun, false),
@@ -73,8 +74,13 @@ public class BossStatusManager : MonoBehaviour
     void Update()
     {
         UpdateBossKCCStats();
-        
-        if (!shieldBroken && !regeneratingShield && currentShield != BossStatus.Shield)
+        if (currentShield > BossStatus.Shield)
+        {
+            currentShield = BossStatus.Shield;
+        }
+
+
+        if (!shieldBroken && !regeneratingShield && currentShield != BossStatus.Shield && Time.time - TimeSinceLastDamage > BossStatus.ShieldRegenTickInterval)
         { 
             regeneratingShield = true;
             StartCoroutine(ShieldRegeneration());
@@ -117,6 +123,7 @@ public class BossStatusManager : MonoBehaviour
             Debug.Break();
             return;
         }
+        TimeSinceLastDamage = Time.time;
 
         float modifiedDamage = Mathf.Clamp(rawDamage * (1 - BossStatus.DamageReduction), 0, rawDamage*2f);
 
