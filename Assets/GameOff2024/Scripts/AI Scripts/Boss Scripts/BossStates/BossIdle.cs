@@ -10,13 +10,23 @@ public class BossIdle : IState
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
 
+    private Animator _animator;
+    private GameObject _torso;
+
     private bool _isComplete;
     public bool IsIdle => _isComplete;
-    public BossIdle(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam) 
+
+
+    private float time;
+
+    public BossIdle(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso) 
     { 
         _bossfunc = boss; 
         _parameters = bossparam;
         _agent = agent;
+
+        _animator = animator;
+        _torso = torso;
     }
     public void Tick() 
     {
