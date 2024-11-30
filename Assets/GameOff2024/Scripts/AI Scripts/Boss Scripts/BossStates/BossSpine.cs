@@ -22,9 +22,13 @@ public class BossSpine : IState
         _animator = animator;  
         _torso = torso;
     }
-    public void Tick() { }
+    public void Tick() 
+    { 
+        
+    }
     public void OnEnter() 
     {
+        _animator.CrossFade("Armature|SB_Boss_Lower_Slide", 0.2f);
         Debug.Log("Entered Spine Pattern");
         _boss._isLocked = true;
         _isComplete = false;
@@ -32,7 +36,7 @@ public class BossSpine : IState
         _boss.StartCoroutine(ExecuteSpine());
     }
 
-    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); }
+    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f); }
 
     private IEnumerator ExecuteSpine()
     {

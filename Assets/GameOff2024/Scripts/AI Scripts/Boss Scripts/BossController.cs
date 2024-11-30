@@ -61,6 +61,8 @@ public class BossController : MonoBehaviour
 
     [Header("Upper Body Model")]
     public GameObject _upperbody;
+    [Header("Lower Body")]
+    public Animator _bosslower;
 
 
     private void Awake()
