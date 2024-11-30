@@ -1,5 +1,7 @@
+using KinematicCharacterController;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using Unity.IO.LowLevel.Unsafe;
 using UnityEngine;
 
@@ -10,7 +12,9 @@ public class DungeonGenerator : MonoBehaviour
     {
         public int Id;
         public string Type;
-        public List<int> ConnectedRooms;
+        public List<int> ConnectedRooms = new List<int>();
+        public Transform PlayerSpawnPoint; // Add a spawn point for teleporting the player
+
         public bool IsVisited;
 
         public Room(int id, string type)
@@ -26,9 +30,8 @@ public class DungeonGenerator : MonoBehaviour
             if (!ConnectedRooms.Contains(otherRoom.Id))
             {
                 ConnectedRooms.Add(otherRoom.Id);
-                otherRoom.ConnectedRooms.Add(Id); // Ensure bidirectional connection
-
-                Debug.Log($"Room {Id} ({Type}) connected to Room {otherRoom.Id} ({otherRoom.Type})");
+                otherRoom.ConnectedRooms.Add(Id); // Ensure the other room knows about this connection
+                Debug.Log($"Room {Id} connected to Room {otherRoom.Id}");
             }
         }
 
@@ -47,6 +50,9 @@ public class DungeonGenerator : MonoBehaviour
     private List<Room> dungeon = new List<Room>();
     private System.Random random = new System.Random();
 
+    private Dictionary<int, GameObject> roomObjects = new Dictionary<int, GameObject>();
+    private Room currentRoom;
+
     void Start()
     {
         GenerateDungeon(roomCount);
@@ -55,63 +61,49 @@ public class DungeonGenerator : MonoBehaviour
 
     private void GenerateDungeon(int roomCount)
     {
+        dungeon.Clear();
 
-        //Ensure correct number of rooms
-        if(roomCount < 2 || uniqueRoomPrefabs.Count < roomCount - 2)
-        {
-            Debug.LogError("Not Enough Unique room prefabs or invalid room count");
-            return;
-        }
-
-        List<GameObject> shuffledUniqueRooms = new List<GameObject>(uniqueRoomPrefabs);
-        ShuffleList(shuffledUniqueRooms);
-
-        //Create Start room
+        // Create Start Room
         dungeon.Add(new Room(0, "Start"));
 
-        //Creat unique rooms
-        for(int i = 1; i <=roomCount -2; i++)
+        // Create Unique Rooms
+        for (int i = 1; i <= roomCount - 2; i++)
         {
             dungeon.Add(new Room(i, "Unique"));
         }
 
-        // Assign unique room prefabs randomly (using shuffledUniqueRooms)
-        for (int i = 1; i <= roomCount - 2; i++)
-        {
-            dungeon[i].Type = shuffledUniqueRooms.Count > 0 ? shuffledUniqueRooms[0].name : "Default";
-            shuffledUniqueRooms.RemoveAt(0);
-        }
-
-        // Create boss room
+        // Create Boss Room
         dungeon.Add(new Room(roomCount - 1, "Boss"));
 
-        // Connect rooms randomly
-        for (int i = 0; i < roomCount; i++)
+        for (int i = 0; i < roomCount - 1; i++) // Exclude the last room
         {
-            // Skip connecting the boss room until the end
-            if (i == roomCount - 1)
-                continue;
+            // Connect the current room to the next room
+            dungeon[i].ConnectTo(dungeon[i + 1]);
+        }
 
-            int connections = UnityEngine.Random.Range(1, 3); // Each room has 1-2 connections
-            for (int j = 0; j < connections; j++)
+        // Connect the last regular room to the boss room
+        dungeon[roomCount - 2].ConnectTo(dungeon[roomCount - 1]);
+
+        foreach (var roomObject in roomObjects.Values)
+        {
+            Room room = dungeon[roomObject.GetComponent<RoomComponent>().RoomId];
+
+            // Example: Assume each room prefab has a child object named "PlayerSpawn"
+            Transform spawnPoint = roomObject.transform.Find("PlayerSpawn");
+            if (spawnPoint != null)
             {
-                int targetRoomId;
-
-                // Ensure the start room doesn't directly connect to the boss room
-                do
-                {
-                    targetRoomId = UnityEngine.Random.Range(0, roomCount - 1); // Exclude the boss room
-                } while (targetRoomId == i); // Avoid self-connections
-
-                dungeon[i].ConnectTo(dungeon[targetRoomId]);
+                room.PlayerSpawnPoint = spawnPoint;
+            }
+            else
+            {
+                Debug.LogWarning($"Spawn point not found for Room {room.Id}!");
             }
         }
 
-        // Connect the boss room to the final room
-        int lastRoomBeforeBoss = UnityEngine.Random.Range(1, roomCount - 1); // Ensure it’s not the start room
-        dungeon[roomCount - 1].ConnectTo(dungeon[lastRoomBeforeBoss]);
-
     }
+
+
+
 
 
     private void RenderDungeon()
@@ -157,6 +149,17 @@ public class DungeonGenerator : MonoBehaviour
             {
                 roomComponent.Initialize(dungeon[i], OnRoomVisited);
             }
+
+            // Assign the player spawn point for this room
+            Transform spawnPoint = roomObject.transform.Find("PlayerSpawn");
+            if (spawnPoint != null)
+            {
+                dungeon[i].PlayerSpawnPoint = spawnPoint; // Assign to the Room's PlayerSpawnPoint
+            }
+            else
+            {
+                Debug.LogWarning($"Player spawn point not found for Room {dungeon[i].Id}!");
+            }
         }
 
         // Draw connections and add teleporters
@@ -178,57 +181,65 @@ public class DungeonGenerator : MonoBehaviour
                         Debug.LogWarning($"Room {room.Id} references a non-existent room {connectedRoomId}");
                     }
 
-                    if (teleporterPrefab != null)
-                    {
-                        GameObject teleporterObject = Instantiate(teleporterPrefab, currentRoomObject.transform);
-                        teleporterObject.name = $"Teleporter {room.Id} -> {connectedRoomId}";
-                        teleporterObject.transform.localPosition = Vector3.zero; // Adjust if needed
-
-                        Teleporter teleporterComponent = teleporterObject.GetComponent<Teleporter>();
-                        if (teleporterComponent != null)
-                        {
-                            teleporterComponent.targetRoom = roomObjects[connectedRoomId].transform;
-
-                            // Optional debugging information
-                            if (teleporterComponent.GetType().GetField("targetRoomId") != null)
-                            {
-                                teleporterComponent.GetType().GetField("targetRoomId").SetValue(teleporterComponent, connectedRoomId);
-                            }
-
-                            Debug.Log($"Teleporter {room.Id} -> {connectedRoomId} created.");
-                        }
-                        else
-                        {
-                            Debug.LogWarning($"Teleporter prefab missing Teleporter component!");
-                        }
-                    }
-                    else
-                    {
-                        Debug.LogWarning("Teleporter prefab is not assigned!");
-                    }
                 }
             }
         }
-    }
 
 
 
-
-
-
-
-
-
-    private void ShuffleList<T>(List<T> list)
-    {
-        for (int i = list.Count - 1; i > 0; i--)
+        // Initialize BuffSelectionUI
+        BuffSelectionUI buffUI = FindObjectOfType<BuffSelectionUI>();
+        if (buffUI != null)
         {
-            int randomIndex = UnityEngine.Random.Range(0, i + 1);
-            T temp = list[i];
-            list[i] = list[randomIndex];
-            list[randomIndex] = temp;
+            PlayerKCC playerKCC = player.GetComponent<PlayerKCC>();
+            if (playerKCC != null)
+            {
+                buffUI.Initialize(playerKCC, currentRoom, roomObjects);
+            }
+            else
+            {
+                Debug.LogWarning("Player GameObject does not have a PlayerKCC component!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("BuffSelectionUI could not be found in the scene!");
         }
     }
+
+
+    public Room GetRoomById(int roomId)
+    {
+        return dungeon.FirstOrDefault(room => room.Id == roomId);
+    }
+    // Update currentRoom as the player teleports
+    public void SetCurrentRoom(Room room)
+    {
+        currentRoom = room;
+    }
+
+    private List<Room> ShuffleRooms(List<Room> rooms)
+    {
+        Debug.Log("Room Order After Shuffling:");
+        // Create rooms
+        for (int i = 0; i < roomCount; i++)
+        {
+            dungeon.Add(new Room(i, $"Room {i}"));
+            Debug.Log($"Room {i}: {dungeon[i]}");
+        }
+
+        // Shuffle rooms (excluding the start and boss rooms)
+        List<Room> shuffledRooms = ShuffleRooms(dungeon.GetRange(1, roomCount - 2)); // Exclude start (0) and boss room (last)
+        shuffledRooms.Insert(0, dungeon[0]); // Add the start room back at the beginning
+        shuffledRooms.Add(dungeon[roomCount - 1]); // Add the boss room at the end
+
+        dungeon = shuffledRooms;
+
+        return rooms.OrderBy(x => UnityEngine.Random.value).ToList();
+
+       
+    }
+
 
     private void OnRoomVisited(Room room)
     {
@@ -250,4 +261,36 @@ public class DungeonGenerator : MonoBehaviour
         Debug.Log("Buff applied! (e.g., +10 health, +5 damage, etc.)");
         // Implement actual buff logic here
     }
+
+    public void TeleportPlayerToNextRoom()
+    {
+        if (currentRoom != null && currentRoom.ConnectedRooms.Count > 0)
+        {
+            int nextRoomId = currentRoom.ConnectedRooms[0]; // Always pick the first connected room
+            if (roomObjects.ContainsKey(nextRoomId))
+            {
+                Transform nextRoomTransform = roomObjects[nextRoomId].transform;
+
+                if (player != null)
+                {
+                    // Teleport the player
+                    player.transform.position = nextRoomTransform.position;
+                    Debug.Log($"Player teleported to Room {nextRoomId}");
+
+                    // Update the current room
+                    currentRoom = dungeon[nextRoomId];
+                }
+            }
+            else
+            {
+                Debug.LogWarning($"Room {nextRoomId} does not exist in roomObjects!");
+            }
+        }
+        else
+        {
+            Debug.LogWarning("No connected rooms to teleport to!");
+        }
+    }
+
+
 }
