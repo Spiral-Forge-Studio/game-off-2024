@@ -78,7 +78,7 @@ public class BossController : MonoBehaviour
         _statemachine = new StateMachine();
 
         //Agent Movement
-        _agent.enabled = false;
+        _agent.enabled = true;
         _agent.stoppingDistance = 0f;
 
         #region ---Boss States---
@@ -115,6 +115,7 @@ public class BossController : MonoBehaviour
         #endregion
 
         timer = 0;
+        MoveToCenter();
         _statemachine.SetState(idle);
 
         void At(IState from, IState to, Func<bool> condition) => _statemachine.AddTransition(from, to, condition);
@@ -156,12 +157,15 @@ public class BossController : MonoBehaviour
 
 
 
-        //SelectAttack();
+        SelectAttack();
 
     }
 
     public void MoveToCenter()
     {
+        
+        _bosslower.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f);
+        
         _agent.SetDestination(_waypoints[0].transform.position);
     }
 

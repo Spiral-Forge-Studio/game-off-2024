@@ -12,7 +12,7 @@ public class MiniGunPerimeterSpray : IState
     private Animator _animator;
     private GameObject _torso;
     private bool _isComplete;
-
+    private Quaternion _originalrotation;
     public bool IsComplete => _isComplete;
     public MiniGunPerimeterSpray(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso)
     {
@@ -30,6 +30,8 @@ public class MiniGunPerimeterSpray : IState
         _boss._isLocked = true;
         _isComplete = false;
         _agent.speed = _parameters._WhilePattern;
+
+        _originalrotation = _torso.transform.localRotation;
         
         GameObject bossPlatformObject = GameObject.FindWithTag("BossPlatform");
         if (bossPlatformObject != null)
@@ -40,10 +42,11 @@ public class MiniGunPerimeterSpray : IState
         {
             Debug.LogWarning("No GameObject with tag 'BossPlatform' was found!");
         }
+        
         _boss.StartCoroutine(ExecuteMiniPeri());
     }
 
-    public void OnExit() { _agent.speed = _parameters._Recenter; _boss._isLocked = false; _boss.ResetAttackFlags(); _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f); }
+    public void OnExit() { _agent.speed = _parameters._Recenter; _boss._isLocked = false; _boss.ResetAttackFlags(); _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f); _torso.transform.localRotation = _originalrotation; }
 
     private IEnumerator ExecuteMiniPeri()
     {
@@ -57,6 +60,7 @@ public class MiniGunPerimeterSpray : IState
 
             while (_agent.remainingDistance >_agent.stoppingDistance)
             {
+                RotateTorsoTowards(BossPlatform.position);
                 _boss.ShootMinigunAt(BossPlatform.position);
                 yield return null;
             }
@@ -65,5 +69,14 @@ public class MiniGunPerimeterSpray : IState
         }
 
         _isComplete = true; // Mark state as complete
+    }
+
+    private void RotateTorsoTowards(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = (targetPosition - _torso.transform.position).normalized;
+        directionToTarget.y = 0; // Ignore Y-axis to only rotate in the XZ plane
+
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 2f);
     }
 }

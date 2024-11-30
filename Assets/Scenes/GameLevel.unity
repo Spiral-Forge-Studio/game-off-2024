@@ -1095,12 +1095,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 421297249}
   m_PrefabAsset: {fileID: 0}
---- !u!95 &1715031032 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 3973896152727508159, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
-    type: 3}
-  m_PrefabInstance: {fileID: 4400824342699090148}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1742079414 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 325718899080429542, guid: fd073c381031b6f4793d96a928476281,
@@ -1800,27 +1794,6 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1432397335092101810, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
         type: 3}
-      propertyPath: _bosslower
-      value: 
-      objectReference: {fileID: 1715031032}
-    - target: {fileID: 1432397335092101810, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
-        type: 3}
-      propertyPath: BossStatusSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 0946982c16d546b40b9a720e261c602e,
-        type: 2}
-    - target: {fileID: 1432397335092101810, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
-        type: 3}
-      propertyPath: _waypoints.Array.size
-      value: 13
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432397335092101810, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
-        type: 3}
-      propertyPath: _shootpoints.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 1432397335092101810, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
-        type: 3}
       propertyPath: _waypoints.Array.data[0]
       value: 
       objectReference: {fileID: 2067864020}
@@ -1959,11 +1932,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3973896152727508159, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
-        type: 3}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 3fe935a0665398a41ba39685b1708ab7, type: 2}
     - target: {fileID: 4947666222608796919, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
         type: 3}
       propertyPath: m_Name

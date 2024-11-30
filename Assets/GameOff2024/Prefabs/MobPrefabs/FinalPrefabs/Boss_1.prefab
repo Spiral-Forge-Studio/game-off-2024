@@ -279,6 +279,37 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &2751207695392394195
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7037788772094888442}
+  m_Layer: 0
+  m_Name: firepointminigun
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7037788772094888442
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2751207695392394195}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 3.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 5728513035465723508}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2931357747287208682
 GameObject:
   m_ObjectHideFlags: 0
@@ -607,7 +638,6 @@ MonoBehaviour:
   _player: {fileID: 0}
   _bossparam: {fileID: 0}
   _statusManager: {fileID: 0}
-  _bosslower: {fileID: 0}
   _doMiniperi: 0
   _doRocketperi: 0
   _doMinisweep: 0
@@ -627,17 +657,24 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
-  _shootpoints: []
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  _shootpoints:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   weaponManager: {fileID: 4698511034234414449}
-  BossStatusSO: {fileID: 0}
+  BossStatusSO: {fileID: 11400000, guid: 0946982c16d546b40b9a720e261c602e, type: 2}
   shootingRange: 100
   aimOffset: 0
   BossMaxHealth: 0
   BossCurrentHealth: 0
-  OnMobDestroyed:
-    m_PersistentCalls:
-      m_Calls: []
   _upperbody: {fileID: 8311040594258556954}
+  _bosslower: {fileID: 3973896152727508159}
 --- !u!195 &7487508210228542590
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -696,6 +733,37 @@ MonoBehaviour:
   _WhilePattern: 7
   _BackShot: 7
   _BackShot_StoppingDistance: 1
+--- !u!1 &5457907821435132775
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8625426434862180016}
+  m_Layer: 0
+  m_Name: firepointrocket
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &8625426434862180016
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5457907821435132775}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 1.75}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7007132890449597849}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5902894937497607923
 GameObject:
   m_ObjectHideFlags: 0
@@ -741,7 +809,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac598a72e963af74cb9fb6e878d8ff57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 6007189738563600660}
+  firePoint: {fileID: 8625426434862180016}
   projectileType: 3
   fireProjectile: 0
   fireRotations: []
@@ -1300,7 +1368,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ac598a72e963af74cb9fb6e878d8ff57, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  firePoint: {fileID: 2696909238142226386}
+  firePoint: {fileID: 7037788772094888442}
   projectileType: 2
   fireProjectile: 0
   fireRotations: []
@@ -1630,7 +1698,7 @@ Animator:
   m_GameObject: {fileID: 707673664731923840}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 2c19f26dd964c58478cd4ec2c0bef764, type: 3}
-  m_Controller: {fileID: 9100000, guid: 041ea9ad8c275514581239894c21c777, type: 2}
+  m_Controller: {fileID: 9100000, guid: 3fe935a0665398a41ba39685b1708ab7, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -1820,7 +1888,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 4211293c210645046adf7e594d0c459c,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 7037788772094888442}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 4211293c210645046adf7e594d0c459c, type: 3}
 --- !u!4 &5728513035465723508 stripped
@@ -1914,7 +1986,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: -8679921383154817045, guid: 8c53c6ff5419f9d4fa70d2642da0d9a1,
+        type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 8625426434862180016}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8c53c6ff5419f9d4fa70d2642da0d9a1, type: 3}
 --- !u!4 &7007132890449597849 stripped
