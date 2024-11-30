@@ -46,7 +46,14 @@ public class MiniGunPerimeterSpray : IState
         _boss.StartCoroutine(ExecuteMiniPeri());
     }
 
-    public void OnExit() { _agent.speed = _parameters._Recenter; _boss._isLocked = false; _boss.ResetAttackFlags(); _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f); _torso.transform.localRotation = _originalrotation; }
+    public void OnExit() 
+    { 
+        _agent.speed = _parameters._Recenter; 
+        _boss._isLocked = false; _boss.ResetAttackFlags(); 
+        _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f); 
+        _torso.transform.localRotation = _originalrotation;
+        _boss.MoveToCenter();
+    }
 
     private IEnumerator ExecuteMiniPeri()
     {

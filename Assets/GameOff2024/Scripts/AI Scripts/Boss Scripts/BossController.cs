@@ -157,7 +157,7 @@ public class BossController : MonoBehaviour
 
 
 
-        SelectAttack();
+        //SelectAttack();
 
     }
 

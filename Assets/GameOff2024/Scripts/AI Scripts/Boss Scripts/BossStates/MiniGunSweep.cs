@@ -42,7 +42,7 @@ public class MiniGunSweep : IState
         _boss.StartCoroutine(ExecuteMiniSweep());
     }
 
-    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); _torso.transform.localRotation = _originalrotation; _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f); _boss.MoveToCenter(); }
+    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); _torso.transform.localRotation = _originalrotation; _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);}
 
     private IEnumerator ExecuteMiniSweep()
     {
