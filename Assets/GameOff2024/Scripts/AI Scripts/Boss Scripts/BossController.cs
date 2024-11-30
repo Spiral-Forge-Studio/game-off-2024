@@ -48,7 +48,7 @@ public class BossController : MonoBehaviour
     [SerializeField] public List<GameObject> _waypoints = new List<GameObject>();
     [SerializeField] public List<GameObject> _shootpoints = new List<GameObject>();
     public BossWeaponManager weaponManager;
-    public BossStatusSO BossStatusSO;
+    public PlayerStatusSO BossStatusSO;
     private Transform playerTransform;
 
     private float timer;

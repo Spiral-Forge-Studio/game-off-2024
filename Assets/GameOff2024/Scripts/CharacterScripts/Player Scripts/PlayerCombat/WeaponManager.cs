@@ -64,6 +64,12 @@ public class WeaponManager : MonoBehaviour
     private bool rocket_holdTimerStarted;
     private bool rocket_holdReleased;
 
+    [Header("Animation and Particles")]
+    public Animator minigunAnimator;
+    public ParticleSystem minigunMuzzleFlash;
+    public ParticleSystem minigunMuzzleSmoke;
+    public ParticleSystem rocketMuzzleSmoke;
+
     private void Awake()
     {
         FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
@@ -107,6 +113,10 @@ public class WeaponManager : MonoBehaviour
         {
             if (minigun_currentAmmo > 0)
             {
+                minigunAnimator.Play("Firing");
+                minigunMuzzleFlash.Play();
+                minigunMuzzleSmoke.Play();
+
                 if (Time.time - minigun_lastShotTime > 1f / playerStats.MinigunFireRate)
                 {
 
@@ -133,6 +143,13 @@ public class WeaponManager : MonoBehaviour
                 StartCoroutine(ReloadMinigun(playerStats.MinigunReloadTime));
             }
         }
+        else
+        {
+            minigunAnimator.Play("Idle");
+            minigunMuzzleFlash.Stop();
+            minigunMuzzleSmoke.Stop();
+        }
+        
 
         // Handle Rocket Shooting and Rearming
         if (inputs.RightShoot && !rocket_holdTimerStarted)
@@ -149,6 +166,7 @@ public class WeaponManager : MonoBehaviour
                 {
                     if (Time.time - rocket_lastShotTime > 1f / playerStats.RocketFireRate && !inputs.RightHold)
                     {
+                        rocketMuzzleSmoke.Play();
                         FireRocketProjectiles(aimPosition, 1);
                         AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
                         rocket_currentAmmo--;
@@ -195,6 +213,8 @@ public class WeaponManager : MonoBehaviour
                 FireRocketProjectiles(aimPosition, rocket_accumulatedShots);
 
                 AudioManager.instance.PlaySFX(audioSource_RocketFire, EGameplaySFX.RocketFire);
+
+                rocketMuzzleSmoke.Play();
 
                 rocket_accumulatedShots = 0;
 
@@ -297,7 +317,7 @@ public class WeaponManager : MonoBehaviour
 
         if (amount > 1)
         {
-            float coneAngle = 30f; // Total spread angle for all rockets in degrees
+            float coneAngle = 20f; // Total spread angle for all rockets in degrees
             float angleStep = coneAngle / (amount - 1); // Divide spread evenly among rockets
 
             for (int i = 0; i < amount; i++)

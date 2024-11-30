@@ -12,6 +12,7 @@ namespace KinematicCharacterController
         public PlayerKCC Character;
         public CameraFollow CharacterCamera;
         private WeaponManager WeaponManager;
+        public GameObject mouseInGameUI;
 
         [Header("Input Actions")]
         PlayerInput playerInput;
@@ -113,6 +114,8 @@ namespace KinematicCharacterController
             controllerInputs.mousePos = CharacterCamera.mouseFollowPoint;
             combatInputs.mousePos = CharacterCamera.mouseFollowPoint;
             combatInputs.Reload = _reload.phase == InputActionPhase.Performed;
+
+            mouseInGameUI.transform.position = CharacterCamera.mouseFollowPoint;
 
             //Debug.Log(_reload.phase);
 

@@ -23,6 +23,7 @@ public abstract class Buff : ScriptableObject
     public abstract BuffType getRandomType();
     public abstract float getBuffBonus();
 
+
     public void StartBuff(GameObject target)
     {
         if (isActive)

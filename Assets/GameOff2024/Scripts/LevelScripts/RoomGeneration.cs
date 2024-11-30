@@ -34,6 +34,9 @@ public class DungeonGenerator : MonoBehaviour
 
 
     }
+    public GameObject player; // Reference to the player GameObject
+
+    public GameObject teleporterPrefab; // Assign this in the Unity Editor
 
     public int roomCount = 10;
     public GameObject startRoomPrefab;
@@ -113,19 +116,21 @@ public class DungeonGenerator : MonoBehaviour
 
     private void RenderDungeon()
     {
-        float roomSpacing = 100f; // Distance between rooms in the grid
-        float floorHeight = 0f; // All rooms are at the same height
-        int gridColumns = 4; // Number of columns in the grid
-        Dictionary<int, Vector3> roomPositions = new Dictionary<int, Vector3>();
+        float roomSpacing = 100f; // Minimum spacing between rooms
+        Dictionary<int, Vector3> roomPositions = new Dictionary<int, Vector3>(); // Track room positions
+        Dictionary<int, GameObject> roomObjects = new Dictionary<int, GameObject>(); // Track room GameObjects
 
-        // Place rooms in a grid layout
+        // Place all rooms in a grid layout and store their positions
         for (int i = 0; i < dungeon.Count; i++)
         {
-            int row = i / gridColumns; // Determine row
-            int column = i % gridColumns; // Determine column
+            // Grid layout calculation
+            Vector3 position = new Vector3(
+                (i % 5) * roomSpacing, // Column index
+                0f,                    // Keep all rooms at the same height
+                (i / 5) * roomSpacing  // Row index
+            );
 
-            Vector3 position = new Vector3(column * roomSpacing, floorHeight, row * roomSpacing); // Calculate grid position
-            roomPositions[i] = position;
+            roomPositions[i] = position; // Save position for this room
 
             // Instantiate the correct prefab
             GameObject roomPrefab = dungeon[i].Type switch
@@ -135,13 +140,16 @@ public class DungeonGenerator : MonoBehaviour
                 _ => uniqueRoomPrefabs.Count > 0 ? uniqueRoomPrefabs[0] : defaultRoomPrefab,
             };
 
-            if (dungeon[i].Type != "Start" && dungeon[i].Type != "Boss" && uniqueRoomPrefabs.Count > 0)
+            if (dungeon[i].Type != "Start" && dungeon[i].Type != "Boss")
             {
                 uniqueRoomPrefabs.RemoveAt(0); // Use and remove prefab
             }
 
             GameObject roomObject = Instantiate(roomPrefab, position, Quaternion.identity);
             roomObject.name = $"Room {dungeon[i].Id} ({dungeon[i].Type})";
+
+            // Add room GameObject to the dictionary
+            roomObjects[dungeon[i].Id] = roomObject;
 
             // Initialize the room's behavior
             RoomComponent roomComponent = roomObject.GetComponent<RoomComponent>();
@@ -151,25 +159,63 @@ public class DungeonGenerator : MonoBehaviour
             }
         }
 
-        // Draw connections and log connections
+        // Draw connections and add teleporters
         foreach (Room room in dungeon)
         {
             Vector3 roomPosition = roomPositions[room.Id];
-            foreach (int connectedRoomId in room.ConnectedRooms)
+            if (roomObjects.TryGetValue(room.Id, out GameObject currentRoomObject))
             {
-                if (roomPositions.ContainsKey(connectedRoomId))
+                foreach (int connectedRoomId in room.ConnectedRooms)
                 {
-                    Vector3 connectedRoomPosition = roomPositions[connectedRoomId];
+                    // Draw debug lines for connections
+                    if (roomPositions.ContainsKey(connectedRoomId))
+                    {
+                        Vector3 connectedRoomPosition = roomPositions[connectedRoomId];
+                        Debug.DrawLine(roomPosition, connectedRoomPosition, Color.red, 100f); // Visible for 100 seconds
+                    }
+                    else
+                    {
+                        Debug.LogWarning($"Room {room.Id} references a non-existent room {connectedRoomId}");
+                    }
 
-                    // Debug.DrawLine to visualize connections
-                    Debug.DrawLine(roomPosition, connectedRoomPosition, Color.green, 1000f);
+                    if (teleporterPrefab != null)
+                    {
+                        GameObject teleporterObject = Instantiate(teleporterPrefab, currentRoomObject.transform);
+                        teleporterObject.name = $"Teleporter {room.Id} -> {connectedRoomId}";
+                        teleporterObject.transform.localPosition = Vector3.zero; // Adjust if needed
 
-                    // Debug.Log for tracking connections
-                    Debug.Log($"Room {room.Id} connects to Room {connectedRoomId}");
+                        Teleporter teleporterComponent = teleporterObject.GetComponent<Teleporter>();
+                        if (teleporterComponent != null)
+                        {
+                            teleporterComponent.targetRoom = roomObjects[connectedRoomId].transform;
+
+                            teleporterObject.GetComponent<Collider>().enabled = false;
+
+                            // Optional debugging information
+                            if (teleporterComponent.GetType().GetField("targetRoomId") != null)
+                            {
+                                teleporterComponent.GetType().GetField("targetRoomId").SetValue(teleporterComponent, connectedRoomId);
+                            }
+
+                            Debug.Log($"Teleporter {room.Id} -> {connectedRoomId} created.");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Teleporter prefab missing Teleporter component!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Teleporter prefab is not assigned!");
+                    }
                 }
             }
         }
     }
+
+
+
+
 
 
 

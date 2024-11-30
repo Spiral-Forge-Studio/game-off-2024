@@ -24,6 +24,10 @@ public class PlayerFallingState : PlayerBaseState
     {
         if (_ctx.IsGrounded)
         {
+            if (_ctx._noFalling)
+            {
+                _ctx._preventFalling = true;
+            }
             SwitchState(_factory.Grounded());
         }
     }

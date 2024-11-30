@@ -21,7 +21,7 @@ public class BossUIScript : MonoBehaviour
     [SerializeField] private TMP_Text rocketAccumulatedShots;
 
     [Header("Data References")]
-    public BossStatusSO BossStatusSO;
+    public PlayerStatusSO BossStatusSO;
 
     private WeaponManager weaponManager;
     private BossStatusManager BossStatusManager;
