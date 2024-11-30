@@ -26,7 +26,7 @@ public class BossRambo : IState
     public void Tick() { }
     public void OnEnter()
     {
-        _animator.CrossFade("Armature|SB_Boss_LowerIdle", 0.2f);
+        _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);
         Debug.Log("Entered Rambo");
         _boss._isLocked = true;
         _isComplete = false;
