@@ -12086,6 +12086,12 @@ PrefabInstance:
       propertyPath: BossKCC
       value: 
       objectReference: {fileID: 68620418}
+    - target: {fileID: 8829171597252797553, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
+        type: 3}
+      propertyPath: projectilePrefab
+      value: 
+      objectReference: {fileID: 440646823390150516, guid: 7c4145ba3cbb3884fb89db63c6f08a08,
+        type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
