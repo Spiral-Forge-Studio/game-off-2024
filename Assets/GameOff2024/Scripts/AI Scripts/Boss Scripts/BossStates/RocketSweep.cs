@@ -28,7 +28,7 @@ public class RocketSweep :IState
         _animator = animator;
         _torso = torso;
     }
-    public void Tick() { }
+    public void Tick() { RotateTorsoTowards(tobeshot); }
     public void OnEnter() {
 
         Debug.Log("Entered RocketSweep");
@@ -112,6 +112,15 @@ public class RocketSweep :IState
         }
         yield return new WaitForSeconds(0.5f); // Simulate attack delay
         _isComplete = true; // Mark state as complete
+    }
+
+    private void RotateTorsoTowards(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = (targetPosition - _torso.transform.position).normalized;
+        directionToTarget.y = 0; // Ignore Y-axis to only rotate in the XZ plane
+
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 4f);
     }
 
 }

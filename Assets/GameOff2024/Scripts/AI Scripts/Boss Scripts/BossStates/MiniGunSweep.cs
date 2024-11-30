@@ -122,7 +122,7 @@ public class MiniGunSweep : IState
         directionToTarget.y = 0; // Ignore Y-axis to only rotate in the XZ plane
 
         Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
-        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 1f);
+        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 4f);
     }
 
 }
