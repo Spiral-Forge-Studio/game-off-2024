@@ -4840,10 +4840,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4781893136836651453}
   - component: {fileID: 9011064795260659789}
-  - component: {fileID: 7306072096652510574}
   - component: {fileID: 6711942783392934474}
   - component: {fileID: 5510509848925237294}
   - component: {fileID: 8574680670287980869}
+  - component: {fileID: 6088141210925229562}
   m_Layer: 7
   m_Name: PlayerRocketProjectile
   m_TagString: Untagged
@@ -4884,27 +4884,6 @@ MonoBehaviour:
   projectileType: 1
   isActive: 0
   audioSource: {fileID: 5510509848925237294}
---- !u!65 &7306072096652510574
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5974040554169218931}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 2696
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Size: {x: 0.87, y: 0.66, z: 1.68}
-  m_Center: {x: 0, y: 0, z: 0.08}
 --- !u!54 &6711942783392934474
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5150,6 +5129,27 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!135 &6088141210925229562
+SphereCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5974040554169218931}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 2696
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Radius: 0.8
+  m_Center: {x: 0, y: 0, z: 0.52}
 --- !u!1 &8144908398251196800
 GameObject:
   m_ObjectHideFlags: 0

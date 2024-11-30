@@ -8,6 +8,13 @@ public class RocketExplosionScript : MonoBehaviour
     [HideInInspector] public float radius;
     [HideInInspector] public UniqueBuffHandler uniqueBuffHandler;
 
+    private EffectsPoolManager effectPoolManager;
+
+    private void Awake()
+    {
+        effectPoolManager = FindObjectOfType<EffectsPoolManager>();
+    }
+
     public float GetDamage()
     {
         return damage;
@@ -21,7 +28,8 @@ public class RocketExplosionScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        StartCoroutine(DestroyAfterDelay(0.05f));
+        effectPoolManager.SpawnRocketHitEffect(transform.position);
+        StartCoroutine(DestroyAfterDelay(0.02f));
     }
 
     private IEnumerator DestroyAfterDelay(float delay)
