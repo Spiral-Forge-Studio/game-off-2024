@@ -8,7 +8,6 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 using Object = System.Object;
-using UnityEngine.Events;
 
 public class BossController : MonoBehaviour
 {
@@ -26,8 +25,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private BossAgentParameters _bossparam;
     [Header ("Boss Status Manager")]
     [SerializeField] public BossStatusManager _statusManager;
-
-    [SerializeField] public Animator _bosslower;
 
     #region ---Attack Flags---
     [Header("Attack Pattern Flags")]
@@ -61,9 +58,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private float BossMaxHealth;
     [SerializeField] private float BossCurrentHealth;
 
-    [Header("Events")]
-    public UnityEvent OnMobDestroyed;
-
 
     [Header("Upper Body Model")]
     public GameObject _upperbody;
@@ -71,12 +65,8 @@ public class BossController : MonoBehaviour
 
     private void Awake()
     {
-
-        OnMobDestroyed.AddListener(() => GameObject.Find("Score").GetComponentInChildren<ScoreManager>().UpdateScore(1000));
-
         #region ---Reference Lines---
         _player = GameObject.Find("Player Controller").GetComponent<PlayerKCC>();
-        _bosslower = GameObject.Find("Boss").GetComponentsInChildren<Animator>()[0];
         _statusManager = GetComponent<BossStatusManager>();
         _agent = GetComponent<NavMeshAgent>();
         _playerDetector = GetComponent<PlayerDetector>();
@@ -177,7 +167,6 @@ public class BossController : MonoBehaviour
     {
      if(BossCurrentHealth <= 0)
         {
-            OnMobDestroyed?.Invoke();
             BOSS.SetActive(false);
             Debug.Log("Boss Destroyed");
         }   

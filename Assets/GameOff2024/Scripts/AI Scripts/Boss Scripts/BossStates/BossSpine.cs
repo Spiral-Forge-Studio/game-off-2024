@@ -26,7 +26,6 @@ public class BossSpine : IState
     public void OnEnter() 
     {
         Debug.Log("Entered Spine Pattern");
-        _animator.CrossFade("Armature|SB_Boss_Lower_Slide", 0.2f);
         _boss._isLocked = true;
         _isComplete = false;
         _agent.speed = _parameters._WhilePattern;

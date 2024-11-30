@@ -26,7 +26,6 @@ public class MiniGunPerimeterSpray : IState
     public void OnEnter()
     {
         Debug.Log("Entered MPeri");
-        _animator.CrossFade("Armature|SB_Boss_Lower_Slide", 0.2f);
         _boss._isLocked = true;
         _isComplete = false;
         _agent.speed = _parameters._WhilePattern;

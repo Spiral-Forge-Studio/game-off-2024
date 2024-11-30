@@ -32,7 +32,6 @@ public class MiniGunSweep : IState
     public void OnEnter()
     {
         Debug.Log("Entered MiniSweep");
-        _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);
         _isComplete = false;
         _boss._isLocked = true;
         _agent.speed = _parameters._WhilePattern;

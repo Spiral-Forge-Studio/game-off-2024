@@ -26,7 +26,6 @@ public class RocketBackShot :IState
     public void OnEnter() 
     {
         Debug.Log("Entered BackShot Pattern");
-        _animator.CrossFade("Armature|SB_Boss_Lower_Slide", 0.2f);
         _isComplete = false;
         _boss._isLocked = true;
         _agent.stoppingDistance = _parameters._BackShot_StoppingDistance;
