@@ -59,10 +59,6 @@ public class BossController : MonoBehaviour
     [SerializeField] private float BossCurrentHealth;
 
 
-    [Header("Upper Body Model")]
-    public GameObject _upperbody;
-
-
     private void Awake()
     {
         #region ---Reference Lines---
@@ -80,15 +76,14 @@ public class BossController : MonoBehaviour
         _agent.stoppingDistance = 0f;
 
         #region ---Boss States---
-
-        var idle = new BossIdle(this, _agent, _bossparam, _bosslower, _upperbody);
-        var rambo = new BossRambo(this, _agent, _bossparam, _bosslower, _upperbody);
-        var spine = new BossSpine(this, _agent, _bossparam, _bosslower, _upperbody);
-        var minisweep = new MiniGunSweep(this, _agent, _bossparam, _bosslower, _upperbody);
-        var rocketsweep = new RocketSweep(this, _agent, _bossparam, _bosslower, _upperbody);
-        var backshot = new RocketBackShot(this, _agent, _bossparam, _bosslower, _upperbody);
-        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam, _bosslower, _upperbody);
-        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam, _bosslower, _upperbody);
+        var idle = new BossIdle(this, _agent, _bossparam);
+        var rambo = new BossRambo(this, _agent, _bossparam);
+        var spine = new BossSpine(this, _agent, _bossparam);
+        var minisweep = new MiniGunSweep(this, _agent, _bossparam);
+        var rocketsweep = new RocketSweep(this, _agent, _bossparam);
+        var backshot = new RocketBackShot(this, _agent, _bossparam);
+        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam);
+        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam);
         #endregion
 
         #region ---Boss Enter Phase Condition---
