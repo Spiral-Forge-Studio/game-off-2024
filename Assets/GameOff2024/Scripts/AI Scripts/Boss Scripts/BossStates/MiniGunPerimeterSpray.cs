@@ -10,15 +10,17 @@ public class MiniGunPerimeterSpray : IState
     private NavMeshAgent _agent;
     private Transform BossPlatform;
     private Animator _animator;
+    private GameObject _torso;
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public MiniGunPerimeterSpray(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator)
+    public MiniGunPerimeterSpray(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso)
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
         _animator = animator;
+        _torso = torso;
     }
     public void Tick() { }
     public void OnEnter()

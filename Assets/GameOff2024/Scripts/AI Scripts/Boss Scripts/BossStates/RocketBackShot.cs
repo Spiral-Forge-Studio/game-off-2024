@@ -9,16 +9,18 @@ public class RocketBackShot :IState
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
     private Animator _animator;
+    private GameObject _torso;
 
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public RocketBackShot(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator) 
+    public RocketBackShot(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso) 
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
         _animator = animator;
+        _torso = torso;
     }
     public void Tick() { }
     public void OnEnter() 

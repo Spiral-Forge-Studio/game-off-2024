@@ -65,6 +65,10 @@ public class BossController : MonoBehaviour
     public UnityEvent OnMobDestroyed;
 
 
+    [Header("Upper Body Model")]
+    public GameObject _upperbody;
+
+
     private void Awake()
     {
 
@@ -86,14 +90,14 @@ public class BossController : MonoBehaviour
         _agent.stoppingDistance = 0f;
 
         #region ---Boss States---
-        var idle = new BossIdle(this, _agent, _bossparam, _bosslower);
-        var rambo = new BossRambo(this, _agent, _bossparam, _bosslower);
-        var spine = new BossSpine(this, _agent, _bossparam, _bosslower);
-        var minisweep = new MiniGunSweep(this, _agent, _bossparam, _bosslower);
-        var rocketsweep = new RocketSweep(this, _agent, _bossparam, _bosslower);
-        var backshot = new RocketBackShot(this, _agent, _bossparam, _bosslower);
-        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam, _bosslower);
-        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam, _bosslower);
+        var idle = new BossIdle(this, _agent, _bossparam, _bosslower, _upperbody);
+        var rambo = new BossRambo(this, _agent, _bossparam, _bosslower, _upperbody);
+        var spine = new BossSpine(this, _agent, _bossparam, _bosslower, _upperbody);
+        var minisweep = new MiniGunSweep(this, _agent, _bossparam, _bosslower, _upperbody);
+        var rocketsweep = new RocketSweep(this, _agent, _bossparam, _bosslower, _upperbody);
+        var backshot = new RocketBackShot(this, _agent, _bossparam, _bosslower, _upperbody);
+        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam, _bosslower, _upperbody);
+        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam, _bosslower, _upperbody);
         #endregion
 
         #region ---Boss Enter Phase Condition---
