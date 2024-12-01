@@ -206,8 +206,9 @@ Transform:
   m_GameObject: {fileID: 698720147606000008}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 1.7, y: 1.46, z: -0.5}
-  m_LocalScale: {x: 4.85, y: 1, z: 3.5}
+  m_LocalPosition: {x: 1.7, y: 3.66, z: -0.5}
+  m_LocalScale: {x: 10, y: 1, z: 10}
+
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 613482962786642489}
@@ -629,6 +630,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 4265016689778942404}
   - {fileID: 2872724715418760712}
   - {fileID: 5320383229874157159}
   - {fileID: 2829259830111944926}
@@ -641,14 +643,14 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3438434951544609951}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1033bf60e1b0f5249be8ee7d99e83290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   totalWaves: 2
-  timeBetweenWaves: 0
-  timeBetweenSpawns: 0
+  timeBetweenWaves: 2
+  timeBetweenSpawns: 0.2
   enableRandomSpawn: 1
   randomSpawnCenter: {x: 0, y: 0, z: 0}
   randomSpawnRadius: 20
@@ -670,7 +672,7 @@ MonoBehaviour:
         prefab: {fileID: 1119717829361681369, guid: fcf9dcc67dabbf140b86b29ff44cc15b,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 1
+      mobCount: 6
   - waveName: Rockets
     spawnConfigs:
     - variant:
@@ -678,7 +680,12 @@ MonoBehaviour:
         prefab: {fileID: 1234330488699831009, guid: 5ed8d08f25d035b4c8e2a381e61ff429,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 1
+      mobCount: 6
+  buffSelectionUI: {fileID: 0}
+  player: {fileID: 0}
+  nextRoomPosition: {fileID: 0}
+  buffSelectionPrefab: {fileID: 0}
+  dungeonGenerator: {fileID: 0}
 --- !u!1 &5384208387126842583
 GameObject:
   m_ObjectHideFlags: 0
@@ -889,6 +896,37 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 1, y: 1, z: 1}
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!1 &5720522264452602284
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4265016689778942404}
+  m_Layer: 6
+  m_Name: PlayerSpawn
+  m_TagString: Untagged
+  m_Icon: {fileID: -5397416234189338067, guid: 0000000000000000d000000000000000, type: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4265016689778942404
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5720522264452602284}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.2, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 613482962786642489}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5742409528589626065
 GameObject:
   m_ObjectHideFlags: 0

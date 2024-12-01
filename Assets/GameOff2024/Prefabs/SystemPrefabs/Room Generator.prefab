@@ -47,7 +47,7 @@ MonoBehaviour:
   player: {fileID: 940173942754266890, guid: 0f0bc997e6443f8428effb089bd37559, type: 3}
   teleporterPrefab: {fileID: 8151653034600462255, guid: 60b83bc3ff39ae34fb12facb0e31998d,
     type: 3}
-  roomCount: 10
+  roomCount: 14
   startRoomPrefab: {fileID: 5404491850618832485, guid: 53b69903c83d95843bc35e34224634d4,
     type: 3}
   bossRoomPrefab: {fileID: 5167195408827501112, guid: fd073c381031b6f4793d96a928476281,

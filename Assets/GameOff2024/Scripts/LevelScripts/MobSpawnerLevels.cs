@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class MobSpawnerLevels : MonoBehaviour
 {
@@ -22,9 +23,32 @@ public class MobSpawnerLevels : MonoBehaviour
     [Header("Wave Settings")]
     public List<WaveConfig> waves;              // Configuration for each wave
 
+    [Header("UI Integration")]
+    public BuffSelectionUI buffSelectionUI; // Reference to the buff selection UI
+
+    [Header("Player Reference")]
+    public Transform player; // Reference to the player's transform
+    public Transform nextRoomPosition; // The position of the next room
+
+    [Header("Spherecast Settings")]
+    public float detectionRadius = 5f;       // Radius of the sphere
+    public float detectionDistance = 20f;   // Distance to cast the sphere
+    public LayerMask detectionLayer;        // Layer mask for detecting the player
+    public event Action OnPlayerDetected;      // Event triggered when player is detected
+
+    private bool playerDetected = false;    // Tracks if the player is detected
+
     private int currentWave = 0;                // Tracks the current wave number
     private bool spawning = false;              // Prevents overlapping wave spawns
     private List<GameObject> activeEnemies = new List<GameObject>(); // Tracks active enemies
+
+    public GameObject buffSelectionPrefab; // Assign this prefab in the Inspector
+
+    private GameObject buffSelectionUIInstance;
+
+    public DungeonGenerator dungeonGenerator; // Replace RoomGeneration with your actual room generation script's class name
+
+
 
     [System.Serializable]
     public class MobVariant
@@ -51,6 +75,32 @@ public class MobSpawnerLevels : MonoBehaviour
     void Start()
     {
         StartSpawning();
+        OnPlayerDetected += StartSpawning;
+    }
+
+    void Update()
+    {
+        SpherecastForPlayer();
+    }
+
+
+    private void SpherecastForPlayer()
+    {
+        // Perform a spherecast to check for the player
+        Ray ray = new Ray(transform.position, Vector3.forward); // Adjust direction as needed
+        if (Physics.SphereCast(ray, detectionRadius, out RaycastHit hit, detectionDistance, detectionLayer))
+        {
+            if (!playerDetected && hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("[MobSpawner] Player detected by spherecast.");
+                playerDetected = true;
+                OnPlayerDetected?.Invoke(); // Trigger the spawning event
+            }
+        }
+        else
+        {
+            playerDetected = false; // Reset detection if the player is no longer in range
+        }
     }
 
     public void StartSpawning()
@@ -108,7 +158,21 @@ public class MobSpawnerLevels : MonoBehaviour
         Debug.Log("[MobSpawner] All waves completed.");
     }
 
+    private IEnumerator WaitForEnemiesToBeDefeated()
+    {
+        float elapsedTime = 0f;
+        while (activeEnemies.Count > 0 && elapsedTime < 30f) // Check for a maximum of 30 seconds
+        {
+            Debug.Log($"[MobSpawner] Waiting for all enemies to be defeated. Active enemies: {activeEnemies.Count}");
+            yield return new WaitForSeconds(1f);
+            elapsedTime += 1f;
+        }
 
+        if (activeEnemies.Count > 0)
+        {
+            Debug.LogWarning("[MobSpawner] Timeout reached, but some enemies are still active.");
+        }
+    }
 
     private void SpawnMob(SpawnConfig spawnConfig)
     {
@@ -145,7 +209,7 @@ public class MobSpawnerLevels : MonoBehaviour
     {
         for (int i = 0; i < 10; i++) // Try up to 10 times to find a valid NavMesh point
         {
-            Vector3 randomPoint = center + Random.insideUnitSphere * radius;
+            Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * radius;
             randomPoint.y = center.y; // Keep the same height
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, NavMesh.AllAreas))
             {
@@ -154,6 +218,80 @@ public class MobSpawnerLevels : MonoBehaviour
         }
         Debug.LogWarning("[MobSpawner] Could not find a valid random NavMesh point.");
         return Vector3.zero;
+    }
+
+    private void ShowBuffSelectionUI()
+    {
+        if (buffSelectionPrefab != null)
+        {
+            // Instantiate the UI prefab
+            buffSelectionUIInstance = Instantiate(buffSelectionPrefab, transform);
+
+            // Initialize the BuffSelectionUI
+            BuffSelectionUI buffUI = buffSelectionUIInstance.GetComponent<BuffSelectionUI>();
+            if (buffUI != null)
+            {
+                buffUI.DisplayBuffOptions(ApplySelectedBuffAndTeleport);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[MobSpawner] Buff selection UI prefab is not assigned!");
+        }
+    }
+
+    private void ApplySelectedBuffAndTeleport(int buffIndex)
+    {
+        Debug.Log($"Buff {buffIndex} selected and applied!");
+
+        // Destroy the BuffSelection UI
+        if (buffSelectionUIInstance != null)
+        {
+            Destroy(buffSelectionUIInstance);
+        }
+
+        // Delegate teleportation logic to the dungeonGenerator
+        if (dungeonGenerator != null)
+        {
+            dungeonGenerator.TeleportPlayerToNextRoom();
+        }
+        else
+        {
+            Debug.LogWarning("Dungeon Generator is not assigned in MobSpawnerLevels!");
+        }
+    }
+
+
+
+    private void ApplyBuff(int buffIndex)
+    {
+        switch (buffIndex)
+        {
+            case 0:
+                Debug.Log("[Buff] Player chose Buff 1: Increased Health!");
+                break;
+
+            case 1:
+                Debug.Log("[Buff] Player chose Buff 2: Increased Damage!");
+                break;
+
+            default:
+                Debug.LogWarning("[Buff] Invalid buff index selected.");
+                break;
+        }
+    }
+
+    private void TeleportToNextRoom()
+    {
+        if (player != null && nextRoomPosition != null)
+        {
+            player.position = nextRoomPosition.position;
+            Debug.Log("[MobSpawner] Teleported player to the next room!");
+        }
+        else
+        {
+            Debug.LogWarning("[MobSpawner] Player or next room position is not assigned!");
+        }
     }
 
     private void OnDrawGizmos()
