@@ -20,6 +20,9 @@ public class UIScript : MonoBehaviour
     [SerializeField] private TMP_Text rocketMagazineSize;
     [SerializeField] private TMP_Text rocketAccumulatedShots;
 
+    [SerializeField] private Image rocketIcon;
+    [SerializeField] private Image minigunIcon;
+
     [Header("Data References")]
     public PlayerStatusSO playerStatusSO;
 
@@ -40,9 +43,15 @@ public class UIScript : MonoBehaviour
         minigunCurrentAmmo.text = weaponManager.GetMinigunAmmo().ToString();
         minigunMagazineSize.text = playerStatusSO.MinigunMagazineSize.ToString();
 
+        minigunIcon.fillAmount = (float)weaponManager.GetMinigunAmmo() / (float)playerStatusSO.MinigunMagazineSize;
+
+        Debug.Log("minigun: " + weaponManager.GetMinigunAmmo() + ", " + playerStatusSO.MinigunMagazineSize);
+
         rocketCurrentAmmo.text = weaponManager.GetRocketAmmo().ToString();
         rocketMagazineSize.text = playerStatusSO.RocketMagazineSize.ToString();
         rocketAccumulatedShots.text = weaponManager.GetRocketAccumulatedShots().ToString();
+
+        rocketIcon.fillAmount = weaponManager.rocketRearmFill;
 
         currentHealth.text = Mathf.RoundToInt(playerStatusManager.GetCurrentHealth()).ToString();
         currentShield.text = Mathf.RoundToInt(playerStatusManager.GetCurrentShield()).ToString();
