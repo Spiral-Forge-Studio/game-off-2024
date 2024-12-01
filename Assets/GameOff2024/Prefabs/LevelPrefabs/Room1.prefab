@@ -636,7 +636,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.65, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7730241674967483711}
@@ -659,7 +659,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _buffspawner: {fileID: 5619717611623658856}
-  totalWaves: 3
+  totalWaves: 2
   timeBetweenWaves: 2
   timeBetweenSpawns: 0.2
   enableRandomSpawn: 1
@@ -681,34 +681,35 @@ MonoBehaviour:
     spawnConfigs:
     - variant:
         name: Shotgun
-        prefab: {fileID: 834916327166278781, guid: 0bf65651be466bd4c96ec9c53e4b5b36,
+        prefab: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 3
+      mobCount: 2
     - variant:
         name: Rocket
-        prefab: {fileID: 1234330488699831009, guid: 5ed8d08f25d035b4c8e2a381e61ff429,
+        prefab: {fileID: 3640743503408750881, guid: 72ddcfef422bef94690c203ae5730a6c,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 3
+      mobCount: 2
   - waveName: Riflers
     spawnConfigs:
     - variant:
         name: Rifling
-        prefab: {fileID: 1119717829361681369, guid: fcf9dcc67dabbf140b86b29ff44cc15b,
+        prefab: {fileID: 8705385775131044220, guid: 297ddf0ae20709e4c84a415f4bc7e750,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 6
+      mobCount: 2
   buffSelectionUI: {fileID: 0}
   player: {fileID: 0}
   nextRoomPosition: {fileID: 0}
-  detectionRadius: 5
-  detectionDistance: 20
+  detectionRadius: 20.8
+  detectionDistance: 0
   detectionLayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 8
   buffSelectionPrefab: {fileID: 0}
   dungeonGenerator: {fileID: 0}
+  isActive: 0
 --- !u!1 &8048600815772145780
 GameObject:
   m_ObjectHideFlags: 0
@@ -770,7 +771,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 0e9c515c6b128a642bf9165a32518346, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 7f19305335c47604196a4024c018b50f, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &8116007492659961967
 GameObject:

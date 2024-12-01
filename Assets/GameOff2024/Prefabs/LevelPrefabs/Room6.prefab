@@ -936,8 +936,8 @@ MonoBehaviour:
   timeBetweenWaves: 2
   timeBetweenSpawns: 0.2
   enableRandomSpawn: 1
-  randomSpawnCenter: {x: 3.56, y: 0, z: 0}
-  randomSpawnRadius: 35
+  randomSpawnCenter: {x: 2.46, y: 0, z: 0}
+  randomSpawnRadius: 48.8
   rangedVariants:
   - name: 
     prefab: {fileID: 8705385775131044220, guid: 297ddf0ae20709e4c84a415f4bc7e750,
@@ -968,6 +968,7 @@ MonoBehaviour:
     m_Bits: 0
   buffSelectionPrefab: {fileID: 0}
   dungeonGenerator: {fileID: 0}
+  isActive: 0
 --- !u!1 &5630499668070955050
 GameObject:
   m_ObjectHideFlags: 0
