@@ -74,12 +74,12 @@ GameObject:
   - component: {fileID: 1844816790277461692}
   - component: {fileID: 8285242395947487546}
   m_Layer: 0
-  m_Name: BufSpawner
+  m_Name: BuffSpawner
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1844816790277461692
 Transform:
   m_ObjectHideFlags: 0
@@ -164,6 +164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1033bf60e1b0f5249be8ee7d99e83290, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _buffspawner: {fileID: 695461818638061056}
   totalWaves: 3
   timeBetweenWaves: 2
   timeBetweenSpawns: 0.2

@@ -6,6 +6,9 @@ using System;
 
 public class MobSpawnerLevels : MonoBehaviour
 {
+    [Header("Buff Spawner")]
+    [SerializeField] private GameObject _buffspawner;
+
     [Header("Spawner Settings")]
     public int totalWaves = 3;                  // Total number of waves
     public float timeBetweenWaves = 5f;         // Delay between waves (after all enemies are defeated)
@@ -49,6 +52,9 @@ public class MobSpawnerLevels : MonoBehaviour
     public DungeonGenerator dungeonGenerator; // Replace RoomGeneration with your actual room generation script's class name
 
 
+    
+
+
 
     [System.Serializable]
     public class MobVariant
@@ -74,6 +80,8 @@ public class MobSpawnerLevels : MonoBehaviour
 
     void Start()
     {
+        //_buffspawner = GameObject.Find("BuffSpawner");
+        _buffspawner.SetActive(false);
         StartSpawning();
         OnPlayerDetected += StartSpawning;
     }
@@ -156,6 +164,7 @@ public class MobSpawnerLevels : MonoBehaviour
 
         spawning = false;
         Debug.Log("[MobSpawner] All waves completed.");
+        _buffspawner.SetActive(true);
     }
 
     private IEnumerator WaitForEnemiesToBeDefeated()
