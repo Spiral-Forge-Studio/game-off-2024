@@ -552,6 +552,7 @@ Transform:
   - {fileID: 7791340375290024972}
   - {fileID: 1473950292256243732}
   - {fileID: 535391904467551013}
+  - {fileID: 7821849778208427386}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8935992314233180124
@@ -680,6 +681,58 @@ Transform:
   m_Children: []
   m_Father: {fileID: 1544281232114023807}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4028366767323201042
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7821849778208427386}
+  - component: {fileID: 586392657160892698}
+  m_Layer: 0
+  m_Name: BuffSpawner
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7821849778208427386
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028366767323201042}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -1.7218056, y: 0.67349994, z: -8.083302}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1544281232114023807}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &586392657160892698
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4028366767323201042}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b7917722ccd916b44a724546401545e6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  buffPrefab: {fileID: 3377402512401837716, guid: 8588cf2ecfe54264e949ca4986222df1,
+    type: 3}
+  spawnPoint: {fileID: 1737991628391362672}
+  spawnInterval: 5
+  spawnRadius: 5
+  buffCount: 3
+  playerStats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  BossStatusSO: {fileID: 11400000, guid: 0946982c16d546b40b9a720e261c602e, type: 2}
 --- !u!1 &4152430688881126604
 GameObject:
   m_ObjectHideFlags: 0
