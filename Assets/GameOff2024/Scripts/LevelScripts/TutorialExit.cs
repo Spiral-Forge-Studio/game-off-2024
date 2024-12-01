@@ -4,11 +4,16 @@ using UnityEngine;
 public class TutorialExit : MonoBehaviour
 {
     public GameObject player; // Reference to the player GameObject
-    public DungeonGenerator dungeonGenerator; // Reference to the Room Generator
+    private DungeonGenerator dungeonGenerator; // Reference to the Room Generator
+
+    private void Awake()
+    {
+        dungeonGenerator = FindObjectOfType<DungeonGenerator>();
+    }
+
 
     private void OnTriggerEnter(Collider other)
     {
-
         Debug.Log($"Entered Collider. Triggered by: {other.gameObject.name}, Player: {player.name}");
 
         PlayerKCC playerKCC = player.GetComponent<PlayerKCC>();

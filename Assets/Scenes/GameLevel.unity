@@ -1592,6 +1592,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6013484886694487563, guid: 444a7cdd855edf542bec6e77c49db3e2,
         type: 3}
+      propertyPath: playerKCC
+      value: 
+      objectReference: {fileID: 589726306}
+    - target: {fileID: 6013484886694487563, guid: 444a7cdd855edf542bec6e77c49db3e2,
+        type: 3}
       propertyPath: roomCount
       value: 5
       objectReference: {fileID: 0}

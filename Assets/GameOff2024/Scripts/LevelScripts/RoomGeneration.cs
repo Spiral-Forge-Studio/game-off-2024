@@ -37,6 +37,8 @@ public class DungeonGenerator : MonoBehaviour
 
 
     }
+    public PlayerKCC playerKCC;
+
     public GameObject player; // Reference to the player GameObject
 
     public GameObject teleporterPrefab; // Assign this in the Unity Editor
@@ -82,6 +84,8 @@ public class DungeonGenerator : MonoBehaviour
             // Connect the current room to the next room
             dungeon[i].ConnectTo(dungeon[i + 1]);
         }
+
+
 
         // Connect the last regular room to the boss room
         dungeon[roomCount - 2].ConnectTo(dungeon[roomCount - 1]);
@@ -142,6 +146,8 @@ public class DungeonGenerator : MonoBehaviour
                 {
                     startRoom.ConnectedRooms.Add(1); // Add connection to Room ID 1
                 }
+
+                SetCurrentRoom(startRoom);
             }
 
 
@@ -183,7 +189,6 @@ public class DungeonGenerator : MonoBehaviour
                 Debug.LogWarning($"Player spawn point not found for Room {dungeon[i].Id}!");
             }
         }
-
 
 
         // Draw connections and add teleporters
@@ -261,6 +266,8 @@ public class DungeonGenerator : MonoBehaviour
         {
             Debug.LogWarning("BuffSelectionUI could not be found in the scene!");
         }
+
+        this.roomObjects = roomObjects;
     }
 
 
@@ -321,6 +328,9 @@ public class DungeonGenerator : MonoBehaviour
     public void TeleportPlayerToNextRoom()
     {
         Debug.Log("Teleport method entered!");
+
+        Debug.Log(currentRoom.Type + ", " + currentRoom.ConnectedRooms.Count);
+
         if (currentRoom != null && currentRoom.ConnectedRooms.Count > 0)
         {
             Debug.Log($"Current Room: {currentRoom.Id}, Connected Rooms Count: {currentRoom.ConnectedRooms.Count}");
@@ -328,6 +338,7 @@ public class DungeonGenerator : MonoBehaviour
             int nextRoomId = currentRoom.ConnectedRooms[0];
             Debug.Log($"Attempting to teleport to Room {nextRoomId}");
             Debug.Log($"Next Room ID: {nextRoomId}");
+
             if (roomObjects.ContainsKey(nextRoomId))
             {
                 GameObject nextRoomObject = roomObjects[nextRoomId];
@@ -336,8 +347,7 @@ public class DungeonGenerator : MonoBehaviour
                 if (spawnPoint != null)
                 {
                     Debug.Log($"PlayerSpawn found at position {spawnPoint.position}");
-                    PlayerKCC playerKCC = player.GetComponent<PlayerKCC>();
-                    if (player != null)
+                    if (playerKCC != null)
                     {
                         playerKCC.Motor.SetPosition(spawnPoint.position);
                         Debug.Log($"Player teleported to Room {nextRoomId} at position {spawnPoint.position}");
@@ -356,7 +366,9 @@ public class DungeonGenerator : MonoBehaviour
             }
             else
             {
+                Debug.Log("roomsnum " + roomObjects.Count);
                 Debug.LogError($"Room {nextRoomId} does not exist in roomObjects!");
+                
             }
         }
         else

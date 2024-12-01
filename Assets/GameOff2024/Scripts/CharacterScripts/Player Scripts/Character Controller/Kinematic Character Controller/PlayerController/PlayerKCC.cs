@@ -150,7 +150,9 @@ namespace KinematicCharacterController
 
             _preventFalling = false;
         }
+
         public PlayerStatusSO playerStats;
+
         private void Start()
         {
             Motor.SetCapsuleCollisionsActivation(true);
