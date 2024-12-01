@@ -22773,7 +22773,6 @@ MonoBehaviour:
     m_Bits: 0
   buffSelectionPrefab: {fileID: 0}
   dungeonGenerator: {fileID: 0}
-  isActive: 0
 --- !u!1 &4331114550732521451
 GameObject:
   m_ObjectHideFlags: 0

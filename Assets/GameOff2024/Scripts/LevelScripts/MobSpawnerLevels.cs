@@ -51,7 +51,7 @@ public class MobSpawnerLevels : MonoBehaviour
 
     public DungeonGenerator dungeonGenerator; // Replace RoomGeneration with your actual room generation script's class name
 
-    public Boolean isActive;
+
     
 
 
@@ -94,15 +94,10 @@ public class MobSpawnerLevels : MonoBehaviour
 
     private void SpherecastForPlayer()
     {
-        if (!isActive) return; // Skip detection if the spawner is inactive
         // Perform a spherecast to check for the player
         Ray ray = new Ray(transform.position, Vector3.forward); // Adjust direction as needed
-
-        Debug.Log($"[MobSpawner] Spherecast starting at {transform.position} with radius {detectionRadius} and distance {detectionDistance}");
         if (Physics.SphereCast(ray, detectionRadius, out RaycastHit hit, detectionDistance, detectionLayer))
         {
-            Debug.Log($"[MobSpawner] Spherecast hit {hit.collider.name}");
-
             if (!playerDetected && hit.collider.CompareTag("Player"))
             {
                 Debug.Log("[MobSpawner] Player detected by spherecast.");
@@ -112,8 +107,6 @@ public class MobSpawnerLevels : MonoBehaviour
         }
         else
         {
-            Debug.Log("[MobSpawner] No player detected by spherecast.");
-
             playerDetected = false; // Reset detection if the player is no longer in range
         }
     }
@@ -149,13 +142,7 @@ public class MobSpawnerLevels : MonoBehaviour
 
             // Wait until all enemies are defeated, with a safety timeout
             float elapsedTime = 0f;
-
-            float waveTimeout = 30f; // Timeout duration
-            float waveStartTime = Time.time;
-
-            // Wait before starting the next wave
-            yield return new WaitUntil(() => activeEnemies.Count == 0 || Time.time - waveStartTime > waveTimeout);
-            while (activeEnemies.Count > 0 && elapsedTime < 15f) // Check for a maximum of 30 seconds
+            while (activeEnemies.Count > 0 && elapsedTime < 30f) // Check for a maximum of 30 seconds
             {
                 Debug.Log($"[MobSpawner] Waiting for all enemies to be defeated. Active enemies: {activeEnemies.Count}");
                 yield return new WaitForSeconds(1f);
@@ -169,13 +156,15 @@ public class MobSpawnerLevels : MonoBehaviour
             else
             {
                 Debug.Log($"[MobSpawner] All enemies defeated. Starting next wave in {timeBetweenWaves} seconds.");
-                _buffspawner.SetActive(true);
             }
+
+            // Wait before starting the next wave
+            yield return new WaitForSeconds(timeBetweenWaves);
         }
 
         spawning = false;
         Debug.Log("[MobSpawner] All waves completed.");
-        //_buffspawner.SetActive(true);
+        _buffspawner.SetActive(true);
     }
 
     private IEnumerator WaitForEnemiesToBeDefeated()
@@ -219,9 +208,6 @@ public class MobSpawnerLevels : MonoBehaviour
         GameObject spawnedMob = Instantiate(spawnConfig.variant.prefab, spawnPosition, Quaternion.identity);
         activeEnemies.Add(spawnedMob);
 
-        Debug.Log($"[MobSpawner] Active enemies count: {activeEnemies.Count}");
-
-
         // Remove from activeEnemies when destroyed
         spawnedMob.GetComponent<EnemyTracker>().onDestroyed += () => activeEnemies.Remove(spawnedMob);
 
@@ -243,7 +229,66 @@ public class MobSpawnerLevels : MonoBehaviour
         return Vector3.zero;
     }
 
-   
+    private void ShowBuffSelectionUI()
+    {
+        if (buffSelectionPrefab != null)
+        {
+            // Instantiate the UI prefab
+            buffSelectionUIInstance = Instantiate(buffSelectionPrefab, transform);
+
+            // Initialize the BuffSelectionUI
+            BuffSelectionUI buffUI = buffSelectionUIInstance.GetComponent<BuffSelectionUI>();
+            if (buffUI != null)
+            {
+                buffUI.DisplayBuffOptions(ApplySelectedBuffAndTeleport);
+            }
+        }
+        else
+        {
+            Debug.LogWarning("[MobSpawner] Buff selection UI prefab is not assigned!");
+        }
+    }
+
+    private void ApplySelectedBuffAndTeleport(int buffIndex)
+    {
+        Debug.Log($"Buff {buffIndex} selected and applied!");
+
+        // Destroy the BuffSelection UI
+        if (buffSelectionUIInstance != null)
+        {
+            Destroy(buffSelectionUIInstance);
+        }
+
+        // Delegate teleportation logic to the dungeonGenerator
+        if (dungeonGenerator != null)
+        {
+            dungeonGenerator.TeleportPlayerToNextRoom();
+        }
+        else
+        {
+            Debug.LogWarning("Dungeon Generator is not assigned in MobSpawnerLevels!");
+        }
+    }
+
+
+
+    private void ApplyBuff(int buffIndex)
+    {
+        switch (buffIndex)
+        {
+            case 0:
+                Debug.Log("[Buff] Player chose Buff 1: Increased Health!");
+                break;
+
+            case 1:
+                Debug.Log("[Buff] Player chose Buff 2: Increased Damage!");
+                break;
+
+            default:
+                Debug.LogWarning("[Buff] Invalid buff index selected.");
+                break;
+        }
+    }
 
     private void TeleportToNextRoom()
     {
@@ -258,23 +303,26 @@ public class MobSpawnerLevels : MonoBehaviour
         }
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
+        if (enableRandomSpawn)
+        {
+            Gizmos.color = Color.green;
+            Gizmos.DrawWireSphere(randomSpawnCenter, randomSpawnRadius);
+        }
 
-        // Start position of the spherecast
-        Vector3 start = transform.position;
+        if (waves == null) return;
 
-        // End position of the spherecast
-        Vector3 end = transform.position + Vector3.forward * detectionDistance; // Adjust direction if needed
-
-        // Draw the start sphere
-        Gizmos.DrawWireSphere(start, detectionRadius);
-
-        // Draw the end sphere
-        Gizmos.DrawWireSphere(end, detectionRadius);
-
-        // Draw a connecting line between start and end
-        Gizmos.DrawLine(start, end);
+        foreach (var wave in waves)
+        {
+            foreach (var spawnConfig in wave.spawnConfigs)
+            {
+                if (spawnConfig.spawnPoint != null)
+                {
+                    Gizmos.color = Color.red;
+                    Gizmos.DrawSphere(spawnConfig.spawnPoint.position, 0.5f);
+                }
+            }
+        }
     }
 }
