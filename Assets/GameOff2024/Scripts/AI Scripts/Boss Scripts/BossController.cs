@@ -79,6 +79,9 @@ public class BossController : MonoBehaviour
         _agent = GetComponent<NavMeshAgent>();
         _playerDetector = GetComponent<PlayerDetector>();
         _bossparam = GetComponent<BossAgentParameters>();
+        BOSS = GameObject.Find("Boss_1");
+        _playerpos = GameObject.Find("Player Controller");
+        _roomcenter = GameObject.Find("Waypoint (Center)");
         #endregion
 
         _statemachine = new StateMachine();

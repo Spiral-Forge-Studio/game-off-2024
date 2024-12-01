@@ -22699,12 +22699,13 @@ MonoBehaviour:
   randomSpawnRadius: 20
   rangedVariants:
   - name: 
-    prefab: {fileID: 1119717829361681369, guid: fcf9dcc67dabbf140b86b29ff44cc15b,
+    prefab: {fileID: 8705385775131044220, guid: 297ddf0ae20709e4c84a415f4bc7e750,
       type: 3}
   - name: 
-    prefab: {fileID: 834916327166278781, guid: 0bf65651be466bd4c96ec9c53e4b5b36, type: 3}
+    prefab: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,
+      type: 3}
   - name: 
-    prefab: {fileID: 1234330488699831009, guid: 5ed8d08f25d035b4c8e2a381e61ff429,
+    prefab: {fileID: 3640743503408750881, guid: 72ddcfef422bef94690c203ae5730a6c,
       type: 3}
   meleeVariants: []
   waves:
@@ -22763,6 +22764,11 @@ MonoBehaviour:
   buffSelectionUI: {fileID: 0}
   player: {fileID: 0}
   nextRoomPosition: {fileID: 0}
+  detectionRadius: 5
+  detectionDistance: 20
+  detectionLayer:
+    serializedVersion: 2
+    m_Bits: 0
   buffSelectionPrefab: {fileID: 0}
   dungeonGenerator: {fileID: 0}
 --- !u!1 &4331114550732521451
