@@ -179,5 +179,10 @@ public class AudioManager : MonoBehaviour
         musicSource.gameObject.transform.SetParent(playerTransform, true);
         musicNonLoopSource.gameObject.transform.SetParent(playerTransform, true);
         UIAudioSource.gameObject.transform.SetParent(playerTransform, true);
+
+        musicSource.transform.position = playerTransform.position;
+        musicNonLoopSource.transform.position = playerTransform.position;
+        UIAudioSource.transform.position = playerTransform.position;
+
     }
 }
