@@ -636,7 +636,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 1.65, y: 1, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 7730241674967483711}
@@ -684,13 +684,13 @@ MonoBehaviour:
         prefab: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 3
+      mobCount: 2
     - variant:
         name: Rocket
         prefab: {fileID: 3640743503408750881, guid: 72ddcfef422bef94690c203ae5730a6c,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 3
+      mobCount: 2
   - waveName: Riflers
     spawnConfigs:
     - variant:
@@ -698,7 +698,7 @@ MonoBehaviour:
         prefab: {fileID: 8705385775131044220, guid: 297ddf0ae20709e4c84a415f4bc7e750,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 6
+      mobCount: 2
   buffSelectionUI: {fileID: 0}
   player: {fileID: 0}
   nextRoomPosition: {fileID: 0}
@@ -771,7 +771,7 @@ MonoBehaviour:
   m_OverrideVoxelSize: 0
   m_VoxelSize: 0.16666667
   m_MinRegionArea: 2
-  m_NavMeshData: {fileID: 23800000, guid: 0e9c515c6b128a642bf9165a32518346, type: 2}
+  m_NavMeshData: {fileID: 23800000, guid: 7f19305335c47604196a4024c018b50f, type: 2}
   m_BuildHeightMesh: 0
 --- !u!1 &8116007492659961967
 GameObject:
