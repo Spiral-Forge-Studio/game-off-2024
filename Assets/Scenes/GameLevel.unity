@@ -122,6 +122,52 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &7093407
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7093409}
+  - component: {fileID: 7093408}
+  m_Layer: 0
+  m_Name: Pos
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &7093408
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093407}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4ab57620ff9406e41b177ff5a901928c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _player: {fileID: 589726306}
+  _gameoverUI: {fileID: 3848247720420629470}
+--- !u!4 &7093409
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7093407}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.97, z: -10.98}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!4 &277071724 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6648992991014048106, guid: 0f0bc997e6443f8428effb089bd37559,
@@ -234,7 +280,7 @@ PrefabInstance:
     - target: {fileID: 8645524843151684744, guid: fd073c381031b6f4793d96a928476281,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 83
+      value: 86
       objectReference: {fileID: 0}
     - target: {fileID: 8928634917838553147, guid: fd073c381031b6f4793d96a928476281,
         type: 3}
@@ -249,7 +295,7 @@ PrefabInstance:
     - target: {fileID: 9013764205701653686, guid: fd073c381031b6f4793d96a928476281,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 83
+      value: 86
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -1580,7 +1626,7 @@ PrefabInstance:
     - target: {fileID: 8177532275863030885, guid: 444a7cdd855edf542bec6e77c49db3e2,
         type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2656,6 +2702,7 @@ SceneRoots:
   - {fileID: 6129757206448591710}
   - {fileID: 1227673866118444424}
   - {fileID: 7120582057050955092}
+  - {fileID: 7093409}
   - {fileID: 5575299177246480500}
   - {fileID: 589726305}
   - {fileID: 6922764741003616234}
