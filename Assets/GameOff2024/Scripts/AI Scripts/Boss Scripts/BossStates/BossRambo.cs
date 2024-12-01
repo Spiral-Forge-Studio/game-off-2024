@@ -8,6 +8,7 @@ public class BossRambo : IState
 {
     private BossController _boss;
     private BossAgentParameters _parameters;
+    private Quaternion _originalrotation;
     private NavMeshAgent _agent;
     private Animator _animator;
     private GameObject _torso;
@@ -31,24 +32,35 @@ public class BossRambo : IState
         _boss._isLocked = true;
         _isComplete = false;
         _agent.speed = _parameters._WhilePattern;
+        _originalrotation = _torso.transform.localRotation;
         _boss.StartCoroutine(ExecuteRambo());
     }
 
-    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); }
+    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); _torso.transform.localRotation = _originalrotation; }
 
     private IEnumerator ExecuteRambo()
     {
         float Duration = 10f;//Duration of rambo
         float Start = Time.time;
-        GameObject player = GameObject.FindGameObjectWithTag("Player");
+        GameObject player = GameObject.Find("Player Controller");
         while (true)
         {
             if (Time.time - Start > Duration) { break; }
+            RotateTorsoTowards(player.transform.position);
             _boss.ShootMinigunAt(player.transform.position);
             _boss.ShootRocketAt(player.transform.position);
             yield return null;
         }
         yield return new WaitForSeconds(0.5f); // Simulate attack delay
         _isComplete = true;
+    }
+
+    private void RotateTorsoTowards(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = (targetPosition - _torso.transform.position).normalized;
+        directionToTarget.y = 0; // Ignore Y-axis to only rotate in the XZ plane
+
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 4f);
     }
 }
