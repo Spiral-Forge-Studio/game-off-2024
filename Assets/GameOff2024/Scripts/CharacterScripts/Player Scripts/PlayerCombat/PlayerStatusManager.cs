@@ -50,6 +50,7 @@ public class PlayerStatusManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _playerUI = GameObject.Find("PlayerStatusUI");
         minigunProjectileParams = new MinigunProjectileParams(
             playerStatus.MinigunProjectileSpeed,
             GetComputedDamage(EWeaponType.Minigun, false),
@@ -348,6 +349,6 @@ public class PlayerStatusManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f; // Reset time scale
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene
+        Application.Quit();
     }
 }
