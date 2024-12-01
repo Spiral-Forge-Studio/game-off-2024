@@ -138,12 +138,17 @@ PrefabInstance:
     - target: {fileID: 709402228952612056, guid: 6a13cb0d06c10e44e9ec772c17904789,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 20
+      value: 29
       objectReference: {fileID: 0}
     - target: {fileID: 4301054868648971455, guid: 6a13cb0d06c10e44e9ec772c17904789,
         type: 3}
       propertyPath: m_Name
       value: Room7
+      objectReference: {fileID: 0}
+    - target: {fileID: 4301054868648971455, guid: 6a13cb0d06c10e44e9ec772c17904789,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5562212714312105007, guid: 6a13cb0d06c10e44e9ec772c17904789,
         type: 3}
@@ -263,11 +268,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 3274438368230359427, guid: fd4b97c75e03c9649a832b344ffe4e8e,
-        type: 3}
-      propertyPath: m_Layer
-      value: 9
-      objectReference: {fileID: 0}
     - target: {fileID: 7728602980654080623, guid: fd4b97c75e03c9649a832b344ffe4e8e,
         type: 3}
       propertyPath: m_Name
@@ -276,7 +276,7 @@ PrefabInstance:
     - target: {fileID: 7728602980654080623, guid: fd4b97c75e03c9649a832b344ffe4e8e,
         type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

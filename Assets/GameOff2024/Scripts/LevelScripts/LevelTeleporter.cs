@@ -3,35 +3,30 @@ using UnityEngine;
 
 public class Teleporter : MonoBehaviour
 {
-    public Transform targetRoom;  // Target room to teleport the player to
+    public Transform targetRoom; // The next room's transform
+    private bool isActive = true;
 
-    // For debugging purposes, add targetRoomId
-    public int targetRoomId;
 
-    private void OnTriggerEnter(Collider other)
+    public void TeleportPlayer()
     {
-        Debug.Log(other.tag);
-        // Check if the player (or another object) enters the trigger collider
-        if (other.CompareTag("Player") && targetRoom != null)
+        if (isActive && targetRoom != null)
         {
-            Debug.Log("Teleporting");
-            TeleportPlayer(other.gameObject);
-        }
-    }
+            Debug.Log($"[Teleporter] Teleporting player to {targetRoom.name}");
 
-    private void TeleportPlayer(GameObject player)
-    {
-        // Teleport the player to the target room's position
-        if (targetRoom != null)
-        {
-            //player.transform.position = targetRoom.position;
-            PlayerKCC playerKCC = player.GetComponent<PlayerKCC>();
-            playerKCC.Motor.SetPosition(targetRoom.position);
-            Debug.Log($"Teleported player to Room {targetRoomId} at position {targetRoom.position}");
+            GameObject player = GameObject.FindWithTag("Player");
+            if (player != null)
+            {
+                PlayerKCC playerKCC = player.GetComponent<PlayerKCC>();
+                if (playerKCC != null)
+                {
+                    playerKCC.Motor.SetPosition(targetRoom.position);
+                    isActive = false;
+                }
+            }
         }
         else
         {
-            Debug.LogWarning("Target room is not set for this teleporter!");
+            Debug.LogWarning("[Teleporter] Teleporter is not active or targetRoom is not set.");
         }
     }
 }

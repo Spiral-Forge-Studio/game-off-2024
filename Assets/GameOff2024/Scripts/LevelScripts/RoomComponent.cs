@@ -9,9 +9,12 @@ public class RoomComponent : MonoBehaviour
 
     public void Initialize(DungeonGenerator.Room room, System.Action<DungeonGenerator.Room> onVisit)
     {
+        RoomId = room.Id;
         roomData = room;
         onVisitCallback = onVisit;
     }
+
+    public int RoomId { get; set; } // Room ID to link this component to the Room instance
 
     private void OnMouseDown()
     {
