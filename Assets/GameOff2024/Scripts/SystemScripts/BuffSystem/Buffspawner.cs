@@ -35,7 +35,7 @@ public class BuffSpawner : MonoBehaviour
     void Start()
     {
         //StartCoroutine(SpawnBuffAtIntervals());
-        playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
+        //playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
         buffpickedup = false;
         SpawnBuffs();
     }
