@@ -23,6 +23,7 @@ public class BuffSpawner : MonoBehaviour
             activeBuffs.Remove(buff);
             Destroy(buff);
             ApplyRandomBufftoBoss();
+            foreach (var item in activeBuffs) { Destroy(item); }
         }
         
     }
@@ -73,7 +74,7 @@ public class BuffSpawner : MonoBehaviour
                
             }
 
-            if (Time.time - timestart > 3)
+            if (Time.time - timestart > 3f)
             {
                 break;
             }
