@@ -684,13 +684,13 @@ MonoBehaviour:
         prefab: {fileID: 834916327166278781, guid: 0bf65651be466bd4c96ec9c53e4b5b36,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 3
+      mobCount: 2
     - variant:
         name: Rocket
         prefab: {fileID: 1234330488699831009, guid: 5ed8d08f25d035b4c8e2a381e61ff429,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 3
+      mobCount: 2
   - waveName: Riflers
     spawnConfigs:
     - variant:
@@ -698,7 +698,7 @@ MonoBehaviour:
         prefab: {fileID: 1119717829361681369, guid: fcf9dcc67dabbf140b86b29ff44cc15b,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 6
+      mobCount: 2
   buffSelectionUI: {fileID: 0}
   player: {fileID: 0}
   nextRoomPosition: {fileID: 0}

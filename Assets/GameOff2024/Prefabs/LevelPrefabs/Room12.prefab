@@ -127,7 +127,7 @@ MonoBehaviour:
         prefab: {fileID: 834916327166278781, guid: 0bf65651be466bd4c96ec9c53e4b5b36,
           type: 3}
       spawnPoint: {fileID: 0}
-      mobCount: 12
+      mobCount: 5
   buffSelectionUI: {fileID: 0}
   player: {fileID: 0}
   nextRoomPosition: {fileID: 0}
