@@ -1,76 +1,51 @@
-using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.UI;
+using TMPro;
 
-public class BuffUIManager : MonoBehaviour
+public class BuffMenuUIManager : MonoBehaviour
 {
-    [SerializeField] private GameObject buffUIPanel; // Panel for the buff menu
-    [SerializeField] private Transform contentParent; // Parent object for buff entries
-    [SerializeField] private GameObject buffEntryPrefab; // Prefab for each buff entry
-    [SerializeField] private BuffMenu buffMenu; // Reference to your BuffMenu SO
+    public BuffMenu buffMenu; // Reference to the BuffMenu ScriptableObject
+    public GameObject buffMenuPanel; // Reference to the UI Panel containing the buff text
+    public TextMeshProUGUI discoveredBuffsText; // Reference to the TextMeshPro element for discovered buffs
+    public TextMeshProUGUI undiscoveredBuffsText; // Reference to the TextMeshPro element for undiscovered buffs
 
-    private bool isPanelOpen = false;
+    private bool isMenuVisible = false;
 
-    private void Start()
+    void Start()
     {
-        buffUIPanel.SetActive(false);
-        PopulateBuffUI();
+        if (buffMenuPanel != null)
+        {
+            buffMenuPanel.SetActive(false); // Hide the panel initially
+        }
+
+        UpdateBuffTexts(); // Initialize text with current buff data
     }
 
-    private void Update()
+    void Update()
     {
+        // Toggle UI visibility with Tab key
         if (Input.GetKeyDown(KeyCode.Tab))
         {
-            ToggleBuffUI();
+            isMenuVisible = !isMenuVisible;
+            buffMenuPanel.SetActive(isMenuVisible);
+
+            if (isMenuVisible)
+            {
+                UpdateBuffTexts();
+            }
         }
     }
 
-    private void ToggleBuffUI()
+    /// <summary>
+    /// Updates the UI text with discovered and undiscovered buffs.
+    /// </summary>
+    void UpdateBuffTexts()
     {
-        isPanelOpen = !isPanelOpen;
-        buffUIPanel.SetActive(isPanelOpen);
+        // Get discovered and undiscovered buffs from the BuffMenu
+        var discoveredBuffs = buffMenu.GetDiscoveredBuffs();
+        var undiscoveredBuffs = buffMenu.GetUndiscoveredBuffs();
 
-        if (isPanelOpen)
-        {
-            RefreshBuffUI();
-        }
-    }
-
-    private void PopulateBuffUI()
-    {
-        // Clear existing entries
-        foreach (Transform child in contentParent)
-        {
-            Destroy(child.gameObject);
-        }
-
-        // Add discovered buffs
-        List<string> discoveredBuffs = buffMenu.GetDiscoveredBuffs();
-        foreach (var buffName in discoveredBuffs)
-        {
-            CreateBuffEntry(buffName, true);
-        }
-
-        // Add undiscovered buffs
-        List<string> undiscoveredBuffs = buffMenu.GetUndiscoveredBuffs();
-        foreach (var buffName in undiscoveredBuffs)
-        {
-            CreateBuffEntry(buffName, false);
-        }
-    }
-
-    private void CreateBuffEntry(string buffName, bool isDiscovered)
-    {
-        GameObject buffEntry = Instantiate(buffEntryPrefab, contentParent);
-        Text nameText = buffEntry.transform.Find("Name").GetComponent<Text>();
-        nameText.text = isDiscovered ? buffName : "???";
-
-        Text statusText = buffEntry.transform.Find("Status").GetComponent<Text>();
-        statusText.text = isDiscovered ? "Discovered" : "Undiscovered";
-    }
-
-    private void RefreshBuffUI()
-    {
-        PopulateBuffUI();
+        // Format and set the text
+        discoveredBuffsText.text = "Discovered Buffs (" + discoveredBuffs.Count + "/" + buffMenu.BuffStatuses.Count + "):\n" + string.Join("\n", discoveredBuffs);
+        //undiscoveredBuffsText.text = "Undiscovered Buffs:\n" + string.Join("\n", undiscoveredBuffs);
     }
 }
