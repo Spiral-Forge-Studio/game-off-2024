@@ -70,6 +70,8 @@ public class WeaponManager : MonoBehaviour
     public ParticleSystem minigunMuzzleSmoke;
     public ParticleSystem rocketMuzzleSmoke;
 
+    private bool minigunAnimPlaying;
+
     private void Awake()
     {
         FindAnyObjectByType<ProjectileManager>().AddProjectileShooter(minigunProjectileShooter);
@@ -85,6 +87,7 @@ public class WeaponManager : MonoBehaviour
         rocket_holdReleased = true;
         isRocketRearming = false;
         useOtherSource = false;
+        minigunAnimPlaying = false;
     }
 
     // Update is called once per frame
@@ -113,7 +116,13 @@ public class WeaponManager : MonoBehaviour
         {
             if (minigun_currentAmmo > 0)
             {
-                minigunAnimator.Play("Firing");
+                if (!minigunAnimPlaying)
+                {
+                    minigunAnimator.Play("Firing");
+                    minigunAnimPlaying = true;
+
+                }
+                //minigunAnimator.Play("Firing");
                 minigunMuzzleFlash.Play();
                 minigunMuzzleSmoke.Play();
 
@@ -145,7 +154,12 @@ public class WeaponManager : MonoBehaviour
         }
         else
         {
-            minigunAnimator.Play("Idle");
+            if (minigunAnimPlaying)
+            {
+                minigunAnimator.Play("Idle");
+                minigunAnimPlaying= false;
+            }
+
             minigunMuzzleFlash.Stop();
             minigunMuzzleSmoke.Stop();
         }
