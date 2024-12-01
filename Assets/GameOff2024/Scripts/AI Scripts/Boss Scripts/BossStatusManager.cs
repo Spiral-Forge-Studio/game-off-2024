@@ -15,7 +15,7 @@ public class BossStatusManager : MonoBehaviour
     [SerializeField] private float currentHealth;
     [SerializeField] private float currentShield;
 
-    public PlayerKCC BossKCC;
+    //public PlayerKCC BossKCC;
     public BossWeaponManager weaponManager;
     private UniqueBuffHandler uniqueBuffHandler;
 
@@ -40,7 +40,7 @@ public class BossStatusManager : MonoBehaviour
     private void Awake()
     {
         uniqueBuffHandler = GetComponent<UniqueBuffHandler>();
-        BossKCC = GameObject.Find("Player Controller").GetComponentInChildren<PlayerKCC>();
+        //BossKCC = GameObject.Find("Player Controller").GetComponentInChildren<PlayerKCC>();
     }
 
     // Start is called before the first frame update
@@ -74,7 +74,8 @@ public class BossStatusManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateBossKCCStats();
+        //UpdateBossKCCStats();
+
         if (currentShield > BossStatus.Shield)
         {
             currentShield = BossStatus.Shield;
@@ -106,11 +107,11 @@ public class BossStatusManager : MonoBehaviour
 
     #region -- Boss Status Stuff ---
 
-    private void UpdateBossKCCStats()
-    {
-        BossKCC._walkingSpeed = BossStatus.MoveSpeed;
-        BossKCC._dashInternalCooldown = BossStatus.DashCooldown;
-    }
+    //private void UpdateBossKCCStats()
+    //{
+    //    BossKCC._walkingSpeed = BossStatus.MoveSpeed;
+    //    BossKCC._dashInternalCooldown = BossStatus.DashCooldown;
+    //}
 
     /// <summary>
     /// Called when you want the Boss to take damage

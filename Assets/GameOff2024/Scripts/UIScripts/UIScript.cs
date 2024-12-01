@@ -45,8 +45,6 @@ public class UIScript : MonoBehaviour
 
         minigunIcon.fillAmount = (float)weaponManager.GetMinigunAmmo() / (float)playerStatusSO.MinigunMagazineSize;
 
-        Debug.Log("minigun: " + weaponManager.GetMinigunAmmo() + ", " + playerStatusSO.MinigunMagazineSize);
-
         rocketCurrentAmmo.text = weaponManager.GetRocketAmmo().ToString();
         rocketMagazineSize.text = playerStatusSO.RocketMagazineSize.ToString();
         rocketAccumulatedShots.text = weaponManager.GetRocketAccumulatedShots().ToString();

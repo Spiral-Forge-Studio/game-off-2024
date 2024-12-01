@@ -264,4 +264,11 @@ public class PlayerStatusSO : ScriptableObject
 
     #endregion
 
+    public void SpeedDebugger()
+    {
+        Debug.Log("movespeed base: " +  baseMoveSpeed);
+        Debug.Log("movespeed mult: " +  multipliers[EStatTypeMultiplier.MoveSpeedMultiplier]);
+        Debug.Log("movespeed flat: " + flatBonuses[EStatTypeFlatBonus.MoveSpeedFlatBonus]);
+    }
+
 }
