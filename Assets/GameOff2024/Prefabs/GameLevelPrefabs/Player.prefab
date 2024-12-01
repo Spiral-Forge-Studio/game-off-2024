@@ -14594,6 +14594,7 @@ MonoBehaviour:
   currentShield: 0
   playerKCC: {fileID: 0}
   weaponManager: {fileID: 0}
+  _playerUI: {fileID: 0}
   _gameOverPanel: {fileID: 0}
   minigun_landedCriticalHit: 0
   rocket_landedCriticalHit: 0

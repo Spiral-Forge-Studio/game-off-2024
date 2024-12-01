@@ -49,11 +49,6 @@ public class PlayerGroundedState : PlayerBaseState
 
     public override void UpdateRotation(ref Quaternion currentRotation, float deltaTime)
     {
-        Quaternion upperXRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
-        _ctx._upperBodyTransform.rotation = 
-            Quaternion.LookRotation(Vector3.ProjectOnPlane(_ctx._lookInputVector, Vector3.up)) * upperXRotation;
-
-
         // lower torso rotation
         if (_ctx._moveInputVector.sqrMagnitude > 0f && _ctx._orientationSharpness > 0f)
         {
@@ -68,6 +63,9 @@ public class PlayerGroundedState : PlayerBaseState
 
         Vector3 smoothedGravityDirLower = Vector3.Slerp(currentUp, -_ctx._gravity.normalized, 1 - Mathf.Exp(-_ctx._bonusOrientationSharpness * deltaTime));
         currentRotation = Quaternion.FromToRotation(currentUp, smoothedGravityDirLower) * currentRotation;
+
+        Quaternion upperXRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+        _ctx._upperBodyTransform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(_ctx._lookInputVector, Vector3.up)) * upperXRotation;
     }
 
     public override void CheckSwitchState()

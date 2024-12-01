@@ -8,10 +8,12 @@ public class UpperBodyPositionScript : MonoBehaviour
     [SerializeField] private float yOffset;
     [SerializeField] private float smoothing;
 
+
     void Update()
     {
-        Vector3 newPos = followTransform.position + Vector3.up * yOffset;
+        transform.position = followTransform.position + Vector3.up * yOffset;
+
+        //gameObject.transform.SetParent(followTransform, false);
         //transform.position = Vector3.Lerp(transform.position, newPos, Time.deltaTime * smoothing);
-        transform.position = newPos;
     }
 }
