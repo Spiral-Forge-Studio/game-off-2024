@@ -182,6 +182,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4232990216834203668, guid: 91696c4d0e6d24e4f9da28c32d6142b7,
         type: 3}
+      propertyPath: randomSpawnCenter.x
+      value: 80.02
+      objectReference: {fileID: 0}
+    - target: {fileID: 4232990216834203668, guid: 91696c4d0e6d24e4f9da28c32d6142b7,
+        type: 3}
       propertyPath: waves.Array.data[0].spawnConfigs.Array.data[0].variant.prefab
       value: 
       objectReference: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,
@@ -1014,6 +1019,34 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 23800000, guid: 753e168eabc4bf040997d90573dc2621,
         type: 2}
+    - target: {fileID: 5977578598580328152, guid: 8e6b90f5fe71a3f42a5fa56cb5ff8de4,
+        type: 3}
+      propertyPath: randomSpawnRadius
+      value: 27.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977578598580328152, guid: 8e6b90f5fe71a3f42a5fa56cb5ff8de4,
+        type: 3}
+      propertyPath: randomSpawnCenter.x
+      value: -9.97
+      objectReference: {fileID: 0}
+    - target: {fileID: 5977578598580328152, guid: 8e6b90f5fe71a3f42a5fa56cb5ff8de4,
+        type: 3}
+      propertyPath: waves.Array.data[0].spawnConfigs.Array.data[0].variant.prefab
+      value: 
+      objectReference: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,
+        type: 3}
+    - target: {fileID: 5977578598580328152, guid: 8e6b90f5fe71a3f42a5fa56cb5ff8de4,
+        type: 3}
+      propertyPath: waves.Array.data[0].spawnConfigs.Array.data[1].variant.prefab
+      value: 
+      objectReference: {fileID: 3640743503408750881, guid: 72ddcfef422bef94690c203ae5730a6c,
+        type: 3}
+    - target: {fileID: 5977578598580328152, guid: 8e6b90f5fe71a3f42a5fa56cb5ff8de4,
+        type: 3}
+      propertyPath: waves.Array.data[1].spawnConfigs.Array.data[0].variant.prefab
+      value: 
+      objectReference: {fileID: 8705385775131044220, guid: 297ddf0ae20709e4c84a415f4bc7e750,
+        type: 3}
     - target: {fileID: 8031406653233162303, guid: 8e6b90f5fe71a3f42a5fa56cb5ff8de4,
         type: 3}
       propertyPath: m_Name
@@ -1041,6 +1074,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_VersionIndex
       value: 41
+      objectReference: {fileID: 0}
+    - target: {fileID: 1907318065973276565, guid: 6a13cb0d06c10e44e9ec772c17904789,
+        type: 3}
+      propertyPath: randomSpawnCenter.x
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4301054868648971455, guid: 6a13cb0d06c10e44e9ec772c17904789,
         type: 3}
@@ -1188,6 +1226,16 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 513077401826357522, guid: e204fa13f28a2724c913b06fd69a0c13,
+        type: 3}
+      propertyPath: randomSpawnRadius
+      value: 23.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 513077401826357522, guid: e204fa13f28a2724c913b06fd69a0c13,
+        type: 3}
+      propertyPath: randomSpawnCenter.x
+      value: 246.4
+      objectReference: {fileID: 0}
     - target: {fileID: 1443086178994902089, guid: e204fa13f28a2724c913b06fd69a0c13,
         type: 3}
       propertyPath: m_Name
