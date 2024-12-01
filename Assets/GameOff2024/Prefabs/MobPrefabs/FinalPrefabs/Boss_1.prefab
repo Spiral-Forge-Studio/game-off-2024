@@ -5370,7 +5370,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -19.743488, y: 5.21, z: -7.415527}
-  m_LocalScale: {x: 0.61, y: 0.6309521, z: 0.632583}
+  m_LocalScale: {x: 0.6099995, y: 0.6309521, z: 0.6325824}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6335250213971639394}
@@ -5466,6 +5466,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BOSS: {fileID: 4947666222608796919}
+  _playerpos: {fileID: 0}
+  _roomcenter: {fileID: 0}
   _player: {fileID: 0}
   _bossparam: {fileID: 0}
   _statusManager: {fileID: 0}

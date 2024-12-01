@@ -40,6 +40,7 @@ public class BossStatusManager : MonoBehaviour
     private void Awake()
     {
         uniqueBuffHandler = GetComponent<UniqueBuffHandler>();
+        BossKCC = GameObject.Find("Player Controller").GetComponentInChildren<PlayerKCC>();
     }
 
     // Start is called before the first frame update
