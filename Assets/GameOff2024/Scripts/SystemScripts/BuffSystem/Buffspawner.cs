@@ -19,14 +19,12 @@ public class BuffSpawner : MonoBehaviour
     {
         if (activeBuffs.Contains(buff))
         {
-            Debug.Log("Removed " + buff.name);
             activeBuffs.Remove(buff);
             Destroy(buff);
             ApplyRandomBufftoBoss();
         }
         else
         {
-            Debug.Log("BUFF NOT IN ACTIVE BUFFS");
             Destroy(buff);
             ApplyRandomBufftoBoss();
             buffpickedup = true;
@@ -38,6 +36,7 @@ public class BuffSpawner : MonoBehaviour
     {
         //StartCoroutine(SpawnBuffAtIntervals());
         playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
+        buffpickedup = false;
         SpawnBuffs();
     }
 
@@ -46,7 +45,6 @@ public class BuffSpawner : MonoBehaviour
         //Debug.Log("There are " + activeBuffs.Count + " active buffs");
         if (buffpickedup)
         {
-            Debug.Log("BUFFPICKEDUP");
             GameObject buff = GameObject.FindWithTag("Buff");
             Destroy(buff);
         }

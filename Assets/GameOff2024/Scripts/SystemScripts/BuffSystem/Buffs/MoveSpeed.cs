@@ -8,7 +8,7 @@ public class MoveSpeedBuff : Buff
     public string buffname = "Swift Stride";
 
     public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 5f;
+    public float initialAmountMultiplier = 20f;
     public float consecutiveAmountFlat = 2f;
     public float consecutiveAmountMultiplier = 2f;
     public float scalingFactor;

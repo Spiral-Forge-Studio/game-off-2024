@@ -70,7 +70,7 @@ public class BuffManager : MonoBehaviour
 
                 ShowFloatingText(message, toBeBuffed.transform);
                 //put teleport function here
-                Debug.Log(message);
+                Debug.Log("BUFF TYPE: " + chosenBuff.getBuffType());
                 if (buffSpawner != null)
                 {
                     buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
