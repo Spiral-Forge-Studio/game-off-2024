@@ -18,6 +18,8 @@ public class BossController : MonoBehaviour
     private PlayerDetector _playerDetector;
 
     [SerializeField] private GameObject BOSS;
+    [SerializeField] private GameObject _playerpos;
+    [SerializeField] private GameObject _roomcenter;
 
     [SerializeField] private PlayerKCC _player;
 
@@ -86,6 +88,7 @@ public class BossController : MonoBehaviour
         _agent.stoppingDistance = 0f;
 
         #region ---Boss States---
+        var combat = new StartCombat(_playerpos, _roomcenter, _bosslower);
         var idle = new BossIdle(this, _agent, _bossparam, _bosslower, _upperbody);
         var rambo = new BossRambo(this, _agent, _bossparam, _bosslower, _upperbody);
         var spine = new BossSpine(this, _agent, _bossparam, _bosslower, _upperbody);
@@ -104,6 +107,7 @@ public class BossController : MonoBehaviour
         At(idle, rambo, () => _doRambo && idle.IsIdle);
         At(idle, spine, () => _doSpine && idle.IsIdle);
         At(idle, backshot, () => _doBackshot && idle.IsIdle);
+        At(combat, idle, () => combat.CombatStart);
 
         #endregion
 
@@ -120,8 +124,8 @@ public class BossController : MonoBehaviour
 
         timer = 0;
         MoveToCenter();
-        _statemachine.SetState(idle);
 
+        _statemachine.SetState(combat);
         void At(IState from, IState to, Func<bool> condition) => _statemachine.AddTransition(from, to, condition);
 
     }
@@ -174,7 +178,7 @@ public class BossController : MonoBehaviour
 
 
 
-        //SelectAttack();
+        SelectAttack();
 
     }
 
