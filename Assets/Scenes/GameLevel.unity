@@ -11577,6 +11577,11 @@ PrefabInstance:
       propertyPath: _shootpoints.Array.data[4]
       value: 
       objectReference: {fileID: 1742079414}
+    - target: {fileID: 1760040928553135741, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c6f20468da0ffe4bbccb8762efd10e2, type: 2}
     - target: {fileID: 1873942869852186936, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
         type: 3}
       propertyPath: m_LocalPosition.x
@@ -11627,11 +11632,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2518339434670809334, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c4fbff53fca7e045ab786b2c35acce5, type: 2}
+    - target: {fileID: 4635220742154459621, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 5c4fbff53fca7e045ab786b2c35acce5, type: 2}
     - target: {fileID: 4947666222608796919, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
         type: 3}
       propertyPath: m_Name
       value: Boss
       objectReference: {fileID: 0}
+    - target: {fileID: 6467918893564059929, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8c6f20468da0ffe4bbccb8762efd10e2, type: 2}
     - target: {fileID: 7468166055347829537, guid: 4a05bc5cda7b25f4cb23c39ef3030b11,
         type: 3}
       propertyPath: BossKCC
