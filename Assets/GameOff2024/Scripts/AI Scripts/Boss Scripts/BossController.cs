@@ -21,6 +21,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject _playerpos;
     [SerializeField] private GameObject _roomcenter;
     [SerializeField] private GameObject _bossUI;
+    [SerializeField] private GameObject _GameOverUI;
 
     [SerializeField] private PlayerKCC _player;
 
@@ -84,6 +85,10 @@ public class BossController : MonoBehaviour
         _playerpos = GameObject.Find("Player Controller");
         _roomcenter = GameObject.Find("Waypoint (Center)");
         _bossUI = GameObject.Find("BossStatusUI");
+        _GameOverUI = GameObject.Find("GameOverPanel");
+
+
+        _GameOverUI.SetActive(false);
 
         #endregion
 
@@ -200,6 +205,7 @@ public class BossController : MonoBehaviour
      if(BossCurrentHealth <= 0)
         {
             BOSS.SetActive(false);
+            _GameOverUI.SetActive(true);
             Debug.Log("Boss Destroyed");
         }   
     }

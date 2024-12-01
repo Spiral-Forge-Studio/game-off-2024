@@ -362,7 +362,7 @@ PrefabInstance:
     - target: {fileID: 8645524843151684744, guid: fd073c381031b6f4793d96a928476281,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 68
+      value: 77
       objectReference: {fileID: 0}
     - target: {fileID: 8928634917838553147, guid: fd073c381031b6f4793d96a928476281,
         type: 3}
@@ -377,7 +377,7 @@ PrefabInstance:
     - target: {fileID: 9013764205701653686, guid: fd073c381031b6f4793d96a928476281,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 68
+      value: 77
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -511,7 +511,7 @@ PrefabInstance:
     - target: {fileID: 7778897619339754986, guid: 0f0bc997e6443f8428effb089bd37559,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 7778897619339754986, guid: 0f0bc997e6443f8428effb089bd37559,
         type: 3}
@@ -1175,6 +1175,12 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 589726305}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1570519036 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8969172988148294540, guid: e183082d407f2c840acef7ade72a2a5f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1304506052427329386}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1753100212
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1615,6 +1621,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_AnchoredPosition.y
       value: 36.80005
+      objectReference: {fileID: 0}
+    - target: {fileID: 9065628387127296604, guid: e183082d407f2c840acef7ade72a2a5f,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -2178,6 +2189,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 6279829101597319737, guid: b98368f4588b5e34981533ceed68e2c6,
+        type: 3}
+      propertyPath: _playerUI
+      value: 
+      objectReference: {fileID: 1570519036}
     - target: {fileID: 6279829101597319737, guid: b98368f4588b5e34981533ceed68e2c6,
         type: 3}
       propertyPath: playerKCC
