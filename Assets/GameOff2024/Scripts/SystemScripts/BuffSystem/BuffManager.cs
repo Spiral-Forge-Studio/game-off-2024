@@ -74,8 +74,14 @@ public class BuffManager : MonoBehaviour
                 if (buffSpawner != null)
                 {
                     buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
+                   
+                }
+                else
+                {
+                    Debug.Log("MISSING BUFFSPAWNER");
                 }
                 Destroy(gameObject); // Destroy the buff GameObject
+
             }
         }
     }

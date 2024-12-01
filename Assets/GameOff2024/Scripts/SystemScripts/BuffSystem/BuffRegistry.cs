@@ -4,7 +4,7 @@ using UnityEngine;
 public static class BuffRegistry
 {
 
-    private static readonly Dictionary<string, Buff> availableBuffs = new Dictionary<string, Buff>();
+    public static readonly Dictionary<string, Buff> availableBuffs = new Dictionary<string, Buff>();
 
 
     public static readonly Dictionary<string, string> NameToBuffs = new Dictionary<string, string>()
@@ -59,6 +59,34 @@ public static class BuffRegistry
         {"Rocket Crit Rate Buff", "Rocket"},
         {"Rocket Crit Damage Buff", "Rocket"},
         {"Extra Rocket Magazine Clip", "Rocket"}
+    };
+
+
+    public static readonly Dictionary<string, string> GoodBadBuffsForBoss = new Dictionary<string, string>()
+    {
+        {"Steel - Plated Armor", "Good"},
+        {"Reinforced Shields", "Good"},
+        {"Nano Repair Kit", "Good"},
+        {"Rapid Shield Regeneration", "Good"},
+        {"Shield Regen Boost", "Good"},
+        {"Hardened Plating", "Good"},
+        {"Swift Stride", "Bad"},
+
+        {"Minigun Damage Boost", "Good"},
+        {"Minigun Bullet Deviation Angle Reduction", "Good"},
+        {"Quick Loader", "Bad"},
+        {"Minigun Projectile Speed Buff", "Good"},
+        {"Minigun Crit Rate Buff", "Good"},
+        {"Minigun Crit Damage Buff", "Good"},
+        {"Rapid Barrel Upgrade", "Good"},
+        {"Extra Magazine Clip", "Bad"},
+
+        {"Rocket Damage Boost", "Good"},
+        {"Rocket Explosion Radius Boost", "Good"},
+        {"Quick Loader Rocket", "Bad"},
+        {"Rocket Crit Rate Buff", "Good"},
+        {"Rocket Crit Damage Buff", "Good"},
+        {"Extra Rocket Magazine Clip", "Bad"}
     };
 
 
