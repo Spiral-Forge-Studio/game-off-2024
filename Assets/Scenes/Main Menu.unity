@@ -807,6 +807,30 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 1296426034}
+        m_TargetAssemblyTypeName: BuffMenuManager, Assembly-CSharp
+        m_MethodName: OnResetBuffHistoryButtonPressed
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1296426035}
+        m_TargetAssemblyTypeName: Resetbuffs, Assembly-CSharp
+        m_MethodName: ResetBuffs
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &669156042
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1677,6 +1701,7 @@ GameObject:
   - component: {fileID: 1296426032}
   - component: {fileID: 1296426031}
   - component: {fileID: 1296426034}
+  - component: {fileID: 1296426035}
   m_Layer: 5
   m_Name: Reset Buff History
   m_TagString: Untagged
@@ -1772,9 +1797,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1296426034}
+      - m_Target: {fileID: 1296426029}
         m_TargetAssemblyTypeName: BuffMenuManager, Assembly-CSharp
-        m_MethodName: OnResetBuffHistoryButtonPressed
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 1296426035}
+        m_TargetAssemblyTypeName: Resetbuffs, Assembly-CSharp
+        m_MethodName: ResetBuffs
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1835,6 +1872,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   buffMenu: {fileID: 11400000, guid: f76aa8fbb3a2e0c4c92f4bfdad63a022, type: 2}
+--- !u!114 &1296426035
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1296426029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 236ed6db7ac04644cb85739b448c9aa6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _playerstats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
+  _bossstats: {fileID: 11400000, guid: 9dff3d644b223274f96bdbef02336c5a, type: 2}
 --- !u!1 &1348029015
 GameObject:
   m_ObjectHideFlags: 0

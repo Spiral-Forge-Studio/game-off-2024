@@ -101,7 +101,7 @@ public class PlayerStatusManager : MonoBehaviour
             currentMaxShield = playerStatus.Shield;
         }
 
-        playerStatus.SpeedDebugger();
+        //playerStatus.SpeedDebugger();
 
         OnPlayerDestroy();
     }
@@ -111,7 +111,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     private void UpdatePlayerKCCStats()
     {
-        Debug.Log("updateKCCStats: " +  playerKCC._walkingSpeed + ", " + playerStatus.MoveSpeed);
+        //Debug.Log("updateKCCStats: " +  playerKCC._walkingSpeed + ", " + playerStatus.MoveSpeed);
         playerKCC._walkingSpeed = playerStatus.MoveSpeed;
         playerKCC._dashInternalCooldown = playerStatus.DashCooldown;
     }
