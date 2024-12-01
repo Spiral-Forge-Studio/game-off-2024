@@ -20,6 +20,7 @@ public class BossController : MonoBehaviour
     [SerializeField] private GameObject BOSS;
     [SerializeField] private GameObject _playerpos;
     [SerializeField] private GameObject _roomcenter;
+    [SerializeField] private GameObject _bossUI;
 
     [SerializeField] private PlayerKCC _player;
 
@@ -82,6 +83,8 @@ public class BossController : MonoBehaviour
         BOSS = GameObject.Find("Boss_1");
         _playerpos = GameObject.Find("Player Controller");
         _roomcenter = GameObject.Find("Waypoint (Center)");
+        _bossUI = GameObject.Find("BossStatusUI");
+
         #endregion
 
         _statemachine = new StateMachine();
@@ -91,7 +94,7 @@ public class BossController : MonoBehaviour
         _agent.stoppingDistance = 0f;
 
         #region ---Boss States---
-        var combat = new StartCombat(_playerpos, _roomcenter, _bosslower);
+        var combat = new StartCombat(_playerpos, _roomcenter, _bosslower, _bossUI);
         var idle = new BossIdle(this, _agent, _bossparam, _bosslower, _upperbody);
         var rambo = new BossRambo(this, _agent, _bossparam, _bosslower, _upperbody);
         var spine = new BossSpine(this, _agent, _bossparam, _bosslower, _upperbody);
@@ -181,7 +184,7 @@ public class BossController : MonoBehaviour
 
 
 
-        //SelectAttack();
+        SelectAttack();
 
     }
 

@@ -95,7 +95,7 @@ public class BossStatusManager : MonoBehaviour
             currentHealth *= currentHealthMultiplier;
             currentMaxHealth = BossStatus.Health;
         }
-
+    
         if (currentMaxShield != BossStatus.Shield)
         {
             float currentShieldMultiplier = BossStatus.Shield / currentMaxShield;

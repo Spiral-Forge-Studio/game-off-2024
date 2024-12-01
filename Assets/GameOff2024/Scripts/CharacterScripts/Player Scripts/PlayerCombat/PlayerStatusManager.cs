@@ -21,7 +21,7 @@ public class PlayerStatusManager : MonoBehaviour
     private UniqueBuffHandler uniqueBuffHandler;
 
     [Header ("Game Over Stuff")]
-    //[SerializeField] private GameObject _playerobject;
+    [SerializeField] private GameObject _playerUI;
     [SerializeField] private GameObject _gameOverPanel;
 
     private MinigunProjectileParams minigunProjectileParams;
@@ -334,6 +334,7 @@ public class PlayerStatusManager : MonoBehaviour
         if (_gameOverPanel != null)
         {
             _gameOverPanel.SetActive(true); // Activate the Game Over UI
+            _playerUI.SetActive(false);
 
             // Optionally, lock game time
             Time.timeScale = 0f; // Pause the game
