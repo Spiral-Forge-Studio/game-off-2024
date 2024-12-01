@@ -7,8 +7,8 @@ public class MinigunBulletDeviationAngleBuff : Buff
     public Rarity rarity;
     public string buffname = "Minigun Bullet Deviation Angle Reduction";
 
-    public float initialAmountFlat = -20f; // Reduced deviation (negative value for reduction)
-    public float initialAmountMultiplier = -50f; // Percentage-based reduction
+    public float initialAmountFlat = -0.5f; // Reduced deviation (negative value for reduction)
+    public float initialAmountMultiplier = -10f; // Percentage-based reduction
     public float consecutiveAmountFlat = 1f;
     public float consecutiveAmountMultiplier = 2.5f;
     public float scalingFactor;

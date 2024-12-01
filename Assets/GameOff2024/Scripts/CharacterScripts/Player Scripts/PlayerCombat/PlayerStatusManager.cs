@@ -50,6 +50,7 @@ public class PlayerStatusManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _playerUI = GameObject.Find("PlayerStatusUI");
         minigunProjectileParams = new MinigunProjectileParams(
             playerStatus.MinigunProjectileSpeed,
             GetComputedDamage(EWeaponType.Minigun, false),
@@ -100,7 +101,7 @@ public class PlayerStatusManager : MonoBehaviour
             currentMaxShield = playerStatus.Shield;
         }
 
-        playerStatus.SpeedDebugger();
+        //playerStatus.SpeedDebugger();
 
         OnPlayerDestroy();
     }
@@ -110,7 +111,7 @@ public class PlayerStatusManager : MonoBehaviour
 
     private void UpdatePlayerKCCStats()
     {
-        Debug.Log("updateKCCStats: " +  playerKCC._walkingSpeed + ", " + playerStatus.MoveSpeed);
+        //Debug.Log("updateKCCStats: " +  playerKCC._walkingSpeed + ", " + playerStatus.MoveSpeed);
         playerKCC._walkingSpeed = playerStatus.MoveSpeed;
         playerKCC._dashInternalCooldown = playerStatus.DashCooldown;
     }
@@ -348,6 +349,6 @@ public class PlayerStatusManager : MonoBehaviour
     public void RestartGame()
     {
         Time.timeScale = 1f; // Reset time scale
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex); // Reload current scene
+        Application.Quit();
     }
 }

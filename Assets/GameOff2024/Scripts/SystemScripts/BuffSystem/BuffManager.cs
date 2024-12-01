@@ -22,6 +22,8 @@ public class BuffManager : MonoBehaviour
 
         // Set buff properties
         chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
+        SetBuffComponent(BuffRegistry.NameToComponent[chosenBuff.getBuffName()]);
+        SetBuffColor(chosenBuff.getBuffRarity());
     }
     public Buff chosenBuff;
     private List<Buff> activeBuffs = new List<Buff>();
@@ -68,12 +70,18 @@ public class BuffManager : MonoBehaviour
 
                 ShowFloatingText(message, toBeBuffed.transform);
                 //put teleport function here
-                Debug.Log(message);
+                Debug.Log("BUFF TYPE: " + chosenBuff.getBuffType());
                 if (buffSpawner != null)
                 {
                     buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
+                   
+                }
+                else
+                {
+                    Debug.Log("MISSING BUFFSPAWNER");
                 }
                 Destroy(gameObject); // Destroy the buff GameObject
+
             }
         }
     }
@@ -117,5 +125,66 @@ public class BuffManager : MonoBehaviour
     private void Update()
     {
         PerformSphereCast();
+    }
+
+    private void SetBuffComponent(string component)
+    {
+        // Find the child with the corresponding name
+        Transform child = transform.Find(component);
+
+        // Check if the child exists
+        if (child != null)
+        {
+            // Enable the child
+            child.gameObject.SetActive(true);
+        }
+        else
+        {
+            Debug.LogWarning($"Child with name '{component}' not found in the prefab!");
+        }
+
+
+    }
+
+    private void SetBuffColor(Buff.Rarity rarity)
+    {
+        Renderer renderer = GetComponent<Renderer>();
+        if (renderer == null)
+        {
+            Debug.LogWarning("No Renderer found on the Buff GameObject!");
+            return;
+        }
+
+        Color emissionColor;
+        switch (rarity)
+        {
+            case Buff.Rarity.Common:
+                emissionColor = new Color(0.71f, 0.71f, 0.71f); // Gray
+                break;
+            case Buff.Rarity.Uncommon:
+                emissionColor = new Color(0.30f, 0.78f, 0.31f); // Green
+                break;
+            case Buff.Rarity.Rare:
+                emissionColor = new Color(0.13f, 0.59f, 0.95f); // Blue
+                break;
+            case Buff.Rarity.Epic:
+                emissionColor = new Color(0.61f, 0.15f, 0.69f); // Purple
+                break;
+            case Buff.Rarity.Legendary:
+                emissionColor = new Color(1.0f, 0.76f, 0.07f); // Gold
+                break;
+            default:
+                emissionColor = Color.white; // Default color
+                break;
+        }
+
+
+        // Apply the color to the material
+        // Apply the emission color
+        Material material = renderer.material;
+        material.SetColor("_EmissionColor", emissionColor);
+
+        // Enable emission if it isn't already
+        material.EnableKeyword("_EMISSION");
     }
 }

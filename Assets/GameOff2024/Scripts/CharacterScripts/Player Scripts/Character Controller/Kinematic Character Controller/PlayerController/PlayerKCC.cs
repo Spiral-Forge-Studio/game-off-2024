@@ -67,6 +67,7 @@ namespace KinematicCharacterController
         public KinematicCharacterMotor Motor;
         public Transform _upperBodyTransform;
         public Animator _lowerBodyAnim;
+        public TrailRenderer _boostTrail;
 
 
         [Header("State Machine")]
@@ -166,6 +167,10 @@ namespace KinematicCharacterController
         {
             _currentState.UpdateStates();
             _currentState.CheckSwitchStates();
+
+
+            Quaternion upperXRotation = Quaternion.Euler(new Vector3(-90, 0, 0));
+            _upperBodyTransform.rotation = Quaternion.LookRotation(Vector3.ProjectOnPlane(_lookInputVector, Vector3.up)) * upperXRotation;
         }
 
         #region --- Inputs ---

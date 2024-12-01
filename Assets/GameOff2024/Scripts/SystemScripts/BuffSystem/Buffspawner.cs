@@ -8,21 +8,26 @@ public class BuffSpawner : MonoBehaviour
     public GameObject buffPrefab;
     public Transform spawnPoint;  // This can serve as the center of the spawn area
     public float spawnInterval = 5f;
-    public float spawnRadius = 0.5f; // Define the radius for random spawning
+    public float spawnRadius = 5f; // Define the radius for random spawning
     public int buffCount = 3;      // Number of buffs to spawn
     public PlayerStatusSO playerStats;
     public PlayerStatusSO BossStatusSO;
     private List<GameObject> activeBuffs = new List<GameObject>();
+    private bool buffpickedup = false;
 
     public void DestroyActiveBuff(GameObject buff)
     {
-        //Debug.Log(buff.name);
         if (activeBuffs.Contains(buff))
         {
-            Debug.Log("Removed " + buff.name);
             activeBuffs.Remove(buff);
             Destroy(buff);
             ApplyRandomBufftoBoss();
+        }
+        else
+        {
+            Destroy(buff);
+            ApplyRandomBufftoBoss();
+            buffpickedup = true;
         }
         
     }
@@ -31,22 +36,34 @@ public class BuffSpawner : MonoBehaviour
     {
         //StartCoroutine(SpawnBuffAtIntervals());
         playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
+        buffpickedup = false;
         SpawnBuffs();
     }
 
     private void Update()
     {
         //Debug.Log("There are " + activeBuffs.Count + " active buffs");
+        if (buffpickedup)
+        {
+            GameObject buff = GameObject.FindWithTag("Buff");
+            Destroy(buff);
+        }
     }
 
     private void SpawnBuffs()
     {
         float timestart = Time.time;
+        int counter = 0;
         while (activeBuffs.Count < buffCount && buffPrefab != null)
         {
+            counter++;
+            if (counter > 500)
+            {
+                break;
+            }
             Vector3 spawnPosition = spawnPoint.position + new Vector3(
                 Random.Range(-spawnRadius, spawnRadius),
-                1f,
+                2f,
                 Random.Range(-spawnRadius, spawnRadius)
             );
 
@@ -73,7 +90,7 @@ public class BuffSpawner : MonoBehaviour
                
             }
 
-            if (Time.time - timestart > 3)
+            if (Time.time - timestart > 3f)
             {
                 break;
             }
@@ -85,6 +102,7 @@ public class BuffSpawner : MonoBehaviour
     private void ApplyRandomBufftoBoss()
     {
         if (activeBuffs.Count < 1) {  return; }
+        buffpickedup = true;
         int randomIndex = Random.Range(0, activeBuffs.Count);
         BuffManager buffManager = activeBuffs[randomIndex].GetComponent<BuffManager>();
         GameObject boss = GameObject.FindGameObjectWithTag("Boss");
@@ -95,6 +113,21 @@ public class BuffSpawner : MonoBehaviour
         else
         {
             Debug.Log("Boss found = " + boss.name);
+            
+            if (BuffRegistry.GoodBadBuffsForBoss[buffManager.chosenBuff.getBuffName()] == "Bad")
+            {
+                string buffcomponent = BuffRegistry.NameToComponent[buffManager.chosenBuff.getBuffName()];
+                List<string> otherpossiblebuffs = new List<string>();
+                foreach(string possiblebuff in BuffRegistry.GetAllBuffNames())
+                {
+                    if (BuffRegistry.GoodBadBuffsForBoss[possiblebuff] == "Good" && BuffRegistry.NameToComponent[possiblebuff] == BuffRegistry.NameToComponent[buffManager.chosenBuff.getBuffName()])
+                    {
+                        otherpossiblebuffs.Add(possiblebuff);
+                    }
+                }
+                randomIndex = Random.Range(0, otherpossiblebuffs.Count);
+                buffManager.chosenBuff = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[otherpossiblebuffs[randomIndex]]];
+            }
             buffManager.toBeBuffed = boss;
             buffManager.chosenBuff.Initialize(BossStatusSO, buffManager.chosenBuff.getBuffBonus(), buffManager.chosenBuff.getBuffType(), buffManager.chosenBuff.getBuffRarity(), 0f, 0f, 0f);
             buffManager.AddBuff(buffManager.chosenBuff);
