@@ -366,16 +366,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6013484886694487563, guid: 444a7cdd855edf542bec6e77c49db3e2,
-        type: 3}
-      propertyPath: roomCount
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6013484886694487563, guid: 444a7cdd855edf542bec6e77c49db3e2,
-        type: 3}
-      propertyPath: startRoom.IsVisited
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 8177532275863030885, guid: 444a7cdd855edf542bec6e77c49db3e2,
         type: 3}
       propertyPath: m_Name

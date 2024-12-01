@@ -47,7 +47,7 @@ MonoBehaviour:
   player: {fileID: 940173942754266890, guid: 0f0bc997e6443f8428effb089bd37559, type: 3}
   teleporterPrefab: {fileID: 8151653034600462255, guid: 60b83bc3ff39ae34fb12facb0e31998d,
     type: 3}
-  roomCount: 14
+  roomCount: 5
   startRoomPrefab: {fileID: 5404491850618832485, guid: 53b69903c83d95843bc35e34224634d4,
     type: 3}
   bossRoomPrefab: {fileID: 5167195408827501112, guid: fd073c381031b6f4793d96a928476281,
@@ -66,3 +66,9 @@ MonoBehaviour:
   - {fileID: 1437686986409707184, guid: bac821f6f27ab414b86cb7d7bc2d57d7, type: 3}
   - {fileID: 1443086178994902089, guid: e204fa13f28a2724c913b06fd69a0c13, type: 3}
   defaultRoomPrefab: {fileID: 0}
+  startRoom:
+    Id: 0
+    Type: 
+    ConnectedRooms: 
+    PlayerSpawnPoint: {fileID: 0}
+    IsVisited: 0
