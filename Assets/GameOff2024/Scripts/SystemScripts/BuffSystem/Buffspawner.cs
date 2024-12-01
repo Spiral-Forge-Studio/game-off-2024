@@ -8,7 +8,7 @@ public class BuffSpawner : MonoBehaviour
     public GameObject buffPrefab;
     public Transform spawnPoint;  // This can serve as the center of the spawn area
     public float spawnInterval = 5f;
-    public float spawnRadius = 0.5f; // Define the radius for random spawning
+    public float spawnRadius = 5f; // Define the radius for random spawning
     public int buffCount = 3;      // Number of buffs to spawn
     public PlayerStatusSO playerStats;
     public PlayerStatusSO BossStatusSO;
@@ -46,7 +46,7 @@ public class BuffSpawner : MonoBehaviour
         {
             Vector3 spawnPosition = spawnPoint.position + new Vector3(
                 Random.Range(-spawnRadius, spawnRadius),
-                1f,
+                2f,
                 Random.Range(-spawnRadius, spawnRadius)
             );
 

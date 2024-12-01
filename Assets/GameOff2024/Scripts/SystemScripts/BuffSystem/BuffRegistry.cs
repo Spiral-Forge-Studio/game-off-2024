@@ -34,6 +34,33 @@ public static class BuffRegistry
         {"Extra Rocket Magazine Clip", "RocketMagazineBuff"}
     };
 
+    public static readonly Dictionary<string, string> NameToComponent = new Dictionary<string, string>()
+    {
+        {"Steel - Plated Armor", "Body"},
+        {"Reinforced Shields", "Body"},
+        {"Nano Repair Kit", "Body"},
+        {"Rapid Shield Regeneration", "Body"},
+        {"Shield Regen Boost", "Body"},
+        {"Hardened Plating", "Body"},
+        {"Swift Stride", "Body"},
+
+        {"Minigun Damage Boost", "Minigun"},
+        {"Minigun Bullet Deviation Angle Reduction", "Minigun"},
+        {"Quick Loader", "Minigun"},
+        {"Minigun Projectile Speed Buff", "Minigun"},
+        {"Minigun Crit Rate Buff", "Minigun"},
+        {"Minigun Crit Damage Buff", "Minigun"},
+        {"Rapid Barrel Upgrade", "Minigun"},
+        {"Extra Magazine Clip", "Minigun"},
+
+        {"Rocket Damage Boost", "Rocket"},
+        {"Rocket Explosion Radius Boost", "Rocket"},
+        {"Quick Loader Rocket", "Rocket"},
+        {"Rocket Crit Rate Buff", "Rocket"},
+        {"Rocket Crit Damage Buff", "Rocket"},
+        {"Extra Rocket Magazine Clip", "Rocket"}
+    };
+
 
 
     /// <summary>
