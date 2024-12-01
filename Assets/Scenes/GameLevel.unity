@@ -1261,11 +1261,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8609955191992961053, guid: 233d08f87c44e1340a260b4ffec3b046,
         type: 3}
-      propertyPath: m_LocalScale.x
-      value: 5.0635
-      objectReference: {fileID: 0}
-    - target: {fileID: 8609955191992961053, guid: 233d08f87c44e1340a260b4ffec3b046,
-        type: 3}
       propertyPath: m_LocalPosition.x
       value: 207.9183
       objectReference: {fileID: 0}
@@ -1569,7 +1564,7 @@ PrefabInstance:
     - target: {fileID: 709402228952612056, guid: 6a13cb0d06c10e44e9ec772c17904789,
         type: 3}
       propertyPath: m_VersionIndex
-      value: 41
+      value: 47
       objectReference: {fileID: 0}
     - target: {fileID: 4301054868648971455, guid: 6a13cb0d06c10e44e9ec772c17904789,
         type: 3}
@@ -2269,12 +2264,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4232990216834203668, guid: 91696c4d0e6d24e4f9da28c32d6142b7,
-        type: 3}
-      propertyPath: waves.Array.data[0].spawnConfigs.Array.data[0].variant.prefab
-      value: 
-      objectReference: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,
-        type: 3}
     - target: {fileID: 5233692693251778128, guid: 91696c4d0e6d24e4f9da28c32d6142b7,
         type: 3}
       propertyPath: m_Name

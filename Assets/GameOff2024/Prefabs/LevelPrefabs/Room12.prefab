@@ -106,8 +106,8 @@ MonoBehaviour:
   timeBetweenWaves: 2
   timeBetweenSpawns: 0.2
   enableRandomSpawn: 1
-  randomSpawnCenter: {x: 0, y: 0, z: 0}
-  randomSpawnRadius: 35
+  randomSpawnCenter: {x: 248.37, y: 0, z: 0}
+  randomSpawnRadius: 30
   rangedVariants:
   - name: 
     prefab: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,

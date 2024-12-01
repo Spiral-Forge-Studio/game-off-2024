@@ -936,7 +936,7 @@ MonoBehaviour:
   timeBetweenWaves: 2
   timeBetweenSpawns: 0.2
   enableRandomSpawn: 1
-  randomSpawnCenter: {x: 3.56, y: 0, z: 0}
+  randomSpawnCenter: {x: 80.48, y: 0, z: 0}
   randomSpawnRadius: 35
   rangedVariants:
   - name: 
@@ -954,7 +954,7 @@ MonoBehaviour:
     spawnConfigs:
     - variant:
         name: 
-        prefab: {fileID: 834916327166278781, guid: 0bf65651be466bd4c96ec9c53e4b5b36,
+        prefab: {fileID: 4581976785946679082, guid: fa572a383ef1cbc4f9e4c707d008c5e1,
           type: 3}
       spawnPoint: {fileID: 0}
       mobCount: 6
