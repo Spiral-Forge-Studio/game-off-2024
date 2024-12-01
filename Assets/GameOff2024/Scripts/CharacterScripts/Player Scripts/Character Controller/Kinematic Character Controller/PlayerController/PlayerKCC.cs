@@ -67,6 +67,7 @@ namespace KinematicCharacterController
         public KinematicCharacterMotor Motor;
         public Transform _upperBodyTransform;
         public Animator _lowerBodyAnim;
+        public TrailRenderer _boostTrail;
 
 
         [Header("State Machine")]
