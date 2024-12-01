@@ -9,6 +9,9 @@ public class MiniGunSweep : IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
+    private Animator _animator;
+    private GameObject _torso;
+    private Quaternion _originalrotation;
     Vector3 tobeshot;
     Vector3 start;
     Vector3 end;
@@ -18,23 +21,28 @@ public class MiniGunSweep : IState
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public MiniGunSweep(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam)
+    public MiniGunSweep(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso)
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
+        _animator = animator;
+        _torso = torso;
     }
-    public void Tick() { }
+    public void Tick() { RotateTorsoTowards(tobeshot); }
     public void OnEnter()
     {
+        _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);
         Debug.Log("Entered MiniSweep");
         _isComplete = false;
         _boss._isLocked = true;
         _agent.speed = _parameters._WhilePattern;
+
+        _torso.transform.localRotation = _originalrotation;
         _boss.StartCoroutine(ExecuteMiniSweep());
     }
 
-    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); }
+    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); _torso.transform.localRotation = _originalrotation; _animator.CrossFade("Armature|SB_Boss_Lower_Idle", 0.2f);}
 
     private IEnumerator ExecuteMiniSweep()
     {
@@ -108,6 +116,13 @@ public class MiniGunSweep : IState
         yield return new WaitForSeconds(0.5f); // Simulate attack delay
         _isComplete = true; // Mark state as complete
     }
+    private void RotateTorsoTowards(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = (targetPosition - _torso.transform.position).normalized;
+        directionToTarget.y = 0; // Ignore Y-axis to only rotate in the XZ plane
 
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 4f);
+    }
 
 }

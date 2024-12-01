@@ -17,7 +17,7 @@ public class HpBuff : Buff
     private float totalFlatBonus;    // Tracks total flat bonus to remove
     private float totalMultiplier;   // Tracks total multiplier bonus to remove
 
-    private PlayerStatusSO playerStatus;
+    public PlayerStatusSO playerStatus;
 
     public Dictionary<BuffType, float> bufftypeProbabilities = new Dictionary<BuffType, float>
     {

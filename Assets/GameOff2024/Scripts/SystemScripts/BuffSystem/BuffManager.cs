@@ -4,21 +4,32 @@ using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
-
+    private BuffMenu buffMenu;
     private void Awake()
     {
+        buffMenu = Resources.Load<BuffMenu>("BuffMenu");
+        if (buffMenu == null)
+        {
+            Debug.LogError("BuffMenu could not be found in Resources!");
+        }
         // Initialize other components
         BuffRegistry.InitializeBuffs(playerStats);
         playerKCC = FindObjectOfType<PlayerKCC>();
         buffSpawner = FindAnyObjectByType<BuffSpawner>();
         playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
+        chosenBuff = GetRandomBuff();
+        if (chosenBuff == null) return;
+
+        // Set buff properties
+        chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
     }
+    public Buff chosenBuff;
     private List<Buff> activeBuffs = new List<Buff>();
     public PlayerKCC playerKCC;
     [SerializeField] private PlayerStatusSO playerStats;
     public float sphereCastInterval = 0.1f;
 
-    private GameObject toBeBuffed;
+    public GameObject toBeBuffed;
     private BuffSpawner buffSpawner;
     public PlayerStatusManager playerStatusManager;
 
@@ -48,23 +59,20 @@ public class BuffManager : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
+                
+                buffMenu.DiscoverBuff(chosenBuff.getBuffName());
                 toBeBuffed = hit.collider.gameObject;
-
-                Buff chosenBuff = GetRandomBuff();
-                if (chosenBuff == null) return;
-
-                // Set buff properties
-                chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
+                
                 AddBuff(chosenBuff);
-
-                string message = $"You got: {chosenBuff.getBuffName()} " +
-                                 $"Rarity: {chosenBuff.getBuffRarity()} " +
-                                 $"Amount: {chosenBuff.getBuffBonus()} " +
-                                 $"Type: {chosenBuff.getBuffType()}";
+                string message = $"You got: {chosenBuff.getBuffName()} ";
 
                 ShowFloatingText(message, toBeBuffed.transform);
-
+                //put teleport function here
                 Debug.Log(message);
+                if (buffSpawner != null)
+                {
+                    buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
+                }
                 Destroy(gameObject); // Destroy the buff GameObject
             }
         }
@@ -80,15 +88,6 @@ public class BuffManager : MonoBehaviour
         }
     }
 
-
-    private void ShowFloatingText(string message, Vector3 position)
-    {
-        if (floatingTextPrefab != null)
-        {
-            GameObject floatingText = Instantiate(floatingTextPrefab, position + Vector3.up * 2f, Quaternion.identity);
-            floatingText.GetComponent<FloatingText>().SetText(message);
-        }
-    }
 
 
     public void AddBuff(Buff newBuff)

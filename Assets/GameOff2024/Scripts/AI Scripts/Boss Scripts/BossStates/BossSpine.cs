@@ -8,19 +8,27 @@ public class BossSpine : IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
+    private Animator _animator;
+    private GameObject _torso;
 
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public BossSpine(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam)
+    public BossSpine(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso)
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
+        _animator = animator;  
+        _torso = torso;
     }
-    public void Tick() { }
+    public void Tick() 
+    { 
+        
+    }
     public void OnEnter() 
     {
+        _animator.CrossFade("Armature|SB_Boss_Lower_Slide", 0.2f);
         Debug.Log("Entered Spine Pattern");
         _boss._isLocked = true;
         _isComplete = false;
@@ -28,7 +36,7 @@ public class BossSpine : IState
         _boss.StartCoroutine(ExecuteSpine());
     }
 
-    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); }
+    public void OnExit() { _boss._isLocked = false; _agent.speed = _parameters._Recenter; _boss.ResetAttackFlags(); _animator.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f); }
 
     private IEnumerator ExecuteSpine()
     {

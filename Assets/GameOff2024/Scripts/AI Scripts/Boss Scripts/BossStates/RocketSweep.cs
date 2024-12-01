@@ -9,6 +9,8 @@ public class RocketSweep :IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
+    private Animator _animator;
+    private GameObject _torso;
     Vector3 tobeshot;
     Vector3 start;
     Vector3 end;
@@ -18,13 +20,15 @@ public class RocketSweep :IState
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public RocketSweep(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam) 
+    public RocketSweep(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso) 
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
+        _animator = animator;
+        _torso = torso;
     }
-    public void Tick() { }
+    public void Tick() { RotateTorsoTowards(tobeshot); }
     public void OnEnter() {
 
         Debug.Log("Entered RocketSweep");
@@ -108,6 +112,15 @@ public class RocketSweep :IState
         }
         yield return new WaitForSeconds(0.5f); // Simulate attack delay
         _isComplete = true; // Mark state as complete
+    }
+
+    private void RotateTorsoTowards(Vector3 targetPosition)
+    {
+        Vector3 directionToTarget = (targetPosition - _torso.transform.position).normalized;
+        directionToTarget.y = 0; // Ignore Y-axis to only rotate in the XZ plane
+
+        Quaternion targetRotation = Quaternion.LookRotation(directionToTarget);
+        _torso.transform.rotation = Quaternion.Slerp(_torso.transform.rotation, targetRotation, Time.deltaTime * 4f);
     }
 
 }

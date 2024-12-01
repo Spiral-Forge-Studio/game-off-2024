@@ -205,6 +205,38 @@ public class DungeonGenerator : MonoBehaviour
                         Debug.LogWarning($"Room {room.Id} references a non-existent room {connectedRoomId}");
                     }
 
+
+                    if (teleporterPrefab != null)
+                    {
+                        GameObject teleporterObject = Instantiate(teleporterPrefab, currentRoomObject.transform);
+                        teleporterObject.name = $"Teleporter {room.Id} -> {connectedRoomId}";
+                        teleporterObject.transform.localPosition = Vector3.zero; // Adjust if needed
+
+                        Teleporter teleporterComponent = teleporterObject.GetComponent<Teleporter>();
+                        if (teleporterComponent != null)
+                        {
+                            teleporterComponent.targetRoom = roomObjects[connectedRoomId].transform;
+
+                            teleporterObject.GetComponent<Collider>().enabled = false;
+
+                            // Optional debugging information
+                            if (teleporterComponent.GetType().GetField("targetRoomId") != null)
+                            {
+                                teleporterComponent.GetType().GetField("targetRoomId").SetValue(teleporterComponent, connectedRoomId);
+                            }
+
+                            Debug.Log($"Teleporter {room.Id} -> {connectedRoomId} created.");
+                        }
+                        else
+                        {
+                            Debug.LogWarning($"Teleporter prefab missing Teleporter component!");
+                        }
+                    }
+                    else
+                    {
+                        Debug.LogWarning("Teleporter prefab is not assigned!");
+                    }
+
                 }
             }
         }

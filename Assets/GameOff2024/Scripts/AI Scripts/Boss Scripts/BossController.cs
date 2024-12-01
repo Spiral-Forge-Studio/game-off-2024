@@ -26,6 +26,10 @@ public class BossController : MonoBehaviour
     [Header ("Boss Status Manager")]
     [SerializeField] public BossStatusManager _statusManager;
 
+    [Header("ParticleEffects")]
+
+    public ParticleSystem _booster1;
+    public ParticleSystem _booster2;
     #region ---Attack Flags---
     [Header("Attack Pattern Flags")]
     [SerializeField] private bool _doMiniperi;
@@ -45,7 +49,7 @@ public class BossController : MonoBehaviour
     [SerializeField] public List<GameObject> _waypoints = new List<GameObject>();
     [SerializeField] public List<GameObject> _shootpoints = new List<GameObject>();
     public BossWeaponManager weaponManager;
-    public BossStatusSO BossStatusSO;
+    public PlayerStatusSO BossStatusSO;
     private Transform playerTransform;
 
     private float timer;
@@ -57,6 +61,12 @@ public class BossController : MonoBehaviour
     //Boss Health
     [SerializeField] private float BossMaxHealth;
     [SerializeField] private float BossCurrentHealth;
+
+
+    [Header("Upper Body Model")]
+    public GameObject _upperbody;
+    [Header("Lower Body")]
+    public Animator _bosslower;
 
 
     private void Awake()
@@ -72,18 +82,18 @@ public class BossController : MonoBehaviour
         _statemachine = new StateMachine();
 
         //Agent Movement
-        _agent.enabled = false;
+        _agent.enabled = true;
         _agent.stoppingDistance = 0f;
 
         #region ---Boss States---
-        var idle = new BossIdle(this, _agent, _bossparam);
-        var rambo = new BossRambo(this, _agent, _bossparam);
-        var spine = new BossSpine(this, _agent, _bossparam);
-        var minisweep = new MiniGunSweep(this, _agent, _bossparam);
-        var rocketsweep = new RocketSweep(this, _agent, _bossparam);
-        var backshot = new RocketBackShot(this, _agent, _bossparam);
-        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam);
-        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam);
+        var idle = new BossIdle(this, _agent, _bossparam, _bosslower, _upperbody);
+        var rambo = new BossRambo(this, _agent, _bossparam, _bosslower, _upperbody);
+        var spine = new BossSpine(this, _agent, _bossparam, _bosslower, _upperbody);
+        var minisweep = new MiniGunSweep(this, _agent, _bossparam, _bosslower, _upperbody);
+        var rocketsweep = new RocketSweep(this, _agent, _bossparam, _bosslower, _upperbody);
+        var backshot = new RocketBackShot(this, _agent, _bossparam, _bosslower, _upperbody);
+        var miniperi = new MiniGunPerimeterSpray(this, _agent, _bossparam, _bosslower, _upperbody);
+        var rocketperi = new RocketPerimeterSpray(this, _agent, _bossparam, _bosslower, _upperbody);
         #endregion
 
         #region ---Boss Enter Phase Condition---
@@ -109,6 +119,7 @@ public class BossController : MonoBehaviour
         #endregion
 
         timer = 0;
+        MoveToCenter();
         _statemachine.SetState(idle);
 
         void At(IState from, IState to, Func<bool> condition) => _statemachine.AddTransition(from, to, condition);
@@ -117,6 +128,19 @@ public class BossController : MonoBehaviour
 
     private void Update()
     {
+
+        if (_agent.speed > 0.01f)
+        {
+            _booster1.Play();
+            _booster2.Play();
+        }
+
+        if (!_agent.pathPending && _agent.remainingDistance <= _agent.stoppingDistance)
+        {
+            
+            _booster1.Stop();
+            _booster2.Stop();
+        }
         _statemachine.Tick();
         //Get Boss Health
         BossMaxHealth = _statusManager.GetCurrentMaxHealth();
@@ -156,6 +180,8 @@ public class BossController : MonoBehaviour
 
     public void MoveToCenter()
     {
+        _bosslower.CrossFade("Armature|SB_Boss_Lower_Walking", 0.2f);
+        
         _agent.SetDestination(_waypoints[0].transform.position);
     }
 

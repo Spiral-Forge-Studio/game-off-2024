@@ -9,19 +9,24 @@ public class BossRambo : IState
     private BossController _boss;
     private BossAgentParameters _parameters;
     private NavMeshAgent _agent;
+    private Animator _animator;
+    private GameObject _torso;
 
     private bool _isComplete;
 
     public bool IsComplete => _isComplete;
-    public BossRambo(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam)
+    public BossRambo(BossController boss, NavMeshAgent agent, BossAgentParameters bossparam, Animator animator, GameObject torso)
     {
         _boss = boss;
         _parameters = bossparam;
         _agent = agent;
+        _animator = animator;
+        _torso = torso;
     }
     public void Tick() { }
     public void OnEnter()
     {
+        _animator.CrossFade("Armature|SB_Boss_LowerIdle", 0.2f);
         Debug.Log("Entered Rambo");
         _boss._isLocked = true;
         _isComplete = false;
