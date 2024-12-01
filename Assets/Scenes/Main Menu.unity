@@ -1885,7 +1885,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _playerstats: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
-  _bossstats: {fileID: 11400000, guid: 9dff3d644b223274f96bdbef02336c5a, type: 2}
+  _bossstats: {fileID: 11400000, guid: 0946982c16d546b40b9a720e261c602e, type: 2}
 --- !u!1 &1348029015
 GameObject:
   m_ObjectHideFlags: 0

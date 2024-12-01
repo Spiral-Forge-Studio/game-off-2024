@@ -14,15 +14,16 @@ public class PositionTracker : MonoBehaviour
     void Start()
     {
         // Initialize the last saved position to the object's starting position
-        _player = GameObject.Find("Position");
+        _player = GameObject.Find("Player");
         _gameoverUI = GameObject.Find("GameOverPanel");
         if( _player == null ) { Debug.LogWarning("Player not Found"); }
-        lastSavedPosition = _player.transform.position;
+        transform.position = _player.transform.position;
     }
 
     void Update()
     {
-        Debug.Log("Position: " + _player.transform.position.y);
+        transform.position = _player.transform.position;
+        Debug.Log("Position: " + transform.position.y);
         // Track time and save position periodically
         timeSinceLastSave += Time.deltaTime;
         if (timeSinceLastSave >= saveInterval)
@@ -32,7 +33,7 @@ public class PositionTracker : MonoBehaviour
         }
 
         // Check if the object is falling below the threshold
-        if (_player.transform.position.y == fallThreshold)
+        if (transform.position.y == fallThreshold)
         {
             Time.timeScale = 0f;
             _gameoverUI.SetActive(true);
@@ -45,7 +46,7 @@ public class PositionTracker : MonoBehaviour
     /// </summary>
     private void SavePosition()
     {
-        lastSavedPosition = _player.transform.position;
+        lastSavedPosition = transform.position;
         Debug.Log("Position Saved: " + lastSavedPosition);
     }
 
@@ -54,7 +55,7 @@ public class PositionTracker : MonoBehaviour
     /// </summary>
     private void ResetToLastSavedPosition()
     {
-        _player.transform.position = lastSavedPosition;
+        transform.position = lastSavedPosition;
         Debug.LogWarning("Object reset to last saved position: " + lastSavedPosition);
     }
 }
