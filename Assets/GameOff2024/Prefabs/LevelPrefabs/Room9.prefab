@@ -673,7 +673,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalWaves: 3
-  timeBetweenWaves: 5
+  timeBetweenWaves: 2
   timeBetweenSpawns: 0.2
   enableRandomSpawn: 1
   randomSpawnCenter: {x: -17.35, y: 0, z: 0}

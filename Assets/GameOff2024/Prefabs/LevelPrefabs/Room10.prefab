@@ -567,9 +567,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   totalWaves: 2
-  timeBetweenWaves: 10
+  timeBetweenWaves: 2
   timeBetweenSpawns: 0.2
-  enableRandomSpawn: 0
+  enableRandomSpawn: 1
   randomSpawnCenter: {x: 0, y: 0, z: 0}
   randomSpawnRadius: 20
   rangedVariants:

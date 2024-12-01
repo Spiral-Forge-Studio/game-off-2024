@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using System;
 
 public class MobSpawnerLevels : MonoBehaviour
 {
@@ -28,6 +29,14 @@ public class MobSpawnerLevels : MonoBehaviour
     [Header("Player Reference")]
     public Transform player; // Reference to the player's transform
     public Transform nextRoomPosition; // The position of the next room
+
+    [Header("Spherecast Settings")]
+    public float detectionRadius = 5f;       // Radius of the sphere
+    public float detectionDistance = 20f;   // Distance to cast the sphere
+    public LayerMask detectionLayer;        // Layer mask for detecting the player
+    public event Action OnPlayerDetected;      // Event triggered when player is detected
+
+    private bool playerDetected = false;    // Tracks if the player is detected
 
     private int currentWave = 0;                // Tracks the current wave number
     private bool spawning = false;              // Prevents overlapping wave spawns
@@ -66,6 +75,32 @@ public class MobSpawnerLevels : MonoBehaviour
     void Start()
     {
         StartSpawning();
+        OnPlayerDetected += StartSpawning;
+    }
+
+    void Update()
+    {
+        SpherecastForPlayer();
+    }
+
+
+    private void SpherecastForPlayer()
+    {
+        // Perform a spherecast to check for the player
+        Ray ray = new Ray(transform.position, Vector3.forward); // Adjust direction as needed
+        if (Physics.SphereCast(ray, detectionRadius, out RaycastHit hit, detectionDistance, detectionLayer))
+        {
+            if (!playerDetected && hit.collider.CompareTag("Player"))
+            {
+                Debug.Log("[MobSpawner] Player detected by spherecast.");
+                playerDetected = true;
+                OnPlayerDetected?.Invoke(); // Trigger the spawning event
+            }
+        }
+        else
+        {
+            playerDetected = false; // Reset detection if the player is no longer in range
+        }
     }
 
     public void StartSpawning()
@@ -174,7 +209,7 @@ public class MobSpawnerLevels : MonoBehaviour
     {
         for (int i = 0; i < 10; i++) // Try up to 10 times to find a valid NavMesh point
         {
-            Vector3 randomPoint = center + Random.insideUnitSphere * radius;
+            Vector3 randomPoint = center + UnityEngine.Random.insideUnitSphere * radius;
             randomPoint.y = center.y; // Keep the same height
             if (NavMesh.SamplePosition(randomPoint, out NavMeshHit hit, radius, NavMesh.AllAreas))
             {
