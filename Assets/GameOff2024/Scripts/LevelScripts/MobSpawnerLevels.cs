@@ -169,7 +169,7 @@ public class MobSpawnerLevels : MonoBehaviour
             else
             {
                 Debug.Log($"[MobSpawner] All enemies defeated. Starting next wave in {timeBetweenWaves} seconds.");
-               // _buffspawner.SetActive(true);
+                _buffspawner.SetActive(true);
             }
         }
 
