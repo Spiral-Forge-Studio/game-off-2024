@@ -18,7 +18,7 @@ MonoBehaviour:
   baseShieldBreakRecoveryDelay: 10
   baseShieldRegenTickInterval: 3
   baseDamageReduction: 0
-  baseMoveSpeed: 100
+  baseMoveSpeed: 20
   baseDashCooldown: 0
   b_MinigunDamage: 25
   b_MinigunCritRate: 0.1
