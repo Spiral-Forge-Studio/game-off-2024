@@ -64,6 +64,8 @@ public class WeaponManager : MonoBehaviour
     private bool rocket_holdTimerStarted;
     private bool rocket_holdReleased;
 
+    [HideInInspector] public float rocketRearmFill;
+
     [Header("Animation and Particles")]
     public Animator minigunAnimator;
     public ParticleSystem minigunMuzzleFlash;
@@ -88,6 +90,8 @@ public class WeaponManager : MonoBehaviour
         isRocketRearming = false;
         useOtherSource = false;
         minigunAnimPlaying = false;
+
+        rocketRearmFill = 1f;
     }
 
     // Update is called once per frame
@@ -264,11 +268,24 @@ public class WeaponManager : MonoBehaviour
         isMinigunReloading = false;
     }
 
-    private IEnumerator RearmRocket(float rearmTime)
+    public IEnumerator RearmRocket(float rearmTime)
     {
+        rocketRearmFill = 0f;
+
         isRocketRearming = true;
 
-        yield return new WaitForSeconds(rearmTime);
+        float elapsedTime = 0f;
+
+        while (elapsedTime < rearmTime)
+        {
+            elapsedTime += Time.deltaTime;
+
+            rocketRearmFill = elapsedTime / rearmTime;
+
+            yield return null; // Wait for the next frame
+        }
+
+        rocketRearmFill = elapsedTime / rearmTime;
 
         if (rocket_holdReleased)
         {

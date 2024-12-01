@@ -552,6 +552,36 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcc078090383f104b8f13d70fef5f6ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &630212073 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3557593614503158962, guid: fd073c381031b6f4793d96a928476281,
+    type: 3}
+  m_PrefabInstance: {fileID: 421297249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &776566613 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5197449291416398789, guid: fd073c381031b6f4793d96a928476281,
+    type: 3}
+  m_PrefabInstance: {fileID: 421297249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &797670393 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4232094246360161772, guid: fd073c381031b6f4793d96a928476281,
+    type: 3}
+  m_PrefabInstance: {fileID: 421297249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1022151074 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7493078300274744822, guid: fd073c381031b6f4793d96a928476281,
+    type: 3}
+  m_PrefabInstance: {fileID: 421297249}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1028747264 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5407422218877436459, guid: fd073c381031b6f4793d96a928476281,
+    type: 3}
+  m_PrefabInstance: {fileID: 421297249}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1040575251
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1334,12 +1364,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 238321030227059738, guid: e183082d407f2c840acef7ade72a2a5f,
-        type: 3}
-      propertyPath: BossStatusSO
-      value: 
-      objectReference: {fileID: 11400000, guid: 0946982c16d546b40b9a720e261c602e,
-        type: 2}
     - target: {fileID: 1576524938358993528, guid: e183082d407f2c840acef7ade72a2a5f,
         type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
@@ -1459,11 +1483,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7947840711673998906, guid: e183082d407f2c840acef7ade72a2a5f,
-        type: 3}
-      propertyPath: m_FillAmount
-      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
