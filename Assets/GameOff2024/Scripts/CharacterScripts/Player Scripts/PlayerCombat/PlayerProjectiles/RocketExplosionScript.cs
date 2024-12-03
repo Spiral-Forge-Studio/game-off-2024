@@ -9,10 +9,12 @@ public class RocketExplosionScript : MonoBehaviour
     [HideInInspector] public UniqueBuffHandler uniqueBuffHandler;
 
     private EffectsPoolManager effectPoolManager;
+    private AudioSource audioSource;
 
     private void Awake()
     {
         effectPoolManager = FindObjectOfType<EffectsPoolManager>();
+        audioSource = GetComponent<AudioSource>();
     }
 
     public float GetDamage()
@@ -24,12 +26,16 @@ public class RocketExplosionScript : MonoBehaviour
     {
         gameObject.transform.localScale = Vector3.one*radius;
         GetComponent<SphereCollider>().enabled = true;
+
+        AudioManager.instance.PlaySFX(audioSource, EGameplaySFX.RocketExplode);
+
+        effectPoolManager.SpawnRocketHitEffect(transform.position);
+        StartCoroutine(DestroyAfterDelay(1.5f));
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        effectPoolManager.SpawnRocketHitEffect(transform.position);
-        StartCoroutine(DestroyAfterDelay(0.02f));
+        
     }
 
     private IEnumerator DestroyAfterDelay(float delay)

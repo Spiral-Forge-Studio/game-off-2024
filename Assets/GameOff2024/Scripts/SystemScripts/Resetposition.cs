@@ -9,7 +9,7 @@ public class PositionTracker : MonoBehaviour
     [SerializeField] private GameObject _gameoverUI;
     private Vector3 lastSavedPosition; // The last valid position saved
     private float fallThreshold = -10f; // Y-value threshold to detect falling
-    private float saveInterval = 3f; // Time interval (seconds) to save position
+    private float saveInterval = 0.5f; // Time interval (seconds) to save position
     private float timeSinceLastSave = 0f; // Tracks time since last save
     private int maxlist = 3;
 
@@ -30,10 +30,10 @@ public class PositionTracker : MonoBehaviour
     void Update()
     {
         transform.position = _player.transform.position;
-        Debug.Log("Position: " + transform.position.y);
+        //Debug.Log("Position: " + transform.position.y);
         // Track time and save position periodically
         timeSinceLastSave += Time.deltaTime;
-        if (timeSinceLastSave >= saveInterval)
+        if (timeSinceLastSave >= saveInterval && _player.IsGrounded)
         {
             SavePosition();
             timeSinceLastSave = 0f; // Reset timer
@@ -76,7 +76,10 @@ public class PositionTracker : MonoBehaviour
         {
             Debug.LogWarning("Not enough saved positions");
         }
-        Vector3 resetpos = _lastpos[_lastpos.Count - 1];
+
+        Vector3 offset = 5f * (_lastpos[_lastpos.Count - 1] - transform.position).normalized;
+
+        Vector3 resetpos = _lastpos[_lastpos.Count - 1] + new Vector3(offset.x, -0.1f, offset.z);
         _player.Motor.SetPosition(resetpos);
         Debug.LogWarning("Player reset to second-to-last saved position: " + resetpos);
     }

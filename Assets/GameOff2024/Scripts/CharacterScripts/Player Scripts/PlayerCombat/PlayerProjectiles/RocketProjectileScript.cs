@@ -68,6 +68,12 @@ public class RocketProjectileScript : Projectile
 
         if (Time.time - startTime > lifetime && returningToPool == false)
         {
+            GameObject explosion = Instantiate(rocketExplosionPrefab, transform.position, Quaternion.identity);
+            RocketExplosionScript explosionScript = explosion.GetComponent<RocketExplosionScript>();
+            explosionScript.damage = damage;
+            explosionScript.radius = explosionRadius;
+            explosionScript.Explode();
+
             returningToPool = true;
             ReturnToPool();
         }

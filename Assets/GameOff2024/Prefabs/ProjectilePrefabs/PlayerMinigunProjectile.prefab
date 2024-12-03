@@ -32,7 +32,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 3.3, z: 1.04}
-  m_LocalScale: {x: 0.24, y: 0.24, z: 0.65999997}
+  m_LocalScale: {x: 0.14, y: 0.24, z: 0.46}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -106,7 +106,7 @@ SphereCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Radius: 1
+  m_Radius: 1.3
   m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4518344171602972493
 MonoBehaviour:
@@ -191,7 +191,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.2
+  m_Time: 0.1
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -201,7 +201,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.2183876
+        value: 0.16732407
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -209,8 +209,8 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.37053058
-        value: 0.087477475
+        time: 0.39505145
+        value: 0.13003424
         inSlope: -0.12346511
         outSlope: -0.12346511
         tangentMode: 0
@@ -231,10 +231,10 @@ TrailRenderer:
       m_RotationOrder: 4
     colorGradient:
       serializedVersion: 2
-      key0: {r: 1, g: 1, b: 1, a: 1}
-      key1: {r: 1, g: 0.87183714, b: 0, a: 0.69803923}
-      key2: {r: 1, g: 0.39718735, b: 0, a: 0.5647059}
-      key3: {r: 0, g: 0, b: 0, a: 0}
+      key0: {r: 1, g: 1, b: 1, a: 0.7058824}
+      key1: {r: 1, g: 0.87183714, b: 0, a: 0.39215687}
+      key2: {r: 1, g: 0.39718735, b: 0, a: 0.31764707}
+      key3: {r: 0, g: 0, b: 0, a: 0.5647059}
       key4: {r: 0, g: 0, b: 0, a: 0}
       key5: {r: 0, g: 0, b: 0, a: 0}
       key6: {r: 0, g: 0, b: 0, a: 0}
@@ -250,7 +250,7 @@ TrailRenderer:
       atime0: 0
       atime1: 24132
       atime2: 65304
-      atime3: 0
+      atime3: 65304
       atime4: 0
       atime5: 0
       atime6: 0

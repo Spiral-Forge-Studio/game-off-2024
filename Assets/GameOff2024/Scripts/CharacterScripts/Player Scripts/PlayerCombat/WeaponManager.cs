@@ -54,6 +54,8 @@ public class WeaponManager : MonoBehaviour
 
     [Header("Rocket Rearm Mechanics")]
     [SerializeField] private float rocket_accumulationTimePerRocket;
+    [Range(0f, 360f)]
+    [SerializeField] private float coneAngle;
 
     private float rocket_setHoldTime = 0.3f;
     private float rocket_startHoldTime;
@@ -348,7 +350,6 @@ public class WeaponManager : MonoBehaviour
 
         if (amount > 1)
         {
-            float coneAngle = 20f; // Total spread angle for all rockets in degrees
             float angleStep = coneAngle / (amount - 1); // Divide spread evenly among rockets
 
             for (int i = 0; i < amount; i++)

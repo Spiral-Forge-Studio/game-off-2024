@@ -172,6 +172,8 @@ public class AudioManager : MonoBehaviour
         audioSource.clip = randomSound ? clips[UnityEngine.Random.Range(0, clips.Length)] : clips[index];
 
         audioSource.Play();
+
+        Debug.Log("Played " + sfxEnum);
     }
 
     public void SetMusicAndUIAudioSourcesToPlayerPosition(Transform playerTransform)
