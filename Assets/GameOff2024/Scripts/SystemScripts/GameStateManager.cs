@@ -25,9 +25,8 @@ public class GameStateManager : MonoBehaviour
     void Awake()
     {
         Application.targetFrameRate = FPSCap;
-
-        playerKCC = FindAnyObjectByType<PlayerKCC>();
         //gameOverPanel.SetActive(false);
+
         playerScript = FindObjectOfType<PlayerScript>();
         if (BuffMenu != null)
         {

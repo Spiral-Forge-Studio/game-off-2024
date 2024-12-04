@@ -17,11 +17,16 @@ public class PlayerMovementAbilityState : PlayerBaseState
 
     public override void EnterState()
     {
+        _ctx.StartCoroutine(_ctx.enableDashTrails());
+
+        _ctx._lowerBodyAnim.Play(_ctx.IDLE);
         //Debug.Log("Enter Movement Ability State");
 
         _dashStartTime = Time.time;
         _ctx._isUsingMovementAbility = true;
         _ctx._canUseMovementAbility = false;
+
+        AudioManager.instance.PlaySFX(_ctx.movementSource, EGameplaySFX.PlayerDash);
     }
 
     public override void ExitState()

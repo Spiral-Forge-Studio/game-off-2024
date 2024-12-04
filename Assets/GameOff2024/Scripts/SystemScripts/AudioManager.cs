@@ -45,9 +45,8 @@ public class AudioManager : MonoBehaviour
     public static AudioManager instance;
 
     [Header("General Audio Sources")]
-    [SerializeField] private AudioSource musicSource;
-    [SerializeField] private AudioSource musicNonLoopSource;
-    [SerializeField] private AudioSource UIAudioSource;
+    public AudioSource menuMusicSource;
+    public AudioSource menuUISource;
 
     private Dictionary<EGameplaySFX, AudioClip[]> GameplaySFXDict = new Dictionary<EGameplaySFX, AudioClip[]>();
 
@@ -135,26 +134,25 @@ public class AudioManager : MonoBehaviour
         GameplaySFXDict.Add(EGameplaySFX.BossKilled, BossKilledSFX);
     }
 
-    public void PlayMusic(int musicNumber, float volume = 1, bool loop = true)
+    public void PlayMusic(AudioSource source, int musicNumber, bool loop = true)
     {
         if (loop)
         {
-            musicSource.clip = musicList[musicNumber];
-            musicSource.volume = volume;
-            musicSource.Play();
+            source.clip = musicList[musicNumber];
+            source.Play();
         }
         else
         {
-            musicNonLoopSource.clip = musicList[musicNumber];
-            musicNonLoopSource.volume = volume;
-            musicNonLoopSource.Play();
+            source.loop = false;
+            source.clip = musicList[musicNumber];
+            source.Play();
         }
     }
 
-    public void PlayButtonSFX(int buttonNumber)
+    public void PlayButtonSFX(AudioSource source, int buttonNumber)
     {
-        UIAudioSource.clip = buttonSfxList[buttonNumber];
-        UIAudioSource.Play();
+        source.clip = buttonSfxList[buttonNumber];
+        source.Play();
     }
 
     public void PlaySFX(AudioSource audioSource, EGameplaySFX sfxEnum, int index = 0, bool randomSound = false)
@@ -174,17 +172,5 @@ public class AudioManager : MonoBehaviour
         audioSource.Play();
 
         Debug.Log("Played " + sfxEnum);
-    }
-
-    public void SetMusicAndUIAudioSourcesToPlayerPosition(Transform playerTransform)
-    {
-        musicSource.gameObject.transform.SetParent(playerTransform, true);
-        musicNonLoopSource.gameObject.transform.SetParent(playerTransform, true);
-        UIAudioSource.gameObject.transform.SetParent(playerTransform, true);
-
-        musicSource.transform.position = playerTransform.position;
-        musicNonLoopSource.transform.position = playerTransform.position;
-        UIAudioSource.transform.position = playerTransform.position;
-
     }
 }

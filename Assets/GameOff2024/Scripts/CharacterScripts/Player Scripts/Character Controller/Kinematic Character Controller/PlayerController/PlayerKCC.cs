@@ -67,7 +67,6 @@ namespace KinematicCharacterController
         public KinematicCharacterMotor Motor;
         public Transform _upperBodyTransform;
         public Animator _lowerBodyAnim;
-        public TrailRenderer _boostTrail;
 
 
         [Header("State Machine")]
@@ -100,6 +99,9 @@ namespace KinematicCharacterController
         [HideInInspector] public bool _isUsingMovementAbility;
         [HideInInspector] public bool _canUseMovementAbility;
         [HideInInspector] public float _timeSinceMovementAbilityLastUsed = Mathf.Infinity;
+        public TrailRenderer[] trails;
+        public float trailDuration;
+        public AudioSource movementSource;
 
         [Header("Targeting")]
         public Vector3 _mousePos;
@@ -160,7 +162,6 @@ namespace KinematicCharacterController
 
             _originalCapsuleHeight = Motor.Capsule.height;
             _originalCapsuleRadius = Motor.Capsule.radius;
-            AudioManager.instance.SetMusicAndUIAudioSourcesToPlayerPosition(transform);
         }
 
         private void Update()
@@ -339,6 +340,21 @@ namespace KinematicCharacterController
         public void OnDiscreteCollisionDetected(Collider hitCollider)
         {
             Debug.Log(hitCollider.gameObject.name);
+        }
+
+        public IEnumerator enableDashTrails()
+        {
+            for (int i = 0; i < trails.Length; i++)
+            {
+                trails[i].enabled = true;
+            }
+
+            yield return new WaitForSeconds(trailDuration);
+
+            for (int i = 0; i < trails.Length; i++)
+            {
+                trails[i].enabled = false;
+            }
         }
     }
 }

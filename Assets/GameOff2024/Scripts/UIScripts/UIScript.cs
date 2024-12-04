@@ -29,12 +29,20 @@ public class UIScript : MonoBehaviour
     private WeaponManager weaponManager;
     private PlayerStatusManager playerStatusManager;
 
+    private Color greenHealth;
+    private Color orangeHealth;
+    private Color redHealth;
+
 
     // Start is called before the first frame update
     void Start()
     {
         weaponManager = FindObjectOfType<WeaponManager>();
         playerStatusManager = FindObjectOfType<PlayerStatusManager>();
+
+        greenHealth = new Color(93f/255f, 211f / 255f, 102f / 255f);
+        orangeHealth = new Color(255f / 255f, 140f / 255f, 48f / 255f);
+        redHealth = new Color(255f / 255f, 50f / 255f, 51f / 255f);
     }
 
     // Update is called once per frame
@@ -50,6 +58,27 @@ public class UIScript : MonoBehaviour
         rocketAccumulatedShots.text = weaponManager.GetRocketAccumulatedShots().ToString();
 
         rocketIcon.fillAmount = weaponManager.rocketRearmFill;
+
+        float hpRatio = playerStatusManager.GetCurrentHealth() / playerStatusSO.Health;
+
+        Debug.Log(hpRatio);
+
+        if (hpRatio < 0.25f)
+        {
+            currentHealth.color = redHealth;
+            healthFill.color = redHealth;
+        }
+        else if (hpRatio < 0.5f)
+        {
+            currentHealth.color = orangeHealth;
+            healthFill.color = orangeHealth;
+
+        }
+        else
+        {
+            currentHealth.color = greenHealth;
+            healthFill.color = greenHealth;
+        }
 
         currentHealth.text = Mathf.RoundToInt(playerStatusManager.GetCurrentHealth()).ToString();
         currentShield.text = Mathf.RoundToInt(playerStatusManager.GetCurrentShield()).ToString();

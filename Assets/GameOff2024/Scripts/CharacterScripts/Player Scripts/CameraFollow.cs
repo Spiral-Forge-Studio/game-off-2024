@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
 {
-    private Transform playerTransform;
+    //private Transform playerTransform;
     public Transform cameraFollowPoint;
     public Vector3 mouseFollowPoint;
 
@@ -17,10 +17,12 @@ public class CameraFollow : MonoBehaviour
     [SerializeField] private float minCameraSplitMoveDistance;
     [SerializeField] private LayerMask targetableMasks;
 
+    [SerializeField] private AudioSource musicAudioSource;
+
     // Start is called before the first frame update
     void Start()
     {
-        playerTransform = FindObjectOfType<PlayerKCC>().transform;
+        AudioManager.instance.PlayMusic(musicAudioSource, 1);
     }
 
     // Update is called once per frame
@@ -31,16 +33,6 @@ public class CameraFollow : MonoBehaviour
         if (Physics.Raycast(ray, out RaycastHit hitInfo, Mathf.Infinity, targetableMasks, QueryTriggerInteraction.Collide))
         {
             mouseFollowPoint = hitInfo.point;
-
-            //// Calculate direction and distance from player to mouseFollowPoint
-            //Vector3 direction = mouseFollowPoint - cameraFollowPoint.position;
-            //float distance = direction.magnitude;
-
-            //// Clamp to maxFollowDistance if necessary
-            //if (distance > maxTargetDistance)
-            //{
-            //    mouseFollowPoint = playerTransform.position + direction.normalized * maxTargetDistance;
-            //}
         }
 
         // Calculate the midpoint between the player and clamped mouseFollowPoint

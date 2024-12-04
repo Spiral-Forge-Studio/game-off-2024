@@ -46,7 +46,7 @@ public class UniqueBuffHandler : MonoBehaviour
     private void Start()
     {
         uniqueBuffsLogicDict.Add(EUniqueBuffs.EnergySiphon, new EnergySiphon(playerUniqueBuffsSO, playerStatsSO, playerStatusManager));
-        uniqueBuffsActiveCheckDict.Add(EUniqueBuffs.EnergySiphon, true);
+        uniqueBuffsActiveCheckDict.Add(EUniqueBuffs.EnergySiphon, false);
     }
 
     private void Update()
