@@ -45,8 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerKCC: {fileID: 0}
-  FPSCap: 120
+  FPSCap: 60
   _timeScale: 1
   isPaused: 0
   gameOverPanel: {fileID: 0}
   restartDelay: 2
+  BuffMenu: {fileID: 11400000, guid: f76aa8fbb3a2e0c4c92f4bfdad63a022, type: 2}

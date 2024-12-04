@@ -44,8 +44,7 @@ public class WeaponManager : MonoBehaviour
     // Ammo
     private int minigun_currentAmmo;
     private int rocket_currentAmmo;
-
-    private bool isMinigunReloading;
+    [HideInInspector] public bool isMinigunReloading { get; private set; }
     private bool isRocketRearming;
 
 
@@ -128,12 +127,12 @@ public class WeaponManager : MonoBehaviour
                     minigunAnimPlaying = true;
 
                 }
-                //minigunAnimator.Play("Firing");
-                minigunMuzzleFlash.Play();
-                minigunMuzzleSmoke.Play();
 
                 if (Time.time - minigun_lastShotTime > 1f / playerStats.MinigunFireRate)
                 {
+                    //minigunAnimator.Play("Firing");
+                    minigunMuzzleFlash.Play();
+                    minigunMuzzleSmoke.Play();
 
                     FireMinigunProjectile(aimPosition);
                     minigun_currentAmmo--;
@@ -150,6 +149,10 @@ public class WeaponManager : MonoBehaviour
                         AudioManager.instance.PlaySFX(audioSource_MinigunFireSource2, EGameplaySFX.MinigunFire);
                         useOtherSource = true;
                     }
+                }
+                else
+                {
+                    minigunMuzzleFlash.Stop();
                 }
             }
             else

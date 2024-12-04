@@ -309,7 +309,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Capsule: {fileID: 656453646442218326}
-  CapsuleRadius: 1.1
+  CapsuleRadius: 0.7
   CapsuleHeight: 3.01
   CapsuleYOffset: 0
   CapsulePhysicsMaterial: {fileID: 0}
@@ -322,9 +322,9 @@ MonoBehaviour:
   StepHandling: 1
   MaxStepHeight: 0.5
   AllowSteppingWithoutStableGrounding: 0
-  MinRequiredStepDepth: 0.1
+  MinRequiredStepDepth: 0
   LedgeAndDenivelationHandling: 1
-  MaxStableDistanceFromLedge: 0.5
+  MaxStableDistanceFromLedge: 0
   MaxVelocityForLedgeSnap: 0
   MaxStableDenivelationAngle: 180
   InteractiveRigidbodyHandling: 1
@@ -355,7 +355,6 @@ MonoBehaviour:
   Motor: {fileID: 5537482666170751915}
   _upperBodyTransform: {fileID: 4913751367224718239}
   _lowerBodyAnim: {fileID: 1464769117727432257}
-  _boostTrail: {fileID: 0}
   _walkingSpeed: 5
   _runningSpeed: 15
   _stableMovementSharpness: 7
@@ -365,13 +364,17 @@ MonoBehaviour:
   _runningCapsuleRadius: 0
   _runningCapsuleHeight: 0
   _runToStop: 0
-  _dashSpeed: 25
+  _dashSpeed: 30
   _dashDuration: 0.2
   _dashInternalCooldown: 0.3
   _movementAbilityRequested: 0
   _isUsingMovementAbility: 0
   _canUseMovementAbility: 0
   _timeSinceMovementAbilityLastUsed: Infinity
+  trails:
+  - {fileID: 3452831101599894547}
+  - {fileID: 8194523385187546271}
+  trailDuration: 0.8
   movementSource: {fileID: 3747517477499979338}
   _mousePos: {x: 0, y: 0, z: 0}
   _wallLayers:
@@ -411,7 +414,7 @@ CapsuleCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 2
-  m_Radius: 1.1
+  m_Radius: 0.7
   m_Height: 3.01
   m_Direction: 1
   m_Center: {x: 0, y: 0, z: 0}
@@ -461,7 +464,7 @@ Transform:
   m_GameObject: {fileID: 1042307489090819913}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0.000000005268356, z: -0, w: 1}
-  m_LocalPosition: {x: -0.026001906, y: 0, z: 2.204002}
+  m_LocalPosition: {x: -0.003, y: -0, z: 1.72}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -5741,7 +5744,7 @@ GameObject:
   - component: {fileID: 844571832756757844}
   - component: {fileID: 8194523385187546271}
   m_Layer: 0
-  m_Name: Trail
+  m_Name: RocketTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5771,7 +5774,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3811576724618783107}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -5805,7 +5808,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.13
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -5815,7 +5818,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.19276237
+        value: 0.206213
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -5823,14 +5826,23 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.44356105
-        value: 0.06451416
+        time: 0.5012698
+        value: 0.13174438
         inSlope: -0.14956999
         outSlope: -0.14956999
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8417233
+        value: 0.04900767
+        inSlope: -0.24226649
+        outSlope: -0.24226649
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 1
       - serializedVersion: 3
         time: 1
         value: 0
@@ -5846,7 +5858,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 0.5529412}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0.18039216}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5862,8 +5874,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime1: 30763
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -5872,7 +5884,7 @@ TrailRenderer:
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0
@@ -10955,13 +10967,13 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
-  m_Volume: 0.2
+  m_Volume: 0.602
   m_Pitch: 1
   Loop: 0
   Mute: 0
   Spatialize: 0
   SpatializePostEffects: 0
-  Priority: 128
+  Priority: 86
   DopplerLevel: 1
   MinDistance: 1
   MaxDistance: 500
@@ -16222,7 +16234,7 @@ GameObject:
   - component: {fileID: 6138804363665854451}
   - component: {fileID: 3452831101599894547}
   m_Layer: 0
-  m_Name: Trail
+  m_Name: MGTrail
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16252,7 +16264,7 @@ TrailRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8535187272304549654}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
@@ -16286,7 +16298,7 @@ TrailRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 0
-  m_Time: 0.5
+  m_Time: 0.13
   m_PreviewTimeScale: 1
   m_Parameters:
     serializedVersion: 3
@@ -16296,7 +16308,7 @@ TrailRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 0.19276237
+        value: 0.206213
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -16304,14 +16316,23 @@ TrailRenderer:
         inWeight: 0.33333334
         outWeight: 0.33333334
       - serializedVersion: 3
-        time: 0.44356105
-        value: 0.06451416
+        time: 0.5012698
+        value: 0.13174438
         inSlope: -0.14956999
         outSlope: -0.14956999
         tangentMode: 0
         weightedMode: 0
         inWeight: 0.33333334
         outWeight: 0.33333334
+      - serializedVersion: 3
+        time: 0.8417233
+        value: 0.04900767
+        inSlope: -0.24226649
+        outSlope: -0.24226649
+        tangentMode: 0
+        weightedMode: 0
+        inWeight: 0.33333334
+        outWeight: 1
       - serializedVersion: 3
         time: 1
         value: 0
@@ -16327,7 +16348,7 @@ TrailRenderer:
     colorGradient:
       serializedVersion: 2
       key0: {r: 1, g: 1, b: 1, a: 0.5529412}
-      key1: {r: 1, g: 1, b: 1, a: 0}
+      key1: {r: 1, g: 1, b: 1, a: 0.18039216}
       key2: {r: 0, g: 0, b: 0, a: 0}
       key3: {r: 0, g: 0, b: 0, a: 0}
       key4: {r: 0, g: 0, b: 0, a: 0}
@@ -16343,8 +16364,8 @@ TrailRenderer:
       ctime6: 0
       ctime7: 0
       atime0: 0
-      atime1: 65535
-      atime2: 0
+      atime1: 30763
+      atime2: 65535
       atime3: 0
       atime4: 0
       atime5: 0
@@ -16353,7 +16374,7 @@ TrailRenderer:
       m_Mode: 0
       m_ColorSpace: 0
       m_NumColorKeys: 2
-      m_NumAlphaKeys: 2
+      m_NumAlphaKeys: 3
     numCornerVertices: 0
     numCapVertices: 0
     alignment: 0

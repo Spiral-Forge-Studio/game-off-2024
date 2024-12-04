@@ -103,6 +103,8 @@ namespace KinematicCharacterController
         public float trailDuration;
         public AudioSource movementSource;
 
+        [HideInInspector] public float currentDashTime;
+
         [Header("Targeting")]
         public Vector3 _mousePos;
 
@@ -291,9 +293,16 @@ namespace KinematicCharacterController
         {
             _currentState.AfterCharacterUpdates(deltaTime);
 
+            
+
             if (!_isUsingMovementAbility && _timeSinceMovementAbilityLastUsed > _dashInternalCooldown)
             {
                 _canUseMovementAbility = true;
+                currentDashTime = playerStats.DashCooldown;
+            }
+            else if (!_isUsingMovementAbility)
+            {
+                currentDashTime += deltaTime;
             }
 
         }

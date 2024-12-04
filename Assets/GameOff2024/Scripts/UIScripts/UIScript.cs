@@ -11,6 +11,7 @@ public class UIScript : MonoBehaviour
     [SerializeField] private Image healthFill;
     [SerializeField] private TMP_Text currentShield;
     [SerializeField] private Image shieldFill;
+    [SerializeField] private Image dashFill;
 
 
     [Header("Player Weapon UI")]
@@ -22,6 +23,7 @@ public class UIScript : MonoBehaviour
 
     [SerializeField] private Image rocketIcon;
     [SerializeField] private Image minigunIcon;
+    [SerializeField] private Image reloadingMinigunIcon;
 
     [Header("Data References")]
     public PlayerStatusSO playerStatusSO;
@@ -33,6 +35,17 @@ public class UIScript : MonoBehaviour
     private Color orangeHealth;
     private Color redHealth;
 
+    private Color dashChargingColor;
+    private Color dashReadyColor;
+
+    private Color reloadingMinigunColor;
+    private Color normalMinigunColor;
+
+    private Color bg_reloadingMinigunColor;
+    private Color bg_normalMinigunColor;
+
+    private float currentDashTimer;
+
 
     // Start is called before the first frame update
     void Start()
@@ -43,6 +56,15 @@ public class UIScript : MonoBehaviour
         greenHealth = new Color(93f/255f, 211f / 255f, 102f / 255f);
         orangeHealth = new Color(255f / 255f, 140f / 255f, 48f / 255f);
         redHealth = new Color(255f / 255f, 50f / 255f, 51f / 255f);
+
+        dashChargingColor = new Color(1, 1, 1, 140f / 255f);
+        dashReadyColor = new Color(1, 217f / 255, 0, 190f / 255f);
+
+        normalMinigunColor = new Color(1, 1, 1, 150f / 255f);
+        reloadingMinigunColor = new Color(1, 123f / 255f, 123f / 255f, 150f / 255f);
+
+        bg_normalMinigunColor = new Color(1, 1, 1, 26f / 255f);
+        bg_reloadingMinigunColor = new Color(1, 123f / 255f, 123f / 255f, 26f / 255f);
     }
 
     // Update is called once per frame
@@ -51,6 +73,17 @@ public class UIScript : MonoBehaviour
         minigunCurrentAmmo.text = weaponManager.GetMinigunAmmo().ToString();
         minigunMagazineSize.text = playerStatusSO.MinigunMagazineSize.ToString();
 
+        if (weaponManager.isMinigunReloading)
+        {
+            minigunIcon.color = reloadingMinigunColor;
+            reloadingMinigunIcon.color = bg_reloadingMinigunColor;
+        }
+        else
+        {
+            minigunIcon.color = normalMinigunColor;
+            reloadingMinigunIcon.color = bg_normalMinigunColor;
+        }
+
         minigunIcon.fillAmount = (float)weaponManager.GetMinigunAmmo() / (float)playerStatusSO.MinigunMagazineSize;
 
         rocketCurrentAmmo.text = weaponManager.GetRocketAmmo().ToString();
@@ -58,6 +91,17 @@ public class UIScript : MonoBehaviour
         rocketAccumulatedShots.text = weaponManager.GetRocketAccumulatedShots().ToString();
 
         rocketIcon.fillAmount = weaponManager.rocketRearmFill;
+
+        if (playerStatusManager.playerKCC._canUseMovementAbility)
+        {
+            dashFill.color = dashReadyColor;
+            dashFill.fillAmount = 1f;
+        }
+        else
+        {
+            dashFill.color = dashChargingColor;
+            dashFill.fillAmount = playerStatusManager.playerKCC.currentDashTime/playerStatusSO.DashCooldown;
+        }
 
         float hpRatio = playerStatusManager.GetCurrentHealth() / playerStatusSO.Health;
 

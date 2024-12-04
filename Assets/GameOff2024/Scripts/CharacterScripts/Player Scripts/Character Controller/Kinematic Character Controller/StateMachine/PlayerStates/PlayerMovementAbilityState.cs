@@ -27,11 +27,14 @@ public class PlayerMovementAbilityState : PlayerBaseState
         _ctx._canUseMovementAbility = false;
 
         AudioManager.instance.PlaySFX(_ctx.movementSource, EGameplaySFX.PlayerDash);
+
+        _ctx.currentDashTime = 0;
     }
 
     public override void ExitState()
     {
         _ctx._timeSinceMovementAbilityLastUsed = 0;
+        _ctx.currentDashTime = 0;
     }
 
     public override void AfterCharacterUpdate(float deltaTime)
