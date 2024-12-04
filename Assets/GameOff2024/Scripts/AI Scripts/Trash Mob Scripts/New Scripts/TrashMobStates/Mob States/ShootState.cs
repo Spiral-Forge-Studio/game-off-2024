@@ -15,7 +15,7 @@ public class ShootState : IState
 
 
     [HideInInspector] public Vector3 _playerpos;
-    private float rotationSpeed = 3f;
+    private float rotationSpeed = 5f;
     public ShootState(TrashMob trashmob, UnityEngine.AI.NavMeshAgent agent, NPCProjectileShooter _shooter, Animator animator)
     {
         mob = trashmob;
@@ -33,7 +33,7 @@ public class ShootState : IState
         _playerpos = _player.transform.position; 
         LookAtPlayer(_playerpos);
 
-        if (_agent.remainingDistance <= _agent.stoppingDistance) 
+        if (_agent.remainingDistance <= _agent.stoppingDistance && _agent.velocity.magnitude <= 1f) 
         { 
             _projectileShooter.TryShoot(_playerpos); 
         }
@@ -78,5 +78,6 @@ public class ShootState : IState
             // Smoothly rotate the NPC towards the player
             mob.transform.rotation = Quaternion.Slerp(mob.transform.rotation, targetRotation, Time.deltaTime * rotationSpeed);
         }
+
     }
 }

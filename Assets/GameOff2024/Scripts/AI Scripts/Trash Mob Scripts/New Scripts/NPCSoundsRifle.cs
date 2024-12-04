@@ -15,12 +15,13 @@ public class NPCSoundsRifle : MonoBehaviour
     private void Awake()
     {
         _weaponsource = GetComponents<AudioSource>()[0];
-        _wheelsource = GetComponents<AudioSource>()[1];
+        //_wheelsource = GetComponents<AudioSource>()[1];
         _isMoving = false;
     }
 
     private void Update()
     {
+        /*
         // Check if the agent is moving
         if (_agent.velocity.magnitude > 0.01f)
         {
@@ -38,6 +39,7 @@ public class NPCSoundsRifle : MonoBehaviour
             _isMoving = false; // Reset the state if the agent stops
             _wheelsource.Stop();
         }
+        */
     }
     private void Shoot()
     {

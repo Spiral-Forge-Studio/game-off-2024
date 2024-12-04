@@ -33,13 +33,13 @@ public class NPCProjectileShooter : MonoBehaviour
         switch (weaponType)
         {
             case NPCWeaponType.Shotgun:
-                _animator = GameObject.Find("Enemy_ShotgunV5").GetComponent<Animator>();
+                _animator = GameObject.Find("SB_EnemyShotgun_WithMaterials").GetComponent<Animator>();
                 break;
             case NPCWeaponType.Rifle:
-                _animator = GameObject.Find("Enemy_RifleV3").GetComponent<Animator>();
+                _animator = GameObject.Find("SB_EnemyRifle_WithMaterials").GetComponent<Animator>();
                 break;
             case NPCWeaponType.Rocket:
-                _animator = GameObject.Find("Enemy_CannonV3(NEW)").GetComponent<Animator>();
+                _animator = GameObject.Find("Enemy_Cannon_WithMaterials").GetComponent<Animator>();
                 break;
         }
         

@@ -2502,10 +2502,10 @@ RectTransform:
   - {fileID: 8509490500359739433}
   m_Father: {fileID: 3276159376677984312}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -842.2, y: -464.9}
-  m_SizeDelta: {x: 165.40001, y: 18.699982}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 69.7, y: 104.9}
+  m_SizeDelta: {x: 165.40002, y: 18.699951}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7374523950480499603
 GameObject:
@@ -3669,7 +3669,7 @@ MonoBehaviour:
   healthFill: {fileID: 4797695156479516260}
   currentShield: {fileID: 8223900360548413119}
   shieldFill: {fileID: 7638544240652607217}
-  dashFill: {fileID: 0}
+  dashFill: {fileID: 7988160132284512563}
   minigunCurrentAmmo: {fileID: 3905374695057590082}
   minigunMagazineSize: {fileID: 5855946766069599001}
   rocketCurrentAmmo: {fileID: 8504421188384425515}
@@ -3677,6 +3677,7 @@ MonoBehaviour:
   rocketAccumulatedShots: {fileID: 2387666693214196707}
   rocketIcon: {fileID: 2967888565870176253}
   minigunIcon: {fileID: 985830440304752545}
+  reloadingMinigunIcon: {fileID: 7341949752036007276}
   playerStatusSO: {fileID: 11400000, guid: 0d2a7e5ea1cfd504b99d1a219622b118, type: 2}
 --- !u!1 &9065628387127296604
 GameObject:
@@ -3695,7 +3696,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &8696756085424228731
 RectTransform:
   m_ObjectHideFlags: 0
