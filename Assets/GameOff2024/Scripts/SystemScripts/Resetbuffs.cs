@@ -8,7 +8,12 @@ public class Resetbuffs : MonoBehaviour
     [SerializeField] private PlayerStatusSO _playerstats;
     [SerializeField] private PlayerStatusSO _bossstats;
     // Start is called before the first frame update
-    
+
+    public void Awake()
+    {
+        ResetBuffs();
+    }
+
     public void ResetBuffs()
     {
         _playerstats.ResetMultipliersAndFlatBonuses();
