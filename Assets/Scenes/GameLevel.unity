@@ -704,18 +704,6 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 456333864}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &687865400 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7341949752036007276, guid: e183082d407f2c840acef7ade72a2a5f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1304506052427329386}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!43 &722149635
 Mesh:
   m_ObjectHideFlags: 0
@@ -2263,18 +2251,6 @@ GameObject:
     type: 3}
   m_PrefabInstance: {fileID: 589726305}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &1510425075 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 7988160132284512563, guid: e183082d407f2c840acef7ade72a2a5f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1304506052427329386}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &1570519036 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 8969172988148294540, guid: e183082d407f2c840acef7ade72a2a5f,
@@ -2812,26 +2788,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: UI Canvas
       objectReference: {fileID: 0}
-    - target: {fileID: 5011118512817427643, guid: e183082d407f2c840acef7ade72a2a5f,
-        type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: -844.87
-      objectReference: {fileID: 0}
-    - target: {fileID: 5011118512817427643, guid: e183082d407f2c840acef7ade72a2a5f,
-        type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -461.8
-      objectReference: {fileID: 0}
-    - target: {fileID: 6416795654177703624, guid: e183082d407f2c840acef7ade72a2a5f,
-        type: 3}
-      propertyPath: dashFill
-      value: 
-      objectReference: {fileID: 1510425075}
-    - target: {fileID: 6416795654177703624, guid: e183082d407f2c840acef7ade72a2a5f,
-        type: 3}
-      propertyPath: reloadingMinigunIcon
-      value: 
-      objectReference: {fileID: 687865400}
     - target: {fileID: 7176171810235723098, guid: e183082d407f2c840acef7ade72a2a5f,
         type: 3}
       propertyPath: m_Pivot.x
@@ -2931,11 +2887,6 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7988160132284512563, guid: e183082d407f2c840acef7ade72a2a5f,
-        type: 3}
-      propertyPath: m_Material
-      value: 
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
