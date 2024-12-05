@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 92703306656502161}
   - component: {fileID: 7159834314780310815}
   - component: {fileID: 4389438263513148301}
-  - component: {fileID: 3014781150815546971}
   - component: {fileID: 4518344171602972493}
   - component: {fileID: -175773353590947757}
   - component: {fileID: 5120504694516349786}
+  - component: {fileID: 1958502497954442660}
   m_Layer: 7
   m_Name: PlayerMinigunProjectile
   m_TagString: PlayerMinigun
@@ -87,27 +87,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!135 &3014781150815546971
-SphereCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 440646823390150516}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 247
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 136
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 1
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 3
-  m_Radius: 1.3
-  m_Center: {x: 0, y: 0, z: 0}
 --- !u!114 &4518344171602972493
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -271,3 +250,26 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!136 &1958502497954442660
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 440646823390150516}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 320
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 5768
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 1
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.79
+  m_Height: 3.15
+  m_Direction: 2
+  m_Center: {x: 0, y: 0, z: -0.04}

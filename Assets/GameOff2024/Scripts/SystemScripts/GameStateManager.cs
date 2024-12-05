@@ -50,14 +50,14 @@ public class GameStateManager : MonoBehaviour
 
     private void Update()
     {
-        //if (isPaused)
-        //{
-        //    Time.timeScale = 0f;
-        //}
-        //else
-        //{
-        //    Time.timeScale = 1.0f;
-        //}
+        if (isPaused)
+        {
+            Time.timeScale = 0f;
+        }
+        else
+        {
+            Time.timeScale = 1.0f;
+        }
     }
 
     public void GameOver()
