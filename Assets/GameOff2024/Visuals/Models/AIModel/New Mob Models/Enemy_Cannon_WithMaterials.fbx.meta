@@ -3,7 +3,47 @@ guid: 64d0c00e2f819a14aa5b4d8322f14cd4
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Barrel_BaseColor
+    second: {fileID: 2100000, guid: 80c57f8a12ced584cae81a737666583d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Barrel_SecondaryColor
+    second: {fileID: 2100000, guid: 2f36ca97a4bfe0541929964751c33a1f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Body_BaseColor
+    second: {fileID: 2100000, guid: c04808d6b6e88a7488b24d25b8e7aa8b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Body_SecondaryColor
+    second: {fileID: 2100000, guid: 857f0969c17bb0b4c9ed5f2808d8fb55, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Turret_BaseColor
+    second: {fileID: 2100000, guid: 7dd4b328da0cdf04c908ee11604b3ca1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Turret_SecondaryColor
+    second: {fileID: 2100000, guid: 9ce04e6ad7ec67a44987b06b83c67e92, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Wheels_BaseColor
+    second: {fileID: 2100000, guid: 0258abb418b2c2e49b34a0aa1f637ec3, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyCannon_Wheels_SecondaryColor
+    second: {fileID: 2100000, guid: 6e2fd35d12d7b0e469e0bc9f2a627dac, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

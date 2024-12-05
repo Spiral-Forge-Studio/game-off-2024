@@ -3,7 +3,47 @@ guid: ef097daf9fb365c4d869a43b615c640f
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Body_BaseColor
+    second: {fileID: 2100000, guid: 1477a7697b211a64b8f6ee646dfe2123, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Body_SecondaryColor
+    second: {fileID: 2100000, guid: 4d3817509c4efa74891cb3111031a93d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Forelegs_BaseColor
+    second: {fileID: 2100000, guid: 6cdd6642926c2424cabcd89f1e1c2f62, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Forelegs_SecondaryColor
+    second: {fileID: 2100000, guid: d6c93084b50466a458e776320e4ee754, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Gun_BaseColor
+    second: {fileID: 2100000, guid: 9573b68e9679e9e40aa9836a616f76f2, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Gun_SecondaryColor
+    second: {fileID: 2100000, guid: 94e93c0d97dfbdc45b43f597096ad968, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Thighs_BaseColor
+    second: {fileID: 2100000, guid: 317f0a04a1f16674cb16988aa109062c, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyShotgun_Thighs_SecondaryColor
+    second: {fileID: 2100000, guid: b64458dbc089b2a4191e5fad9831e8a5, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0

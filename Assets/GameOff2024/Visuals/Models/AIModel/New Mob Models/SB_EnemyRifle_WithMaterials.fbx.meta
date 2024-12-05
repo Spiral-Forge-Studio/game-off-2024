@@ -3,7 +3,57 @@ guid: ece146a3a15c2414a82c72b9bf371c42
 ModelImporter:
   serializedVersion: 22200
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_Body_BaseColor
+    second: {fileID: 2100000, guid: 65e27f244f44be241bb1673222e22977, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_Body_SecondaryColor
+    second: {fileID: 2100000, guid: 76a078026e57c0b4f95bb3cf662f6cec, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_GunBarrels_BaseColor
+    second: {fileID: 2100000, guid: 9d4911906978b854cb895fd4544bc9d1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_GunBarrels_SecondaryColor
+    second: {fileID: 2100000, guid: db6045ab40aedee49886b10747fb2934, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_GunBody_BaseColor
+    second: {fileID: 2100000, guid: ffc73afdcb438fe45ae7dd10b93400a7, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_GunBody_SecondaryColor
+    second: {fileID: 2100000, guid: 32adb485792f814428078a35de265731, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_GunMount_BaseColor
+    second: {fileID: 2100000, guid: b290001505501ba46b2bfe30987a391b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_GunMount_SecondaryColor
+    second: {fileID: 2100000, guid: a80eb24cbe7e31f41b79029da66eb6a9, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_Tire_BaseColor
+    second: {fileID: 2100000, guid: 36dca19aa20ba4240b1cbf8c960372a5, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SB_EnemyRifle_Tire_SecondaryColor
+    second: {fileID: 2100000, guid: 90ef9a52afcfa534296049b9c301739c, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
