@@ -7,8 +7,8 @@ public class BuffSpawner : MonoBehaviour
 {
     public GameObject buffPrefab;
     public Transform spawnPoint;  // This can serve as the center of the spawn area
-    public float spawnInterval = 5f;
-    public float spawnRadius = 5f; // Define the radius for random spawning
+    //public float spawnRadius = 5f; // Define the radius for random spawning
+    public float spacing = 2f; // Adjust this value for the distance between buffs
     public int buffCount = 3;      // Number of buffs to spawn
     public PlayerStatusSO playerStats;
     public PlayerStatusSO BossStatusSO;
@@ -52,52 +52,33 @@ public class BuffSpawner : MonoBehaviour
 
     private void SpawnBuffs()
     {
-        float timestart = Time.time;
-        int counter = 0;
-        while (activeBuffs.Count < buffCount && buffPrefab != null)
+        
+        float startX = spawnPoint.position.x - (buffCount - 1) * spacing / 2; // Center the line of buffs
+
+        for (int i = 0; i < buffCount; i++)
         {
-            counter++;
-            if (counter > 500)
-            {
-                break;
-            }
-            Vector3 spawnPosition = spawnPoint.position + new Vector3(
-                Random.Range(-spawnRadius, spawnRadius),
-                2f,
-                Random.Range(-spawnRadius, spawnRadius)
+            // Calculate the spawn position for each buff
+            Vector3 spawnPosition = new Vector3(
+                startX + i * spacing,
+                spawnPoint.position.y,
+                spawnPoint.position.z
             );
 
-            Collider[] colliders = Physics.OverlapSphere(spawnPosition, 5);
-            bool validPos = true;
-
-            if (colliders.Length != 0)
+            // Ensure no overlapping with other objects
+            Collider[] colliders = Physics.OverlapSphere(spawnPosition, 1f);
+            if (colliders.Length == 0)
             {
-                foreach (Collider collided in colliders)
-                {
-                    if (collided.gameObject.CompareTag("Player") || collided.gameObject.CompareTag("Buff"))
-                    {
-                        validPos = false;
-                        break;
-                    }
-                }
-            }
-
-            if (validPos)
-            {
+                // Instantiate the buff and add it to the active list
                 GameObject newBuff = Instantiate(buffPrefab, spawnPosition, Quaternion.identity);
                 activeBuffs.Add(newBuff);
-
-               
             }
-
-            if (Time.time - timestart > 3f)
+            else
             {
-                break;
+                Debug.LogWarning($"Failed to spawn buff at {spawnPosition}, position already occupied.");
             }
         }
-
-        
     }
+
 
     private void ApplyRandomBufftoBoss()
     {
