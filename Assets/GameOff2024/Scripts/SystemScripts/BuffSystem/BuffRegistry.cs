@@ -89,6 +89,33 @@ public static class BuffRegistry
         {"Extra Rocket Magazine Clip", "Bad"}
     };
 
+    public static readonly Dictionary<string, string> NametoBuffDescription = new Dictionary<string, string>()
+    {
+        {"Steel - Plated Armor", "Descriptions"},
+        {"Reinforced Shields", "Descriptions"},
+        {"Nano Repair Kit", "Descriptions"},
+        {"Rapid Shield Regeneration", "Descriptions"},
+        {"Shield Regen Boost", "Descriptions"},
+        {"Hardened Plating", "Descriptions"},
+        {"Swift Stride", "Descriptions"},
+
+        {"Minigun Damage Boost", "Descriptions"},
+        {"Minigun Bullet Deviation Angle Reduction", "Descriptions"},
+        {"Quick Loader", "Descriptions"},
+        {"Minigun Projectile Speed Buff", "Descriptions"},
+        {"Minigun Crit Rate Buff", "Descriptions"},
+        {"Minigun Crit Damage Buff", "Descriptions"},
+        {"Rapid Barrel Upgrade", "Descriptions"},
+        {"Extra Magazine Clip", "Descriptions"},
+
+        {"Rocket Damage Boost", "Descriptions"},
+        {"Rocket Explosion Radius Boost", "Descriptions"},
+        {"Quick Loader Rocket", "Descriptions"},
+        {"Rocket Crit Rate Buff", "Descriptions"},
+        {"Rocket Crit Damage Buff", "Descriptions"},
+        {"Extra Rocket Magazine Clip", "Descriptions"}
+    };
+
 
 
     /// <summary>
@@ -162,5 +189,18 @@ public static class BuffRegistry
     public static List<Buff> GetAllBuffs()
     {
         return new List<Buff>(availableBuffs.Values);
+    }
+
+    public static List<string> RandomBuffComponent(string componentname)
+    {
+        List<string> buffnameslist = new List<string>();
+        foreach(var Name in NameToComponent.Keys)
+        {
+            if (NameToComponent[Name] == componentname) {
+                buffnameslist.Add(Name);
+            }
+
+        }
+        return buffnameslist;
     }
 }

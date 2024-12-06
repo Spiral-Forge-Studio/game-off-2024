@@ -13,6 +13,7 @@ TagManager:
   - BossRocket
   - BossHitBox
   - BossPlatform
+  - BuffChoiceUI
   layers:
   - Default
   - TransparentFX

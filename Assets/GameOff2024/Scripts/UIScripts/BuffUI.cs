@@ -4,6 +4,7 @@ using TMPro;
 public class BuffMenuUIManager : MonoBehaviour
 {
     public BuffMenu buffMenu; // Reference to the BuffMenu ScriptableObject
+    public Transform BuffchoiceUI;
     public GameObject buffMenuPanel; // Reference to the UI Panel containing the buff text
     public TextMeshProUGUI discoveredBuffsText; // Reference to the TextMeshPro element for discovered buffs
     public TextMeshProUGUI undiscoveredBuffsText; // Reference to the TextMeshPro element for undiscovered buffs
@@ -47,5 +48,28 @@ public class BuffMenuUIManager : MonoBehaviour
         // Format and set the text
         discoveredBuffsText.text = "Discovered Buffs (" + discoveredBuffs.Count + "/" + buffMenu.BuffStatuses.Count + "):\n" + string.Join("\n", discoveredBuffs);
         //undiscoveredBuffsText.text = "Undiscovered Buffs:\n" + string.Join("\n", undiscoveredBuffs);
+    }
+
+    public void ToggleBuffchoice()
+    {
+        Transform Buffchoice =  BuffchoiceUI.GetChild(0);
+        if (Buffchoice != null)
+        {
+            if (Buffchoice.gameObject.activeSelf)
+            {
+                Buffchoice.gameObject.SetActive(false);
+            }
+            else
+            {
+                Buffchoice.gameObject.SetActive(true);
+            }
+
+        }
+        else
+        {
+            Debug.Log("BuffchoiceUI is null");
+        }
+        
+
     }
 }

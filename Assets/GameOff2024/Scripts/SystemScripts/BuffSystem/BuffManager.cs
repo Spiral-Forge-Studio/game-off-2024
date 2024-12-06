@@ -1,10 +1,25 @@
 using System.Collections.Generic;
 using KinematicCharacterController;
+using TMPro;
 using UnityEngine;
 
 public class BuffManager : MonoBehaviour
 {
     private BuffMenu buffMenu;
+    public Buff chosenBuff;
+    private bool choosingbuff;
+    private List<Buff> activeBuffs = new List<Buff>();
+    public PlayerKCC playerKCC;
+    [SerializeField] private PlayerStatusSO playerStats;
+    public float sphereCastInterval = 0.1f;
+    public GameObject BuffChoiceUI;
+    public GameObject toBeBuffed;
+    private BuffSpawner buffSpawner;
+    public PlayerStatusManager playerStatusManager;
+    public BuffMenuUIManager BMUIManager;
+
+
+
     private void Awake()
     {
         buffMenu = Resources.Load<BuffMenu>("BuffMenu");
@@ -12,28 +27,23 @@ public class BuffManager : MonoBehaviour
         {
             Debug.LogError("BuffMenu could not be found in Resources!");
         }
+        choosingbuff = false;
         // Initialize other components
         BuffRegistry.InitializeBuffs(playerStats);
         playerKCC = FindObjectOfType<PlayerKCC>();
         buffSpawner = FindAnyObjectByType<BuffSpawner>();
         playerStatusManager = FindAnyObjectByType<PlayerStatusManager>();
         chosenBuff = GetRandomBuff();
+        BuffChoiceUI = GameObject.FindGameObjectWithTag("BuffChoiceUI");
+        BMUIManager = FindAnyObjectByType<BuffMenuUIManager>();
         if (chosenBuff == null) return;
 
         // Set buff properties
         chosenBuff.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
         SetBuffComponent(BuffRegistry.NameToComponent[chosenBuff.getBuffName()]);
-        SetBuffColor(chosenBuff.getBuffRarity());
+        //SetBuffColor(chosenBuff.getBuffRarity());
     }
-    public Buff chosenBuff;
-    private List<Buff> activeBuffs = new List<Buff>();
-    public PlayerKCC playerKCC;
-    [SerializeField] private PlayerStatusSO playerStats;
-    public float sphereCastInterval = 0.1f;
-
-    public GameObject toBeBuffed;
-    private BuffSpawner buffSpawner;
-    public PlayerStatusManager playerStatusManager;
+    
 
     // Get a random buff from the registry
     Buff GetRandomBuff()
@@ -61,7 +71,10 @@ public class BuffManager : MonoBehaviour
         {
             if (hit.collider.CompareTag("Player"))
             {
-                
+                choosingbuff = true;
+                toBeBuffed = hit.collider.gameObject;
+                Buffchoosing();
+                /*
                 buffMenu.DiscoverBuff(chosenBuff.getBuffName());
                 toBeBuffed = hit.collider.gameObject;
                 
@@ -80,7 +93,8 @@ public class BuffManager : MonoBehaviour
                 {
                     Debug.Log("MISSING BUFFSPAWNER");
                 }
-                Destroy(gameObject); // Destroy the buff GameObject
+                Destroy(gameObject); // Destroy the buff GameObject*/
+                break;
 
             }
         }
@@ -124,7 +138,97 @@ public class BuffManager : MonoBehaviour
 
     private void Update()
     {
-        PerformSphereCast();
+        if (choosingbuff)
+        {
+            
+        }
+        else
+        {
+            PerformSphereCast();
+        }
+        
+    }
+
+    private void Buffchoosing()
+    {
+        string componenttobebuffed = BuffRegistry.NameToComponent[chosenBuff.getBuffName()];
+        List<string> Buffchoices = BuffRegistry.RandomBuffComponent(componenttobebuffed);
+        int choice1 = Random.Range(0, Buffchoices.Count);
+        int choice2 = Random.Range(0, Buffchoices.Count);
+        while (choice1 == choice2)
+        {
+            if (Buffchoices.Count < 2) { break; }
+            choice2 = Random.Range(0, Buffchoices.Count);
+        }
+        string buffname1 = Buffchoices[choice1];
+        string buffname2 = Buffchoices[choice2];
+        Buff.BuffType Buff1type = chosenBuff.getRandomType();
+        Buff.BuffType Buff2type = chosenBuff.getRandomType();
+        Buff.Rarity Buff1rarity = chosenBuff.getRandomRarity();
+        Buff.Rarity Buff2rarity = chosenBuff.getRandomRarity();
+        BMUIManager.ToggleBuffchoice();
+        // Assuming BuffChoiceUI is already referenced in your script
+        BuffChoiceUI = GameObject.FindGameObjectWithTag("BuffChoiceUI");
+        if (BuffChoiceUI != null)
+        {
+            
+            Transform buffList = BuffChoiceUI.transform.Find("Buff List");
+            if (buffList != null)
+            {
+                // Get the BuffChoicePrefabs (assuming only two are visible at a time)
+                Transform choice1Transform = buffList.GetChild(0);
+                Transform choice2Transform = buffList.GetChild(1);
+
+                // Update choice 1
+                choice1Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname1;
+                choice1Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname1]; // Assuming BuffRegistry has this
+                choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff1rarity.ToString(); // Assuming BuffRegistry has this
+
+                // Update choice 2
+                choice2Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname2;
+                choice2Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname2]; // Assuming BuffRegistry has this
+                choice2Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff2rarity.ToString(); // Assuming BuffRegistry has this
+
+                // Optionally, set other properties like images
+                // choice1Transform.Find("BuffIcon").GetComponent<Image>().sprite = BuffRegistry.GetBuffIcon(buffname1);
+            }
+            else
+            {
+                Debug.LogError("Buff List not found in BuffChoiceUI!");
+            }
+        }
+        else
+        {
+            Debug.LogError("BuffChoiceUI is null!");
+        }
+
+
+
+
+
+        Buff Buff1 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname1]];
+        Buff Buff2 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname2]];
+        Buff1.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
+        Buff2.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
+
+        AddBuff(chosenBuff);
+        string message = $"You got: {chosenBuff.getBuffName()} ";
+
+        ShowFloatingText(message, toBeBuffed.transform);
+        //put teleport function here
+        Debug.Log("BUFF TYPE: " + chosenBuff.getBuffType());
+
+        buffMenu.DiscoverBuff(chosenBuff.getBuffName());
+        if (buffSpawner != null)
+        {
+            buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
+
+        }
+        else
+        {
+            Debug.Log("MISSING BUFFSPAWNER");
+        }
+        Destroy(gameObject); // Destroy the buff GameObject
     }
 
     private void SetBuffComponent(string component)
