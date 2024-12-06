@@ -181,13 +181,13 @@ public class BuffManager : MonoBehaviour
 
                 // Update choice 1
                 choice1Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname1;
-                choice1Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname1]; // Assuming BuffRegistry has this
-                choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff1rarity.ToString(); // Assuming BuffRegistry has this
+                choice1Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname1];
+                choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff1rarity.ToString();
 
                 // Update choice 2
                 choice2Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname2;
-                choice2Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname2]; // Assuming BuffRegistry has this
-                choice2Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff2rarity.ToString(); // Assuming BuffRegistry has this
+                choice2Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname2];
+                choice2Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff2rarity.ToString();
 
                 // Optionally, set other properties like images
                 // choice1Transform.Find("BuffIcon").GetComponent<Image>().sprite = BuffRegistry.GetBuffIcon(buffname1);

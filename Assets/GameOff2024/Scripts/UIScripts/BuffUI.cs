@@ -72,4 +72,10 @@ public class BuffMenuUIManager : MonoBehaviour
         
 
     }
+
+    public void OnBuffSelected()
+    {
+        Debug.Log("Buff selected!");
+        // Add your logic here
+    }
 }
