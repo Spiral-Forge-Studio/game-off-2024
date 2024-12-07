@@ -8,6 +8,8 @@ public class BuffMenuUIManager : MonoBehaviour
     public GameObject buffMenuPanel; // Reference to the UI Panel containing the buff text
     public TextMeshProUGUI discoveredBuffsText; // Reference to the TextMeshPro element for discovered buffs
     public TextMeshProUGUI undiscoveredBuffsText; // Reference to the TextMeshPro element for undiscovered buffs
+    public BuffSpawner buffSpawner;
+    public GameObject toBeBuffed;
 
     private bool isMenuVisible = false;
 
@@ -17,7 +19,7 @@ public class BuffMenuUIManager : MonoBehaviour
         {
             buffMenuPanel.SetActive(false); // Hide the panel initially
         }
-
+        buffSpawner = FindAnyObjectByType<BuffSpawner>();
         UpdateBuffTexts(); // Initialize text with current buff data
     }
 
@@ -73,9 +75,19 @@ public class BuffMenuUIManager : MonoBehaviour
 
     }
 
-    public void OnBuffSelected()
+    public void Buff1Selected()
     {
-        Debug.Log("Buff selected!");
+        Debug.Log("Buff 1 selected!");
+        buffSpawner.Buff1.ApplyBuff(toBeBuffed);
+        ToggleBuffchoice();
+        // Add your logic here
+    }
+    public void Buff2Selected()
+    {
+        buffSpawner.Buff2.ApplyBuff(toBeBuffed);
+        Debug.Log("Buff 2 selected!");
+        ToggleBuffchoice();
+
         // Add your logic here
     }
 }
