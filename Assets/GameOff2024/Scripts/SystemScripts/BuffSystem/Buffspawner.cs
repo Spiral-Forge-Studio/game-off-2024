@@ -14,6 +14,8 @@ public class BuffSpawner : MonoBehaviour
     public PlayerStatusSO BossStatusSO;
     private List<GameObject> activeBuffs = new List<GameObject>();
     private bool buffpickedup = false;
+    public Buff Buff1;
+    public Buff Buff2;
 
     public void DestroyActiveBuff(GameObject buff)
     {
@@ -35,9 +37,9 @@ public class BuffSpawner : MonoBehaviour
     void Start()
     {
         //StartCoroutine(SpawnBuffAtIntervals());
-        //playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO SOMEWHERE 
         buffpickedup = false;
         SpawnBuffs();
+        playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO RESET ON START OF RUNN
     }
 
     private void Update()
