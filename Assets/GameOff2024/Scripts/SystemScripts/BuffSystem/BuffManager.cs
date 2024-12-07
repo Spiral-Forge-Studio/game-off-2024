@@ -2,11 +2,14 @@ using System.Collections.Generic;
 using KinematicCharacterController;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class BuffManager : MonoBehaviour
 {
     private BuffMenu buffMenu;
     public Buff chosenBuff;
+    public Buff Buff1;
+    public Buff Buff2;
     private bool choosingbuff;
     private List<Buff> activeBuffs = new List<Buff>();
     public PlayerKCC playerKCC;
@@ -72,6 +75,7 @@ public class BuffManager : MonoBehaviour
             if (hit.collider.CompareTag("Player"))
             {
                 choosingbuff = true;
+                
                 toBeBuffed = hit.collider.gameObject;
                 Buffchoosing();
                 /*
@@ -183,11 +187,15 @@ public class BuffManager : MonoBehaviour
                 choice1Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname1;
                 choice1Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname1];
                 choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff1rarity.ToString();
+                choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().color = SetBuffColor(Buff1rarity);
+                choice1Transform.Find("BuffSelectBorder").GetComponent<Image>().color = SetBuffColor(Buff1rarity);
 
                 // Update choice 2
                 choice2Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname2;
                 choice2Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname2];
                 choice2Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff2rarity.ToString();
+                choice2Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().color = SetBuffColor(Buff2rarity);
+                choice2Transform.Find("BuffSelectBorder").GetComponent<Image>().color = SetBuffColor(Buff2rarity);
 
                 // Optionally, set other properties like images
                 // choice1Transform.Find("BuffIcon").GetComponent<Image>().sprite = BuffRegistry.GetBuffIcon(buffname1);
@@ -201,27 +209,24 @@ public class BuffManager : MonoBehaviour
         {
             Debug.LogError("BuffChoiceUI is null!");
         }
-
-
-
-
-
-        Buff Buff1 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname1]];
-        Buff Buff2 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname2]];
+        Buff1 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname1]];
+        Buff2 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname2]];
         Buff1.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
         Buff2.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
 
-        AddBuff(chosenBuff);
-        string message = $"You got: {chosenBuff.getBuffName()} ";
+        //AddBuff(chosenBuff);
+        //string message = $"You got: {chosenBuff.getBuffName()} ";
 
-        ShowFloatingText(message, toBeBuffed.transform);
+        //ShowFloatingText(message, toBeBuffed.transform);
         //put teleport function here
-        Debug.Log("BUFF TYPE: " + chosenBuff.getBuffType());
+        //Debug.Log("BUFF TYPE: " + chosenBuff.getBuffType());
 
-        buffMenu.DiscoverBuff(chosenBuff.getBuffName());
+        //buffMenu.DiscoverBuff(chosenBuff.getBuffName());
         if (buffSpawner != null)
         {
             buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
+            buffSpawner.Buff1 = Buff1;
+            buffSpawner.Buff2 = Buff2;
 
         }
         else
@@ -250,45 +255,32 @@ public class BuffManager : MonoBehaviour
 
     }
 
-    private void SetBuffColor(Buff.Rarity rarity)
+    private Color SetBuffColor(Buff.Rarity rarity)
     {
-        Renderer renderer = GetComponent<Renderer>();
-        if (renderer == null)
-        {
-            Debug.LogWarning("No Renderer found on the Buff GameObject!");
-            return;
-        }
 
-        Color emissionColor;
         switch (rarity)
         {
             case Buff.Rarity.Common:
-                emissionColor = new Color(0.71f, 0.71f, 0.71f); // Gray
-                break;
+                return new Color(0.71f, 0.71f, 0.71f); // Gray
             case Buff.Rarity.Uncommon:
-                emissionColor = new Color(0.30f, 0.78f, 0.31f); // Green
-                break;
+                return new Color(0.30f, 0.78f, 0.31f); // Green
             case Buff.Rarity.Rare:
-                emissionColor = new Color(0.13f, 0.59f, 0.95f); // Blue
-                break;
+                return new Color(0.13f, 0.59f, 0.95f); // Blue
             case Buff.Rarity.Epic:
-                emissionColor = new Color(0.61f, 0.15f, 0.69f); // Purple
-                break;
+                return new Color(0.61f, 0.15f, 0.69f); // Purple
             case Buff.Rarity.Legendary:
-                emissionColor = new Color(1.0f, 0.76f, 0.07f); // Gold
-                break;
+                return new Color(1.0f, 0.76f, 0.07f); // Gold
             default:
-                emissionColor = Color.white; // Default color
-                break;
+                return Color.white; // Default color
         }
 
 
         // Apply the color to the material
         // Apply the emission color
-        Material material = renderer.material;
-        material.SetColor("_EmissionColor", emissionColor);
+        //Material material = renderer.material;
+        //material.SetColor("_EmissionColor", emissionColor);
 
         // Enable emission if it isn't already
-        material.EnableKeyword("_EMISSION");
+        //material.EnableKeyword("_EMISSION");
     }
 }
