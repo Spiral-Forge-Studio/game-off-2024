@@ -62,6 +62,7 @@ public class PlatformScript : MonoBehaviour
             if (nextPosition == newWallPosition)
             {
                 loweringPlatformWalls = false;
+                triggerCollider.enabled = true;
             }
 
             platformWalls.transform.position = nextPosition;
