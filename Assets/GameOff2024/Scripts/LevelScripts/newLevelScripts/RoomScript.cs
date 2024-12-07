@@ -23,7 +23,7 @@ public class RoomScript : MonoBehaviour
     {
         if (!spawnedRoom)
         {
-            if (Vector3.Distance(player.position, transform.position) < spawnTriggerDistance)
+            if (Mathf.Abs(player.position.y - transform.position.y) < spawnTriggerDistance)
             {
                 level.SetActive(true);
                 spawnedRoom = true;
@@ -32,7 +32,7 @@ public class RoomScript : MonoBehaviour
 
         if (spawnedRoom)
         {
-            if (Vector3.Distance(player.position, transform.position) > despawnTriggerDistance)
+            if (Mathf.Abs(player.position.y - transform.position.y) > despawnTriggerDistance)
             {
                 level.SetActive(false);
                 spawnedRoom = false;
