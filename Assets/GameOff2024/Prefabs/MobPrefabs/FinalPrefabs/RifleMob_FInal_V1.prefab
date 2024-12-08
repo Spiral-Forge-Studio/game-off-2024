@@ -947,7 +947,7 @@ MonoBehaviour:
   detectCover: 10
   dodgeprobability: 0.3
   shootprobability: 0.7
-  PlayerDetectionRadius: 15
+  PlayerDetectionRadius: 20
   PlayerExitCombatRange: 3
   healthfactor: 10
   speedfactor: 0.1

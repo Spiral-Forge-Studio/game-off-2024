@@ -20,7 +20,7 @@ public class ShootState : IState
     private float rotationSpeed = 5f;
 
     //Shooting Handlers
-    private bool _ismovinglaterally = false;
+    private bool _isShooting = false;
 
     //Raycasting
     private LayerMask _obstacles;
@@ -55,19 +55,11 @@ public class ShootState : IState
             }
             */
 
-            if(_agent.velocity.magnitude <= 0.1f && !_projectileShooter.isreloading)
+            if(_agent.velocity.magnitude <= 0.1f)
             {
                 LookAtPlayer(_playerpos);
                 _projectileShooter.TryShoot(_playerpos);
             }
-
-            if(_projectileShooter.isreloading)
-            {
-                //Debug.Log("Evading");
-                MoveLaterally();
-                _ismovinglaterally = false;
-            }
-      
         }
 
         else
@@ -96,7 +88,7 @@ public class ShootState : IState
 
 
 
-        if ((_playerpos - _agent.transform.position).magnitude > 15f)
+        if ((_playerpos - _agent.transform.position).magnitude > 20f)
         {
             _agent.SetDestination(_playerpos);
         }
@@ -105,7 +97,6 @@ public class ShootState : IState
     }
     public void OnEnter() 
     {
-        _ismovinglaterally = false;
         //NavMeshdata
         _agent.enabled = true;
         //_agent.SetDestination(_playerpos);
@@ -159,7 +150,7 @@ public class ShootState : IState
         Debug.Log("Computing New Position");
 
         float searchRadius = 10f;
-        float maxAttempts = 10f;
+        float maxAttempts = 3f;
 
         for(int i = 0; i < maxAttempts; i++)
         {
@@ -178,20 +169,4 @@ public class ShootState : IState
         return Vector3.zero;
     }
 
-   private void MoveLaterally()
-    {
-        Debug.Log("Moving Laterally");
-        _ismovinglaterally = true;
-        // Check left and right directions
-        Vector3 left = mob.transform.position - mob.transform.right * 1f;
-        Vector3 right = mob.transform.position + mob.transform.right * 1f;
-        if (LineOfSight(left))
-        {
-            _agent.SetDestination(left);
-        }
-        else if (LineOfSight(right))
-        {
-            _agent.SetDestination(right);
-        }
-    }
 }

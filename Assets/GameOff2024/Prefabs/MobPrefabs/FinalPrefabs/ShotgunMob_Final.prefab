@@ -546,7 +546,7 @@ MonoBehaviour:
   detectCover: 10
   dodgeprobability: 0.3
   shootprobability: 0.7
-  PlayerDetectionRadius: 15
+  PlayerDetectionRadius: 20
   PlayerExitCombatRange: 3
   healthfactor: 10
   speedfactor: 0.1
@@ -1310,7 +1310,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponType: 0
   _weaponsource: {fileID: 0}
-  _footsource: {fileID: 0}
 --- !u!82 &1061588856369778325
 AudioSource:
   m_ObjectHideFlags: 0
