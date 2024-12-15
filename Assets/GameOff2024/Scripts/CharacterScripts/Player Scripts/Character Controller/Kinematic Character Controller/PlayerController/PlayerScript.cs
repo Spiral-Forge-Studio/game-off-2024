@@ -75,11 +75,6 @@ namespace KinematicCharacterController
         {
             if (!_endCutscene)
             {
-                if (Input.GetMouseButtonDown(0))
-                {
-                    Cursor.visible = false;
-                }
-
                 if (Input.GetKey(KeyCode.Tab))
                 {
                     Cursor.visible = true;
