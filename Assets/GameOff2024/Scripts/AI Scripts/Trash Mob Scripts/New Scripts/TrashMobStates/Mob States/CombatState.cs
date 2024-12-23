@@ -9,11 +9,13 @@ public class CombatState : IState
     private UnityEngine.AI.NavMeshAgent _agent;
     //private readonly TrashMobParameters _parameters;
 
+    private Animator _animator;
     private float _weaponrange;
 
     [HideInInspector] public float _combatspeed;
-    public CombatState(TrashMob trashMob, UnityEngine.AI.NavMeshAgent agent, TrashMobParameters parameters, NPCWeaponType weapontype, WeaponParameters param)
+    public CombatState(TrashMob trashMob, UnityEngine.AI.NavMeshAgent agent, TrashMobParameters parameters, NPCWeaponType weapontype, WeaponParameters param, Animator _animator)
     {
+        this._animator = _animator;
         mob = trashMob;
         _agent = agent;
         //_parameters = parameters;
@@ -32,7 +34,17 @@ public class CombatState : IState
                 break;
         }
     }
-    public void OnEnter() { _agent.enabled = false; _agent.speed = _combatspeed; _agent.stoppingDistance = _weaponrange; }
+    public void OnEnter() 
+    { 
+        _agent.enabled = false; 
+        _agent.speed = _combatspeed; 
+        _agent.stoppingDistance = _weaponrange;
+
+        if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Movement"))
+        {
+            _animator.CrossFadeInFixedTime("Movement", 0.05f);
+        }
+    }
     public void Tick() { }
     public void OnExit() { }
 }

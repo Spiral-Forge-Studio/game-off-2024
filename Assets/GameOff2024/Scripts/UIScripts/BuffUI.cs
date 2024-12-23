@@ -1,5 +1,6 @@
 using UnityEngine;
 using TMPro;
+using System;
 
 public class BuffMenuUIManager : MonoBehaviour
 {
@@ -55,6 +56,7 @@ public class BuffMenuUIManager : MonoBehaviour
     public void ToggleBuffchoice()
     {
         Transform Buffchoice =  BuffchoiceUI.GetChild(0);
+
         if (Buffchoice != null)
         {
             if (Buffchoice.gameObject.activeSelf)
@@ -65,14 +67,11 @@ public class BuffMenuUIManager : MonoBehaviour
             {
                 Buffchoice.gameObject.SetActive(true);
             }
-
         }
         else
         {
             Debug.Log("BuffchoiceUI is null");
         }
-        
-
     }
 
     public void Buff1Selected()

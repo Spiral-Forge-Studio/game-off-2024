@@ -12,10 +12,11 @@ public class EffectsPoolManager : MonoBehaviour
 {
     public EffectsPoolScript minigunHitEffects;
     public EffectsPoolScript rocketHitEffects;
+    public EffectsPoolScript mobExplodeEffects;
 
     private void Awake()
     {
-        if (!minigunHitEffects || !rocketHitEffects)
+        if (!minigunHitEffects || !rocketHitEffects || !mobExplodeEffects)
         {
             Debug.LogError("hit effect pool missing");
             Debug.Break();
@@ -23,6 +24,7 @@ public class EffectsPoolManager : MonoBehaviour
 
         minigunHitEffects.Initialize();
         rocketHitEffects.Initialize();
+        mobExplodeEffects.Initialize();
     }
 
     // Start is called before the first frame update
@@ -44,5 +46,12 @@ public class EffectsPoolManager : MonoBehaviour
         minigunHitEffectObject.transform.position = spawnPos;
         minigunHitEffectObject.GetComponent<EffectObjectScript>().PlayEffect();
 
+    }
+
+    public void SpawnMobExplodeEffect(Vector3 spawnPos)
+    {
+        GameObject mobExplodeEffectObject = mobExplodeEffects.GetEffectObject();
+        mobExplodeEffectObject.transform.position = spawnPos;
+        mobExplodeEffectObject.GetComponent <EffectObjectScript>().PlayEffect();
     }
 }

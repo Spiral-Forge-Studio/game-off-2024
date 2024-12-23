@@ -91,29 +91,29 @@ public static class BuffRegistry
 
     public static readonly Dictionary<string, string> NametoBuffDescription = new Dictionary<string, string>()
     {
-        {"Steel - Plated Armor", "Descriptions"},
-        {"Reinforced Shields", "Descriptions"},
-        {"Nano Repair Kit", "Descriptions"},
-        {"Rapid Shield Regeneration", "Descriptions"},
-        {"Shield Regen Boost", "Descriptions"},
-        {"Hardened Plating", "Descriptions"},
-        {"Swift Stride", "Descriptions"},
+        {"Steel - Plated Armor", "Increase HP."},
+        {"Reinforced Shields", "Increase shield."},
+        {"Nano Repair Kit", "Reduce shield break recovery delay."},
+        {"Rapid Shield Regeneration", "Increase shield regeneration speed."},
+        {"Shield Regen Boost", "Increase shield regeneration amount."},
+        {"Hardened Plating", "Increase damage reduction."},
+        {"Swift Stride", "Increase movement speed."},
 
-        {"Minigun Damage Boost", "Descriptions"},
-        {"Minigun Bullet Deviation Angle Reduction", "Descriptions"},
-        {"Quick Loader", "Descriptions"},
-        {"Minigun Projectile Speed Buff", "Descriptions"},
-        {"Minigun Crit Rate Buff", "Descriptions"},
-        {"Minigun Crit Damage Buff", "Descriptions"},
-        {"Rapid Barrel Upgrade", "Descriptions"},
-        {"Extra Magazine Clip", "Descriptions"},
+        {"Minigun Damage Boost", "Increase minigun damage per shot."},
+        {"Minigun Bullet Deviation Angle Reduction", "Reduce minigun bullet deviation."},
+        {"Quick Loader", "Reduce minigun reload time."},
+        {"Minigun Projectile Speed Buff", "Increase minigun bullet speed."},
+        {"Minigun Crit Rate Buff", "Increase minigun critical rate."},
+        {"Minigun Crit Damage Buff", "Increase minigun critical damage."},
+        {"Rapid Barrel Upgrade", "Increase minigun firerate."},
+        {"Extra Magazine Clip", "Increase minigun maximum ammo capacity"},
 
-        {"Rocket Damage Boost", "Descriptions"},
-        {"Rocket Explosion Radius Boost", "Descriptions"},
-        {"Quick Loader Rocket", "Descriptions"},
-        {"Rocket Crit Rate Buff", "Descriptions"},
-        {"Rocket Crit Damage Buff", "Descriptions"},
-        {"Extra Rocket Magazine Clip", "Descriptions"}
+        {"Rocket Damage Boost", "Increase rocket damage."},
+        {"Rocket Explosion Radius Boost", "Increase rocket explosion radius."},
+        {"Quick Loader Rocket", "Increase rocket rearm time."},
+        {"Rocket Crit Rate Buff", "Inrease rocket critical rate."},
+        {"Rocket Crit Damage Buff", "Increase rocket critical damage."},
+        {"Extra Rocket Magazine Clip", "Increase rocket maximum ammo capacity"}
     };
 
 

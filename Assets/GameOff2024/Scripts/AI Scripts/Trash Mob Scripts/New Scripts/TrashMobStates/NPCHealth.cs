@@ -20,6 +20,8 @@ public class NPCHealth : MonoBehaviour
     private float _mobcurrenthealth;
     private float _mobhealthmax;
 
+    private EffectsPoolManager effectsPoolManager;
+
 
     [Header("Events")]
     public UnityEvent OnMobDestroyed;
@@ -45,6 +47,8 @@ public class NPCHealth : MonoBehaviour
         _mobcurrenthealth = _mobhealthmax;
         _slider.maxValue = _mobhealthmax;
         _fill.color = _gradient.Evaluate(1f);
+
+        effectsPoolManager = FindObjectOfType<EffectsPoolManager>();
 
     }
 
@@ -84,6 +88,9 @@ public class NPCHealth : MonoBehaviour
         {
             //Debug.Log("Mob Destroyed");
             OnMobDestroyed?.Invoke();
+
+            effectsPoolManager.SpawnMobExplodeEffect(transform.position);
+
             mob.SetActive(false);
         }
     }

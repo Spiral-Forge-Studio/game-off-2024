@@ -38,8 +38,8 @@ public class TrashMob : MonoBehaviour
 
         _statemachine = new StateMachine();
 
-        var idle = new IdleState(this, _agent, _parameters);
-        var combat = new CombatState(this, _agent, _parameters, _weaponType, _weaponparam);
+        var idle = new IdleState(this, _agent, _parameters, _animator);
+        var combat = new CombatState(this, _agent, _parameters, _weaponType, _weaponparam, _animator);
         var shoot = new ShootState(this, _agent, _poolshooter, _animator);
 
 

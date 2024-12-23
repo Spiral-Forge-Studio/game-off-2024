@@ -8,19 +8,20 @@ public class IdleState : IState
     private readonly TrashMob TrashMob;
     private NavMeshAgent _navmeshagent;
     //private readonly TrashMobParameters _parameters;
-    //private Animator _animator;
+    private Animator _animator;
 
     [HideInInspector] public float roamspeed;
     public float roamradius = 7f;
 
     private List<Vector3> roamPoints = new List<Vector3>();
     private int currentPointIndex = 0;
-    public IdleState(TrashMob trashMob, NavMeshAgent agent, TrashMobParameters parameters)
+    public IdleState(TrashMob trashMob, NavMeshAgent agent, TrashMobParameters parameters, Animator animator)
     {
         TrashMob = trashMob;
         _navmeshagent = agent;
         //_parameters = parameters;
         roamspeed = parameters.roamspeed;
+        _animator = animator;
     }
 
     public void OnEnter() 
@@ -29,6 +30,7 @@ public class IdleState : IState
         _navmeshagent.speed = roamspeed; 
         _navmeshagent.autoBraking = true;
         _navmeshagent.stoppingDistance = 0f;
+        _animator.CrossFadeInFixedTime("Movement", 0.05f);
     }
     public void Tick()
     {

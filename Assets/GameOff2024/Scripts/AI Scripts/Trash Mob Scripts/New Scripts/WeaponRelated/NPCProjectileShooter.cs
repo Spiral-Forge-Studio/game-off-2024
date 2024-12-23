@@ -68,7 +68,7 @@ public class NPCProjectileShooter : MonoBehaviour
     {
         if (isreloading == false)
         {
-            _animator.SetTrigger("Shoot");
+            _animator.SetBool("Shoot", true);
 
             if (weaponType == NPCWeaponType.Shotgun)
             {

@@ -42,7 +42,6 @@ public class ShootState : IState
 
     public void Tick() 
     {
-        //_animator.SetFloat("AI Speed", _agent.velocity.magnitude);
         _playerpos = _player.transform.position; 
         
 
@@ -59,6 +58,17 @@ public class ShootState : IState
             {
                 LookAtPlayer(_playerpos);
                 _projectileShooter.TryShoot(_playerpos);
+
+                if (_animator.GetBool("Shoot"))
+                {
+                    _animator.SetBool("CombatIdle", false);
+                    _animator.Play("Shoot");
+                    _animator.SetBool("Shoot", false);
+                }
+                if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
+                {
+                    _animator.SetBool("CombatIdle", true);
+                }
             }
         }
 

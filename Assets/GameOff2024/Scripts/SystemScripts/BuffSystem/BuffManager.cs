@@ -190,6 +190,7 @@ public class BuffManager : MonoBehaviour
                 choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().color = SetBuffColor(Buff1rarity);
                 choice1Transform.Find("BuffSelectBorder").GetComponent<Image>().color = SetBuffColor(Buff1rarity);
 
+
                 // Update choice 2
                 choice2Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname2;
                 choice2Transform.Find("BuffDescription").GetComponent<TextMeshProUGUI>().text = BuffRegistry.NametoBuffDescription[buffname2];
@@ -209,6 +210,7 @@ public class BuffManager : MonoBehaviour
         {
             Debug.LogError("BuffChoiceUI is null!");
         }
+
         Buff1 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname1]];
         Buff2 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname2]];
         Buff1.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
@@ -233,6 +235,7 @@ public class BuffManager : MonoBehaviour
         {
             Debug.Log("MISSING BUFFSPAWNER");
         }
+
         Destroy(gameObject); // Destroy the buff GameObject
     }
 
