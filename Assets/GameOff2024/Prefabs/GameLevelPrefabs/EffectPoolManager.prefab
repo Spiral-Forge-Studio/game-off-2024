@@ -44,7 +44,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3521c13c0998ecf4cae83b61036c1bb4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  effectPrefab: {fileID: 0}
+  effectPrefab: {fileID: 2681085766427248752, guid: 5662c7bb90388454288b0ced3f890017,
+    type: 3}
   initialSize: 10
 --- !u!1 &3399314287743973562
 GameObject:

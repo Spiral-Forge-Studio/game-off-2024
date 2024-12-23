@@ -7,6 +7,7 @@ public class BuffSpawner : MonoBehaviour
 {
     public GameObject buffPrefab;
     public Transform spawnPoint;  // This can serve as the center of the spawn area
+    public LayerMask TerrainLayers;
     //public float spawnRadius = 5f; // Define the radius for random spawning
     public float spacing = 2f; // Adjust this value for the distance between buffs
     public int buffCount = 3;      // Number of buffs to spawn
@@ -38,7 +39,7 @@ public class BuffSpawner : MonoBehaviour
     {
         //StartCoroutine(SpawnBuffAtIntervals());
         buffpickedup = false;
-        SpawnBuffs();
+        //SpawnBuffs();
         playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO RESET ON START OF RUNN
     }
 
@@ -52,7 +53,7 @@ public class BuffSpawner : MonoBehaviour
         }
     }
 
-    private void SpawnBuffs()
+    public void SpawnBuffs()
     {
         
         float startX = spawnPoint.position.x - (buffCount - 1) * spacing / 2; // Center the line of buffs
@@ -67,7 +68,7 @@ public class BuffSpawner : MonoBehaviour
             );
 
             // Ensure no overlapping with other objects
-            Collider[] colliders = Physics.OverlapSphere(spawnPosition, 1f);
+            Collider[] colliders = Physics.OverlapSphere(spawnPosition, 1f, TerrainLayers);
             if (colliders.Length == 0)
             {
                 // Instantiate the buff and add it to the active list
@@ -76,7 +77,9 @@ public class BuffSpawner : MonoBehaviour
             }
             else
             {
+                Debug.Log(colliders[0].name);
                 Debug.LogWarning($"Failed to spawn buff at {spawnPosition}, position already occupied.");
+                Debug.Break();
             }
         }
     }
@@ -116,8 +119,6 @@ public class BuffSpawner : MonoBehaviour
             buffManager.AddBuff(buffManager.chosenBuff);
             Debug.Log("Boss buffed with" + buffManager.chosenBuff.getBuffName());
         }
-        
-        
     }
 
 

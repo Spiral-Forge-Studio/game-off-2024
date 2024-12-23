@@ -1,4 +1,5 @@
 using KinematicCharacterController;
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,6 +20,9 @@ public class PlayerStatusManager : MonoBehaviour
     public PlayerKCC playerKCC;
     public WeaponManager weaponManager;
     private UniqueBuffHandler uniqueBuffHandler;
+    private MaterialFlasher materialFlasher;
+    [SerializeField] private AudioSource hitAudioSource;
+    private MMFeedbacks feelFeedback;
 
     [Header ("Game Over Stuff")]
     [SerializeField] private GameObject _playerUI;
@@ -44,7 +48,9 @@ public class PlayerStatusManager : MonoBehaviour
 
     private void Awake()
     {
+        materialFlasher = playerKCC.gameObject.GetComponentInChildren<MaterialFlasher>();
         uniqueBuffHandler = GetComponent<UniqueBuffHandler>();
+        feelFeedback = GetComponent<MMFeedbacks>();
     }
 
     // Start is called before the first frame update
@@ -165,6 +171,12 @@ public class PlayerStatusManager : MonoBehaviour
 
             carryOverDamage = 1f;
         }
+
+        materialFlasher.FlashAllMaterials();
+
+        feelFeedback.PlayFeedbacks();
+
+        AudioManager.instance.PlaySFX(hitAudioSource, EGameplaySFX.PlayerGetHit);
     }
 
     /// <summary>

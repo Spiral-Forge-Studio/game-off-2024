@@ -15,7 +15,7 @@ public class SFXPlayerScript : MonoBehaviour
         {
             for (int i = 0; i < SFXs.Count; i++)
             {
-                AudioManager.instance.PlaySFX(AudioSources[i], SFXs[i]);
+                AudioManager.instance.PlaySFX(AudioSources?[i], SFXs[i]);
             }
         }
         else
