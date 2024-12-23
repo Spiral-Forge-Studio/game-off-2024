@@ -13,7 +13,6 @@ GameObject:
   - component: {fileID: 3783947808838941675}
   - component: {fileID: 8265284476913570435}
   - component: {fileID: 1375170015152377213}
-  - component: {fileID: 8212528697886489419}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -163,23 +162,6 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 512
   musicAudioSource: {fileID: 2886832368496740640}
---- !u!114 &8212528697886489419
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 794475073987393385}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 172515602e62fb746b5d573b38a5fe58, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IsGlobal: 1
-  priority: 0
-  blendDistance: 0
-  weight: 1
-  sharedProfile: {fileID: 11400000, guid: 9b4f58339a41d7747942e5844d971d6a, type: 2}
 --- !u!1 &1580629051338060806
 GameObject:
   m_ObjectHideFlags: 0

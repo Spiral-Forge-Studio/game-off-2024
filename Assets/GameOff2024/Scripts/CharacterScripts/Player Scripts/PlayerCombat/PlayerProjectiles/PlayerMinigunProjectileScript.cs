@@ -1,5 +1,7 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.Collections.LowLevel.Unsafe;
 using UnityEngine;
 
 public class MinigunProjectileParams : ProjectileParams
@@ -91,6 +93,11 @@ public class PlayerMinigunProjectileScript : Projectile
     public float GetDamage()
     {
         return damage;
+    }
+
+    public bool GetIsCritical()
+    {
+        return isCritical;
     }
 
     private void OnTriggerEnter(Collider other)

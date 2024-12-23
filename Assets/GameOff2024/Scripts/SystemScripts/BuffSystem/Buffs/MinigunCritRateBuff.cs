@@ -7,8 +7,8 @@ public class MinigunCritRateBuff : Buff
     public Rarity rarity;
     public string buffname = "Minigun Crit Rate Buff";
 
-    public float initialAmountFlat = 20f; // Reduced deviation (negative value for reduction)
-    public float initialAmountMultiplier = 50f; // Percentage-based reduction
+    public float initialAmountFlat = 0.01f; // Reduced deviation (negative value for reduction)
+    public float initialAmountMultiplier = 5f; // Percentage-based reduction
     public float consecutiveAmountFlat = 1f;
     public float consecutiveAmountMultiplier = 2.5f;
     public float scalingFactor;
@@ -132,6 +132,9 @@ public class MinigunCritRateBuff : Buff
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunCritRateMultiplier, multiplierValue, true);
             totalMultiplierReduction += multiplierValue / 100f;
         }
+
+        Debug.Log(initialAmountFlat + ", " + initialAmountMultiplier);
+        Debug.Break();
     }
 
     public override void ApplyConsecutiveBuff()

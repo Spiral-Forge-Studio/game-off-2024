@@ -1,11 +1,16 @@
+using MoreMountains.Feedbacks;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
 public class RocketExplosionScript : MonoBehaviour
 {
+    [SerializeField] private MMFeedbacks normalHitFeedback;
+    [SerializeField] private MMFeedbacks criticalHitFeedback;
+
     [HideInInspector] public float damage;
     [HideInInspector] public float radius;
+    [HideInInspector] public bool isCritical;
     [HideInInspector] public UniqueBuffHandler uniqueBuffHandler;
 
     private EffectsPoolManager effectPoolManager;
@@ -26,6 +31,7 @@ public class RocketExplosionScript : MonoBehaviour
     {
         gameObject.transform.localScale = Vector3.one*radius;
         GetComponent<SphereCollider>().enabled = true;
+        // Perform SphereCast to check for "Enemy" tagged objects
 
         AudioManager.instance.PlaySFX(audioSource, EGameplaySFX.RocketExplode);
 
@@ -35,7 +41,7 @@ public class RocketExplosionScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        
+
     }
 
     private IEnumerator DestroyAfterDelay(float delay)

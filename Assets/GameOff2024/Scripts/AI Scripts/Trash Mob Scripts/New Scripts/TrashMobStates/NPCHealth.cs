@@ -3,7 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using UnityEngine.Events; 
+using UnityEngine.Events;
+using MoreMountains.Feedbacks;
 
 public class NPCHealth : MonoBehaviour
 {
@@ -16,11 +17,14 @@ public class NPCHealth : MonoBehaviour
 
     [SerializeField] private Gradient _gradient;
     [SerializeField] private Image _fill;
+    [SerializeField] private MMFeedbacks normalHitFeedback;
+    [SerializeField] private MMFeedbacks criticalHitFeedback;
 
     private float _mobcurrenthealth;
     private float _mobhealthmax;
 
     private EffectsPoolManager effectsPoolManager;
+    private MaterialFlasher materialFlasher;
 
 
     [Header("Events")]
@@ -50,6 +54,8 @@ public class NPCHealth : MonoBehaviour
 
         effectsPoolManager = FindObjectOfType<EffectsPoolManager>();
 
+        materialFlasher = GetComponent<MaterialFlasher>();
+
     }
 
     // Update is called once per frame
@@ -70,7 +76,12 @@ public class NPCHealth : MonoBehaviour
         if(other.CompareTag("PlayerMinigun"))
         {
             Debug.Log("Taking minigun damage");
+
             float minigunDamage = other.gameObject.GetComponent<PlayerMinigunProjectileScript>().GetDamage();
+            bool isCritical = other.gameObject.GetComponent<PlayerMinigunProjectileScript>().GetIsCritical();
+
+            PlayHitFeedbacks(isCritical, minigunDamage);
+
             MobDamaged(minigunDamage);
         }
 
@@ -78,7 +89,25 @@ public class NPCHealth : MonoBehaviour
         {
             Debug.Log("Taking rocket damage");
             float rocketDamage = other.gameObject.GetComponent<RocketExplosionScript>().GetDamage();
+            bool isCritical = other.gameObject.GetComponent<RocketExplosionScript>().isCritical;
+
+            PlayHitFeedbacks(isCritical, rocketDamage);
+
             MobDamaged(rocketDamage);
+        }
+
+        materialFlasher.FlashAllMaterials();
+    }
+
+    public void PlayHitFeedbacks(bool isCritical, float damage)
+    {
+        if (isCritical)
+        {
+            criticalHitFeedback.PlayFeedbacks(transform.position, damage);
+        }
+        else
+        {
+            normalHitFeedback.PlayFeedbacks(transform.position, damage);
         }
     }
 

@@ -113,6 +113,7 @@ public class RocketProjectileScript : Projectile
         RocketExplosionScript explosionScript = explosion.GetComponent<RocketExplosionScript>();
         explosionScript.damage = damage;
         explosionScript.radius = explosionRadius;
+        explosionScript.isCritical = isCriticalHit;
         explosionScript.Explode();
 
         returningToPool = true;

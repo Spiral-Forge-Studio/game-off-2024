@@ -10,6 +10,7 @@ public class MaterialFlasher : MonoBehaviour
     private List<Material> allMaterials = new List<Material>(); // Store all materials
     private List<Color> originalColors = new List<Color>(); // Store original material colors
     private List<Color> originalEmissionColors = new List<Color>(); // Store original emission colors
+    public Color flashColor;
 
     private void Start()
     {
@@ -84,13 +85,15 @@ public class MaterialFlasher : MonoBehaviour
             // Set materials to white with bright emission
             foreach (var material in allMaterials)
             {
+                //Color flashColor = new Color(210f/255f, 210f / 255f, 210f / 255f, 1);
+
                 if (material.HasProperty("_Color"))
                 {
-                    material.color = Color.white;
+                    material.color = flashColor;
                 }
                 if (material.HasProperty("_EmissionColor"))
                 {
-                    material.SetColor("_EmissionColor", Color.white * emissionIntensity);
+                    material.SetColor("_EmissionColor", flashColor * emissionIntensity);
                     material.EnableKeyword("_EMISSION");
                 }
             }
