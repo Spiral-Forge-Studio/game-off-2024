@@ -35,6 +35,7 @@ public enum EGameplaySFX
     BossLevelRoomEntered,
     BossLevelRoomCleared,
     BossKilled,
+    MobExplodeOnDeath
 }
 
 #endregion
@@ -87,6 +88,8 @@ public class AudioManager : MonoBehaviour
     [SerializeField] private AudioClip[] BossLevelRoomClearedSFX;
     [SerializeField] private AudioClip[] BossKilledSFX;
 
+    [SerializeField] private AudioClip[] MobExplodeOnDeathSFX;
+
     private void Awake()
     {
         if (instance == null)
@@ -132,6 +135,9 @@ public class AudioManager : MonoBehaviour
         GameplaySFXDict.Add(EGameplaySFX.BossLevelRoomEntered, BossLevelRoomEnteredSFX);
         GameplaySFXDict.Add(EGameplaySFX.BossLevelRoomCleared, BossLevelRoomClearedSFX);
         GameplaySFXDict.Add(EGameplaySFX.BossKilled, BossKilledSFX);
+
+        GameplaySFXDict.Add(EGameplaySFX.MobExplodeOnDeath, MobExplodeOnDeathSFX);
+
     }
 
     public void PlayMusic(AudioSource source, int musicNumber, bool loop = true)
