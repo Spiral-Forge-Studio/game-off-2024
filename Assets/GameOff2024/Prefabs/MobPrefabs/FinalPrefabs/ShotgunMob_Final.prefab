@@ -728,6 +728,8 @@ GameObject:
   - component: {fileID: 19667729714730553}
   - component: {fileID: 768614736471108252}
   - component: {fileID: 4567308171525855354}
+  - component: {fileID: 6382782448825593300}
+  - component: {fileID: 6327573337119838694}
   m_Layer: 8
   m_Name: ShotgunMob_Final
   m_TagString: Enemy
@@ -903,6 +905,35 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 2.36, y: 1.94, z: 2.14}
   m_Center: {x: 0, y: 0.24, z: 0}
+--- !u!114 &6382782448825593300
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581976785946679082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 24e9223d8876e124bbaaea0502f829de, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  flashInterval: 0.1
+  flashCount: 1
+  emissionIntensity: 0.1
+  flashColor: {r: 0.8235294, g: 0.8235294, b: 0.8235294, a: 0.003921569}
+--- !u!114 &6327573337119838694
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4581976785946679082}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 481fabee798e6b445b593528e8803159, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mobPool: {fileID: 0}
 --- !u!1 &4940690917416292874
 GameObject:
   m_ObjectHideFlags: 0
