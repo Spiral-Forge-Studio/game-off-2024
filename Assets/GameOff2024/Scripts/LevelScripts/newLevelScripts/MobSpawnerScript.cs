@@ -98,6 +98,8 @@ public class MobSpawnerScript : MonoBehaviour
                             // Get a random point within a sphere (3D random distance)
                             Vector3 randomOffset = Random.insideUnitSphere * spawnGroup.spawnRadius;
 
+                            randomOffset = new Vector3(randomOffset.x, 0, randomOffset.z);
+
                             // Calculate the final spawn position by adding the random offset to the spawn point
                             Vector3 spawnPosition = spawnGroup.spawnPoint.position + randomOffset;
 

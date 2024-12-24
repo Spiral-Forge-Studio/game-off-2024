@@ -875,7 +875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33a0a27c5c1b0974cb17f6a68c071774, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  weaponType: 0
+  weaponType: 2
   _weaponsource: {fileID: 0}
   _wheelsource: {fileID: 0}
   _agent: {fileID: 6913476217642315077}
