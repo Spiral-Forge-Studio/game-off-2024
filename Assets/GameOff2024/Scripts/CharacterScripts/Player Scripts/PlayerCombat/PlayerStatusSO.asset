@@ -12,11 +12,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ed7d9956d5acb41a163919e7e5a838, type: 3}
   m_Name: PlayerStatusSO
   m_EditorClassIdentifier: 
-  baseHealth: 100
-  baseShield: 50
-  baseShieldRegenAmount: 1
-  baseShieldBreakRecoveryDelay: 2
-  baseShieldRegenTickInterval: 1
+  baseHealth: 10000
+  baseShield: 5000
+  baseShieldRegenAmount: 100
+  baseShieldBreakRecoveryDelay: 0
+  baseShieldRegenTickInterval: 0.01
   baseDamageReduction: 0.1
   baseMoveSpeed: 7
   baseDashCooldown: 0.7

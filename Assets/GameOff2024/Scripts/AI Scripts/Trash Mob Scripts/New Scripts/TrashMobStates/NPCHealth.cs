@@ -25,7 +25,8 @@ public class NPCHealth : MonoBehaviour
 
     private EffectsPoolManager effectsPoolManager;
     private MaterialFlasher materialFlasher;
-
+    private MobPoolableScript mobPoolable;
+    private TrashMob trashmob;
 
     [Header("Events")]
     public UnityEvent OnMobDestroyed;
@@ -36,6 +37,8 @@ public class NPCHealth : MonoBehaviour
         player = GameObject.Find("Player");
         _playerdamage = player.GetComponent<PlayerStatusManager>();
         _mobparameters = GetComponent<TrashMobParameters>();
+        trashmob = GetComponent<TrashMob>();
+        mobPoolable = GetComponent<MobPoolableScript>();
 
         if(_mobparameters == null)
         {
@@ -120,7 +123,9 @@ public class NPCHealth : MonoBehaviour
 
             effectsPoolManager.SpawnMobExplodeEffect(transform.position);
 
-            mob.SetActive(false);
+            trashmob.initialized = false;
+
+            mobPoolable.ReturnToPool();
         }
     }
 

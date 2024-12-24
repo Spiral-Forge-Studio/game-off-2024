@@ -8,12 +8,16 @@ public class NPCProjectile : MonoBehaviour
     private float damage;
     private NPCPoolingScript poolingScript;
     private PlayerStatusManager _playerstatusmanager;
+    private TrailRenderer _trailrenderer;
 
     private void Awake()
     {
         _playerstatusmanager = FindAnyObjectByType<PlayerStatusManager>();
+        _trailrenderer = GetComponent<TrailRenderer>();
+
         if( _playerstatusmanager == null ) { Debug.LogWarning("PlayerStatusManager not referenced"); }
     }
+
     public void Initialize(NPCWeaponType weaponType, WeaponParameters weaponParams, NPCPoolingScript pool)
     {
         poolingScript = pool;
@@ -54,6 +58,7 @@ public class NPCProjectile : MonoBehaviour
 
     private void DeactivateProjectile()
     {
+        _trailrenderer?.Clear();
         gameObject.SetActive(false);
         poolingScript.ReturnProjectile(gameObject);
     }

@@ -42,7 +42,7 @@ public class CombatState : IState
 
         if (!_animator.GetCurrentAnimatorStateInfo(0).IsName("Movement"))
         {
-            _animator.CrossFadeInFixedTime("Movement", 0.05f);
+            _animator.Play("Movement");
         }
     }
     public void Tick() { }

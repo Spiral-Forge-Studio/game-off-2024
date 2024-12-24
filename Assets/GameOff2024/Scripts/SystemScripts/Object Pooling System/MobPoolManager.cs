@@ -27,22 +27,43 @@ public class MobPoolManager : MonoBehaviour
 
     }
 
-    public void SpawnRocketHitEffect(Vector3 spawnPos)
+    public void SpawnMob(EMobType mobType, EMobGrade mobGrade, int amount, Vector3 spawnPos)
     {
-        GameObject rocketMobObject = rocketMobPool.GetMobObject();
-        rocketMobObject.transform.position = spawnPos;
-    }
+        for (int i = 0; i < amount; i++)
+        {
+            GameObject mobObject = null;
 
-    public void SpawnMinigunHitEffect(Vector3 spawnPos)
-    {
-        GameObject shotgunMobObject = shotgunMobPool.GetMobObject();
-        shotgunMobObject.transform.position = spawnPos;
+            switch (mobType)
+            {
+                case EMobType.rifle:
+                    mobObject = rifleMobPool.GetMobObject();
+                    break;
 
-    }
+                case EMobType.shotgun:
+                    mobObject = shotgunMobPool.GetMobObject();
+                    break;
 
-    public void SpawnMobExplodeEffect(Vector3 spawnPos)
-    {
-        GameObject rifleMobObject = rifleMobPool.GetMobObject();
-        rifleMobObject.transform.position = spawnPos;
+                case EMobType.rocket:
+                    mobObject = rocketMobPool.GetMobObject();
+                    break;
+            }
+
+            TrashMobParameters mobParams = mobObject.GetComponent<TrashMobParameters>();
+            TrashMob mobScript = mobObject.GetComponent<TrashMob>();
+
+            if (mobParams != null)
+            {
+                mobParams.ScaleMobParams(mobGrade);
+                mobScript.InitializeMob();
+            }
+            else
+            {
+                Debug.LogError("No TrashMobParameters script attached");
+                Debug.Break();
+            }
+
+            mobObject.transform.position = spawnPos;
+            mobObject.SetActive(true);
+        }
     }
 }

@@ -17,7 +17,7 @@ public class ShootState : IState
 
 
     [HideInInspector] public Vector3 _playerpos;
-    private float rotationSpeed = 5f;
+    private float rotationSpeed = 10f;
 
     //Shooting Handlers
     private bool _isShooting = false;
@@ -59,21 +59,30 @@ public class ShootState : IState
                 LookAtPlayer(_playerpos);
                 _projectileShooter.TryShoot(_playerpos);
 
-                if (_animator.GetBool("Shoot"))
-                {
-                    _animator.SetBool("CombatIdle", false);
-                    _animator.Play("Shoot");
-                    _animator.SetBool("Shoot", false);
-                }
+                //if (_projectileShooter.weaponType == NPCWeaponType.Shotgun)
+                //{
+                //    if (_animator.GetBool("Shoot"))
+                //    {
+                //        _animator.Play("Shoot");
+                //    }
+                //    else
+                //    {
+                //        _animator.Play("Movement");
+                //    }
+                //}
+
                 if (_animator.GetCurrentAnimatorStateInfo(0).IsName("Shoot") && _animator.GetCurrentAnimatorStateInfo(0).normalizedTime >= 1)
                 {
                     _animator.SetBool("CombatIdle", true);
+                    _animator.Play("Movement");
                 }
             }
         }
 
         else
         {
+            _animator.Play("Movement");
+
             if (fallbackcooldown > 0f)
             {
                 fallbackcooldown -= Time.deltaTime;
@@ -100,6 +109,7 @@ public class ShootState : IState
 
         if ((_playerpos - _agent.transform.position).magnitude > 20f)
         {
+            _animator.Play("Movement");
             _agent.SetDestination(_playerpos);
         }
         

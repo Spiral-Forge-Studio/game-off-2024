@@ -47,6 +47,11 @@ public class NPCProjectileShooter : MonoBehaviour
         SetUpWeapon();
     }
 
+    private void OnEnable()
+    {
+        SetUpWeapon();
+    }
+
     public void TryShoot(Vector3 targetPosition)
     {
         if (isreloading || currentammo <= 0) { return; }
@@ -68,13 +73,18 @@ public class NPCProjectileShooter : MonoBehaviour
     {
         if (isreloading == false)
         {
-            _animator.SetBool("Shoot", true);
+            //_animator.SetBool("Shoot", true);
+            //_animator.SetBool("CombatIdle", false);
+            _animator.Play("Shoot");
 
             if (weaponType == NPCWeaponType.Shotgun)
             {
                 //AudioManager.instance.PlaySFX(_soundsource, EGameplaySFX.MobShotgunFire, 0, true);
                 // Spread angle for the shotgun (adjust in WeaponParameters for fine-tuning)
                 float spreadAngle = weaponParameters.shotgunspreadangle; // e.g., 10 degrees
+
+                //_animator.SetBool("Shoot", true);
+
 
                 // Create 3 projectiles with spread
                 for (int i = -1; i <= 1; i++)

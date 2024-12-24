@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class MaterialFlasher : MonoBehaviour
 {
+    public bool initializeMaterialsOnStart = false;
     public float flashInterval = 0.1f; // Time between flashes
     public int flashCount = 3; // Number of flashes
     public float emissionIntensity = 2.0f; // Intensity of the emission during flash
@@ -14,13 +15,13 @@ public class MaterialFlasher : MonoBehaviour
 
     private void Start()
     {
-        InitializeMaterials();
+
     }
 
     /// <summary>
     /// Initializes and stores all materials from all child MeshRenderers and SkinnedMeshRenderers.
     /// </summary>
-    private void InitializeMaterials()
+    public void InitializeMaterials()
     {
         MeshRenderer[] meshRenderers = GetComponentsInChildren<MeshRenderer>();
         SkinnedMeshRenderer[] skinnedMeshRenderers = GetComponentsInChildren<SkinnedMeshRenderer>();
@@ -73,7 +74,12 @@ public class MaterialFlasher : MonoBehaviour
     /// </summary>
     public void FlashAllMaterials()
     {
-        if (allMaterials.Count == 0) return;
+        if (allMaterials.Count == 0)
+        {
+            Debug.LogWarning("NoMaterials");
+
+            return;
+        }
 
         StartCoroutine(FlashCoroutine());
     }

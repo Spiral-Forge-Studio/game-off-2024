@@ -29,12 +29,13 @@ public class MobPoolScript : MonoBehaviour
         if (poolList.Count > 0)
         {
             GameObject mob = poolList.Dequeue();
-            mob.SetActive(true);
+            //mob.SetActive(true);
             return mob;
         }
         else
         {
             GameObject newMob = Instantiate(mobPrefab);
+            newMob.SetActive(false);
             return newMob;
         }
     }

@@ -16,7 +16,7 @@ public class MobPoolableScript : MonoBehaviour
         this.mobPool = mobPool;
     }
 
-    protected void ReturnToPool()
+    public void ReturnToPool()
     {
         if (mobPool != null)
         {

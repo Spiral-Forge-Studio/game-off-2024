@@ -80,6 +80,8 @@ public class PlayerStatusManager : MonoBehaviour
         currentMaxShield = playerStatus.Shield;
 
         shieldRecoverRoutine = null;
+
+        materialFlasher.InitializeMaterials();
     }
 
     // Update is called once per frame

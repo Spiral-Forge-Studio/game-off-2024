@@ -30,7 +30,7 @@ public class IdleState : IState
         _navmeshagent.speed = roamspeed; 
         _navmeshagent.autoBraking = true;
         _navmeshagent.stoppingDistance = 0f;
-        _animator.CrossFadeInFixedTime("Movement", 0.05f);
+        _animator.Play("Movement");
     }
     public void Tick()
     {

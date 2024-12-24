@@ -6119,7 +6119,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 2.4, z: 0}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalScale: {x: 3, y: 3, z: 3}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 7778897619339754986}
@@ -17123,6 +17123,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 24e9223d8876e124bbaaea0502f829de, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  flashInterval: 0.1
-  flashCount: 1
-  emissionIntensity: 0.2
+  flashInterval: 0.07
+  flashCount: 2
+  emissionIntensity: 0.5
+  flashColor: {r: 0.6226415, g: 0.0035243349, b: 0.0035243349, a: 1}
