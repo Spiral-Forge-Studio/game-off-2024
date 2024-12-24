@@ -1,6 +1,4 @@
-using System;
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
@@ -8,10 +6,10 @@ using MoreMountains.Feedbacks;
 
 public class NPCHealth : MonoBehaviour
 {
-
     [SerializeField] private GameObject mob;
     [HideInInspector] private GameObject player;
     [SerializeField] private Slider _slider;
+    [SerializeField] private GameObject healthBarGameObject; // Reference to the health bar GameObject
     [SerializeField] private PlayerStatusManager _playerdamage;
     [SerializeField] private TrashMobParameters _mobparameters;
 
@@ -20,8 +18,12 @@ public class NPCHealth : MonoBehaviour
     [SerializeField] private MMFeedbacks normalHitFeedback;
     [SerializeField] private MMFeedbacks criticalHitFeedback;
 
+    [Header("Health Bar Display")]
+    [SerializeField] private float healthBarDisplayDuration = 3f; // Duration before hiding the health bar
+
     private float _mobcurrenthealth;
     private float _mobhealthmax;
+    private Coroutine healthBarCoroutine;
 
     private EffectsPoolManager effectsPoolManager;
     private MaterialFlasher materialFlasher;
@@ -30,9 +32,10 @@ public class NPCHealth : MonoBehaviour
 
     [Header("Events")]
     public UnityEvent OnMobDestroyed;
+
     void Awake()
     {
-        //Event Handling
+        // Event Handling
         OnMobDestroyed.AddListener(GameObject.Find("Player").GetComponentInChildren<UniqueBuffHandler>().ApplyOnKillUniqueBuffs);
         player = GameObject.Find("Player");
         _playerdamage = player.GetComponent<PlayerStatusManager>();
@@ -40,7 +43,7 @@ public class NPCHealth : MonoBehaviour
         trashmob = GetComponent<TrashMob>();
         mobPoolable = GetComponent<MobPoolableScript>();
 
-        if(_mobparameters == null)
+        if (_mobparameters == null)
         {
             Debug.LogWarning("mob parameters not referenced");
         }
@@ -49,19 +52,19 @@ public class NPCHealth : MonoBehaviour
             Debug.LogWarning("player parameters not referenced");
         }
 
-        //Setup
+        // Setup
         _mobhealthmax = _mobparameters.health;
         _mobcurrenthealth = _mobhealthmax;
         _slider.maxValue = _mobhealthmax;
         _fill.color = _gradient.Evaluate(1f);
 
         effectsPoolManager = FindObjectOfType<EffectsPoolManager>();
-
         materialFlasher = GetComponent<MaterialFlasher>();
 
+        // Initially hide the health bar
+        healthBarGameObject.SetActive(false);
     }
 
-    // Update is called once per frame
     void Update()
     {
         DestroyMob(_mobcurrenthealth);
@@ -70,32 +73,31 @@ public class NPCHealth : MonoBehaviour
 
     private void MobDamaged(float damage)
     {
-        _mobcurrenthealth = Mathf.Clamp( _mobcurrenthealth - damage, 0, _mobhealthmax);
+        _mobcurrenthealth = Mathf.Clamp(_mobcurrenthealth - damage, 0, _mobhealthmax);
+
+        // Show the health bar and restart the visibility coroutine
+        ShowHealthBar();
+        if (healthBarCoroutine != null)
+        {
+            StopCoroutine(healthBarCoroutine);
+        }
+        healthBarCoroutine = StartCoroutine(HideHealthBarAfterDelay());
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log($"Mob hit by: " + other);
-        if(other.CompareTag("PlayerMinigun"))
+        if (other.CompareTag("PlayerMinigun"))
         {
-            Debug.Log("Taking minigun damage");
-
             float minigunDamage = other.gameObject.GetComponent<PlayerMinigunProjectileScript>().GetDamage();
             bool isCritical = other.gameObject.GetComponent<PlayerMinigunProjectileScript>().GetIsCritical();
-
             PlayHitFeedbacks(isCritical, minigunDamage);
-
             MobDamaged(minigunDamage);
         }
-
         else if (other.CompareTag("PlayerRocket"))
         {
-            Debug.Log("Taking rocket damage");
             float rocketDamage = other.gameObject.GetComponent<RocketExplosionScript>().GetDamage();
             bool isCritical = other.gameObject.GetComponent<RocketExplosionScript>().isCritical;
-
             PlayHitFeedbacks(isCritical, rocketDamage);
-
             MobDamaged(rocketDamage);
         }
 
@@ -118,13 +120,9 @@ public class NPCHealth : MonoBehaviour
     {
         if (mobcurrenthealth <= 0)
         {
-            //Debug.Log("Mob Destroyed");
             OnMobDestroyed?.Invoke();
-
             effectsPoolManager.SpawnMobExplodeEffect(transform.position);
-
             trashmob.initialized = false;
-
             mobPoolable.ReturnToPool();
         }
     }
@@ -133,5 +131,16 @@ public class NPCHealth : MonoBehaviour
     {
         _slider.value = health;
         _fill.color = _gradient.Evaluate(_slider.normalizedValue);
+    }
+
+    private void ShowHealthBar()
+    {
+        healthBarGameObject.SetActive(true);
+    }
+
+    private IEnumerator HideHealthBarAfterDelay()
+    {
+        yield return new WaitForSeconds(healthBarDisplayDuration);
+        healthBarGameObject.SetActive(false);
     }
 }

@@ -1227,6 +1227,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mob: {fileID: 3640743503408750881}
   _slider: {fileID: 5055116599375963012}
+  healthBarGameObject: {fileID: 2095220316509513361}
   _playerdamage: {fileID: 0}
   _mobparameters: {fileID: 3358853632753114250}
   _gradient:
@@ -1262,6 +1263,7 @@ MonoBehaviour:
   _fill: {fileID: 3400946373468145605}
   normalHitFeedback: {fileID: 3747789721317995254}
   criticalHitFeedback: {fileID: 346300500416016391}
+  healthBarDisplayDuration: 3
   OnMobDestroyed:
     m_PersistentCalls:
       m_Calls: []

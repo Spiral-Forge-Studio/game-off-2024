@@ -685,7 +685,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 139.01001, y: 1}
+  m_SizeDelta: {x: 139.01001, y: 15}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6640525798271709819
 CanvasRenderer:
@@ -2349,6 +2349,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mob: {fileID: 8705385775131044220}
   _slider: {fileID: 7923346851929810105}
+  healthBarGameObject: {fileID: 2242231934814075675}
   _playerdamage: {fileID: 0}
   _mobparameters: {fileID: 1780552690897865642}
   _gradient:
@@ -2384,6 +2385,7 @@ MonoBehaviour:
   _fill: {fileID: 2173591759263079739}
   normalHitFeedback: {fileID: 74347115910814541}
   criticalHitFeedback: {fileID: 7271810778473547909}
+  healthBarDisplayDuration: 3
   OnMobDestroyed:
     m_PersistentCalls:
       m_Calls: []
