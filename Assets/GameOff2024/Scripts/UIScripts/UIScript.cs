@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
@@ -124,8 +125,8 @@ public class UIScript : MonoBehaviour
             healthFill.color = greenHealth;
         }
 
-        currentHealth.text = Mathf.RoundToInt(playerStatusManager.GetCurrentHealth()).ToString();
-        currentShield.text = Mathf.RoundToInt(playerStatusManager.GetCurrentShield()).ToString();
+        currentHealth.text = Math.Round(playerStatusManager.GetCurrentHealth(), 2).ToString();
+        currentShield.text = Math.Round(playerStatusManager.GetCurrentShield(), 2).ToString();
 
         healthFill.fillAmount = playerStatusManager.GetCurrentHealth()/playerStatusSO.Health;
         shieldFill.fillAmount = playerStatusManager.GetCurrentShield()/playerStatusSO.Shield;
