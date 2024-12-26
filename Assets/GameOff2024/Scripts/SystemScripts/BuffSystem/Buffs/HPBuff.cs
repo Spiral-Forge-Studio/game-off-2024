@@ -8,9 +8,9 @@ public class HpBuff : Buff
     public Rarity rarity;
     public string buffname = "Steel - Plated Armor";
 
-    public float initialAmountFlat = 50f;
+    public float initialAmountFlat = 10f;
     public float initialAmountMultiplier = 30f;
-    public float consecutiveAmountFlat = 25f;
+    public float consecutiveAmountFlat = 5f;
     public float consecutiveAmountMultiplier = 5f;
     public float scalingFactor;
 

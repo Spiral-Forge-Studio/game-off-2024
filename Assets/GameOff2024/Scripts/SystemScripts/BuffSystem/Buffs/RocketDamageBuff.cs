@@ -7,10 +7,10 @@ public class RocketDamageBuff : Buff
     public Rarity rarity;
     public string buffname = "Rocket Damage Boost";
 
-    public float initialAmountFlat = 10f;
-    public float initialAmountMultiplier = 10f;
-    public float consecutiveAmountFlat = 5f;
-    public float consecutiveAmountMultiplier = 5f;
+    public float initialAmountFlat = 5f;
+    public float initialAmountMultiplier = 20f;
+    public float consecutiveAmountFlat = 2.5f;
+    public float consecutiveAmountMultiplier = 10f;
     public float scalingFactor;
 
     private float totalFlatBonus;

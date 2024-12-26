@@ -685,7 +685,7 @@ RectTransform:
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 139.01001, y: 15}
+  m_SizeDelta: {x: 139.01001, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6640525798271709819
 CanvasRenderer:
@@ -2266,7 +2266,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 902aad97cf087a6449da686144d84a2c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 50
   roamspeed: 7
   combatspeed: 7
   dodgeSpeed: 5
@@ -2274,29 +2274,29 @@ MonoBehaviour:
   detectCover: 10
   dodgeprobability: 0.3
   shootprobability: 0.7
-  PlayerDetectionRadius: 20
+  PlayerDetectionRadius: 30
   PlayerExitCombatRange: 3
   healthfactor_Private: 1
   speedfactor_Private: 1
-  healthfactor_Corporal: 2
-  speedfactor_Corporal: 2
+  healthfactor_Corporal: 1.5
+  speedfactor_Corporal: 1.1
   healthfactor_Seargeant: 3
-  speedfactor_Seargeant: 3
+  speedfactor_Seargeant: 1.15
   healthfactor_Lieutenant: 4
-  speedfactor_Lieutenant: 4
+  speedfactor_Lieutenant: 1.2
   healthfactor_Captain: 5
-  speedfactor_Captain: 5
+  speedfactor_Captain: 1.2
   healthfactor_Major: 6
-  speedfactor_Major: 6
+  speedfactor_Major: 1.2
   healthfactor_General: 8
-  speedfactor_General: 8
+  speedfactor_General: 1.35
   weaponFactor_Private: 1
-  weaponFactor_Corporal: 1.1
-  weaponFactor_Seargeant: 1.2
-  weaponFactor_Lieutenant: 1.3
-  weaponFactor_Captain: 1.5
-  weaponFactor_Major: 2
-  weaponFactor_General: 2.5
+  weaponFactor_Corporal: 1.25
+  weaponFactor_Seargeant: 2.5
+  weaponFactor_Lieutenant: 3
+  weaponFactor_Captain: 3.5
+  weaponFactor_Major: 4.5
+  weaponFactor_General: 6.5
 --- !u!114 &6387822160219958254
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -7,10 +7,10 @@ public class DamageReductionBuff : Buff
     public Rarity rarity;
     public string buffname = "Hardened Plating";
 
-    public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 5f;
-    public float consecutiveAmountFlat = 2f;
-    public float consecutiveAmountMultiplier = 2f;
+    public float initialAmountFlat = 0.01f;
+    public float initialAmountMultiplier = 10f;
+    public float consecutiveAmountFlat = 0.005f;
+    public float consecutiveAmountMultiplier = 5f;
     public float scalingFactor;
 
     private float totalFlatBonus;    // Tracks total flat bonus to remove
@@ -20,8 +20,8 @@ public class DamageReductionBuff : Buff
 
     public Dictionary<BuffType, float> bufftypeProbabilities = new Dictionary<BuffType, float>
     {
-        { BuffType.Percentage, 1f },
-        { BuffType.Flat, 0f }
+        { BuffType.Percentage, 0.5f },
+        { BuffType.Flat, 0.5f }
     };
 
     public Dictionary<Rarity, float> rarityProbabilities = new Dictionary<Rarity, float>

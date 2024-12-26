@@ -7,10 +7,10 @@ public class MinigunFireRateBuff : Buff
     public Rarity rarity;
     public string buffName = "Rapid Barrel Upgrade";
 
-    public float initialAmountFlat = 1f;
-    public float initialAmountMultiplier = 10.0f;
+    public float initialAmountFlat = 0.5f;
+    public float initialAmountMultiplier = 15.0f;
     public float consecutiveAmountFlat = 0.25f;
-    public float consecutiveAmountMultiplier = 0.5f;
+    public float consecutiveAmountMultiplier = 7.5f;
     public float scalingFactor;
 
     private float totalFlatBonus;    // Tracks total flat bonus to remove

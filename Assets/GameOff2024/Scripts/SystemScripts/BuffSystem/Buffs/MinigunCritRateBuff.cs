@@ -7,10 +7,10 @@ public class MinigunCritRateBuff : Buff
     public Rarity rarity;
     public string buffname = "Minigun Crit Rate Buff";
 
-    public float initialAmountFlat = 0.01f; // Reduced deviation (negative value for reduction)
-    public float initialAmountMultiplier = 5f; // Percentage-based reduction
-    public float consecutiveAmountFlat = 1f;
-    public float consecutiveAmountMultiplier = 2.5f;
+    public float initialAmountFlat = 0.025f; // Reduced deviation (negative value for reduction)
+    public float initialAmountMultiplier = 25f; // Percentage-based reduction
+    public float consecutiveAmountFlat = 0.01f;
+    public float consecutiveAmountMultiplier = 10f;
     public float scalingFactor;
 
     private float totalFlatReduction;

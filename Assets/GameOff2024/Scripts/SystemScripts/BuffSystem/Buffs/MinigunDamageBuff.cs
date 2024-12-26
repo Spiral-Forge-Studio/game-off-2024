@@ -7,10 +7,10 @@ public class MinigunDamageBuff : Buff
     public Rarity rarity;
     public string buffname = "Minigun Damage Boost";
 
-    public float initialAmountFlat = 10f;
-    public float initialAmountMultiplier = 10f;
-    public float consecutiveAmountFlat = 5f;
-    public float consecutiveAmountMultiplier = 5f;
+    public float initialAmountFlat = 1f;
+    public float initialAmountMultiplier = 15f;
+    public float consecutiveAmountFlat = 0.5f;
+    public float consecutiveAmountMultiplier = 10f;
     public float scalingFactor;
 
     private float totalFlatBonus;

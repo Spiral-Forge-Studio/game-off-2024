@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 7640956374907140754}
   - component: {fileID: 2800687310212935718}
+  - component: {fileID: 1558652729481379553}
   m_Layer: 0
   m_Name: Game State
   m_TagString: Untagged
@@ -44,6 +45,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0ffa8cf64000d68469a75f756e026dcc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mobSpawners:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  currentMobSpawnerIndex: 0
   playerKCC: {fileID: 0}
   FPSCap: 60
   _timeScale: 1
@@ -51,3 +57,15 @@ MonoBehaviour:
   gameOverPanel: {fileID: 0}
   restartDelay: 2
   BuffMenu: {fileID: 11400000, guid: f76aa8fbb3a2e0c4c92f4bfdad63a022, type: 2}
+--- !u!114 &1558652729481379553
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6833045503498849629}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5df253bd4737bf64288acbd6925aeb3e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

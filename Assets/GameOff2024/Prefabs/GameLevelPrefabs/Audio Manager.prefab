@@ -178,7 +178,7 @@ MonoBehaviour:
   menuUISource: {fileID: 733218431704082594}
   musicList:
   - {fileID: 8300000, guid: 9ecd50b201720214892698b5f6346046, type: 3}
-  - {fileID: 8300000, guid: a7d37df4c45257144ad05178722d8f37, type: 3}
+  - {fileID: 8300000, guid: 61817a90fc9a2cb4a8c96fd2ed9d6788, type: 3}
   buttonSfxList: []
   MinigunFireSFX:
   - {fileID: 8300000, guid: 351416bbb6f031a40a52d21afe4e9283, type: 3}
@@ -197,10 +197,12 @@ MonoBehaviour:
   PlayerWalkSFX: []
   PlayerDashSFX:
   - {fileID: 8300000, guid: e0c1f70d1af111b4aa951e9468eb8b13, type: 3}
-  PlayerGetHitSFX: []
+  PlayerGetHitSFX:
+  - {fileID: 8300000, guid: fe43b44e9b07b614cb2b0488f05f4330, type: 3}
   PlayerDieSFX: []
   MobHitSFX: []
-  MobDieSFX: []
+  MobDieSFX:
+  - {fileID: 8300000, guid: 04c84f89599d69e459a2a359fa03f151, type: 3}
   MobWindupSFX:
   - {fileID: 8300000, guid: 04c84f89599d69e459a2a359fa03f151, type: 3}
   MobWalkSFX:
@@ -221,6 +223,8 @@ MonoBehaviour:
   BossLevelRoomEnteredSFX: []
   BossLevelRoomClearedSFX: []
   BossKilledSFX: []
+  MobExplodeOnDeathSFX:
+  - {fileID: 8300000, guid: f166736334e0623418a466350eb2fac2, type: 3}
 --- !u!1 &7079339579808779340
 GameObject:
   m_ObjectHideFlags: 0

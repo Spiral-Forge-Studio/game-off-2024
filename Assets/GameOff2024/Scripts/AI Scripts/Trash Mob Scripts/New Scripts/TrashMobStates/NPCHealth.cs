@@ -3,6 +3,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.Events;
 using MoreMountains.Feedbacks;
+using System;
 
 public class NPCHealth : MonoBehaviour
 {
@@ -111,13 +112,14 @@ public class NPCHealth : MonoBehaviour
 
     public void PlayHitFeedbacks(bool isCritical, float damage)
     {
+        float roundedDamage = (float)Math.Round(damage, 2);
         if (isCritical)
         {
-            criticalHitFeedback.PlayFeedbacks(transform.position, damage);
+            criticalHitFeedback.PlayFeedbacks(transform.position, roundedDamage);
         }
         else
         {
-            normalHitFeedback.PlayFeedbacks(transform.position, damage);
+            normalHitFeedback.PlayFeedbacks(transform.position, roundedDamage);
         }
     }
 

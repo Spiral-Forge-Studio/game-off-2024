@@ -7,10 +7,10 @@ public class MinigunReloadTimeBuff : Buff
     public Rarity rarity;
     public string buffname = "Quick Loader";
 
-    public float initialAmountFlat = -0.1f;
-    public float initialAmountMultiplier = -5.0f;
-    public float consecutiveAmountFlat = -0.05f;
-    public float consecutiveAmountMultiplier = -2.5f;
+    public float initialAmountFlat = -0.15f;
+    public float initialAmountMultiplier = -10.0f;
+    public float consecutiveAmountFlat = -0.1f;
+    public float consecutiveAmountMultiplier = -5f;
     public float scalingFactor;
 
     private float totalFlatBonus;

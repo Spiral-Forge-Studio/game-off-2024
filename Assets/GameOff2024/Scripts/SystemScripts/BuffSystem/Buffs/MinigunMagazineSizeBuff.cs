@@ -7,10 +7,10 @@ public class MinigunMagazineBuff : Buff
     public Rarity rarity;
     public string buffname = "Extra Magazine Clip";
 
-    public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 10f;
-    public float consecutiveAmountFlat = 2f;
-    public float consecutiveAmountMultiplier = 5f;
+    public float initialAmountFlat = 10f;
+    public float initialAmountMultiplier = 20f;
+    public float consecutiveAmountFlat = 5f;
+    public float consecutiveAmountMultiplier = 15f;
     public float scalingFactor;
 
     private float totalFlatBonus;    // Tracks total flat bonus to remove
