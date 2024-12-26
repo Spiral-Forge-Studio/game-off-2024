@@ -176,8 +176,8 @@ public class BuffManager : MonoBehaviour
         Buff2 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname2]];
         Buff1.UpdateBuffValues(Buff1type, Buff1rarity);
         Buff2.UpdateBuffValues(Buff2type, Buff2rarity);
-        string buffchanges1 = BuffRegistry.NametoStattobebuffed[buffname1] + ": " + NameToCurrStat(buffname1) + "->" + PreviewBuffChange(Buff1);
-        string buffchanges2 = BuffRegistry.NametoStattobebuffed[buffname2] + ": " + NameToCurrStat(buffname2) + "->" + PreviewBuffChange(Buff2);
+        string buffchanges1 = BuffRegistry.NametoStattobebuffed[buffname1] + ": " + NameToCurrStat(buffname1) + "->" + PreviewBuffChange(Buff1) + "(" + Buff1type + ")";
+        string buffchanges2 = BuffRegistry.NametoStattobebuffed[buffname2] + ": " + NameToCurrStat(buffname2) + "->" + PreviewBuffChange(Buff2) + "(" + Buff2type + ")";
 
 
         BMUIManager.ToggleBuffchoice();

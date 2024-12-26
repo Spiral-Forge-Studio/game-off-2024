@@ -13,10 +13,10 @@ MonoBehaviour:
   m_Name: PlayerStatusSO
   m_EditorClassIdentifier: 
   baseHealth: 50
-  baseShield: 30
-  baseShieldRegenAmount: 0.1
-  baseShieldBreakRecoveryDelay: 2.5
-  baseShieldRegenTickInterval: 0.1
+  baseShield: 50
+  baseShieldRegenAmount: 1
+  baseShieldBreakRecoveryDelay: 2
+  baseShieldRegenTickInterval: 0.5
   baseDamageReduction: 0.1
   baseMoveSpeed: 7
   baseDashCooldown: 0.7

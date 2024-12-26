@@ -146,7 +146,7 @@ public class RocketExplosionRadiusBuff : Buff
         {
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketExplosionRadiusMultiplier, bonusAmount, true);
-            totalMultiplier += bonusAmount / 100f;
+            totalMultiplier += bonusAmount;
         }
     }
 

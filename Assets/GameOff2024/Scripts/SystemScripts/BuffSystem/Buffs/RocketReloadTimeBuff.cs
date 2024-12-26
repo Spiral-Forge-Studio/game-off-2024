@@ -113,7 +113,7 @@ public class RocketReloadTimeBuff : Buff
         else if (buffType == BuffType.Percentage)
         {
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, initialAmountMultiplier, true);
-            totalMultiplier += initialAmountMultiplier / 100f;
+            totalMultiplier += initialAmountMultiplier;
         }
     }
 
@@ -129,7 +129,7 @@ public class RocketReloadTimeBuff : Buff
         {
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, bonusAmount, true);
-            totalMultiplier += bonusAmount / 100f;
+            totalMultiplier += bonusAmount;
         }
     }
 
@@ -137,11 +137,11 @@ public class RocketReloadTimeBuff : Buff
     {
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.RocketReloadTimeFlatBonus, -totalFlatBonus);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.RocketReloadTimeFlatBonus, totalFlatBonus);
         }
         else if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, -totalMultiplier, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, totalMultiplier, true);
         }
     }
 

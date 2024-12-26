@@ -7,10 +7,10 @@ public class MoveSpeedBuff : Buff
     public Rarity rarity;
     public string buffname = "Swift Stride";
 
-    public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 20f;
-    public float consecutiveAmountFlat = 2f;
-    public float consecutiveAmountMultiplier = 2f;
+    public float initialAmountFlat = 0.5f;
+    public float initialAmountMultiplier = 15f;
+    public float consecutiveAmountFlat = 0.1f;
+    public float consecutiveAmountMultiplier = 3f;
     public float scalingFactor;
 
     private float totalFlatBonus;
