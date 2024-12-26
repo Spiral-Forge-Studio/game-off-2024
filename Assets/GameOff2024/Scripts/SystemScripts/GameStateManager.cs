@@ -8,8 +8,13 @@ using UnityEngine.UI;
 
 public class GameStateManager : MonoBehaviour
 {
+    [Header("Mob Spawners")]
+    public MobSpawnerScript[] mobSpawners;
+    public int currentMobSpawnerIndex;
+
     public PlayerKCC playerKCC;
     private PlayerScript playerScript;
+    private PlatformScript platformScript;
 
     public int FPSCap;
     public float _timeScale;
@@ -28,6 +33,8 @@ public class GameStateManager : MonoBehaviour
         //gameOverPanel.SetActive(false);
 
         playerScript = FindObjectOfType<PlayerScript>();
+        platformScript = FindObjectOfType<PlatformScript>();
+
         if (BuffMenu != null)
         {
             if (BuffMenu.FirstTimeRun)
@@ -35,18 +42,20 @@ public class GameStateManager : MonoBehaviour
                 BuffMenu.InitializeMenu();//run this only once per game 
                 BuffMenu.FirstTimeRun = false;
             }
-            
-
         }
-        
+
+        currentMobSpawnerIndex = 0;
     }
 
     // Start is called before the first frame update
     void Start()
     {
         isPaused = false;
+
+        StartWave();
     }
 
+    
 
     //private void Update()
     //{
@@ -59,6 +68,23 @@ public class GameStateManager : MonoBehaviour
     //        Time.timeScale = 1.0f;
     //    }
     //}
+
+    public void MobDied()
+    {
+        mobSpawners[currentMobSpawnerIndex].ReduceMobCount();
+    }
+
+    public void StartWave()
+    {
+        mobSpawners[currentMobSpawnerIndex].SpawnWave();
+
+        if (mobSpawners[currentMobSpawnerIndex].AllWavesCompleted)
+        {
+            platformScript.triggerCollider.SetActive(true);
+            Debug.Log("[GAMESTATE] nextLevel");
+            currentMobSpawnerIndex++;
+        }
+    }
 
     public void GameOver()
     {

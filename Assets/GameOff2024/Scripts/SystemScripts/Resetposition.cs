@@ -61,7 +61,7 @@ public class PositionTracker : MonoBehaviour
         }
 
 
-        Debug.Log("Position Saved. History Count: " + _lastpos.Count);
+        //Debug.Log("Position Saved. History Count: " + _lastpos.Count);
     }
 
     /// <summary>
@@ -74,14 +74,14 @@ public class PositionTracker : MonoBehaviour
         //Debug.LogWarning("Object reset to last saved position: " + lastSavedPosition);
         if (_lastpos.Count < 2)
         {
-            Debug.LogWarning("Not enough saved positions");
+            //Debug.LogWarning("Not enough saved positions");
         }
 
         Vector3 offset = 5f * (_lastpos[_lastpos.Count - 1] - transform.position).normalized;
 
         Vector3 resetpos = _lastpos[_lastpos.Count - 1] + new Vector3(offset.x, -0.1f, offset.z);
         _player.Motor.SetPosition(resetpos);
-        Debug.LogWarning("Player reset to second-to-last saved position: " + resetpos);
+        //Debug.LogWarning("Player reset to second-to-last saved position: " + resetpos);
     }
 }
 

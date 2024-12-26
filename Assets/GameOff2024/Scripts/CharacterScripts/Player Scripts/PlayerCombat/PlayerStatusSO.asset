@@ -20,12 +20,12 @@ MonoBehaviour:
   baseDamageReduction: 0.1
   baseMoveSpeed: 7
   baseDashCooldown: 0.7
-  b_MinigunDamage: 5
+  b_MinigunDamage: 100
   b_MinigunCritRate: 0.3
   b_MinigunCritDamage: 1.5
-  b_MinigunFireRate: 7
-  b_MinigunReloadTime: 1.5
-  b_MinigunMagazineSize: 50
+  b_MinigunFireRate: 10
+  b_MinigunReloadTime: 2
+  b_MinigunMagazineSize: 25
   b_MinigunProjectileLifetime: 0.5
   b_MinigunProjectileSpeed: 50
   b_minigunDeviationAngle: 3
@@ -33,8 +33,8 @@ MonoBehaviour:
   b_RocketCritRate: 0
   b_RocketCritDamage: 1.5
   b_RocketFireRate: 10
-  b_RocketReloadTime: 5
-  b_RocketMagazineSize: 2
+  b_RocketReloadTime: 3
+  b_RocketMagazineSize: 3
   b_RocketProjectileLifetime: 0.7
   b_RocketProjectileSpeed: 30
   b_RocketExplosionRadius: 10

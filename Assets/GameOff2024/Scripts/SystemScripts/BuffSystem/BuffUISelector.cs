@@ -7,6 +7,7 @@ using static DungeonGenerator;
 
 public class BuffSelectionUI : MonoBehaviour
 {
+    private GameStateManager gameStateManager;
     public GameObject buffUI; // Reference to the UI canvas or panel
     public PlayerKCC player; // Reference to the player
     private Room currentRoom; // Reference to the current room
@@ -16,6 +17,12 @@ public class BuffSelectionUI : MonoBehaviour
     public Button buffOption2Button;        // Button for the second buff
 
     private Action<int> onBuffSelectedCallback;
+
+    private void Awake()
+    {
+        gameStateManager = FindObjectOfType<GameStateManager>();
+    }
+
     public void DisplayBuffOptions(Action<int> callback)
     {
         // Assign the callback to be used when a buff is selected

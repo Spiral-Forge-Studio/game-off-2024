@@ -10,13 +10,12 @@ public class NPCSoundsRifle : MonoBehaviour
     public AudioSource _wheelsource;
     public NavMeshAgent _agent;
 
-    private bool _isMoving;
+    //private bool _isMoving;
 
     private void Awake()
     {
         _weaponsource = GetComponents<AudioSource>()[0];
         //_wheelsource = GetComponents<AudioSource>()[1];
-        _isMoving = false;
     }
 
     private void Update()

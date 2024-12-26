@@ -84,6 +84,8 @@ public class WeaponManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        playerStats.ResetMultipliersAndFlatBonuses();
+
         minigun_currentAmmo = playerStats.MinigunMagazineSize;
         rocket_currentAmmo = playerStats.RocketMagazineSize;
         rocket_accumulatedShots = 0;

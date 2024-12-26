@@ -20,7 +20,7 @@ public class ShootState : IState
     private float rotationSpeed = 10f;
 
     //Shooting Handlers
-    private bool _isShooting = false;
+    //private bool _isShooting = false;
 
     //Raycasting
     private LayerMask _obstacles;
@@ -167,7 +167,7 @@ public class ShootState : IState
 
     private Vector3 FindNewPosition()
     {
-        Debug.Log("Computing New Position");
+        //Debug.Log("Computing New Position");
 
         float searchRadius = 10f;
         float maxAttempts = 3f;

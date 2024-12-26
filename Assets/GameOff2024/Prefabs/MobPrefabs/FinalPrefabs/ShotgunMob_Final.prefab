@@ -415,10 +415,10 @@ MonoBehaviour:
   shotgunspeed: 7
   shotgunlifetime: 3
   shotgunreload: 5
-  shotgunfirerate: 2
+  shotgunfirerate: 3
   shotgunmagazinesize: 3
   shotgunspreadangle: 35
-  shotgunrange: 5
+  shotgunrange: 2
   rocketdamage: 20
   rocketspeed: 5
   rocketlifetime: 5
@@ -1528,7 +1528,7 @@ MonoBehaviour:
   dodgeprobability: 0.3
   shootprobability: 0.7
   PlayerDetectionRadius: 30
-  PlayerExitCombatRange: 3
+  PlayerExitCombatRange: 2
   healthfactor_Private: 1
   speedfactor_Private: 1
   healthfactor_Corporal: 1.2

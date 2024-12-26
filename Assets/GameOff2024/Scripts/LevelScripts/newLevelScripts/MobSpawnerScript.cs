@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 
@@ -75,42 +76,78 @@ public class MobSpawnerScript : MonoBehaviour
     public MobPoolManager mobPoolManager;
     public Wave[] waves;
 
-    private bool tested;
+    private int currentWave;
+    public bool AllWavesCompleted;
+
+    private int currentMobCount;
+
+    private BuffSpawner buffSpawner;
+
     private void Awake()
     {
-        tested = false;
+        buffSpawner = FindObjectOfType<BuffSpawner>();
+        currentWave = 0;
+        AllWavesCompleted = false;
+    }
+
+    private void Start()
+    {
+        currentMobCount = waves[currentWave].GetNumberOfMobsInWave();
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.G) && !tested)
+        if (currentMobCount == 0)
         {
-            tested = true;
+            Debug.Log("Spawning Buffs");
+            buffSpawner.SpawnBuffs();
+            currentMobCount = -1;
+        }
+    }
 
-            foreach (Wave wave in waves)
+    public void ReduceMobCount()
+    {
+        currentMobCount--;
+    }
+
+    public void SpawnWave()
+    {
+        if (currentWave == waves.Length)
+        {
+            AllWavesCompleted = true;
+        }
+        else
+        {
+            foreach (SpawnGroup spawnGroup in waves[currentWave].SpawnGroups)
             {
-                foreach (SpawnGroup spawnGroup in wave.SpawnGroups)
-                {
-                    foreach (MobGroup mobGroup in spawnGroup.mobGroups)
-                    {
-                        for (int i = 0; i < mobGroup.amount; i++)
-                        {
-                            // Get a random point within a sphere (3D random distance)
-                            Vector3 randomOffset = Random.insideUnitSphere * spawnGroup.spawnRadius;
+                SpawnSpawnGroup(spawnGroup);
+            }
 
-                            randomOffset = new Vector3(randomOffset.x, 0, randomOffset.z);
+            currentMobCount = waves[currentWave].GetNumberOfMobsInWave();
 
-                            // Calculate the final spawn position by adding the random offset to the spawn point
-                            Vector3 spawnPosition = spawnGroup.spawnPoint.position + randomOffset;
+            currentWave++;
+        }
+    }
 
-                            mobPoolManager.SpawnMob(
-                                mobGroup.type,
-                                mobGroup.grade,
-                                mobGroup.amount,
-                                spawnPosition);
-                        }
-                    }
-                }
+    private void SpawnSpawnGroup(SpawnGroup spawnGroup)
+    {
+        foreach (MobGroup mobGroup in spawnGroup.mobGroups)
+        {
+            for (int i = 0; i < mobGroup.amount; i++)
+            {
+                // Get a random point within a sphere (3D random distance)
+                Vector2 randomOffset = Random.insideUnitCircle * spawnGroup.spawnRadius;
+
+                Vector3 randomOffsetV3 = new Vector3(randomOffset.x, 0, randomOffset.y);
+
+                // Calculate the final spawn position by adding the random offset to the spawn point
+                Vector3 spawnPosition = spawnGroup.spawnPoint.position + randomOffsetV3;
+
+                mobPoolManager.SpawnMob(
+                    mobGroup.type,
+                    mobGroup.grade,
+                    mobGroup.amount,
+                    spawnPosition);
             }
         }
     }

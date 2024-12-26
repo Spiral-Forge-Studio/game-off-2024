@@ -177,6 +177,6 @@ public class AudioManager : MonoBehaviour
 
         audioSource.Play();
 
-        Debug.Log("Played " + sfxEnum);
+        //Debug.Log("Played " + sfxEnum);
     }
 }

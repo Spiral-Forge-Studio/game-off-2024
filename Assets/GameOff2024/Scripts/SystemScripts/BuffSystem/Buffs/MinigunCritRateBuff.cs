@@ -132,9 +132,6 @@ public class MinigunCritRateBuff : Buff
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunCritRateMultiplier, multiplierValue, true);
             totalMultiplierReduction += multiplierValue / 100f;
         }
-
-        Debug.Log(initialAmountFlat + ", " + initialAmountMultiplier);
-        Debug.Break();
     }
 
     public override void ApplyConsecutiveBuff()

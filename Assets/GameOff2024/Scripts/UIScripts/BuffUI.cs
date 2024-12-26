@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System;
+using KinematicCharacterController;
 
 public class BuffMenuUIManager : MonoBehaviour
 {
@@ -13,6 +14,15 @@ public class BuffMenuUIManager : MonoBehaviour
     public GameObject toBeBuffed;
 
     private bool isMenuVisible = false;
+
+    private GameStateManager gameStateManager;
+    private PauseScript pauseScript;
+
+    private void Awake()
+    {
+        gameStateManager = FindObjectOfType<GameStateManager>();
+        pauseScript = FindObjectOfType<PauseScript>();
+    }
 
     void Start()
     {
@@ -61,11 +71,19 @@ public class BuffMenuUIManager : MonoBehaviour
         {
             if (Buffchoice.gameObject.activeSelf)
             {
+                Cursor.visible = false;
+                pauseScript.Resume();
+                FindObjectOfType<PlayerScript>()._kccInputsEnabled = true;
                 Buffchoice.gameObject.SetActive(false);
             }
             else
             {
+                Cursor.visible = true;
+                pauseScript.Pause();
+                FindObjectOfType<PlayerScript>()._kccInputsEnabled = false;
+
                 Buffchoice.gameObject.SetActive(true);
+
             }
         }
         else
@@ -80,6 +98,9 @@ public class BuffMenuUIManager : MonoBehaviour
         buffSpawner.Buff1.ApplyBuff(toBeBuffed);
         ToggleBuffchoice();
         // Add your logic here
+
+
+        gameStateManager.StartWave();
     }
     public void Buff2Selected()
     {
@@ -88,5 +109,8 @@ public class BuffMenuUIManager : MonoBehaviour
         ToggleBuffchoice();
 
         // Add your logic here
+
+
+        gameStateManager.StartWave();
     }
 }

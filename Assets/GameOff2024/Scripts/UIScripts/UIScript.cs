@@ -105,7 +105,7 @@ public class UIScript : MonoBehaviour
 
         float hpRatio = playerStatusManager.GetCurrentHealth() / playerStatusSO.Health;
 
-        Debug.Log(hpRatio);
+        //Debug.Log(hpRatio);
 
         if (hpRatio < 0.25f)
         {

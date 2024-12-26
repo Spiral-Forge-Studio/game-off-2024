@@ -40,6 +40,8 @@ namespace KinematicCharacterController
         [HideInInspector] private GameStateManager gameState;
         [HideInInspector] public float _mouseSensitivity;
 
+        private PauseScript _pauseScript;
+        public bool _kccInputsEnabled;
 
         private void Awake()
         {
@@ -53,6 +55,7 @@ namespace KinematicCharacterController
 
         private void Start()
         {
+            _pauseScript = FindObjectOfType<PauseScript>();
             // New Input System
             playerInput = GetComponent<PlayerInput>();
 
@@ -69,32 +72,31 @@ namespace KinematicCharacterController
             _reload = playerInput.actions.FindAction("Reload");
 
             _openMenu = false;
+
+            _kccInputsEnabled = true;
         }
 
         private void Update()
         {
-            if (!_endCutscene)
+            if (Input.GetKeyDown(KeyCode.Tab) && _kccInputsEnabled)
             {
-                if (Input.GetKey(KeyCode.Tab))
+                if (_openMenu)
+                {
+                    Cursor.visible = false;
+                    _pauseScript.Resume();
+                    _openMenu = false;
+                }
+                else
                 {
                     Cursor.visible = true;
+                    _pauseScript.Pause();
+                    _openMenu = true;
                 }
+            }
 
-                if (Input.GetKeyDown(KeyCode.P))
-                {
-                    _openMenu = !_openMenu;
-                    Cursor.visible = true;
-                }
-
-                if (!_openMenu)
-                {
-                    gameState.isPaused = false;
-                    HandleCharacterInput();
-                }
-                else if (_openMenu)
-                {
-                    gameState.isPaused = true;
-                }
+            if (!_openMenu && _kccInputsEnabled)
+            {
+                HandleCharacterInput();
             }
         }
 

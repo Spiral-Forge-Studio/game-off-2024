@@ -126,6 +126,7 @@ namespace MoreMountains.Feedbacks
 			_instance = null;
 		}
 
+		bool paused = false;
 		/// <summary>
 		/// A method used from the inspector to test the system
 		/// </summary>

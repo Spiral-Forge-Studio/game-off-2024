@@ -20,8 +20,8 @@ public class DamageReductionBuff : Buff
 
     public Dictionary<BuffType, float> bufftypeProbabilities = new Dictionary<BuffType, float>
     {
-        { BuffType.Percentage, 0.4f },
-        { BuffType.Flat, 0.6f }
+        { BuffType.Percentage, 1f },
+        { BuffType.Flat, 0f }
     };
 
     public Dictionary<Rarity, float> rarityProbabilities = new Dictionary<Rarity, float>

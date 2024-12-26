@@ -10,7 +10,7 @@ public class BuffSpawner : MonoBehaviour
     public LayerMask TerrainLayers;
     //public float spawnRadius = 5f; // Define the radius for random spawning
     public float spacing = 2f; // Adjust this value for the distance between buffs
-    public int buffCount = 3;      // Number of buffs to spawn
+    public int buffCount = 2;      // Number of buffs to spawn
     public PlayerStatusSO playerStats;
     public PlayerStatusSO BossStatusSO;
     private List<GameObject> activeBuffs = new List<GameObject>();
@@ -39,7 +39,6 @@ public class BuffSpawner : MonoBehaviour
     {
         //StartCoroutine(SpawnBuffAtIntervals());
         buffpickedup = false;
-        SpawnBuffs();
         playerStats.ResetMultipliersAndFlatBonuses();//MOVE THIS TO RESET ON START OF RUNN
     }
 
@@ -48,8 +47,12 @@ public class BuffSpawner : MonoBehaviour
         //Debug.Log("There are " + activeBuffs.Count + " active buffs");
         if (buffpickedup)
         {
-            GameObject buff = GameObject.FindWithTag("Buff");
-            Destroy(buff);
+            for (int i = 0; i < buffCount-1; i++)
+            {
+                GameObject buff = GameObject.FindWithTag("Buff");
+                Destroy(buff);
+            }
+            buffpickedup = false;
         }
     }
 
@@ -94,7 +97,7 @@ public class BuffSpawner : MonoBehaviour
         GameObject boss = GameObject.FindGameObjectWithTag("Boss");
         if (boss == null)
         {
-            Debug.Log("Boss not found");
+            //Debug.Log("Boss not found");
         }
         else
         {

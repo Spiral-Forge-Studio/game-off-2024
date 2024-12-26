@@ -13,7 +13,7 @@ public class PlatformTriggerScript : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        Debug.Log(other.gameObject.name);
+        //Debug.Log(other.gameObject.name);
 
         if (other.CompareTag("Player"))
         {

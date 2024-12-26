@@ -10,7 +10,7 @@ public class PlatformScript : MonoBehaviour
     [SerializeField] private float platformSpeed;
     [SerializeField] private float wallRaiseSpeed;
 
-    public Collider triggerCollider;
+    public GameObject triggerCollider;
 
     private int nextLevel;
     private Vector3 newWallPosition;
@@ -18,7 +18,13 @@ public class PlatformScript : MonoBehaviour
     private bool raisingPlatformWallls;
     private bool liftingPlatform;
     private bool loweringPlatformWalls;
+    
+    private GameStateManager gameStateManager;
 
+    private void Awake()
+    {
+        gameStateManager = FindObjectOfType<GameStateManager>();
+    }
 
     // Start is called before the first frame update
     void Start()
@@ -37,6 +43,8 @@ public class PlatformScript : MonoBehaviour
             {
                 raisingPlatformWallls = false;
                 liftingPlatform = true;
+
+                triggerCollider.SetActive(false);
             }
 
             platformWalls.transform.position = nextPosition;
@@ -51,6 +59,8 @@ public class PlatformScript : MonoBehaviour
                 liftingPlatform = false;
                 loweringPlatformWalls = true;
                 newWallPosition = platformWalls.transform.position - new Vector3(0, platformWallsOffsetY, 0);
+
+                gameStateManager.StartWave();
             }
 
             transform.position = nextPosition;
@@ -62,7 +72,6 @@ public class PlatformScript : MonoBehaviour
             if (nextPosition == newWallPosition)
             {
                 loweringPlatformWalls = false;
-                triggerCollider.enabled = true;
             }
 
             platformWalls.transform.position = nextPosition;
@@ -72,7 +81,6 @@ public class PlatformScript : MonoBehaviour
     public void StartLiftSequence()
     {
         EnableWalls();
-        triggerCollider.enabled = false;
     }
 
     private void EnableWalls()
