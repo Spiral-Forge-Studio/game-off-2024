@@ -170,9 +170,22 @@ public class BuffManager : MonoBehaviour
         Buff.BuffType Buff2type = chosenBuff.getRandomType();
         Buff.Rarity Buff1rarity = chosenBuff.getRandomRarity();
         Buff.Rarity Buff2rarity = chosenBuff.getRandomRarity();
+
+
+        Buff1 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname1]];
+        Buff2 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname2]];
+        Buff1.UpdateBuffValues(Buff1type, Buff1rarity);
+        Buff2.UpdateBuffValues(Buff2type, Buff2rarity);
+        string buffchanges1 = BuffRegistry.NametoStattobebuffed[buffname1] + ": " + NameToCurrStat(buffname1) + "->" + PreviewBuffChange(Buff1);
+        string buffchanges2 = BuffRegistry.NametoStattobebuffed[buffname2] + ": " + NameToCurrStat(buffname2) + "->" + PreviewBuffChange(Buff2);
+
+
         BMUIManager.ToggleBuffchoice();
         // Assuming BuffChoiceUI is already referenced in your script
         BuffChoiceUI = GameObject.FindGameObjectWithTag("BuffChoiceUI");
+
+        
+        
         if (BuffChoiceUI != null)
         {
             
@@ -189,7 +202,7 @@ public class BuffManager : MonoBehaviour
                 choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff1rarity.ToString();
                 choice1Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().color = SetBuffColor(Buff1rarity);
                 choice1Transform.Find("BuffSelectBorder").GetComponent<Image>().color = SetBuffColor(Buff1rarity);
-
+                choice1Transform.Find("BuffChanges").GetComponent<TextMeshProUGUI>().text = buffchanges1;
 
                 // Update choice 2
                 choice2Transform.Find("BuffName").GetComponent<TextMeshProUGUI>().text = buffname2;
@@ -197,6 +210,7 @@ public class BuffManager : MonoBehaviour
                 choice2Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().text = Buff2rarity.ToString();
                 choice2Transform.Find("BuffRarity").GetComponent<TextMeshProUGUI>().color = SetBuffColor(Buff2rarity);
                 choice2Transform.Find("BuffSelectBorder").GetComponent<Image>().color = SetBuffColor(Buff2rarity);
+                choice2Transform.Find("BuffChanges").GetComponent<TextMeshProUGUI>().text = buffchanges2;
 
                 // Optionally, set other properties like images
                 // choice1Transform.Find("BuffIcon").GetComponent<Image>().sprite = BuffRegistry.GetBuffIcon(buffname1);
@@ -211,10 +225,7 @@ public class BuffManager : MonoBehaviour
             Debug.LogError("BuffChoiceUI is null!");
         }
 
-        Buff1 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname1]];
-        Buff2 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname2]];
-        Buff1.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
-        Buff2.UpdateBuffValues(chosenBuff.getRandomType(), chosenBuff.getRandomRarity());
+        
 
         //AddBuff(chosenBuff);
         //string message = $"You got: {chosenBuff.getBuffName()} ";
@@ -226,7 +237,10 @@ public class BuffManager : MonoBehaviour
         //buffMenu.DiscoverBuff(chosenBuff.getBuffName());
         if (buffSpawner != null)
         {
-            buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
+            if (gameObject != null) {
+                buffSpawner.DestroyActiveBuff(gameObject); // Notify and destroy this buff
+            }
+            
             buffSpawner.Buff1 = Buff1;
             buffSpawner.Buff2 = Buff2;
 
@@ -286,4 +300,81 @@ public class BuffManager : MonoBehaviour
         // Enable emission if it isn't already
         //material.EnableKeyword("_EMISSION");
     }
+
+    public string NameToCurrStat(string name)
+    {
+        // Check if the name exists in the dictionary
+        if (BuffRegistry.NametoStattobebuffed.TryGetValue(name, out string statKey))
+        {
+            // Use the statKey to determine which stat to return
+            switch (statKey)
+            {
+                case "HP":
+                    return playerStats.Health.ToString();
+                case "Shield":
+                    return playerStats.Shield.ToString();
+                case "Shield Regeneration Speed":
+                    return playerStats.ShieldRegenTickInterval.ToString();
+                case "Shield Break Recovery Delay":
+                    return playerStats.ShieldBreakRecoveryDelay.ToString();
+                case "Shield Regeneration Amount":
+                    return playerStats.ShieldRegenAmount.ToString();
+                case "Damage Reduction":
+                    return playerStats.DamageReduction.ToString();
+                case "Movement Speed":
+                    return playerStats.MoveSpeed.ToString();
+
+                // Minigun Stats
+                case "Minigun Damage":
+                    return playerStats.MinigunDamage.ToString();
+                case "Minigun Bullet Deviation":
+                    return playerStats.MinigunBulletDeviationAngle.ToString();
+                case "Minigun Reload Time":
+                    return playerStats.MinigunReloadTime.ToString();
+                case "Minigun Bullet Speed":
+                    return playerStats.MinigunProjectileSpeed.ToString();
+                case "Minigun Critical Rate":
+                    return playerStats.MinigunCritRate.ToString();
+                case "Minigun Critical Damage":
+                    return playerStats.MinigunCritDamage.ToString();
+                case "Minigun Fire Rate":
+                    return playerStats.MinigunFireRate.ToString();
+                case "Minigun Maximum Ammo Capacity":
+                    return playerStats.MinigunMagazineSize.ToString();
+
+                // Rocket Stats
+                case "Rocket Damage":
+                    return playerStats.RocketDamage.ToString();
+                case "Rocket Explosion Radius":
+                    return playerStats.RocketExplosionRadius.ToString();
+                case "Rocket Rearm Time":
+                    return playerStats.RocketReloadTime.ToString();
+                case "Rocket Critical Rate":
+                    return playerStats.RocketCritRate.ToString();
+                case "Rocket Critical Damage":
+                    return playerStats.RocketCritDamage.ToString();
+                case "Rocket Maximum Ammo Capacity":
+                    return playerStats.RocketMagazineSize.ToString();
+
+                // Default fallback in case of an unmapped statKey
+                default:
+                    return "STAT NOT FOUND";
+            }
+        }
+        else
+        {
+            // If the name is not found in the dictionary
+            return "NAME NOT FOUND";
+        }
+    }
+
+    public string PreviewBuffChange(Buff buff)
+    {
+        string preview = "";
+        buff.ApplyBuff(toBeBuffed);
+        preview = NameToCurrStat(buff.getBuffName());
+        buff.RemoveBuff(toBeBuffed);
+        return preview;
+    }
+
 }

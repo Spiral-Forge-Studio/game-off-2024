@@ -116,6 +116,33 @@ public static class BuffRegistry
         {"Extra Rocket Magazine Clip", "Increase rocket maximum ammo capacity"}
     };
 
+    public static readonly Dictionary<string, string> NametoStattobebuffed = new Dictionary<string, string>()
+{
+    {"Steel - Plated Armor", "HP"},
+    {"Reinforced Shields", "Shield"},
+    {"Nano Repair Kit", "Shield Break Recovery Delay"},
+    {"Rapid Shield Regeneration", "Shield Regeneration Speed"},
+    {"Shield Regen Boost", "Shield Regeneration Amount"},
+    {"Hardened Plating", "Damage Reduction"},
+    {"Swift Stride", "Movement Speed"},
+
+    {"Minigun Damage Boost", "Minigun Damage"},
+    {"Minigun Bullet Deviation Angle Reduction", "Minigun Bullet Deviation"},
+    {"Quick Loader", "Minigun Reload Time"},
+    {"Minigun Projectile Speed Buff", "Minigun Bullet Speed"},
+    {"Minigun Crit Rate Buff", "Minigun Critical Rate"},
+    {"Minigun Crit Damage Buff", "Minigun Critical Damage"},
+    {"Rapid Barrel Upgrade", "Minigun Fire Rate"},
+    {"Extra Magazine Clip", "Minigun Maximum Ammo Capacity"},
+
+    {"Rocket Damage Boost", "Rocket Damage"},
+    {"Rocket Explosion Radius Boost", "Rocket Explosion Radius"},
+    {"Quick Loader Rocket", "Rocket Rearm Time"},
+    {"Rocket Crit Rate Buff", "Rocket Critical Rate"},
+    {"Rocket Crit Damage Buff", "Rocket Critical Damage"},
+    {"Extra Rocket Magazine Clip", "Rocket Maximum Ammo Capacity"}
+};
+
 
 
     /// <summary>
@@ -203,4 +230,6 @@ public static class BuffRegistry
         }
         return buffnameslist;
     }
+
+
 }
