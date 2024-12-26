@@ -141,7 +141,7 @@ public class RocketReloadTimeBuff : Buff
         }
         else if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, -totalMultiplier, true);
         }
     }
 

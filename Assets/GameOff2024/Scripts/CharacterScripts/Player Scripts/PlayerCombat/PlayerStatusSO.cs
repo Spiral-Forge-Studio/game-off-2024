@@ -113,7 +113,7 @@ public class PlayerStatusSO : ScriptableObject
 
 
     // Modifier Dictionaries
-    private Dictionary<EStatTypeMultiplier, float> multipliers = new Dictionary<EStatTypeMultiplier, float>
+    public Dictionary<EStatTypeMultiplier, float> multipliers = new Dictionary<EStatTypeMultiplier, float>
     {
         { EStatTypeMultiplier.HealthMultiplier, 1f },
         { EStatTypeMultiplier.ShieldMultiplier, 1f },

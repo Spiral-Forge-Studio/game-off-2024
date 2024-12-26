@@ -20,6 +20,10 @@ public class BuffSpawner : MonoBehaviour
 
     public void DestroyActiveBuff(GameObject buff)
     {
+        if (buff == null)
+        {
+            return;
+        }
         if (activeBuffs.Contains(buff))
         {
             activeBuffs.Remove(buff);

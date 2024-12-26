@@ -115,7 +115,7 @@ public class ShieldRegenTickIntervalBuff : Buff
             // Apply a percentage reduction to shield regen tick interval
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenTickIntervalMultipier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -144,7 +144,7 @@ public class ShieldRegenTickIntervalBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenTickIntervalMultipier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenTickIntervalMultipier, -totalMultiplier, true);
         }
     }
 

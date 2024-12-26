@@ -132,7 +132,7 @@ public class DamageReductionBuff : Buff
             // Apply percentage damage reduction
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.DamageReductionMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -161,7 +161,7 @@ public class DamageReductionBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.DamageReductionMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.DamageReductionMultiplier, -totalMultiplier, true);
         }
     }
 

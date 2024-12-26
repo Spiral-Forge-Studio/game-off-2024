@@ -151,7 +151,7 @@ public class ShieldBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -179,7 +179,7 @@ public class ShieldBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, -totalMultiplier, true);
         }
     }
 

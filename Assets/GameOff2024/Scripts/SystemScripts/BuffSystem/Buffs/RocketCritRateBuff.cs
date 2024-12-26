@@ -130,7 +130,7 @@ public class RocketCritRateBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketCritRateMultiplier, multiplierValue, true);
-            totalMultiplierReduction += multiplierValue / 100f;
+            totalMultiplierReduction += multiplierValue;
         }
     }
 
@@ -146,7 +146,7 @@ public class RocketCritRateBuff : Buff
         {
             float reductionAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketCritRateMultiplier, reductionAmount, true);
-            totalMultiplierReduction += reductionAmount / 100f;
+            totalMultiplierReduction += reductionAmount;
         }
     }
 
@@ -158,7 +158,7 @@ public class RocketCritRateBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketCritRateMultiplier, -totalMultiplierReduction * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketCritRateMultiplier, -totalMultiplierReduction, true);
         }
     }
 

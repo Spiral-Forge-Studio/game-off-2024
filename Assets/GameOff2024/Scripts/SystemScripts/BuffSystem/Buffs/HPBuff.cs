@@ -155,7 +155,7 @@ public class HpBuff : Buff
             // Apply a multiplier to health
             float multiplierValue = initialAmountMultiplier;  // Assuming this is in percentage terms
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -186,7 +186,7 @@ public class HpBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, --totalMultiplier, true);
         }
     }
 

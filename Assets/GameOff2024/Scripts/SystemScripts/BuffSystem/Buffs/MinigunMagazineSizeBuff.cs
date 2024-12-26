@@ -132,7 +132,7 @@ public class MinigunMagazineBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -160,7 +160,7 @@ public class MinigunMagazineBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunMagazineSizeMultiplier, -totalMultiplier, true);
         }
     }
 

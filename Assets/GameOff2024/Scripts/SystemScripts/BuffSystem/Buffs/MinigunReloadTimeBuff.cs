@@ -141,7 +141,7 @@ public class MinigunReloadTimeBuff : Buff
         }
         else if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunReloadTimeMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunReloadTimeMultiplier, -totalMultiplier, true);
         }
     }
 

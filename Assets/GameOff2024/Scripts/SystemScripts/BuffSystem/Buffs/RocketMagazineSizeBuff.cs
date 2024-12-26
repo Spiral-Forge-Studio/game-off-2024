@@ -133,7 +133,7 @@ public class RocketMagazineBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketMagazineSizeMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -161,7 +161,7 @@ public class RocketMagazineBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketMagazineSizeMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketMagazineSizeMultiplier, -totalMultiplier, true);
         }
     }
 

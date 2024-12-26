@@ -136,7 +136,7 @@ public class ShieldRegenAmountBuff : Buff
             // Apply a multiplier to ShieldRegenAmount
             float multiplierValue = initialAmountMultiplier;  // Assuming this is in percentage terms
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenAmountMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -167,7 +167,7 @@ public class ShieldRegenAmountBuff : Buff
         }
         else if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenAmountMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenAmountMultiplier, -totalMultiplier, true);
         }
     }
 

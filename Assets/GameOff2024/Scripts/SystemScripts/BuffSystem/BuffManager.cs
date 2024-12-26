@@ -370,10 +370,12 @@ public class BuffManager : MonoBehaviour
 
     public string PreviewBuffChange(Buff buff)
     {
-        string preview = "";
+        string preview = string.Empty; //= buff.getBuffBonus().ToString();
+
         buff.ApplyBuff(toBeBuffed);
         preview = NameToCurrStat(buff.getBuffName());
         buff.RemoveBuff(toBeBuffed);
+
         return preview;
     }
 

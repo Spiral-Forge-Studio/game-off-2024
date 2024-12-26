@@ -130,7 +130,7 @@ public class MinigunProjectileSpeedBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunProjectileSpeedMultiplier, multiplierValue, true);
-            totalMultiplierReduction += multiplierValue / 100f;
+            totalMultiplierReduction += multiplierValue;
         }
     }
 
@@ -146,7 +146,7 @@ public class MinigunProjectileSpeedBuff : Buff
         {
             float reductionAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunProjectileSpeedMultiplier, reductionAmount, true);
-            totalMultiplierReduction += reductionAmount / 100f;
+            totalMultiplierReduction += reductionAmount;
         }
     }
 
@@ -158,7 +158,7 @@ public class MinigunProjectileSpeedBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunProjectileSpeedMultiplier, -totalMultiplierReduction * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunProjectileSpeedMultiplier, -totalMultiplierReduction, true);
         }
     }
 

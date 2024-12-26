@@ -107,7 +107,7 @@ public class MinigunFireRateBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunFireRateMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -133,7 +133,7 @@ public class MinigunFireRateBuff : Buff
             playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.MinigunFireRateFlatBonus, -totalFlatBonus);
 
         if (buffType == BuffType.Percentage)
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunFireRateMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunFireRateMultiplier, -totalMultiplier, true);
     }
 
     public override void UpdateBuffValues(Buff.BuffType buffType, Buff.Rarity rarity, float initialAmount = 0, float consecutiveAmount = 0, float scalingFactor = 0)

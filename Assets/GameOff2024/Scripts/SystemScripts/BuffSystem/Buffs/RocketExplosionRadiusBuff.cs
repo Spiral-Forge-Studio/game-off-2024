@@ -130,7 +130,7 @@ public class RocketExplosionRadiusBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketExplosionRadiusMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -158,7 +158,7 @@ public class RocketExplosionRadiusBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketExplosionRadiusMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketExplosionRadiusMultiplier, -totalMultiplier, true);
         }
     }
 

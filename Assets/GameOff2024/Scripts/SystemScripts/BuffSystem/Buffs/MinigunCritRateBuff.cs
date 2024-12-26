@@ -130,7 +130,7 @@ public class MinigunCritRateBuff : Buff
         {
             float multiplierValue = initialAmountMultiplier;
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunCritRateMultiplier, multiplierValue, true);
-            totalMultiplierReduction += multiplierValue / 100f;
+            totalMultiplierReduction += multiplierValue;
         }
     }
 
@@ -146,7 +146,7 @@ public class MinigunCritRateBuff : Buff
         {
             float reductionAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunCritRateMultiplier, reductionAmount, true);
-            totalMultiplierReduction += reductionAmount / 100f;
+            totalMultiplierReduction += reductionAmount;
         }
     }
 
@@ -158,7 +158,7 @@ public class MinigunCritRateBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunCritRateMultiplier, -totalMultiplierReduction * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunCritRateMultiplier, -totalMultiplierReduction, true);
         }
     }
 

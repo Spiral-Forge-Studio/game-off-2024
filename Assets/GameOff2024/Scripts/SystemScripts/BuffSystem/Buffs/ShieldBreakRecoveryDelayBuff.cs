@@ -137,7 +137,7 @@ public class ShieldBreakRecoveryDelay : Buff
             // Apply a multiplier to health
             float multiplierValue = initialAmountMultiplier;  // Assuming this is in percentage terms
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier, multiplierValue, true);
-            totalMultiplier += multiplierValue / 100f;
+            totalMultiplier += multiplierValue;
         }
     }
 
@@ -168,7 +168,7 @@ public class ShieldBreakRecoveryDelay : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier, -totalMultiplier * 100f, false);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier, -totalMultiplier, true);
         }
     }
 
