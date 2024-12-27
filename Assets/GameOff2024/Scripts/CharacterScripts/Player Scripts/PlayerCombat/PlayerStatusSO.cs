@@ -181,8 +181,8 @@ public class PlayerStatusSO : ScriptableObject
     public float Health => (baseHealth * multipliers[EStatTypeMultiplier.HealthMultiplier]) + flatBonuses[EStatTypeFlatBonus.HealthFlatBonus];
     public float Shield => (baseShield * multipliers[EStatTypeMultiplier.ShieldMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldFlatBonus];
     public float ShieldRegenAmount => (baseShieldRegenAmount * multipliers[EStatTypeMultiplier.ShieldRegenAmountMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldRegenAmountFlatBonus];
-    public float ShieldBreakRecoveryDelay => (baseShieldBreakRecoveryDelay * multipliers[EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldBreakRecoveryDelayFlatBonus];
-    public float ShieldRegenTickInterval => (baseShieldRegenTickInterval * multipliers[EStatTypeMultiplier.ShieldRegenTickIntervalMultipier]) + flatBonuses[EStatTypeFlatBonus.ShieldRegenTickIntervalFlatBonus];    
+    public float ShieldBreakRecoveryDelay => Mathf.Clamp((baseShieldBreakRecoveryDelay * multipliers[EStatTypeMultiplier.ShieldBreakRecoveryDelayMultiplier]) + flatBonuses[EStatTypeFlatBonus.ShieldBreakRecoveryDelayFlatBonus], 0, Mathf.Infinity);
+    public float ShieldRegenTickInterval => Mathf.Clamp((baseShieldRegenTickInterval * multipliers[EStatTypeMultiplier.ShieldRegenTickIntervalMultipier]) + flatBonuses[EStatTypeFlatBonus.ShieldRegenTickIntervalFlatBonus], 0, Mathf.Infinity);    
     public float DamageReduction => (baseDamageReduction * multipliers[EStatTypeMultiplier.DamageReductionMultiplier]) + flatBonuses[EStatTypeFlatBonus.DamageReductionFlatBonus];
     public float MoveSpeed => (baseMoveSpeed * multipliers[EStatTypeMultiplier.MoveSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.MoveSpeedFlatBonus];
     public float DashCooldown => (baseDashCooldown * multipliers[EStatTypeMultiplier.DashCooldownMultiplier]) + flatBonuses[EStatTypeFlatBonus.DashCooldownFlatBonus];
@@ -192,18 +192,18 @@ public class PlayerStatusSO : ScriptableObject
     public float MinigunCritRate => (b_MinigunCritRate * multipliers[EStatTypeMultiplier.MinigunCritRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunCritRateFlatBonus];
     public float MinigunCritDamage => (b_MinigunCritDamage * multipliers[EStatTypeMultiplier.MinigunCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunCritDamageFlatBonus];
     public float MinigunFireRate => (b_MinigunFireRate * multipliers[EStatTypeMultiplier.MinigunFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunFireRateFlatBonus];
-    public float MinigunReloadTime => (b_MinigunReloadTime * multipliers[EStatTypeMultiplier.MinigunReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunReloadTimeFlatBonus];
+    public float MinigunReloadTime => Mathf.Clamp((b_MinigunReloadTime * multipliers[EStatTypeMultiplier.MinigunReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunReloadTimeFlatBonus], 0, Mathf.Infinity);
     public int MinigunMagazineSize => (int)((b_MinigunMagazineSize * multipliers[EStatTypeMultiplier.MinigunMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunMagazineSizeFlatBonus]);
     public float MinigunProjectileLifetime => (b_MinigunProjectileLifetime * multipliers[EStatTypeMultiplier.MinigunProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileLifetimeFlatBonus];
     public float MinigunProjectileSpeed => (b_MinigunProjectileSpeed * multipliers[EStatTypeMultiplier.MinigunProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunProjectileSpeedFlatBonus];
-    public float MinigunBulletDeviationAngle => (b_minigunDeviationAngle * multipliers[EStatTypeMultiplier.MinigunBulletDeviationAngleMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunBulletDeviationAngleBonus];
+    public float MinigunBulletDeviationAngle => Mathf.Clamp((b_minigunDeviationAngle * multipliers[EStatTypeMultiplier.MinigunBulletDeviationAngleMultiplier]) + flatBonuses[EStatTypeFlatBonus.MinigunBulletDeviationAngleBonus], 0, Mathf.Infinity);
 
     // Rocket Computed Stats
     public float RocketDamage => (b_RocketDamage * multipliers[EStatTypeMultiplier.RocketDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketDamageFlatBonus];
     public float RocketCritRate => (b_RocketCritRate * multipliers[EStatTypeMultiplier.RocketCritRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketCritRateFlatBonus];
     public float RocketCritDamage => (b_RocketCritDamage * multipliers[EStatTypeMultiplier.RocketCritDamageMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketCritDamageFlatBonus];
     public float RocketFireRate => (b_RocketFireRate * multipliers[EStatTypeMultiplier.RocketFireRateMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketFireRateFlatBonus];
-    public float RocketReloadTime => (b_RocketReloadTime * multipliers[EStatTypeMultiplier.RocketReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketReloadTimeFlatBonus];
+    public float RocketReloadTime => Mathf.Clamp((b_RocketReloadTime * multipliers[EStatTypeMultiplier.RocketReloadTimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketReloadTimeFlatBonus], 0, Mathf.Infinity);
     public int RocketMagazineSize => (int)((b_RocketMagazineSize * multipliers[EStatTypeMultiplier.RocketMagazineSizeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketMagazineSizeFlatBonus]);
     public float RocketProjectileLifetime => (b_RocketProjectileLifetime * multipliers[EStatTypeMultiplier.RocketProjectileLifetimeMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileLifetimeFlatBonus];
     public float RocketProjectileSpeed => (b_RocketProjectileSpeed * multipliers[EStatTypeMultiplier.RocketProjectileSpeedMultiplier]) + flatBonuses[EStatTypeFlatBonus.RocketProjectileSpeedFlatBonus];

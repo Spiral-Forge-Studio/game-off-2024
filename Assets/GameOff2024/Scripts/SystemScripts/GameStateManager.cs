@@ -32,6 +32,8 @@ public class GameStateManager : MonoBehaviour
         Application.targetFrameRate = FPSCap;
         //gameOverPanel.SetActive(false);
 
+        BuffMenu.FirstTimeRun = true;
+
         playerScript = FindObjectOfType<PlayerScript>();
         platformScript = FindObjectOfType<PlatformScript>();
 

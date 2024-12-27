@@ -100,7 +100,7 @@ public class RocketReloadTimeBuff : Buff
 
     public override float getBuffBonus()
     {
-        return buffType == BuffType.Flat ? totalFlatBonus : totalMultiplier * 100f;
+        return buffType == BuffType.Flat ? totalFlatBonus : totalMultiplier;
     }
 
     public override void ApplyBuff(GameObject target)
@@ -137,11 +137,11 @@ public class RocketReloadTimeBuff : Buff
     {
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.RocketReloadTimeFlatBonus, totalFlatBonus);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.RocketReloadTimeFlatBonus, -totalFlatBonus);
         }
         else if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, totalMultiplier, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.RocketReloadTimeMultiplier, -totalMultiplier, true);
         }
     }
 

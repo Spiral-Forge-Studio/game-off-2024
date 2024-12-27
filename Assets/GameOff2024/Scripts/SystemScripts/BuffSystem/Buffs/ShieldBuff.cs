@@ -7,10 +7,10 @@ public class ShieldBuff : Buff
     public Rarity rarity;
     public string buffname = "Reinforced Shields";
 
-    public float initialAmountFlat = 100f;
-    public float initialAmountMultiplier = 1.1f;
-    public float consecutiveAmountFlat = 50f;
-    public float consecutiveAmountMultiplier = 1.05f;
+    public float initialAmountFlat = 5f;
+    public float initialAmountMultiplier = 0.1f;
+    public float consecutiveAmountFlat = 2.5f;
+    public float consecutiveAmountMultiplier = 0.05f;
     public float scalingFactor;
 
     private float totalFlatBonus;    // Tracks total flat bonus to remove
@@ -167,7 +167,7 @@ public class ShieldBuff : Buff
         {
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldMultiplier, bonusAmount, true);
-            totalMultiplier += bonusAmount / 100f;
+            totalMultiplier += bonusAmount;
         }
     }
 

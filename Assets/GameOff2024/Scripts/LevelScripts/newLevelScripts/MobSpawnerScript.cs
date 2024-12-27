@@ -74,6 +74,8 @@ public class MobGroup
 public class MobSpawnerScript : MonoBehaviour
 {
     public MobPoolManager mobPoolManager;
+
+    // specify waves through custom editor.
     public Wave[] waves;
 
     private int currentWave;

@@ -131,7 +131,7 @@ public class ShieldRegenTickIntervalBuff : Buff
         {
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenTickIntervalMultipier, bonusAmount, true);
-            totalMultiplier += bonusAmount / 100f;
+            totalMultiplier += bonusAmount;
         }
     }
 
@@ -140,11 +140,11 @@ public class ShieldRegenTickIntervalBuff : Buff
         // Remove the accumulated bonuses
         if (buffType == BuffType.Flat)
         {
-            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldRegenTickIntervalFlatBonus, totalFlatBonus);
+            playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.ShieldRegenTickIntervalFlatBonus, -totalFlatBonus);
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenTickIntervalMultipier, totalMultiplier, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenTickIntervalMultipier, -totalMultiplier, true);
         }
     }
 

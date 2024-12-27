@@ -7,10 +7,10 @@ public class MinigunReloadTimeBuff : Buff
     public Rarity rarity;
     public string buffname = "Quick Loader";
 
-    public float initialAmountFlat = -0.15f;
-    public float initialAmountMultiplier = -10.0f;
+    public float initialAmountFlat = -0.20f;
+    public float initialAmountMultiplier = -0.10f;
     public float consecutiveAmountFlat = -0.1f;
-    public float consecutiveAmountMultiplier = -5f;
+    public float consecutiveAmountMultiplier = -0.05f;
     public float scalingFactor;
 
     private float totalFlatBonus;
@@ -113,7 +113,7 @@ public class MinigunReloadTimeBuff : Buff
         else if (buffType == BuffType.Percentage)
         {
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunReloadTimeMultiplier, initialAmountMultiplier, true);
-            totalMultiplier += initialAmountMultiplier / 100f;
+            totalMultiplier += initialAmountMultiplier;
         }
     }
 
@@ -129,7 +129,7 @@ public class MinigunReloadTimeBuff : Buff
         {
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.MinigunReloadTimeMultiplier, bonusAmount, true);
-            totalMultiplier += bonusAmount / 100f;
+            totalMultiplier += bonusAmount;
         }
     }
 

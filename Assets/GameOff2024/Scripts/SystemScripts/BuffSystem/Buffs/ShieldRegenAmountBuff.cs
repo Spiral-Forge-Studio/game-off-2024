@@ -154,7 +154,7 @@ public class ShieldRegenAmountBuff : Buff
             // Apply the consecutive multiplier bonus
             float bonusAmount = consecutiveAmountMultiplier * (1 + scalingFactor);
             playerStatus.ModifyMultiplier(EStatTypeMultiplier.ShieldRegenAmountMultiplier, bonusAmount, true);
-            totalMultiplier += bonusAmount / 100f;
+            totalMultiplier += bonusAmount;
         }
     }
 
