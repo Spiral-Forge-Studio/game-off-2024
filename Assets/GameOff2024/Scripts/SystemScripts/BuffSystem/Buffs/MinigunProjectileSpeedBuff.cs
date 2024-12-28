@@ -8,7 +8,7 @@ public class MinigunProjectileSpeedBuff : Buff
     public string buffname = "Minigun Projectile Speed Buff";
 
     public float initialAmountFlat = 10; // Reduced deviation (negative value for reduction)
-    public float initialAmountMultiplier = 2f; // Percentage-based reduction
+    public float initialAmountMultiplier = 40f; // Percentage-based reduction
     public float consecutiveAmountFlat = 1f;
     public float consecutiveAmountMultiplier = 2.5f;
     public float scalingFactor;

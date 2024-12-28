@@ -7,8 +7,8 @@ public class ShieldRegenTickIntervalBuff : Buff
     public Rarity rarity;
     public string buffName = "Rapid Shield Regeneration";
 
-    public float initialAmountFlat = -0.1f; // Reduce tick interval by 0.1s
-    public float initialAmountMultiplier = -5f; // Reduce tick interval by 5%
+    public float initialAmountFlat = -0.05f; 
+    public float initialAmountMultiplier = -5f; 
     public float consecutiveAmountFlat = -0.05f;
     public float consecutiveAmountMultiplier = -2.5f;
     public float scalingFactor;

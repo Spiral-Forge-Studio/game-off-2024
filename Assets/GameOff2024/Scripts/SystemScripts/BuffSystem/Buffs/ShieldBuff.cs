@@ -8,7 +8,7 @@ public class ShieldBuff : Buff
     public string buffname = "Reinforced Shields";
 
     public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 0.1f;
+    public float initialAmountMultiplier = 30f;
     public float consecutiveAmountFlat = 2.5f;
     public float consecutiveAmountMultiplier = 0.05f;
     public float scalingFactor;

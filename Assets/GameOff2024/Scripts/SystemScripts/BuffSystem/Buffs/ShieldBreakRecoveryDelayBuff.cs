@@ -8,8 +8,8 @@ public class ShieldBreakRecoveryDelay : Buff
     public Rarity rarity;
     public string buffname = "Nano Repair Kit";
 
-    public float initialAmountFlat = 0.5f;
-    public float initialAmountMultiplier = 30f;
+    public float initialAmountFlat = -0.5f;
+    public float initialAmountMultiplier = -30f;
     public float consecutiveAmountFlat = 25f;
     public float consecutiveAmountMultiplier = 5f;
     public float scalingFactor;
@@ -85,7 +85,7 @@ public class ShieldBreakRecoveryDelay : Buff
         float cumulative = 0;
         foreach (var entry in rarityProbabilities)
         {
-            Debug.Log(entry.Value);
+            //Debug.Log(entry.Value);
             cumulative += entry.Value;
             if (randomValue <= cumulative)
             {

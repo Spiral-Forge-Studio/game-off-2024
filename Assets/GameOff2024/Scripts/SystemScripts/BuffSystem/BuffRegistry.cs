@@ -121,7 +121,7 @@ public static class BuffRegistry
     {"Steel - Plated Armor", "HP"},
     {"Reinforced Shields", "Shield"},
     {"Nano Repair Kit", "Shield Break Recovery Delay"},
-    {"Rapid Shield Regeneration", "Shield Regeneration Speed"},
+    {"Rapid Shield Regeneration", "Shield Regeneration Tick Interval"},
     {"Shield Regen Boost", "Shield Regeneration Amount"},
     {"Hardened Plating", "Damage Reduction"},
     {"Swift Stride", "Movement Speed"},

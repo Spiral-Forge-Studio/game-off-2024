@@ -166,10 +166,26 @@ public class BuffManager : MonoBehaviour
         }
         string buffname1 = Buffchoices[choice1];
         string buffname2 = Buffchoices[choice2];
+        
+
+
+
         Buff.BuffType Buff1type = chosenBuff.getRandomType();
         Buff.BuffType Buff2type = chosenBuff.getRandomType();
         Buff.Rarity Buff1rarity = chosenBuff.getRandomRarity();
         Buff.Rarity Buff2rarity = chosenBuff.getRandomRarity();
+
+        //debugging all buffs
+        //buffname1 = "Steel - Plated Armor";
+        //buffname2 = "Rocket Crit Damage Buff";
+        //Buff1type = Buff.BuffType.Flat;
+        //Buff2type = Buff.BuffType.Flat;
+        //Buff1type = Buff.BuffType.Percentage;
+        //Buff2type = Buff.BuffType.Percentage;
+        //Buff1rarity = Buff.Rarity.Common;
+        //Buff2rarity = Buff.Rarity.Common;
+        //Buff1rarity = Buff.Rarity.Legendary;
+        //Buff2rarity = Buff.Rarity.Legendary;
 
 
         Buff1 = BuffRegistry.availableBuffs[BuffRegistry.NameToBuffs[buffname1]];
@@ -313,7 +329,7 @@ public class BuffManager : MonoBehaviour
                     return playerStats.Health.ToString();
                 case "Shield":
                     return playerStats.Shield.ToString();
-                case "Shield Regeneration Speed":
+                case "Shield Regeneration Tick Interval":
                     return playerStats.ShieldRegenTickInterval.ToString();
                 case "Shield Break Recovery Delay":
                     return playerStats.ShieldBreakRecoveryDelay.ToString();

@@ -7,7 +7,7 @@ public class RocketReloadTimeBuff : Buff
     public Rarity rarity;
     public string buffname = "Quick Loader Rocket";
 
-    public float initialAmountFlat = -0.1f;
+    public float initialAmountFlat = -0.2f;
     public float initialAmountMultiplier = -10.0f;
     public float consecutiveAmountFlat = -0.05f;
     public float consecutiveAmountMultiplier = -5f;

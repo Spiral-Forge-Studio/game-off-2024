@@ -7,8 +7,8 @@ public class RocketExplosionRadiusBuff : Buff
     public Rarity rarity;
     public string buffname = "Rocket Explosion Radius Boost";
 
-    public float initialAmountFlat = 1f;
-    public float initialAmountMultiplier = 10f;
+    public float initialAmountFlat = 2f;
+    public float initialAmountMultiplier = 20f;
     public float consecutiveAmountFlat = 0.5f;
     public float consecutiveAmountMultiplier = 5f;
     public float scalingFactor;

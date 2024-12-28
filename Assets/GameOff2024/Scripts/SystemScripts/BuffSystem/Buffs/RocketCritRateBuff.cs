@@ -7,8 +7,8 @@ public class RocketCritRateBuff : Buff
     public Rarity rarity;
     public string buffname = "Rocket Crit Rate Buff";
 
-    public float initialAmountFlat = 0.05f; // Reduced deviation (negative value for reduction)
-    public float initialAmountMultiplier = 15f; // Percentage-based reduction
+    public float initialAmountFlat = 0.06f; // Reduced deviation (negative value for reduction)
+    public float initialAmountMultiplier = 60f; // Percentage-based reduction
     public float consecutiveAmountFlat = 0.01f;
     public float consecutiveAmountMultiplier = 5f;
     public float scalingFactor;

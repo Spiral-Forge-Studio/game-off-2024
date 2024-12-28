@@ -9,7 +9,7 @@ public class ShieldRegenAmountBuff : Buff
 
     public float initialAmountFlat = 2f;
     public float consecutiveAmountFlat = 1f;
-    public float initialAmountMultiplier = 5f;
+    public float initialAmountMultiplier = 200f;
     public float consecutiveAmountMultiplier = 2.5f;
     public float scalingFactor;
 

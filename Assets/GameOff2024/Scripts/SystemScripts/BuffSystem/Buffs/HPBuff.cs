@@ -144,11 +144,14 @@ public class HpBuff : Buff
 
     public override void ApplyBuff(GameObject target)
     {
+        
         if (buffType == BuffType.Flat)
         {
+            
             // Apply a flat bonus to health
             playerStatus.ModifyFlatBonus(EStatTypeFlatBonus.HealthFlatBonus, initialAmountFlat);
             totalFlatBonus += initialAmountFlat;
+
         }
         if (buffType == BuffType.Percentage)
         {
@@ -179,6 +182,7 @@ public class HpBuff : Buff
 
     public override void RemoveBuff(GameObject target)
     {
+
         // Remove the accumulated bonuses
         if (buffType == BuffType.Flat)
         {
@@ -186,7 +190,7 @@ public class HpBuff : Buff
         }
         if (buffType == BuffType.Percentage)
         {
-            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, --totalMultiplier, true);
+            playerStatus.ModifyMultiplier(EStatTypeMultiplier.HealthMultiplier, -totalMultiplier, true);
         }
     }
 

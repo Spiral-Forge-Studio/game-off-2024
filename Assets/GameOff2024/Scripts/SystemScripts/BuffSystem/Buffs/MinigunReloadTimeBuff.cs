@@ -8,7 +8,7 @@ public class MinigunReloadTimeBuff : Buff
     public string buffname = "Quick Loader";
 
     public float initialAmountFlat = -0.20f;
-    public float initialAmountMultiplier = -0.10f;
+    public float initialAmountMultiplier = -10f;
     public float consecutiveAmountFlat = -0.1f;
     public float consecutiveAmountMultiplier = -0.05f;
     public float scalingFactor;

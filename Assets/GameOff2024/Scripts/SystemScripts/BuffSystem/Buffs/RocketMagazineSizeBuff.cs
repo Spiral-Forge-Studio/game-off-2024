@@ -7,8 +7,8 @@ public class RocketMagazineBuff : Buff
     public Rarity rarity;
     public string buffname = "Extra Rocket Magazine Clip";
 
-    public float initialAmountFlat = 5f;
-    public float initialAmountMultiplier = 10f;
+    public float initialAmountFlat = 1f;
+    public float initialAmountMultiplier = 35f;
     public float consecutiveAmountFlat = 2f;
     public float consecutiveAmountMultiplier = 5f;
     public float scalingFactor;
@@ -83,7 +83,7 @@ public class RocketMagazineBuff : Buff
         float cumulative = 0;
         foreach (var entry in rarityProbabilities)
         {
-            Debug.Log(entry.Value);
+            //Debug.Log(entry.Value);
             cumulative += entry.Value;
             if (randomValue <= cumulative)
             {
