@@ -96,6 +96,7 @@ public class BuffMenuUIManager : MonoBehaviour
     {
         Debug.Log("Buff 1 selected!");
         buffSpawner.Buff1.ApplyBuff(toBeBuffed);
+        buffMenu.DiscoverBuff(buffSpawner.Buff1.getBuffName());
         ToggleBuffchoice();
         // Add your logic here
 
@@ -105,6 +106,8 @@ public class BuffMenuUIManager : MonoBehaviour
     public void Buff2Selected()
     {
         buffSpawner.Buff2.ApplyBuff(toBeBuffed);
+        buffMenu.DiscoverBuff(buffSpawner.Buff2.getBuffName());
+
         Debug.Log("Buff 2 selected!");
         ToggleBuffchoice();
 
