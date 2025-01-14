@@ -148,7 +148,7 @@ public class MobSpawnerScript : MonoBehaviour
                 mobPoolManager.SpawnMob(
                     mobGroup.type,
                     mobGroup.grade,
-                    mobGroup.amount,
+                    1,
                     spawnPosition);
             }
         }
