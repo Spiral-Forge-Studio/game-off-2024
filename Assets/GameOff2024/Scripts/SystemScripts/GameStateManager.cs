@@ -78,13 +78,15 @@ public class GameStateManager : MonoBehaviour
 
     public void StartWave()
     {
-        mobSpawners[currentMobSpawnerIndex].SpawnWave();
-
         if (mobSpawners[currentMobSpawnerIndex].AllWavesCompleted)
         {
             platformScript.triggerCollider.SetActive(true);
             Debug.Log("[GAMESTATE] nextLevel");
             currentMobSpawnerIndex++;
+        }
+        else
+        {
+            mobSpawners[currentMobSpawnerIndex].SpawnWave();
         }
     }
 

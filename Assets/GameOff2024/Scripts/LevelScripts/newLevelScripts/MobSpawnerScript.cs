@@ -85,25 +85,36 @@ public class MobSpawnerScript : MonoBehaviour
 
     private BuffSpawner buffSpawner;
 
+    public bool spawnedBuffsThisWave;
+
     private void Awake()
     {
         buffSpawner = FindObjectOfType<BuffSpawner>();
-        currentWave = 0;
-        AllWavesCompleted = false;
+
     }
 
     private void Start()
     {
-        currentMobCount = waves[currentWave].GetNumberOfMobsInWave();
+        spawnedBuffsThisWave = false;
+        AllWavesCompleted = false;
+        currentMobCount = waves[0].GetNumberOfMobsInWave();
+        currentWave = 0;
     }
 
     private void Update()
     {
-        if (currentMobCount == 0)
+        if (currentMobCount == 0 && !spawnedBuffsThisWave)
         {
             Debug.Log("Spawning Buffs");
             buffSpawner.SpawnBuffs();
-            currentMobCount = -1;
+            spawnedBuffsThisWave=true;
+
+            currentWave++;
+
+            if (currentWave == waves.Length)
+            {
+                AllWavesCompleted = true;
+            }
         }
     }
 
@@ -114,11 +125,8 @@ public class MobSpawnerScript : MonoBehaviour
 
     public void SpawnWave()
     {
-        if (currentWave == waves.Length)
-        {
-            AllWavesCompleted = true;
-        }
-        else
+
+        if (!AllWavesCompleted)
         {
             foreach (SpawnGroup spawnGroup in waves[currentWave].SpawnGroups)
             {
@@ -127,7 +135,7 @@ public class MobSpawnerScript : MonoBehaviour
 
             currentMobCount = waves[currentWave].GetNumberOfMobsInWave();
 
-            currentWave++;
+            spawnedBuffsThisWave = false;
         }
     }
 

@@ -115,5 +115,6 @@ public class BuffMenuUIManager : MonoBehaviour
 
 
         gameStateManager.StartWave();
+
     }
 }

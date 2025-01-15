@@ -50,9 +50,11 @@ public class MobPoolManager : MonoBehaviour
 
             TrashMobParameters mobParams = mobObject.GetComponent<TrashMobParameters>();
             TrashMob mobScript = mobObject.GetComponent<TrashMob>();
+            NPCHealth npcHealth = mobObject.GetComponent<NPCHealth>();
 
             if (mobParams != null)
             {
+                npcHealth.ResetMobHealth();
                 mobParams.ScaleMobParams(mobGrade);
                 mobScript.InitializeMob();
             }

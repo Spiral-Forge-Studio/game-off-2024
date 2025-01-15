@@ -58,11 +58,7 @@ public class NPCHealth : MonoBehaviour
             Debug.LogWarning("player parameters not referenced");
         }
 
-        // Setup
-        _mobhealthmax = _mobparameters.health;
-        _mobcurrenthealth = _mobhealthmax;
-        _slider.maxValue = _mobhealthmax;
-        _fill.color = _gradient.Evaluate(1f);
+        ResetMobHealth();
 
         effectsPoolManager = FindObjectOfType<EffectsPoolManager>();
         materialFlasher = GetComponent<MaterialFlasher>();
@@ -75,6 +71,16 @@ public class NPCHealth : MonoBehaviour
     {
         DestroyMob(_mobcurrenthealth);
         SetMobHealth(_mobcurrenthealth);
+    }
+
+    public void ResetMobHealth()
+    {
+        // Setup
+        _mobhealthmax = _mobparameters.health;
+        _mobcurrenthealth = _mobhealthmax;
+        _slider.maxValue = _mobhealthmax;
+        _fill.color = _gradient.Evaluate(1f);
+        healthBarGameObject.SetActive(false );
     }
 
     private void MobDamaged(float damage)
