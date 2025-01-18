@@ -362,7 +362,6 @@ public class PlayerStatusManager : MonoBehaviour
 
     public void RestartGame()
     {
-        Time.timeScale = 1f; // Reset time scale
-        Application.Quit();
+        SceneManager.LoadScene(0);
     }
 }

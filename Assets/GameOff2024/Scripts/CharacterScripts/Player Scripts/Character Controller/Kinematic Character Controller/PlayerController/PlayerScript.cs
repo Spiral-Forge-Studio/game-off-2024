@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using KinematicCharacterController;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
 
 namespace KinematicCharacterController
 {
@@ -76,6 +77,7 @@ namespace KinematicCharacterController
             _kccInputsEnabled = true;
         }
 
+
         private void Update()
         {
             if (Input.GetKeyDown(KeyCode.Tab) && _kccInputsEnabled)
@@ -130,6 +132,11 @@ namespace KinematicCharacterController
             // Apply inputs to character
             Character.SetInputs(ref controllerInputs);
             WeaponManager.SetInputs(ref combatInputs);
+        }
+
+        public void ReturnToMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

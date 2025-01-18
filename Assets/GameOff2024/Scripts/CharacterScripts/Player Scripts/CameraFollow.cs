@@ -22,7 +22,7 @@ public class CameraFollow : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        AudioManager.instance.PlayMusic(musicAudioSource, 1);
+        AudioManager.instance.PlayMusic(musicAudioSource, 2);
     }
 
     // Update is called once per frame

@@ -21,8 +21,6 @@ public class BuffManager : MonoBehaviour
     public PlayerStatusManager playerStatusManager;
     public BuffMenuUIManager BMUIManager;
 
-
-
     private void Awake()
     {
         buffMenu = Resources.Load<BuffMenu>("BuffMenu");

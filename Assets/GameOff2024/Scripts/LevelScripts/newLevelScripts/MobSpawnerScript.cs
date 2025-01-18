@@ -1,5 +1,6 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 
 public enum EMobType
@@ -73,6 +74,7 @@ public class MobGroup
 
 public class MobSpawnerScript : MonoBehaviour
 {
+    public bool lastRoom = false;
     public MobPoolManager mobPoolManager;
 
     // specify waves through custom editor.
@@ -114,6 +116,11 @@ public class MobSpawnerScript : MonoBehaviour
             if (currentWave == waves.Length)
             {
                 AllWavesCompleted = true;
+                
+                if (lastRoom)
+                {
+                    FindObjectOfType<GameStateManager>().GameComplete();
+                }
             }
         }
     }

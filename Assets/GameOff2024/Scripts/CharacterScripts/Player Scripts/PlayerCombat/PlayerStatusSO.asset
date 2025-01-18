@@ -12,20 +12,20 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28ed7d9956d5acb41a163919e7e5a838, type: 3}
   m_Name: PlayerStatusSO
   m_EditorClassIdentifier: 
-  baseHealth: 50
-  baseShield: 50
+  baseHealth: 150
+  baseShield: 75
   baseShieldRegenAmount: 1
   baseShieldBreakRecoveryDelay: 2
   baseShieldRegenTickInterval: 0.5
   baseDamageReduction: 0.1
   baseMoveSpeed: 7
   baseDashCooldown: 0.7
-  b_MinigunDamage: 70
-  b_MinigunCritRate: 0.05
-  b_MinigunCritDamage: 1.3
+  b_MinigunDamage: 7
+  b_MinigunCritRate: 0.1
+  b_MinigunCritDamage: 1.8
   b_MinigunFireRate: 6
   b_MinigunReloadTime: 2
-  b_MinigunMagazineSize: 200
+  b_MinigunMagazineSize: 50
   b_MinigunProjectileLifetime: 0.5
   b_MinigunProjectileSpeed: 50
   b_minigunDeviationAngle: 3
@@ -33,10 +33,10 @@ MonoBehaviour:
   b_RocketCritRate: 0.1
   b_RocketCritDamage: 1.3
   b_RocketFireRate: 10
-  b_RocketReloadTime: 2
+  b_RocketReloadTime: 1.6
   b_RocketMagazineSize: 3
-  b_RocketProjectileLifetime: 0.7
-  b_RocketProjectileSpeed: 30
-  b_RocketExplosionRadius: 10
+  b_RocketProjectileLifetime: 1
+  b_RocketProjectileSpeed: 23
+  b_RocketExplosionRadius: 13
   b_RocketHoldDuration: 0
   b_RocketReleaseFirerate: 0

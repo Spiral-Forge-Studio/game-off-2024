@@ -177,8 +177,9 @@ MonoBehaviour:
   menuMusicSource: {fileID: 9111572224224776868}
   menuUISource: {fileID: 733218431704082594}
   musicList:
+  - {fileID: 8300000, guid: 86264d030ea30ad4db0f816e104e6389, type: 3}
   - {fileID: 8300000, guid: 9ecd50b201720214892698b5f6346046, type: 3}
-  - {fileID: 8300000, guid: 61817a90fc9a2cb4a8c96fd2ed9d6788, type: 3}
+  - {fileID: 8300000, guid: 379054b2ac372bb479375d5601ed82be, type: 3}
   buttonSfxList: []
   MinigunFireSFX:
   - {fileID: 8300000, guid: 351416bbb6f031a40a52d21afe4e9283, type: 3}

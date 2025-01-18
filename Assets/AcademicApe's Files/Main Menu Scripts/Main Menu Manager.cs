@@ -5,9 +5,12 @@ using UnityEngine.SceneManagement;
 
 public class MainMenuManager : MonoBehaviour
 {
+
     private void Start()
     {
-        AudioManager.instance.PlayMusic(AudioManager.instance.menuMusicSource, 0);
+        int musicNumber = Random.Range(0, 2);
+        AudioManager.instance.PlayMusic(AudioManager.instance.menuMusicSource, musicNumber);
+        Cursor.visible = true;
     }
 
     public void PlayGame()

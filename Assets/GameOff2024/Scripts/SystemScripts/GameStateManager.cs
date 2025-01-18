@@ -26,6 +26,9 @@ public class GameStateManager : MonoBehaviour
     public float restartDelay = 2f;
     public BuffMenu BuffMenu;
 
+    [Header("Game Completed UI")]
+    public GameObject congratsPanel;
+    private PauseScript _pauseScript;
 
     void Awake()
     {
@@ -52,9 +55,12 @@ public class GameStateManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        _pauseScript = FindObjectOfType<PauseScript>();
         isPaused = false;
 
         StartWave();
+
+        playerScript._disableRotation = false;
     }
 
     
@@ -90,6 +96,12 @@ public class GameStateManager : MonoBehaviour
         }
     }
 
+    public void GameComplete()
+    {
+        congratsPanel.SetActive(true);
+        _pauseScript.Pause();
+    }
+
     public void GameOver()
     {
         //isPaused = true;
@@ -97,10 +109,13 @@ public class GameStateManager : MonoBehaviour
         //Time.timeScale = 0f;
         // Start a coroutine to reload the game after a delay
 
-        playerScript._disableMovement = true;
         playerScript._disableRotation = true;
+
+        Cursor.visible = true;
+
+        _pauseScript.Pause();
         
-        StartCoroutine(ReloadGameAfterDelay());
+        //StartCoroutine(ReloadGameAfterDelay());
     }
 
     private IEnumerator ReloadGameAfterDelay()
